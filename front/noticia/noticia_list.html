@@ -43,41 +43,44 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      LGPD
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        LGPD
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Conheça o LGPD</a>
-                      <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
-                      <a class="dropdown-item" href="../quiz/quiz.html">Teste de conhecimento</a>
+                        <a class="dropdown-item" href="#">Conheça o LGPD</a>
+                        <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
+                        <a class="dropdown-item" href="../quiz/quiz.html">Teste de conhecimento</a>
                     </div>
-                  </li>
-
-
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Contatos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="../contatos/consultoria.html">Consultoria</a>
-                      <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
-
-                    </div>
-                  </li>
+                </li>
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Perfil
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contatos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="../conta/login.html">Entrar</a>
-                      <a class="dropdown-item" href="../conta/register.html">Cadastrar</a>
-                      <a class="dropdown-item" href="../usuario/perfil.html">Ver Perfil</a>
-                      <a class="dropdown-item" href="../usuario/editar_perfil.html">Editar Perfil</a>
-                      <a class="dropdown-item" href="#">Sair</a>
+                        <a class="dropdown-item" href="../contatos/consultoria.html">Consultoria</a>
+                        <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+
                     </div>
-                  </li>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../conta/login.html">Entrar</a>
+                        <a class="dropdown-item" href="../conta/register.html">Cadastrar</a>
+                        <a class="dropdown-item" href="../usuario/perfil.html">Ver Perfil</a>
+                        <a class="dropdown-item" href="../usuario/editar_perfil.html">Editar Perfil</a>
+                        <a class="dropdown-item" href="#">Sair</a>
+                    </div>
+                </li>
 
             </ul>
         </div>
@@ -100,154 +103,247 @@
 
         <hr>
 
-        
+
         <div class="container-fluid text-center navbar-expand-md">
 
-            <div class="row align-items-start">
+            <div class="row align-items-start" id="accordion-parent">
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-1">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-1" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+
+                </div>
+                
+                
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-2">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-2" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+
+                </div>
+                
+                
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-3">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-3" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+
+                </div>
+                
+                
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-4">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-4" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+
+                </div>
+                
+                
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-5">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-5" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
+
+
                 </div>
 
-                <div class="col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                    <div class="h-100 card">
-                        <a href="noticias_modelo.html">
-                            <h3 class="card-header text-center text-dark mt-1">Titulo da matéria</h3>
-                        </a>
-                        <div class="card-body text-left no-padding">
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <p class="limite_caracter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+
+                <!--Noticia-->
+                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-6">Título da matéria</button>
                         </div>
 
-                        <div class="container">
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a></p>
+                        <div class="collapse" id="card-6" data-parent="#accordion-parent">
+                            <div class="card-body">
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do
+                                    eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua</p>
+
+                                <br>
+
+                                <div class="row">
+                                    <p class="col text-left">Categoria: XYZ</p>
+                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
+
+
+                </div>     
+
+
+
+
 
             </div>
 
