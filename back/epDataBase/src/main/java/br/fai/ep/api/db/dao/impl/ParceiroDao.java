@@ -190,7 +190,7 @@ public class ParceiroDao implements BaseDao {
         boolean isUpdateCompleted = false;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + PartinerTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += PartinerTable.CNPJ_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += PartinerTable.WEBSITE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += PartinerTable.SITUATION_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
@@ -203,7 +203,6 @@ public class ParceiroDao implements BaseDao {
 
             final Parceiro client = (Parceiro) entity;
             int i = 1;
-            preparedStatement.setString(i++, PartinerTable.TABLE_NAME.getName());
             preparedStatement.setString(i++, client.getCnpj());
             preparedStatement.setString(i++, client.getWebsite());
             preparedStatement.setString(i++, client.getSituacao());
@@ -226,7 +225,7 @@ public class ParceiroDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -258,7 +257,7 @@ public class ParceiroDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

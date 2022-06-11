@@ -2,6 +2,7 @@ package br.fai.ep.api.db.dao.impl;
 
 import br.fai.ep.api.db.connection.ConnectionFactory;
 import br.fai.ep.api.db.dao.BaseDao;
+import br.fai.ep.api.db.helper.DataBaseHelper;
 import br.fai.ep.api.db.helper.DataBaseHelper.RequestTable;
 import br.fai.ep.api.db.helper.DataBaseHelper.Sql;
 import br.fai.ep.api.entities.BasePojo;
@@ -141,7 +142,7 @@ public class SolicitacaoDao implements BaseDao {
         boolean isUpdateCompleted;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + DataBaseHelper.RequestTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += RequestTable.DEMAND_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += RequestTable.SERVICE_TYPE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += RequestTable.ID_CLIENT_COLUMN.getName() + Sql.lAST_PARAM_UPDATE_TO_COMPLETE.getName();
@@ -151,7 +152,6 @@ public class SolicitacaoDao implements BaseDao {
 
             final Solicitacao request = (Solicitacao) entity;
             int i = 1;
-            preparedStatement.setString(i++, RequestTable.TABLE_NAME.getName());
             preparedStatement.setString(i++, request.getDemanda());
             preparedStatement.setString(i++, request.getTipoServico());
             preparedStatement.setString(i++, request.getIdCliente());
@@ -171,7 +171,7 @@ public class SolicitacaoDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -203,7 +203,7 @@ public class SolicitacaoDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

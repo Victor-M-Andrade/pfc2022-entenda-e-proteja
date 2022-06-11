@@ -2,6 +2,7 @@ package br.fai.ep.api.db.dao.impl;
 
 import br.fai.ep.api.db.connection.ConnectionFactory;
 import br.fai.ep.api.db.dao.BaseDao;
+import br.fai.ep.api.db.helper.DataBaseHelper;
 import br.fai.ep.api.db.helper.DataBaseHelper.QuestionTestTable;
 import br.fai.ep.api.db.helper.DataBaseHelper.Sql;
 import br.fai.ep.api.entities.BasePojo;
@@ -140,7 +141,7 @@ public class QuestaoTesteDao implements BaseDao {
         boolean isUpdateCompleted;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + DataBaseHelper.QuestionTestTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += QuestionTestTable.CHOICE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += QuestionTestTable.ID_QUEST_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += QuestionTestTable.ID_TEST_COLUMN.getName() + Sql.lAST_PARAM_UPDATE_TO_COMPLETE.getName();
@@ -150,7 +151,6 @@ public class QuestaoTesteDao implements BaseDao {
 
             final QuestaoTeste questionTest = (QuestaoTeste) entity;
             int i = 1;
-            preparedStatement.setString(i++, QuestionTestTable.TABLE_NAME.getName());
             preparedStatement.setString(i++, questionTest.getEscolha());
             preparedStatement.setLong(i++, questionTest.getIdQuestao());
             preparedStatement.setLong(i++, questionTest.getIdTeste());
@@ -170,7 +170,7 @@ public class QuestaoTesteDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -202,7 +202,7 @@ public class QuestaoTesteDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

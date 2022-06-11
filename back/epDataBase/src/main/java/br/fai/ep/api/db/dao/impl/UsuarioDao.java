@@ -156,7 +156,7 @@ public class UsuarioDao implements BaseDao {
         boolean isUpdateCompleted = false;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + UserTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += UserTable.NAME_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += UserTable.TYPE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += UserTable.EMAIL_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
@@ -165,14 +165,13 @@ public class UsuarioDao implements BaseDao {
             sql += UserTable.ID_COLUMN.getName() + Sql.lAST_PARAM_UPDATE_TO_COMPLETE.getName() + ";";
             preparForUpdateOrDelete(sql);
 
-            final Usuario client = (Usuario) entity;
+            final Usuario user = (Usuario) entity;
             int i = 1;
-            preparedStatement.setString(i++, UserTable.TABLE_NAME.getName());
-            preparedStatement.setString(i++, client.getNome());
-            preparedStatement.setString(i++, client.getTipo());
-            preparedStatement.setString(i++, client.getEmail());
-            preparedStatement.setString(i++, client.getSenha());
-            preparedStatement.setLong(i++, client.getId());
+            preparedStatement.setString(i++, user.getNome());
+            preparedStatement.setString(i++, user.getTipo());
+            preparedStatement.setString(i++, user.getEmail());
+            preparedStatement.setString(i++, user.getSenha());
+            preparedStatement.setLong(i++, user.getId());
 
             preparedStatement.execute();
             if (preparedStatement.getUpdateCount() == -1) {
@@ -188,7 +187,7 @@ public class UsuarioDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -220,7 +219,7 @@ public class UsuarioDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

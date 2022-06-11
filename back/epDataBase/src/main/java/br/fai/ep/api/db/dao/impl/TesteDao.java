@@ -2,6 +2,7 @@ package br.fai.ep.api.db.dao.impl;
 
 import br.fai.ep.api.db.connection.ConnectionFactory;
 import br.fai.ep.api.db.dao.BaseDao;
+import br.fai.ep.api.db.helper.DataBaseHelper;
 import br.fai.ep.api.db.helper.DataBaseHelper.Sql;
 import br.fai.ep.api.db.helper.DataBaseHelper.TestTable;
 import br.fai.ep.api.entities.BasePojo;
@@ -142,7 +143,7 @@ public class TesteDao implements BaseDao {
         boolean isUpdateCompleted = false;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + DataBaseHelper.TestTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += TestTable.DATE_TIME_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += TestTable.HIT_COLUMN.getName() + Sql.lAST_PARAM_UPDATE_TO_COMPLETE.getName();
             sql += Sql.WHERE.getName();
@@ -151,7 +152,6 @@ public class TesteDao implements BaseDao {
 
             final Teste test = (Teste) entity;
             int i = 1;
-            preparedStatement.setString(i++, TestTable.TABLE_NAME.getName());
             preparedStatement.setTimestamp(i++, test.getDataHora());
             preparedStatement.setInt(i++, test.getAcertos());
             preparedStatement.setLong(i++, test.getId());
@@ -170,7 +170,7 @@ public class TesteDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -202,7 +202,7 @@ public class TesteDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

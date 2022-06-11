@@ -2,6 +2,7 @@ package br.fai.ep.api.db.dao.impl;
 
 import br.fai.ep.api.db.connection.ConnectionFactory;
 import br.fai.ep.api.db.dao.BaseDao;
+import br.fai.ep.api.db.helper.DataBaseHelper;
 import br.fai.ep.api.db.helper.DataBaseHelper.PartinerRequestTable;
 import br.fai.ep.api.db.helper.DataBaseHelper.Sql;
 import br.fai.ep.api.entities.BasePojo;
@@ -134,7 +135,7 @@ public class ParceiroSolicitacaoDao implements BaseDao {
         boolean isUpdateCompleted;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + DataBaseHelper.PartinerRequestTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += PartinerRequestTable.ID_PARTINER_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += PartinerRequestTable.ID_PARTINER_COLUMN.getName() + Sql.lAST_PARAM_UPDATE_TO_COMPLETE.getName();
             sql += Sql.WHERE.getName();
@@ -143,7 +144,6 @@ public class ParceiroSolicitacaoDao implements BaseDao {
 
             final ParceiroSolicitacao partinerRequest = (ParceiroSolicitacao) entity;
             int i = 1;
-            preparedStatement.setString(i++, PartinerRequestTable.TABLE_NAME.getName());
             preparedStatement.setLong(i++, partinerRequest.getIdParceiro());
             preparedStatement.setLong(i++, partinerRequest.getIdSolicitacao());
             preparedStatement.setLong(i++, partinerRequest.getId());
@@ -162,7 +162,7 @@ public class ParceiroSolicitacaoDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -194,7 +194,7 @@ public class ParceiroSolicitacaoDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;

@@ -2,6 +2,7 @@ package br.fai.ep.api.db.dao.impl;
 
 import br.fai.ep.api.db.connection.ConnectionFactory;
 import br.fai.ep.api.db.dao.BaseDao;
+import br.fai.ep.api.db.helper.DataBaseHelper;
 import br.fai.ep.api.db.helper.DataBaseHelper.NewsTable;
 import br.fai.ep.api.db.helper.DataBaseHelper.Sql;
 import br.fai.ep.api.entities.BasePojo;
@@ -165,7 +166,7 @@ public class NoticiaDao implements BaseDao {
         boolean isUpdateCompleted = false;
 
         try {
-            String sql = Sql.UPDATE.getName();
+            String sql = Sql.UPDATE.getName() + DataBaseHelper.NewsTable.TABLE_NAME.getName() + Sql.SET_UPDATE.getName();
             sql += NewsTable.TITLE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += NewsTable.ARTICLE_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
             sql += NewsTable.CONTEXT_COLUMN.getName() + Sql.PARAM_UPDATE_TO_COMPLETE.getName();
@@ -207,7 +208,7 @@ public class NoticiaDao implements BaseDao {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isUpdateCompleted;
@@ -239,7 +240,7 @@ public class NoticiaDao implements BaseDao {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return isDeleteCompleted;
