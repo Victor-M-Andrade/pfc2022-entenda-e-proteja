@@ -1,9 +1,0 @@
-Colocar nesta pasta do Apêndice F:
-
-Fase 1:
-não tem.
-
-Fase 2:
-1. Um único arquivo do Ideas Modeller com os diagramas.
-2. Uma subpasta nomeada com cada diagrama.
-2.1 Dentro de cada subpasta, coloque as figuras dos diagramas

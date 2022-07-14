@@ -1,9 +1,0 @@
-Colocar nesta pasta do Apêndice H:
-
-Fase 1:
-Não tem.
-
-Fase 2:
-1. FAI_SI_PFC_Fase2_EstimativaPorCasosdeUso.xlsx
-Nas demais fases, a estimativa deverá ser refeita.
-
