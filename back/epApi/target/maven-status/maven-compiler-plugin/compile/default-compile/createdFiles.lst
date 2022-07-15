@@ -1,0 +1,11 @@
+br\fai\ep\api\service\impl\ParceiroService.class
+br\fai\ep\api\service\impl\QuestaoService.class
+br\fai\ep\api\controller\impl\UsuarioController.class
+br\fai\ep\api\service\impl\NoticiaService.class
+br\fai\ep\api\service\impl\ClienteService.class
+br\fai\ep\api\service\impl\UsuarioService.class
+br\fai\ep\api\controller\BaseController.class
+br\fai\ep\api\EpApiApplication.class
+br\fai\ep\api\service\impl\SolicitacaoService.class
+br\fai\ep\api\service\impl\TesteService.class
+br\fai\ep\api\service\BaseService.class

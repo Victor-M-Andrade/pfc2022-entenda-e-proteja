@@ -1,0 +1,14 @@
+br\fai\ep\api\entities\QuestaoTeste.class
+br\fai\ep\api\entities\Usuario.class
+br\fai\ep\api\entities\Usuario$TypeUser.class
+br\fai\ep\api\entities\Noticia.class
+br\fai\ep\api\entities\Cliente.class
+br\fai\ep\api\entities\Solicitacao.class
+br\fai\ep\api\entities\Noticia$NewsSituation.class
+br\fai\ep\api\entities\Questao.class
+br\fai\ep\api\entities\Teste.class
+br\fai\ep\api\entities\BasePojo.class
+br\fai\ep\api\entities\Parceiro$PartinerType.class
+br\fai\ep\api\entities\Parceiro$PartinerSituation.class
+br\fai\ep\api\entities\ParceiroSolicitacao.class
+br\fai\ep\api\entities\Parceiro.class
