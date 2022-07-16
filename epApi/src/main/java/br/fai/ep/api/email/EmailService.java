@@ -1,4 +1,4 @@
-package br.fai.ep.api.service.email;
+package br.fai.ep.api.email;
 
 import br.fai.ep.api.EpApiApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,22 +9,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailApi {
+public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
 
-    public final String SENDER = "Lucas lima <lucaslima@fai-mg.br>";
-
-    public void enviar(final Message message) {
-        final SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(message.getRemetente());
-        simpleMailMessage.setTo(message.getDestinarios().toArray(new String[message.getDestinarios().size()]));
-        simpleMailMessage.setSubject(message.getAssunto());
-        simpleMailMessage.setText(message.getCorpo());
-
-        mailSender.send(simpleMailMessage);
-    }
+    public final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
 
     public boolean send(final String receivers, final String subject, final String message) {
         boolean isMessageSent = false;
@@ -43,6 +33,7 @@ public class EmailApi {
             isMessageSent = true;
         } catch (final MailException e) {
             e.printStackTrace();
+            return false;
         }
 
         return isMessageSent;

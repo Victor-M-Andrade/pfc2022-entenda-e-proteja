@@ -1,4 +1,4 @@
-package br.fai.ep.api.service.email;
+package br.fai.ep.api.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

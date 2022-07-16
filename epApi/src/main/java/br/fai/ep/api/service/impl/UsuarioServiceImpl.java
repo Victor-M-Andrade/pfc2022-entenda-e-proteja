@@ -2,11 +2,11 @@ package br.fai.ep.api.service.impl;
 
 import br.fai.ep.api.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.api.db.helper.DataBaseHelper.SQL_COMMAND;
+import br.fai.ep.api.email.EmailService;
 import br.fai.ep.api.entities.BasePojo;
 import br.fai.ep.api.entities.Usuario;
 import br.fai.ep.api.entities.Usuario.USER_TABLE;
 import br.fai.ep.api.service.BaseService;
-import br.fai.ep.api.service.email.EmailApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,9 +75,9 @@ public class UsuarioServiceImpl implements BaseService {
             return false;
         }
 
-        final EmailApi emailApi = new EmailApi();
+        final EmailService emailService = new EmailService();
         final String subject = "Recuperação de senha - Projeto Entenda e Proteja";
         final String message = "Clique neste link para recupar a senha";
-        return emailApi.send(userEmail, subject, message);
+        return emailService.send(userEmail, subject, message);
     }
 }
