@@ -50,4 +50,9 @@ public class UsuarioController {
     public ResponseEntity<List<? extends BasePojo>> readByCriteria(@RequestBody final Map criteria) {
         return ResponseEntity.ok(service.readByCriteria(criteria));
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<Boolean> forgotPassword(@RequestBody final Map criteria) {
+        return ResponseEntity.ok(service.forgotPassword(criteria));
+    }
 }
