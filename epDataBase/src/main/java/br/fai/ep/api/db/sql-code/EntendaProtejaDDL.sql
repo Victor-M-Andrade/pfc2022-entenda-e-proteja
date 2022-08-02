@@ -4,8 +4,8 @@ create table usuario(
     nome character varying(100) not null,
     email character varying(200) not null,
     senha character varying(30) not null,
-    isAutor boolean varying(30) not null default false,
-    isParceiro boolean varying(30) not null default false,
+    isAutor boolean not null default false,
+    isParceiro boolean not null default false,
     aceite boolean not null,
     data_hora timestamp without time zone not null default now()
 );
