@@ -2,17 +2,14 @@
 create table usuario(
     id serial primary key,
     nome character varying(100) not null,
-    tipo character varying(11) not null,
     email character varying(200) not null,
     senha character varying(30) not null,
+    isAutor boolean varying(30) not null default false,
+    isParceiro boolean varying(30) not null default false,
     aceite boolean not null,
     data_hora timestamp without time zone not null default now()
 );
--- garantindo o que sera armazenado dentro do tipo do usuário
-alter table usuario
-add constraint ck_user_type check(
-        tipo in ('INTERESSADO', 'ADM', 'PARCEIRO', 'AUTOR', 'ENCARREGADO')
-    );
+
 /**
  TABELAS REFERENTES AO MODULO CONSULTORIA
  */
