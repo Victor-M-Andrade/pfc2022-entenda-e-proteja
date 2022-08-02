@@ -1,5 +1,10 @@
 package br.fai.ep.api.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Parceiro extends Usuario {
     private String cnpj;
     private String website;
@@ -8,62 +13,6 @@ public class Parceiro extends Usuario {
     private String tipoServico;
     private String nomeEmpresa;
     private long idUsuario;
-
-    public String getCnpj() {
-        return this.cnpj;
-    }
-
-    public void setCnpj(final String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getWebsite() {
-        return this.website;
-    }
-
-    public void setWebsite(final String website) {
-        this.website = website;
-    }
-
-    public String getSituacao() {
-        return this.situacao;
-    }
-
-    public void setSituacao(final String situacao) {
-        this.situacao = situacao;
-    }
-
-    public String getDescricao() {
-        return this.descricao;
-    }
-
-    public void setDescricao(final String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getTipoServico() {
-        return this.tipoServico;
-    }
-
-    public void setTipoServico(final String tipoServico) {
-        this.tipoServico = tipoServico;
-    }
-
-    public String getNomeEmpresa() {
-        return this.nomeEmpresa;
-    }
-
-    public void setNomeEmpresa(final String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
-    }
-
-    public long getIdUsuario() {
-        return this.idUsuario;
-    }
-
-    public void setIdUsuario(final long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public static enum PartinerSituation {
         APPROVED("APROVADO"),

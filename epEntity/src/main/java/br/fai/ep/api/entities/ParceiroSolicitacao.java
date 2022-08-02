@@ -1,24 +1,13 @@
 package br.fai.ep.api.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ParceiroSolicitacao extends BasePojo {
     private long idParceiro;
     private long idSolicitacao;
-
-    public long getIdParceiro() {
-        return idParceiro;
-    }
-
-    public void setIdParceiro(final long idParceiro) {
-        this.idParceiro = idParceiro;
-    }
-
-    public long getIdSolicitacao() {
-        return idSolicitacao;
-    }
-
-    public void setIdSolicitacao(final long idSolicitacao) {
-        this.idSolicitacao = idSolicitacao;
-    }
 
     public static class PARTINER_REQUEST_TABLE extends TABLE {
         public static final String TABLE_NAME = "solicitacao_parceiro as SP";

@@ -1,35 +1,16 @@
 package br.fai.ep.api.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 
+@Getter
+@Setter
 public class Teste extends BasePojo {
     private Timestamp dataHora;
     private int acertos;
     private long idUsuario;
-
-    public Timestamp getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(final Timestamp dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public int getAcertos() {
-        return acertos;
-    }
-
-    public void setAcertos(final int acertos) {
-        this.acertos = acertos;
-    }
-
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(final long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public static class TEST_TABLE extends TABLE {
         public static final String TABLE_NAME = "teste as T";

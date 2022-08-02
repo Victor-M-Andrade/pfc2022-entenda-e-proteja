@@ -1,33 +1,14 @@
 package br.fai.ep.api.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class QuestaoTeste extends BasePojo {
     private String escolha;
     private long idQuestao;
     private long idTeste;
-
-    public String getEscolha() {
-        return escolha;
-    }
-
-    public void setEscolha(final String escolha) {
-        this.escolha = escolha;
-    }
-
-    public long getIdQuestao() {
-        return idQuestao;
-    }
-
-    public void setIdQuestao(final long idQuestao) {
-        this.idQuestao = idQuestao;
-    }
-
-    public long getIdTeste() {
-        return idTeste;
-    }
-
-    public void setIdTeste(final long idTeste) {
-        this.idTeste = idTeste;
-    }
 
     public static class QUESTION_TEST_TABLE extends TABLE {
         public static final String TABLE_NAME = "teste_questao as TQ";
