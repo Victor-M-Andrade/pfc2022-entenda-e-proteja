@@ -32,10 +32,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 final Usuario user = new Usuario();
                 user.setId(resultSet.getLong(USER_TABLE.ID_COLUMN));
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
-                user.setTipo(resultSet.getString(USER_TABLE.TYPE_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
+                user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
+                user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
 
                 userList.add(user);
@@ -72,10 +73,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 user = new Usuario();
                 user.setId(resultSet.getLong(USER_TABLE.ID_COLUMN));
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
-                user.setTipo(resultSet.getString(USER_TABLE.TYPE_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
+                user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
+                user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
             }
         } catch (final Exception e) {
@@ -101,25 +103,26 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             String sql = SQL_COMMAND.INSERT;
             sql += USER_TABLE.TABLE_NAME + SQL_COMMAND.OPEN_PARENTHESIS;
             sql += USER_TABLE.NAME_COLUMN + SQL_COMMAND.SEPARATOR;
-            sql += USER_TABLE.TYPE_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.SEPARATOR;
+            sql += USER_TABLE.IS_AUTHOR_COLUMN + SQL_COMMAND.SEPARATOR;
+            sql += USER_TABLE.IS_PARTNER_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.ACCEPT_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.DATE_TIME_COLUMN + SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += SQL_COMMAND.VALUES;
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome
-            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; //tipo
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // email
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // senha
+            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // isAutor
+            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // isParceiro
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // aceite
             sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.FINAL_CLOSE_PARENTHESIS;
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Usuario user = (Usuario) entity;
             int i = 1;
             preparedStatement.setString(i++, user.getNome());
-            preparedStatement.setString(i++, user.getTipo());
             preparedStatement.setString(i++, user.getEmail());
             preparedStatement.setString(i++, user.getSenha());
             preparedStatement.setBoolean(i++, user.isAceite());
@@ -155,9 +158,10 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             String sql = SQL_COMMAND.UPDATE + USER_TABLE.TABLE_NAME + SQL_COMMAND.SET_UPDATE;
             sql += USER_TABLE.NAME_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += USER_TABLE.TYPE_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.IS_AUTHOR_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.IS_PARTNER_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
             sql += SQL_COMMAND.WHERE;
             sql += USER_TABLE.ID_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
@@ -165,9 +169,10 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             final Usuario user = (Usuario) entity;
             int i = 1;
             preparedStatement.setString(i++, user.getNome());
-            preparedStatement.setString(i++, user.getTipo());
             preparedStatement.setString(i++, user.getEmail());
             preparedStatement.setString(i++, user.getSenha());
+            preparedStatement.setBoolean(i++, user.isAutor());
+            preparedStatement.setBoolean(i++, user.isParceiro());
             preparedStatement.setLong(i++, user.getId());
 
             preparedStatement.execute();
@@ -239,10 +244,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 final Usuario user = new Usuario();
                 user.setId(resultSet.getLong(USER_TABLE.ID_COLUMN));
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
-                user.setTipo(resultSet.getString(USER_TABLE.TYPE_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
+                user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
+                user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
 
                 userList.add(user);

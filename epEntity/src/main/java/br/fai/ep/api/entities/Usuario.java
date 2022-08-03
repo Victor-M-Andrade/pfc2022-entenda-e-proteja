@@ -9,10 +9,11 @@ import java.sql.Timestamp;
 @Setter
 public class Usuario extends BasePojo {
     private String nome;
-    private String tipo;
     private String email;
     private String senha;
     private boolean aceite;
+    private boolean isParceiro;
+    private boolean isAutor;
     private Timestamp dataHora;
 
     public static class USER_TABLE extends TABLE {
@@ -22,6 +23,8 @@ public class Usuario extends BasePojo {
         public static final String TYPE_COLUMN = "tipo";
         public static final String EMAIL_COLUMN = "email";
         public static final String PASSWORD_COLUMN = "senha";
+        public static final String IS_AUTHOR_COLUMN = "isAutor";
+        public static final String IS_PARTNER_COLUMN = "isParceiro";
         public static final String ACCEPT_COLUMN = "aceite";
         public static final String DATE_TIME_COLUMN = "data_hora";
     }

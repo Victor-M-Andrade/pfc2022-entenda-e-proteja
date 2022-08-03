@@ -39,10 +39,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 // on the user
                 partner.setId(resultSet.getLong(Usuario.USER_TABLE.ID_COLUMN));
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
-                partner.setTipo(resultSet.getString(Usuario.USER_TABLE.TYPE_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
+                partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
+                partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -94,10 +95,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 // on the user
                 partner.setId(resultSet.getLong(Usuario.USER_TABLE.ID_COLUMN));
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
-                partner.setTipo(resultSet.getString(Usuario.USER_TABLE.TYPE_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
+                partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
+                partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -146,7 +148,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome_empresa
             sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; //id_usuario
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Parceiro partner = (Parceiro) entity;
             int i = 1;
@@ -184,7 +186,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
     @Override
     public boolean update(final Object entity) {
         resetValuesForNewQuery();
-        boolean isUpdateCompleted = false;
+        boolean isUpdateCompleted;
 
         try {
             String sql = SQL_COMMAND.UPDATE + PARTINER_TABLE.TABLE_NAME + SQL_COMMAND.SET_UPDATE;
@@ -283,10 +285,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 // on the user
                 partner.setId(resultSet.getLong(Usuario.USER_TABLE.ID_COLUMN));
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
-                partner.setTipo(resultSet.getString(Usuario.USER_TABLE.TYPE_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
+                partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
+                partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
