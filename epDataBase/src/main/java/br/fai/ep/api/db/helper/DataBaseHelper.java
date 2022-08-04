@@ -20,6 +20,7 @@ public abstract class DataBaseHelper {
         public static String PARAM_UPDATE_TO_COMPLETE = "= ?, ";
         public static String lAST_PARAM_UPDATE_TO_COMPLETE = " = ?";
         public static String INNER_JOIN = " INNER JOIN ";
+        public static String ON = " ON ";
         public static String EQUAL_COMPATION = " = ";
         public static String AND = " AND ";
         public static String OR = " OR ";

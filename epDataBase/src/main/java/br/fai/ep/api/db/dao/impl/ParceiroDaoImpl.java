@@ -25,7 +25,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             String sql = SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
             sql += SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
-            sql += SQL_COMMAND.WHERE;
+            sql += SQL_COMMAND.ON;
             sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
             sql += SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
@@ -52,7 +52,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
                 partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
             }
@@ -78,7 +79,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             String sql = SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
             sql += SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
-            sql += SQL_COMMAND.WHERE;
+            sql += SQL_COMMAND.ON;
             sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
             sql += SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
@@ -108,7 +109,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
                 partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
             }
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:readById | classe: " + ClienteDaoImpl.class);
@@ -154,7 +156,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             int i = 1;
             preparedStatement.setString(i++, partner.getCnpj());
             preparedStatement.setString(i++, partner.getWebsite());
-            preparedStatement.setString(i++, Parceiro.PartinerSituation.REQUESTED.getName());
+            preparedStatement.setString(i++, Parceiro.SITUATIONS.REQUESTED);
             preparedStatement.setString(i++, partner.getDescricao());
             preparedStatement.setString(i++, partner.getTipoServico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
@@ -200,15 +202,15 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTINER_TABLE.ID_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
 
-            final Parceiro client = (Parceiro) entity;
+            final Parceiro partner = (Parceiro) entity;
             int i = 1;
-            preparedStatement.setString(i++, client.getCnpj());
-            preparedStatement.setString(i++, client.getWebsite());
-            preparedStatement.setString(i++, client.getSituacao());
-            preparedStatement.setString(i++, client.getDescricao());
-            preparedStatement.setString(i++, client.getNomeEmpresa());
-            preparedStatement.setString(i++, client.getTipoServico());
-            preparedStatement.setLong(i++, client.getId());
+            preparedStatement.setString(i++, partner.getCnpj());
+            preparedStatement.setString(i++, partner.getWebsite());
+            preparedStatement.setString(i++, partner.getSituacao());
+            preparedStatement.setString(i++, partner.getDescricao());
+            preparedStatement.setString(i++, partner.getNomeEmpresa());
+            preparedStatement.setString(i++, partner.getTipoServico());
+            preparedStatement.setLong(i++, partner.getId());
 
             preparedStatement.execute();
             if (preparedStatement.getUpdateCount() == -1) {
@@ -270,7 +272,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             String sql = SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
             sql += SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
-            sql += SQL_COMMAND.WHERE;
+            sql += SQL_COMMAND.ON;
             sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
             sql += SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
@@ -298,7 +300,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
                 partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
             }

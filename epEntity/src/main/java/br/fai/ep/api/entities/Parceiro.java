@@ -14,60 +14,17 @@ public class Parceiro extends Usuario {
     private String nomeEmpresa;
     private long idUsuario;
 
-    public static enum PartinerSituation {
-        APPROVED("APROVADO"),
-        REPROVED("REPROVADO"),
-        REQUESTED("SOLICITADO"),
-        EXCLUDED("EXCLUIDO");
-
-        private final String name;
-
-        private PartinerSituation(final String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return this.name;
-        }
+    public static class SITUATIONS extends TABLE {
+        public static final String APPROVED = "APROVADO";
+        public static final String REPROVED = "REPROVADO";
+        public static final String REQUESTED = "SOLICITADO";
+        public static final String EXCLUDED = "EXCLUIDO";
     }
 
-    public static enum PartinerType {
-        TECHNICAL("TECNICO"),
-        LEGISLATIVE("LEGISLATIVO");
-
-        private final String name;
-
-        private PartinerType(final String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return this.name;
-        }
+    public static class PARTINER_TYPE extends TABLE {
+        public static final String TECHNICAL = "TECNICO";
+        public static final String LEGISLATIVE = "LEGISLATIVO";
     }
-
-    public String getNameByIndex(final int index) {
-        if (index > PartinerSituation.values().length) {
-            return "Tipo inválido";
-        }
-
-        if (PartinerSituation.values().length == index) {
-            String names = "";
-            for (final PartinerSituation situation : PartinerSituation.values()) {
-                names += situation.name + ";";
-            }
-            return names;
-        }
-
-        for (final PartinerSituation situation : PartinerSituation.values()) {
-            if (situation.ordinal() == index) {
-                return situation.name;
-            }
-        }
-
-        return "";
-    }
-
 
     public static class PARTINER_TABLE extends TABLE {
         public static final String TABLE_NAME = "parceiro as P";
