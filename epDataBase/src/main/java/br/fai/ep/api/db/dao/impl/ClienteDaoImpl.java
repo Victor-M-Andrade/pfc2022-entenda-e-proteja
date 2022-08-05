@@ -100,11 +100,11 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += CLIENT_TABLE.DATE_TIME_COLUMN + SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += SQL_COMMAND.VALUES;
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome
-            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE;
-            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE;
-            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.FINAL_CLOSE_PARENTHESIS;
+            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; //cnpj
+            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // aceite
+            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.FINAL_CLOSE_PARENTHESIS + ";";
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Cliente client = (Cliente) entity;
             int i = 1;
@@ -150,7 +150,6 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
 
             final Cliente client = (Cliente) entity;
             int i = 1;
-            preparedStatement.setString(i++, CLIENT_TABLE.TABLE_NAME);
             preparedStatement.setString(i++, client.getNome());
             preparedStatement.setString(i++, client.getCnpj());
             preparedStatement.setLong(i++, client.getId());
