@@ -24,7 +24,7 @@ public class TesteDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             final String sql = SQL_COMMAND.SELECT_FULL + TEST_TABLE.TABLE_NAME + ";";
 
-            preparForReadingOrCreating(sql, false, true);
+            preparForReadingOrCreating(sql, false, false);
             resultSet = preparedStatement.executeQuery();
 
             testList = new ArrayList<>();
@@ -102,11 +102,10 @@ public class TesteDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // qtd_acerto
             sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // id_usuario
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Teste test = (Teste) entity;
             int i = 1;
-            preparedStatement.setTimestamp(i++, test.getDataHora());
             preparedStatement.setInt(i++, test.getAcertos());
             preparedStatement.setLong(i++, test.getIdUsuario());
 
