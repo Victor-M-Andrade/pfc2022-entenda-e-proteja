@@ -3,6 +3,7 @@ package br.fai.ep.api.service.impl;
 import br.fai.ep.api.db.dao.impl.ClienteDaoImpl;
 import br.fai.ep.api.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.api.entities.BasePojo;
+import br.fai.ep.api.entities.Cliente.CLIENT_TABLE;
 import br.fai.ep.api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,11 +49,18 @@ public class ClienteServiceImpl implements BaseService {
     }
 
     @Override
-    public String buildCriteriaParameters(Map criteria) {
+    public String buildCriteriaParameters(final Map criteria) {
         String param = "";
         for (final Object key : criteria.keySet()) {
             final String column = (String) key;
-            
+            if (CLIENT_TABLE.DATE_TIME_COLUMN.equalsIgnoreCase(column)) {
+                param += SQL_COMMAND.OR + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+                continue;
+            } else if (CLIENT_TABLE.ID_COLUMN.equalsIgnoreCase(column)) {
+                param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
+                continue;
+            }
+            param += SQL_COMMAND.OR + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
         }
         return param;
     }
