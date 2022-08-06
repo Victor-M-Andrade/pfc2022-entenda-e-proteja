@@ -118,7 +118,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // resposta
             sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // nivel
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Questao question = (Questao) entity;
             int i = 1;
