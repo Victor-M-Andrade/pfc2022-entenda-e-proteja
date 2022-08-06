@@ -58,6 +58,10 @@ public class NoticiaServiceImpl implements BaseService {
                     NEWS_TABLE.ID_PUBLISHER_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
+            } else if (NEWS_TABLE.CREATION_DATE_COLUMN.equalsIgnoreCase(column) ||
+                    NEWS_TABLE.PUBLICATION_DATE_COLUMN.equalsIgnoreCase(column)) {
+                param += SQL_COMMAND.OR + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+                continue;
             }
             param += SQL_COMMAND.AND + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
         }
