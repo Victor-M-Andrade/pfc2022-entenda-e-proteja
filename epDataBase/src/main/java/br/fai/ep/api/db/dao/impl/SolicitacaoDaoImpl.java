@@ -33,7 +33,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
                 request.setId(resultSet.getLong(RESQUEST_TABLE.ID_COLUMN));
                 request.setDemanda(resultSet.getString(RESQUEST_TABLE.DEMAND_COLUMN));
                 request.setTipoServico(resultSet.getString(RESQUEST_TABLE.SERVICE_TYPE_COLUMN));
-                request.setIdCliente(resultSet.getString(RESQUEST_TABLE.ID_CLIENT_COLUMN));
+                request.setIdCliente(resultSet.getLong(RESQUEST_TABLE.ID_CLIENT_COLUMN));
 
                 requestList.add(request);
             }
@@ -70,7 +70,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
                 request.setId(resultSet.getLong(RESQUEST_TABLE.ID_COLUMN));
                 request.setDemanda(resultSet.getString(RESQUEST_TABLE.DEMAND_COLUMN));
                 request.setTipoServico(resultSet.getString(RESQUEST_TABLE.SERVICE_TYPE_COLUMN));
-                request.setIdCliente(resultSet.getString(RESQUEST_TABLE.ID_CLIENT_COLUMN));
+                request.setIdCliente(resultSet.getLong(RESQUEST_TABLE.ID_CLIENT_COLUMN));
             }
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:readById | classe: " + ClienteDaoImpl.class);
@@ -100,14 +100,14 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += SQL_COMMAND.VALUES;
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // demanda
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; //tipo_servico
-            sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // id_requeste
-            preparForReadingOrCreating(sql, true, true);
+            sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // id_cliente
+            preparForReadingOrCreating(sql, true, false);
 
             final Solicitacao request = (Solicitacao) entity;
             int i = 1;
             preparedStatement.setString(i++, request.getDemanda());
             preparedStatement.setString(i++, request.getTipoServico());
-            preparedStatement.setString(i++, request.getIdCliente());
+            preparedStatement.setLong(i++, request.getIdCliente());
 
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -150,7 +150,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             int i = 1;
             preparedStatement.setString(i++, request.getDemanda());
             preparedStatement.setString(i++, request.getTipoServico());
-            preparedStatement.setString(i++, request.getIdCliente());
+            preparedStatement.setLong(i++, request.getIdCliente());
             preparedStatement.setLong(i++, request.getId());
 
             preparedStatement.execute();
@@ -223,7 +223,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
                 request.setId(resultSet.getLong(RESQUEST_TABLE.ID_COLUMN));
                 request.setDemanda(resultSet.getString(RESQUEST_TABLE.DEMAND_COLUMN));
                 request.setTipoServico(resultSet.getString(RESQUEST_TABLE.SERVICE_TYPE_COLUMN));
-                request.setIdCliente(resultSet.getString(RESQUEST_TABLE.ID_CLIENT_COLUMN));
+                request.setIdCliente(resultSet.getLong(RESQUEST_TABLE.ID_CLIENT_COLUMN));
 
                 requestList.add(request);
             }

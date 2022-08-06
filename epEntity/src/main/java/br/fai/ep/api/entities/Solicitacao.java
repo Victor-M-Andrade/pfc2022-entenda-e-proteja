@@ -8,7 +8,7 @@ import lombok.Setter;
 public class Solicitacao extends BasePojo {
     private String demanda;
     private String tipoServico;
-    private String idCliente;
+    private Long idCliente;
 
     public static class RESQUEST_TABLE extends TABLE {
         public static final String TABLE_NAME = "solicitacao as S";
