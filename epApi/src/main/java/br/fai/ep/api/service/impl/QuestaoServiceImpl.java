@@ -54,10 +54,10 @@ public class QuestaoServiceImpl implements BaseService {
         for (final Object key : criteria.keySet()) {
             final String column = (String) key;
             if (QUESTION_TABLE.LEVEL_COLUMN.equalsIgnoreCase(column)) {
-                param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
+                param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
             }
-            param += SQL_COMMAND.AND + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+            param += SQL_COMMAND.OR + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
         }
 
         return param;

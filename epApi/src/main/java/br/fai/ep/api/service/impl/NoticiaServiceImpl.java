@@ -56,14 +56,14 @@ public class NoticiaServiceImpl implements BaseService {
             if (NEWS_TABLE.ARTICLE_COLUMN.equalsIgnoreCase(column) ||
                     NEWS_TABLE.ID_AUTHOR_COLUMN.equalsIgnoreCase(column) ||
                     NEWS_TABLE.ID_PUBLISHER_COLUMN.equalsIgnoreCase(column)) {
-                param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
+                param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
             } else if (NEWS_TABLE.CREATION_DATE_COLUMN.equalsIgnoreCase(column) ||
                     NEWS_TABLE.PUBLICATION_DATE_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
                 continue;
             }
-            param += SQL_COMMAND.AND + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+            param += SQL_COMMAND.OR + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
         }
 
         return param;
