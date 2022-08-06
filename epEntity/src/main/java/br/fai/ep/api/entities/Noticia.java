@@ -12,26 +12,16 @@ public class Noticia extends BasePojo {
     private int artigo;
     private String situacao;
     private String contexto;
-    private String palabraChave;
+    private String palavraChave;
     private Timestamp dataCriacao;
-    private Timestamp dataPublicao;
+    private Timestamp dataPublicacao;
     private long idAutor;
     private long idPublicador;
 
-    public static enum NewsSituation {
-        CREATED("CRIADO"),
-        PUBLISHED("PUBLICADO"),
-        REJECTED("RECUSADO");
-
-        private final String name;
-
-        private NewsSituation(final String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return this.name;
-        }
+    public static class SITUATIONS {
+        public static final String CREATED = "CRIADO";
+        public static final String PUBLISHED = "PUBLICADO";
+        public static final String REJECTED = "RECUSADO";
     }
 
     public static class NEWS_TABLE extends TABLE {

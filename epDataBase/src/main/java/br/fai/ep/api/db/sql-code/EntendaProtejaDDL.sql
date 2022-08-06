@@ -67,7 +67,7 @@ create table noticia(
     situacao character varying(9) not null,
     palavra_chave character varying (50) not null,
     data_criacao timestamp without time zone not null default now(),
-    data_publicacao timestamp without time zone default now(),
+    data_publicacao timestamp without time zone,
     id_autor integer not null references usuario(id) on update cascade on delete cascade,
     id_publicador integer references usuario(id) on update cascade on delete cascade
 );

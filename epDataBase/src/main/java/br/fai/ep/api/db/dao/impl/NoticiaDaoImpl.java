@@ -35,9 +35,9 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
-                news.setPalabraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
-                news.setDataPublicao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
                 news.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
                 news.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
 
@@ -78,9 +78,9 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
-                news.setPalabraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
-                news.setDataPublicao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
                 news.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
                 news.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
             }
@@ -122,15 +122,15 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // cricao
             sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // autor
 
-            preparForReadingOrCreating(sql, true, true);
+            preparForReadingOrCreating(sql, true, false);
 
             final Noticia news = (Noticia) entity;
             int i = 1;
             preparedStatement.setString(i++, news.getTitulo());
             preparedStatement.setInt(i++, news.getArtigo());
             preparedStatement.setString(i++, news.getContexto());
-            preparedStatement.setString(i++, Noticia.NewsSituation.CREATED.getName());
-            preparedStatement.setString(i++, news.getPalabraChave());
+            preparedStatement.setString(i++, Noticia.SITUATIONS.CREATED);
+            preparedStatement.setString(i++, news.getPalavraChave());
             preparedStatement.setLong(i++, news.getIdAutor());
 
             preparedStatement.execute();
@@ -178,14 +178,13 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
 
             final Noticia news = (Noticia) entity;
             int i = 1;
-            preparedStatement.setString(i++, NEWS_TABLE.TABLE_NAME);
             preparedStatement.setString(i++, news.getTitulo());
             preparedStatement.setInt(i++, news.getArtigo());
             preparedStatement.setString(i++, news.getContexto());
             preparedStatement.setString(i++, news.getSituacao());
-            preparedStatement.setString(i++, news.getPalabraChave());
+            preparedStatement.setString(i++, news.getPalavraChave());
             preparedStatement.setTimestamp(i++, news.getDataCriacao());
-            preparedStatement.setTimestamp(i++, news.getDataPublicao());
+            preparedStatement.setTimestamp(i++, news.getDataPublicacao());
             preparedStatement.setLong(i++, news.getIdAutor());
             preparedStatement.setLong(i++, news.getIdPublicador());
             preparedStatement.setLong(i++, news.getId());
@@ -262,9 +261,9 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
-                news.setPalabraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
-                news.setDataPublicao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
                 news.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
                 news.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
 
