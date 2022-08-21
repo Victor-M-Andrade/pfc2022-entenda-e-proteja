@@ -1,0 +1,53 @@
+.logo {
+    padding: 10px;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.login img {
+    height: 150px;
+}
+
+
+.login {
+    margin-bottom: 50px;
+}
+
+.carousel img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.banner_noticia {
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+
+.noticia_categ{
+    margin-bottom: 20px;
+}
+
+.perfil {
+    margin-bottom: 50px;
+}
+
+.noticia_categ img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.noticia_categ:hover {
+    transform: scale(102%);
+    cursor: pointer; 
+}
+ .materia_resumo {
+     margin-bottom: 15px;
+ }
+
