@@ -4,23 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.fai.ep.Entities</groupId>
+    <parent>
+        <groupId>br.fai.ep</groupId>
+        <artifactId>entenda-e-proteja-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <artifactId>epEntity</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${epEntity.version}</version>
+
+    <name>epEntity</name>
+    <packaging>jar</packaging>
+    <description>Módulo que armazena todas as entidades do projeto Entenda e Proteja</description>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <revision>${entenda-e-proteja.version}</revision>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
 </project>
