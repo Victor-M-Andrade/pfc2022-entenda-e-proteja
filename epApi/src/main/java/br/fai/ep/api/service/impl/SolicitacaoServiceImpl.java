@@ -1,9 +1,9 @@
 package br.fai.ep.api.service.impl;
 
-import br.fai.ep.api.db.dao.impl.SolicitacaoDaoImpl;
-import br.fai.ep.api.db.helper.DataBaseHelper.SQL_COMMAND;
-import br.fai.ep.api.entities.BasePojo;
-import br.fai.ep.api.entities.Solicitacao.RESQUEST_TABLE;
+import br.fai.ep.db.dao.impl.SolicitacaoDaoImpl;
+import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
+import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.Solicitacao.RESQUEST_TABLE;
 import br.fai.ep.api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

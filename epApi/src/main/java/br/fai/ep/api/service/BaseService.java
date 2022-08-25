@@ -1,6 +1,6 @@
 package br.fai.ep.api.service;
 
-import br.fai.ep.api.entities.BasePojo;
+import br.fai.ep.epEntities.BasePojo;
 
 import java.util.List;
 import java.util.Map;

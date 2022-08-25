@@ -1,7 +1,7 @@
 package br.fai.ep.api.controller;
 
-import br.fai.ep.api.entities.BasePojo;
-import br.fai.ep.api.entities.Usuario;
+import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.api.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

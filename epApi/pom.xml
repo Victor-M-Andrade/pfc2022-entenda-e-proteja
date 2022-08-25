@@ -43,11 +43,13 @@
         <dependency>
             <groupId>br.fai.ep</groupId>
             <artifactId>epEntity</artifactId>
+            <version>${epEntity.version}</version>
         </dependency>
         <!-- dependencia para acessar as classes do projeto epDataBase -->
         <dependency>
             <groupId>br.fai.ep</groupId>
             <artifactId>epDataBase</artifactId>
+            <version>${epDataBase.version}</version>
         </dependency>
 
         <dependency>

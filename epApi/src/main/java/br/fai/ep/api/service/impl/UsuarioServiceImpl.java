@@ -1,11 +1,11 @@
 package br.fai.ep.api.service.impl;
 
-import br.fai.ep.api.db.dao.impl.UsuarioDaoImpl;
-import br.fai.ep.api.db.helper.DataBaseHelper.SQL_COMMAND;
+import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
+import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.api.email.EmailService;
-import br.fai.ep.api.entities.BasePojo;
-import br.fai.ep.api.entities.Usuario;
-import br.fai.ep.api.entities.Usuario.USER_TABLE;
+import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epEntities.Usuario.USER_TABLE;
 import br.fai.ep.api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
