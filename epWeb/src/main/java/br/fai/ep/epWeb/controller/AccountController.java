@@ -16,14 +16,14 @@ public class AccountController {
         return "conta/register";
     }
 
-    @GetMapping("/account/forgot-my-passowrd")
+    @GetMapping("/account/forgot-my-password")
     public String getForgotMyPassowordPage() {
         return "conta/password";
     }
 
     @GetMapping("/account/log-out")
     public String singOut() {
-        return "redirect: /";
+        return "redirect:/";
     }
 
     @GetMapping("/user/profile")

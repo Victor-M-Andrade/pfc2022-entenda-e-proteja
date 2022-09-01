@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NavBar Template</title>
+    <title>Template E&P</title>
 
     <link rel="stylesheet" href="/resources/bootstrap-4.4.1-dist/css/bootstrap.min.css">
 
@@ -75,11 +75,11 @@
                     Perfil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/conta/login">Entrar</a>
-                    <a class="dropdown-item" href="/conta/register">Cadastrar</a>
-                    <a class="dropdown-item" href="/usuario/perfil">Ver Perfil</a>
-                    <a class="dropdown-item" href="/usuario/editar_perfil">Editar Perfil</a>
-                    <a class="dropdown-item" href="#">Sair</a>
+                    <a class="dropdown-item" th:href="@{/account/authenticate}">Entrar</a>
+                    <a class="dropdown-item" th:href="@{/account/register}">Cadastrar</a>
+                    <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
+                    <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a>
+                    <a class="dropdown-item" th:href="@{/account/log-out}">Sair</a>
                 </div>
             </li>
 
@@ -88,14 +88,10 @@
 
 </nav>
 
-<div class="container col-12">
-
-    <br>
-
+<div class="container col-12"><br>
     <main>
         <div layout:fragment="body"></div>
     </main>
-
 </div>
 
 <div id="layoutAuthentication_footer">
@@ -113,5 +109,4 @@
     </footer>
 </div>
 </body>
-
 </html>
