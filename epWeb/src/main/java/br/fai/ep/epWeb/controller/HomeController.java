@@ -18,6 +18,6 @@ public class HomeController {
 
     @GetMapping("/not-found")
     public String getNotFoundPage() {
-        return "/exception/not-found";
+        return "exception/not-found";
     }
 }
