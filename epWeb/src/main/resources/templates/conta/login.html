@@ -26,16 +26,19 @@
                     <img src="/resources/img/logo.png" alt="logo">
                 </div>
                 <div class="card-body">
-                    <form>
+                    <div class="alert alert-danger" th:if="${authenticationError}">
+                        <span class="font-weight-bold align-middle">Email ou senha inválidos</span>
+                    </div>
+                    <form th:action="@{/account/authenticate}" method="post" th:object="${usuario}">
                         <div class="form-group">
                             <label class="small mb-1" for="inputEmailAddress">Email</label>
                             <input class="form-control py-4" id="inputEmailAddress" type="email"
-                                   placeholder="Insira o endereço de email" required/>
+                                   placeholder="Insira o endereço de email" required th:field="${usuario.email}"/>
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="inputPassword">Senha</label>
                             <input class="form-control py-4" id="inputPassword" type="password"
-                                   placeholder="Insira a senha" required/>
+                                   placeholder="Insira a senha" required th:field="${usuario.senha}"/>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
@@ -45,7 +48,7 @@
                         </div>
                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                             <a class="small" th:href="@{/account/forgot-my-password}">Esqueceu a senha?</a>
-                            <a class="btn btn-info" th:href="@{/user/profile}">Autenticar</a>
+                            <button class="btn btn-info" type="submit">Autenticar</button>
                         </div>
                     </form>
                 </div>

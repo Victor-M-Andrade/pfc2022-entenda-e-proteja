@@ -1,12 +1,12 @@
 package br.fai.ep.api.service.impl;
 
+import br.fai.ep.api.email.EmailService;
+import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
-import br.fai.ep.api.email.EmailService;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epEntities.Usuario.USER_TABLE;
-import br.fai.ep.api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,5 +82,19 @@ public class UsuarioServiceImpl implements BaseService {
         final String subject = "Recuperação de senha - Projeto Entenda e Proteja";
         final String message = "Clique neste link para recupar a senha";
         return emailService.send(userEmail, subject, message);
+    }
+
+    public Usuario authenticate(final Map criteria) {
+        final String userEmail = (String) criteria.get(USER_TABLE.EMAIL_COLUMN);
+        final String userPassword = (String) criteria.get(USER_TABLE.PASSWORD_COLUMN);
+
+        String queryCriteria = SQL_COMMAND.WHERE + USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userEmail + "\'";
+        queryCriteria += SQL_COMMAND.AND + USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userPassword + "\';";
+        final List<Usuario> userList = (List<Usuario>) dao.readByCriteria(queryCriteria);
+        if (userList == null || userList.isEmpty()) {
+            return null;
+        }
+
+        return userList.get(0);
     }
 }

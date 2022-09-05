@@ -12,10 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AccountController {
     private final ServiceInterface service = new UsuarioServiceImpl();
+    private final String AUTHENTICATION_ERROR = "authenticationError";
 
-    @GetMapping("/account/authenticate")
-    public String getAuthenticatePage() {
+    @GetMapping("/account/login")
+    public String getLoginPage(final Model model, final Usuario usuario) {
+        model.addAttribute(AUTHENTICATION_ERROR, false);
         return "conta/login";
+    }
+
+    @PostMapping("/account/authenticate")
+    public String getAuthenticatePage(final Model model, final Usuario user) {
+        final Usuario myUser = new UsuarioServiceImpl().authentication(user.getEmail(), user.getSenha());
+        if (myUser == null) {
+            model.addAttribute(AUTHENTICATION_ERROR, true);
+            return "conta/login";
+        }
+
+        return "redirect:/user/profile/" + myUser.getId();
     }
 
     @GetMapping("/account/register")

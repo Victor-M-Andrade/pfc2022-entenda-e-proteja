@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -118,6 +119,26 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
                     httpEntity, Usuario[].class);
             response = Arrays.asList(responseEntity.getBody());
 
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public Usuario authentication(final String email, final String password) {
+        final String endpoint = baseEntedpoint + "/authentication";
+        Usuario response = null;
+        final Map<String, String> criteria = new HashMap<>();
+        criteria.put(Usuario.USER_TABLE.EMAIL_COLUMN, email);
+        criteria.put(Usuario.USER_TABLE.PASSWORD_COLUMN, password);
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final ResponseEntity<Usuario> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+                    httpEntity, Usuario.class);
+            response = responseEntity.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
         }

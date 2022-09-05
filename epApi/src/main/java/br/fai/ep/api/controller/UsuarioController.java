@@ -1,8 +1,8 @@
 package br.fai.ep.api.controller;
 
+import br.fai.ep.api.service.impl.UsuarioServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.api.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +54,10 @@ public class UsuarioController {
     @PostMapping("/forgot-password")
     public ResponseEntity<Boolean> forgotPassword(@RequestBody final Map criteria) {
         return ResponseEntity.ok(service.forgotPassword(criteria));
+    }
+
+    @PostMapping("/authentication")
+    public ResponseEntity<Usuario> authenticate(@RequestBody final Map criteria) {
+        return ResponseEntity.ok(service.authenticate(criteria));
     }
 }
