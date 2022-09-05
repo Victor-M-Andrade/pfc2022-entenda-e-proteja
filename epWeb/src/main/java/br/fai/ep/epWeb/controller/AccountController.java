@@ -43,8 +43,11 @@ public class AccountController {
         return "redirect:/";
     }
 
-    @GetMapping("/user/profile")
-    public String getUserProfilePage() {
+    @GetMapping("/user/profile/{id}")
+    public String getUserProfilePage(@PathVariable final long id, final Model model) {
+        final Usuario user = (Usuario) service.readById(id);
+        model.addAttribute("myUser", user);
+        model.addAttribute("dateCreate", service.getCreationDateAndTime(user.getDataHora()));
         return "/usuario/perfil";
     }
 
