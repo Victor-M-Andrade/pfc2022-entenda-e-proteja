@@ -20,7 +20,7 @@ public class EmailConfigarion {
     @Bean
     public JavaMailSender mailSender() {
         final JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-
+        mailSender.setDefaultEncoding("utf-8");
         mailSender.setHost(env.getProperty("mail.smtp.host"));
         mailSender.setPort(env.getProperty("mail.smtp.port", Integer.class));
         mailSender.setUsername(env.getProperty("mail.smtp.username"));
@@ -31,6 +31,7 @@ public class EmailConfigarion {
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", true);
         properties.put("mail.smtp.connectiontimeout", 10000);
+        properties.setProperty("mail.mime.charset", "utf-8");
 
         mailSender.setJavaMailProperties(properties);
         return mailSender;

@@ -75,10 +75,11 @@ public class UsuarioServiceImpl implements BaseService {
         if (userList == null || userList.isEmpty()) {
             return false;
         }
+        final Usuario user = userList.get(0);
 
         final EmailService emailService = new EmailService();
         final String subject = "Recuperação de senha - Projeto Entenda e Proteja";
-        final String message = "Clique neste link para recupar a senha";
+        final String message = emailService.buildMessage(user.getNome(), user.getId());
         return emailService.send(userEmail, subject, message);
     }
 
