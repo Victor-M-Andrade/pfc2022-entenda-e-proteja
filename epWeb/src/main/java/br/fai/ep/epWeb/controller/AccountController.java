@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AccountController {
     private final ServiceInterface service = new UsuarioServiceImpl();
     private final String AUTHENTICATION_ERROR = "authenticationError";
+    private final String EMAIL_NOT_FOUND = "emailNotFound";
+    private final String SENDED_EMAIL = "sendedEmail";
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario usuario) {
@@ -47,7 +49,22 @@ public class AccountController {
     }
 
     @GetMapping("/account/forgot-my-password")
-    public String getForgotMyPassowordPage() {
+    public String getForgotMyPassowordPage(final Model model, final Usuario usuario) {
+        model.addAttribute(SENDED_EMAIL, false);
+        model.addAttribute(EMAIL_NOT_FOUND, false);
+        return "conta/password";
+    }
+
+    @PostMapping("/account/request-password-change")
+    public String requestPasswordChange(final Model model, final Usuario user) {
+        final boolean sendedEmail = new UsuarioServiceImpl().forgotPassword(user.getEmail());
+        if (sendedEmail) {
+            model.addAttribute(SENDED_EMAIL, true);
+            model.addAttribute(EMAIL_NOT_FOUND, false);
+            return "conta/password";
+        }
+        model.addAttribute(SENDED_EMAIL, false);
+        model.addAttribute(EMAIL_NOT_FOUND, true);
         return "conta/password";
     }
 

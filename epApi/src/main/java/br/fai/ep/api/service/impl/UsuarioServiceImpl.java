@@ -69,9 +69,7 @@ public class UsuarioServiceImpl implements BaseService {
         return param;
     }
 
-    public boolean forgotPassword(final Map criteria) {
-        final String userEmail = (String) criteria.get(USER_TABLE.EMAIL_COLUMN);
-
+    public boolean forgotPassword(final String userEmail) {
         final String queryCriteria = SQL_COMMAND.WHERE + USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userEmail + "\';";
         final List<Usuario> userList = (List<Usuario>) dao.readByCriteria(queryCriteria);
         if (userList == null || userList.isEmpty()) {

@@ -126,6 +126,23 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
         return response;
     }
 
+    public boolean forgotPassword(final String userEmail) {
+        final String endpoint = baseEntedpoint + "/forgot-password";
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(userEmail);
+            final ResponseEntity<Boolean> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+                    httpEntity, Boolean.class);
+            response = responseEntity.getBody();
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
     public Usuario authentication(final String email, final String password) {
         final String endpoint = baseEntedpoint + "/authentication";
         Usuario response = null;
