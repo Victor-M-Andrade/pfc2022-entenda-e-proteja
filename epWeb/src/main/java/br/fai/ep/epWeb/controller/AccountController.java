@@ -15,6 +15,8 @@ public class AccountController {
     private final String AUTHENTICATION_ERROR = "authenticationError";
     private final String EMAIL_NOT_FOUND = "emailNotFound";
     private final String SENDED_EMAIL = "sendedEmail";
+    public final String MY_USER_REFERENCE = "myUser";
+    public final String USER_CREATION_DATE = "dateCreate";
 
     public boolean sendedEmail = false;
     public boolean emailNotFound = false;
@@ -90,8 +92,8 @@ public class AccountController {
     @GetMapping("/user/profile/{id}")
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
-        model.addAttribute("myUser", user);
-        model.addAttribute("dateCreate", service.getCreationDateAndTime(user.getDataHora()));
+        model.addAttribute(MY_USER_REFERENCE, user);
+        model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
         return "/usuario/perfil";
     }
 

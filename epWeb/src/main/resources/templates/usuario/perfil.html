@@ -64,37 +64,20 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">Data e Hora de criação da conta</div>
-                                    <div class="col-sm-9" th:text="${dateCreate}">
+                                    <div class="col-sm-9">
                                         <label th:text="${dateCreate}"></label>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Autor alguma notícia no site?</div>
-                                    <div class="col-sm-9" th:if="@{myUser.isAutor}">Sim</div>
-                                    <div class="col-sm-9" th:unless="@{myUser.isAutor}">Não</div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">É dos prestadores de consultorias?</div>
-                                    <div class="col-sm-9" th:if="@{myUser.isParceiro}">Sim</div>
-                                    <div class="col-sm-9" th:unless="@{myUser.isParceiro}">Não</div>
-                                </div>
                             </div>
                         </div>
-
                         <div class="mb-2">
                             <a th:href="@{/user/edit}" class="btn btn-info col-12">Editar</a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
 </body>
