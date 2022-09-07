@@ -6,7 +6,9 @@ create table usuario(
     senha character varying(30) not null,
     isAutor boolean not null default false,
     isParceiro boolean not null default false,
+    isAnonimo boolean not null default false,
     aceite boolean not null,
+    path_img_profile character varying(1000) not null,
     data_hora timestamp without time zone not null default now()
 );
 
@@ -20,7 +22,8 @@ create table parceiro(
     site_parceiro character varying(500) not null,
     situacao character varying(10) not null,
     descricao text not null,
-    tipo_servico character varying(11) not null,
+    isLegislativo boolean not null default false,
+    isTecnico boolean not null default false,
     nome_empresa character varying(100) not null,
     id_usuario integer not null references usuario(id) on update cascade on delete cascade
 );
@@ -28,10 +31,7 @@ alter table parceiro
 add constraint ck_partiner_situation check(
         situacao in ('APROVADO', 'REPROVADO', 'SOLICITADO', 'EXCLUIDO')
     );
-alter table parceiro
-add constraint ck_partiner_service_type check(
-        tipo_servico in ('TECNICO', 'LEGISLATIVO')
-    );
+
 -- table com dados da empresa(cliente) que solicitaram as consultorias
 create table cliente(
     id serial primary key,
@@ -44,7 +44,8 @@ create table cliente(
 create table solicitacao(
     id serial primary key,
     demanda text not null,
-    tipo_servico character varying(50) not null,
+    isLegislativo boolean not null default false,
+    isTecnico boolean not null default false,
     id_cliente integer not null references cliente(id) on update cascade on delete cascade
 );
 -- relacionamento N:N entre solicitacao - parceiro
@@ -62,6 +63,7 @@ add constraint uk_client_request unique(id_parceiro, id_solicitacao);
 create table noticia(
     id serial primary key,
     titulo character varying(100) not null,
+    categoria character varying(50) not null,
     artigo integer not null,
     contexto text not null,
     situacao character varying(9) not null,
