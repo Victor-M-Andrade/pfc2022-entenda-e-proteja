@@ -56,6 +56,9 @@ public class UsuarioServiceImpl implements BaseService {
         for (final Object key : criteria.keySet()) {
             final String column = (String) key;
             if (USER_TABLE.ACCEPT_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_AUTHOR_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_PARTNER_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_ANONYMOUS_COLUMN.equalsIgnoreCase(column) ||
                     USER_TABLE.ID_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;

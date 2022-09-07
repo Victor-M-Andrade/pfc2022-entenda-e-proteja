@@ -53,7 +53,9 @@ public class ParceiroServiceImpl implements BaseService {
         String param = "";
         for (final Object key : criteria.keySet()) {
             final String column = (String) key;
-            if (PARTNER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
+            if (PARTNER_TABLE.IS_LEGISLATE_SERVICE.equalsIgnoreCase(column) ||
+                    PARTNER_TABLE.IS_TECHNICAL_SERVICE.equalsIgnoreCase(column) ||
+                    PARTNER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
             } else if (PARTNER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column) ||

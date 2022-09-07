@@ -34,9 +34,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
+                user.setPathImageProfile(resultSet.getString(USER_TABLE.PATH_IMG_PROFILE));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
                 user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
                 user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
+                user.setAnonimo(resultSet.getBoolean(USER_TABLE.IS_ANONYMOUS_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
 
                 userList.add(user);
@@ -75,9 +77,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
+                user.setPathImageProfile(resultSet.getString(USER_TABLE.PATH_IMG_PROFILE));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
                 user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
                 user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
+                user.setAnonimo(resultSet.getBoolean(USER_TABLE.IS_ANONYMOUS_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
             }
         } catch (final Exception e) {
@@ -105,18 +109,22 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += USER_TABLE.NAME_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.SEPARATOR;
+            sql += USER_TABLE.PATH_IMG_PROFILE + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.IS_AUTHOR_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.IS_PARTNER_COLUMN + SQL_COMMAND.SEPARATOR;
+            sql += USER_TABLE.IS_ANONYMOUS_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.ACCEPT_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += USER_TABLE.DATE_TIME_COLUMN + SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += SQL_COMMAND.VALUES;
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // email
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // senha
+            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // pathImgProfile
             sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // isAutor
             sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // isParceiro
+            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.SEPARATOR; // isAnonimo
             sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // aceite
-            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.FINAL_CLOSE_PARENTHESIS;
+            sql += SQL_COMMAND.DEFAULT_VALUE_DECLARTION + SQL_COMMAND.FINAL_CLOSE_PARENTHESIS; //data_hora
 
             preparForReadingOrCreating(sql, true, false);
 
@@ -125,6 +133,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, user.getNome());
             preparedStatement.setString(i++, user.getEmail());
             preparedStatement.setString(i++, user.getSenha());
+            preparedStatement.setString(i++, user.getPathImageProfile());
             preparedStatement.setBoolean(i++, user.isAceite());
 
             preparedStatement.execute();
@@ -160,8 +169,10 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += USER_TABLE.NAME_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.PATH_IMG_PROFILE + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += USER_TABLE.IS_AUTHOR_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += USER_TABLE.IS_PARTNER_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.IS_PARTNER_COLUMN + SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += USER_TABLE.IS_ANONYMOUS_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
             sql += SQL_COMMAND.WHERE;
             sql += USER_TABLE.ID_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
@@ -171,8 +182,10 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, user.getNome());
             preparedStatement.setString(i++, user.getEmail());
             preparedStatement.setString(i++, user.getSenha());
+            preparedStatement.setString(i++, user.getPathImageProfile());
             preparedStatement.setBoolean(i++, user.isAutor());
             preparedStatement.setBoolean(i++, user.isParceiro());
+            preparedStatement.setBoolean(i++, user.isAnonimo());
             preparedStatement.setLong(i++, user.getId());
 
             preparedStatement.execute();
@@ -246,9 +259,11 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 user.setNome(resultSet.getString(USER_TABLE.NAME_COLUMN));
                 user.setEmail(resultSet.getString(USER_TABLE.EMAIL_COLUMN));
                 user.setSenha(resultSet.getString(USER_TABLE.PASSWORD_COLUMN));
+                user.setPathImageProfile(resultSet.getString(USER_TABLE.PATH_IMG_PROFILE));
                 user.setAceite(resultSet.getBoolean(USER_TABLE.ACCEPT_COLUMN));
                 user.setAutor(resultSet.getBoolean(USER_TABLE.IS_AUTHOR_COLUMN));
                 user.setParceiro(resultSet.getBoolean(USER_TABLE.IS_PARTNER_COLUMN));
+                user.setAnonimo(resultSet.getBoolean(USER_TABLE.IS_ANONYMOUS_COLUMN));
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
 
                 userList.add(user);

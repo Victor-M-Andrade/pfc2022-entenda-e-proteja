@@ -41,9 +41,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
+                partner.setPathImageProfile(resultSet.getString(Usuario.USER_TABLE.PATH_IMG_PROFILE));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
+                partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -51,8 +53,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
+                partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
@@ -98,9 +101,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
+                partner.setPathImageProfile(resultSet.getString(Usuario.USER_TABLE.PATH_IMG_PROFILE));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
+                partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -108,8 +113,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
+                partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
             }
         } catch (final Exception e) {
@@ -138,7 +144,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTNER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.IS_LEGISLATE_SERVICE + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.IS_TECHNICAL_SERVICE + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.ID_USER_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += DataBaseHelper.SQL_COMMAND.VALUES;
@@ -146,7 +153,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // website
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // situacao
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // descricao
-            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // tipo_servico
+            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // isLegislativo
+            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // isTecnico
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome_empresa
             sql += DataBaseHelper.SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; //id_usuario
 
@@ -158,7 +166,8 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, partner.getWebsite());
             preparedStatement.setString(i++, Parceiro.SITUATIONS.REQUESTED);
             preparedStatement.setString(i++, partner.getDescricao());
-            preparedStatement.setString(i++, partner.getTipoServico());
+            preparedStatement.setBoolean(i++, partner.isLegislativo());
+            preparedStatement.setBoolean(i++, partner.isTecnico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
             preparedStatement.setLong(i++, partner.getIdUsuario());
 
@@ -196,8 +205,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTNER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.IS_LEGISLATE_SERVICE + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.IS_TECHNICAL_SERVICE + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
             sql += DataBaseHelper.SQL_COMMAND.WHERE;
             sql += PARTNER_TABLE.ID_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
@@ -208,8 +218,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, partner.getWebsite());
             preparedStatement.setString(i++, partner.getSituacao());
             preparedStatement.setString(i++, partner.getDescricao());
+            preparedStatement.setBoolean(i++, partner.isLegislativo());
+            preparedStatement.setBoolean(i++, partner.isTecnico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
-            preparedStatement.setString(i++, partner.getTipoServico());
             preparedStatement.setLong(i++, partner.getId());
 
             preparedStatement.execute();
@@ -289,9 +300,11 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setNome(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 partner.setEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
                 partner.setSenha(resultSet.getString(Usuario.USER_TABLE.PASSWORD_COLUMN));
+                partner.setPathImageProfile(resultSet.getString(Usuario.USER_TABLE.PATH_IMG_PROFILE));
                 partner.setAceite(resultSet.getBoolean(Usuario.USER_TABLE.ACCEPT_COLUMN));
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
+                partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -299,8 +312,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
+                partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
