@@ -1,10 +1,10 @@
 package br.fai.ep.api.service.impl;
 
+import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.ParceiroDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
-import br.fai.ep.epEntities.Parceiro.PARTINER_TABLE;
-import br.fai.ep.api.service.BaseService;
+import br.fai.ep.epEntities.Parceiro.PARTNER_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,11 +53,11 @@ public class ParceiroServiceImpl implements BaseService {
         String param = "";
         for (final Object key : criteria.keySet()) {
             final String column = (String) key;
-            if (PARTINER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
+            if (PARTNER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
-            } else if (PARTINER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column) ||
-                    PARTINER_TABLE.SERVICE_TYPE_COLUMN.equalsIgnoreCase(column)) {
+            } else if (PARTNER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column) ||
+                    PARTNER_TABLE.SERVICE_TYPE_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + "'" + criteria.get(key) + "'";
                 continue;
             }

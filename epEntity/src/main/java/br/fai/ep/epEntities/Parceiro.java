@@ -21,12 +21,12 @@ public class Parceiro extends Usuario {
         public static final String EXCLUDED = "EXCLUIDO";
     }
 
-    public static class PARTINER_TYPE extends TABLE {
+    public static class PARTNER_TYPE extends TABLE {
         public static final String TECHNICAL = "TECNICO";
         public static final String LEGISLATIVE = "LEGISLATIVO";
     }
 
-    public static class PARTINER_TABLE extends TABLE {
+    public static class PARTNER_TABLE extends TABLE {
         public static final String TABLE_NAME = "parceiro as P";
         public static final String SHORT_TABLE_NAME = "P.";
         public static final String CNPJ_COLUMN = "cnpj";

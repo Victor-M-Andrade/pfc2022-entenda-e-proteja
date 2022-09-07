@@ -3,11 +3,11 @@ package br.fai.ep.db.dao.impl;
 import br.fai.ep.db.connection.ConnectionFactory;
 import br.fai.ep.db.dao.BaseDao;
 import br.fai.ep.db.dao.BaseDaoInterface;
+import br.fai.ep.db.helper.DataBaseHelper;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro;
-import br.fai.ep.epEntities.Parceiro.PARTINER_TABLE;
+import br.fai.ep.epEntities.Parceiro.PARTNER_TABLE;
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.db.helper.DataBaseHelper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -23,10 +23,10 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         resetValuesForNewQuery();
 
         try {
-            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTNER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.ON;
-            sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
+            sql += PARTNER_TABLE.SHORT_TABLE_NAME + PARTNER_TABLE.ID_USER_COLUMN;
             sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
 
@@ -47,13 +47,13 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
-                partner.setCnpj(resultSet.getString(PARTINER_TABLE.CNPJ_COLUMN));
-                partner.setWebsite(resultSet.getString(PARTINER_TABLE.WEBSITE_COLUMN));
-                partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
-                partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
-                partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
+                partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
+                partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
+                partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
             }
@@ -77,14 +77,14 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         resetValuesForNewQuery();
 
         try {
-            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTNER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.ON;
-            sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
+            sql += PARTNER_TABLE.SHORT_TABLE_NAME + PARTNER_TABLE.ID_USER_COLUMN;
             sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
             sql += DataBaseHelper.SQL_COMMAND.AND;
-            sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_COLUMN;
+            sql += PARTNER_TABLE.SHORT_TABLE_NAME + PARTNER_TABLE.ID_COLUMN;
             sql += DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
 
             preparForReadingOrCreating(sql, false, true);
@@ -104,13 +104,13 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
-                partner.setCnpj(resultSet.getString(PARTINER_TABLE.CNPJ_COLUMN));
-                partner.setWebsite(resultSet.getString(PARTINER_TABLE.WEBSITE_COLUMN));
-                partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
-                partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
-                partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
+                partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
+                partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
+                partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
             }
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:readById | classe: " + ClienteDaoImpl.class);
@@ -133,14 +133,14 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
 
         try {
             String sql = DataBaseHelper.SQL_COMMAND.INSERT;
-            sql += PARTINER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.OPEN_PARENTHESIS;
-            sql += PARTINER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
-            sql += PARTINER_TABLE.ID_USER_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
+            sql += PARTNER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.OPEN_PARENTHESIS;
+            sql += PARTNER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.ID_USER_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += DataBaseHelper.SQL_COMMAND.VALUES;
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // cnpj
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // website
@@ -166,7 +166,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                newId = resultSet.getLong(PARTINER_TABLE.ID_COLUMN);
+                newId = resultSet.getLong(PARTNER_TABLE.ID_COLUMN);
             }
 
             if (newId == -1) {
@@ -191,15 +191,15 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         boolean isUpdateCompleted;
 
         try {
-            String sql = DataBaseHelper.SQL_COMMAND.UPDATE + PARTINER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.SET_UPDATE;
-            sql += PARTINER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTINER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTINER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTINER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTINER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
-            sql += PARTINER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
+            String sql = DataBaseHelper.SQL_COMMAND.UPDATE + PARTNER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.SET_UPDATE;
+            sql += PARTNER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.SERVICE_TYPE_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
             sql += DataBaseHelper.SQL_COMMAND.WHERE;
-            sql += PARTINER_TABLE.ID_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
+            sql += PARTNER_TABLE.ID_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
 
             final Parceiro partner = (Parceiro) entity;
@@ -238,9 +238,9 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         boolean isDeleteCompleted = false;
 
         try {
-            String sql = DataBaseHelper.SQL_COMMAND.DELETE + PARTINER_TABLE.TABLE_NAME;
+            String sql = DataBaseHelper.SQL_COMMAND.DELETE + PARTNER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.WHERE;
-            sql += PARTINER_TABLE.ID_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
+            sql += PARTNER_TABLE.ID_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
 
             preparForUpdateOrDelete(sql);
             preparedStatement.setLong(1, id);
@@ -270,10 +270,10 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         resetValuesForNewQuery();
 
         try {
-            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTINER_TABLE.TABLE_NAME;
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + PARTNER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
             sql += DataBaseHelper.SQL_COMMAND.ON;
-            sql += PARTINER_TABLE.SHORT_TABLE_NAME + PARTINER_TABLE.ID_USER_COLUMN;
+            sql += PARTNER_TABLE.SHORT_TABLE_NAME + PARTNER_TABLE.ID_USER_COLUMN;
             sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
             sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
             sql += " " + criteria;
@@ -295,13 +295,13 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
-                partner.setCnpj(resultSet.getString(PARTINER_TABLE.CNPJ_COLUMN));
-                partner.setWebsite(resultSet.getString(PARTINER_TABLE.WEBSITE_COLUMN));
-                partner.setSituacao(resultSet.getString(PARTINER_TABLE.SITUATION_COLUMN));
-                partner.setDescricao(resultSet.getString(PARTINER_TABLE.DESCRIPTION_COLUMN));
-                partner.setNomeEmpresa(resultSet.getString(PARTINER_TABLE.COMPANY_NAME_COLUMN));
-                partner.setTipoServico(resultSet.getString(PARTINER_TABLE.SERVICE_TYPE_COLUMN));
-                partner.setIdUsuario(resultSet.getLong(PARTINER_TABLE.ID_USER_COLUMN));
+                partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
+                partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
+                partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
+                partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setTipoServico(resultSet.getString(PARTNER_TABLE.SERVICE_TYPE_COLUMN));
+                partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
             }
