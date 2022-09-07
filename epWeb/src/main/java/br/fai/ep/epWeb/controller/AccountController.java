@@ -18,10 +18,15 @@ public class AccountController {
 
     public boolean sendedEmail = false;
     public boolean emailNotFound = false;
+    public boolean authenticationError = false;
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario usuario) {
-        model.addAttribute(AUTHENTICATION_ERROR, false);
+        model.addAttribute(AUTHENTICATION_ERROR, authenticationError);
+        if (authenticationError) {
+            authenticationError = false;
+        }
+
         return "conta/login";
     }
 
@@ -29,8 +34,8 @@ public class AccountController {
     public String getAuthenticatePage(final Model model, final Usuario user) {
         final Usuario myUser = new UsuarioServiceImpl().authentication(user.getEmail(), user.getSenha());
         if (myUser == null) {
-            model.addAttribute(AUTHENTICATION_ERROR, true);
-            return "conta/login";
+            authenticationError = true;
+            return "redirect:/account/login";
         }
 
         return "redirect:/user/profile/" + myUser.getId();
@@ -54,12 +59,11 @@ public class AccountController {
     @GetMapping("/account/forgot-my-password")
     public String getForgotMyPassowordPage(final Model model, final Usuario usuario) {
         model.addAttribute(SENDED_EMAIL, sendedEmail);
-        model.addAttribute(EMAIL_NOT_FOUND, emailNotFound);
-
         if (sendedEmail) {
             sendedEmail = false;
         }
 
+        model.addAttribute(EMAIL_NOT_FOUND, emailNotFound);
         if (emailNotFound) {
             emailNotFound = false;
         }
