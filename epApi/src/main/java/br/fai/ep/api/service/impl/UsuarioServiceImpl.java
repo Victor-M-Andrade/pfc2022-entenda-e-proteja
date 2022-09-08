@@ -40,6 +40,12 @@ public class UsuarioServiceImpl implements BaseService {
 
     @Override
     public boolean delete(final long id) {
+        final Usuario user = (Usuario) dao.readById(id);
+        if (user.isAutor() || user.isParceiro() || user.isAdministrador()) {
+            user.setAnonimo(true);
+            return dao.update(user);
+        }
+
         return dao.delete(id);
     }
 
