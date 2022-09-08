@@ -44,7 +44,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 userList.add(user);
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readAll | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readAll | classe: " + UsuarioDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }
@@ -85,7 +85,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
                 user.setDataHora(resultSet.getTimestamp(USER_TABLE.DATE_TIME_COLUMN));
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readById | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readById | classe: " + UsuarioDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }
@@ -150,7 +150,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             connection.commit();
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:create | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:create | classe: " + UsuarioDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
             ConnectionFactory.close(resultSet, preparedStatement, connection);
@@ -198,7 +198,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             isUpdateCompleted = true;
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:update | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:update | classe: " + UsuarioDaoImpl.class);
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
@@ -225,7 +225,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             connection.commit();
             isDeleteCompleted = true;
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:delete | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:delete | classe: " + UsuarioDaoImpl.class);
 
             try {
                 connection.rollback();
@@ -270,7 +270,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             }
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readByCriteria | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readByCriteria | classe: " + UsuarioDaoImpl.class);
             System.out.println(e.getMessage());
             return null;
         } finally {

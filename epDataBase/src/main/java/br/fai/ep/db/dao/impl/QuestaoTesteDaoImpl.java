@@ -36,7 +36,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
                 questionTestList.add(questionTest);
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readAll | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readAll | classe: " + QuestaoTesteDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }
@@ -72,7 +72,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
 
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readById | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readById | classe: " + QuestaoTesteDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }
@@ -122,7 +122,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
             connection.commit();
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:create | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:create | classe: " + QuestaoTesteDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
             ConnectionFactory.close(resultSet, preparedStatement, connection);
@@ -162,7 +162,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
             isUpdateCompleted = true;
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:update | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:update | classe: " + QuestaoTesteDaoImpl.class);
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
@@ -189,7 +189,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
             connection.commit();
             isDeleteCompleted = true;
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:delete | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:delete | classe: " + QuestaoTesteDaoImpl.class);
 
             try {
                 connection.rollback();
@@ -228,7 +228,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
             }
 
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readByCriteria | classe: " + ClienteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readByCriteria | classe: " + QuestaoTesteDaoImpl.class);
             System.out.println(e.getMessage());
             return null;
         } finally {
