@@ -7,6 +7,7 @@ create table usuario(
     isAutor boolean not null default false,
     isParceiro boolean not null default false,
     isAnonimo boolean not null default false,
+    isAdministrador boolean not null default false,
     aceite boolean not null,
     path_img_profile character varying(1000) not null,
     data_hora timestamp without time zone not null default now()
