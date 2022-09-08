@@ -2,7 +2,7 @@
 create table usuario(
     id serial primary key,
     nome character varying(100) not null,
-    email character varying(200) not null,
+    email character varying(200) not null unique,
     senha character varying(30) not null,
     isAutor boolean not null default false,
     isParceiro boolean not null default false,

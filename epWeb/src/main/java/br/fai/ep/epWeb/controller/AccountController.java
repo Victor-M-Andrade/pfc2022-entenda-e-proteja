@@ -17,10 +17,14 @@ public class AccountController {
     private final String SENDED_EMAIL = "sendedEmail";
     public final String MY_USER_REFERENCE = "myUser";
     public final String USER_CREATION_DATE = "dateCreate";
+    public final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
+    public final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
 
     public boolean sendedEmail = false;
     public boolean emailNotFound = false;
     public boolean authenticationError = false;
+    public boolean alreadyregisteredEmail = false;
+    public boolean accountCreationProblems = false;
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario usuario) {
@@ -45,6 +49,15 @@ public class AccountController {
 
     @GetMapping("/account/register")
     public String getRegisterPage(final Model model, final Usuario user) {
+        model.addAttribute(ALREADY_REGISTERED_EMAIL, alreadyregisteredEmail);
+        if (alreadyregisteredEmail) {
+            alreadyregisteredEmail = false;
+        }
+
+        model.addAttribute(ACCOUNT_CREATION_PROBLEMS, accountCreationProblems);
+        if (accountCreationProblems) {
+            accountCreationProblems = false;
+        }
         return "conta/register";
     }
 
@@ -52,6 +65,10 @@ public class AccountController {
     private String createUser(final Usuario user, final Model model) {
         final long newIdUser = service.create(user);
         if (newIdUser == -1) {
+            accountCreationProblems = true;
+            return "redirect:/account/register";
+        } else if (newIdUser == -2) {
+            alreadyregisteredEmail = true;
             return "redirect:/account/register";
         }
 

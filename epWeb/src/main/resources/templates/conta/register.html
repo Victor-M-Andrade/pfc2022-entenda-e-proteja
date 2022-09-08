@@ -54,6 +54,12 @@
                     <img class="logo" src="/resources/img/logo.png" alt="logo">
                 </div>
                 <div class="card-body">
+                    <div class="alert alert-danger" th:if="${alreadyRegisteredEmail}">
+                        <span class="font-weight-bold align-middle">O email informado já esta registrado. Por gentileza, informe outro email.</span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${accountCreationProblems}">
+                        <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.</span>
+                    </div>
                     <form th:action="@{/account/create}" method="post" th:object="${usuario}">
                         <div class="form-row">
                             <div class="col-md-12">

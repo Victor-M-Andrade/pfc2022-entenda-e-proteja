@@ -30,6 +30,13 @@ public class UsuarioServiceImpl implements BaseService {
 
     @Override
     public long create(final Object entity) {
+        final Usuario user = (Usuario) entity;
+        final String criteria = "WHERE email = \'" + user.getEmail() + "\';";
+        final List<? extends BasePojo> userList = dao.readByCriteria(criteria);
+        if (userList != null && !userList.isEmpty()) {
+            return -2; // representa que existe um usuário com o email informado
+        }
+
         return dao.create(entity);
     }
 
@@ -98,7 +105,8 @@ public class UsuarioServiceImpl implements BaseService {
         final String userPassword = (String) criteria.get(USER_TABLE.PASSWORD_COLUMN);
 
         String queryCriteria = SQL_COMMAND.WHERE + USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userEmail + "\'";
-        queryCriteria += SQL_COMMAND.AND + USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userPassword + "\';";
+        queryCriteria += SQL_COMMAND.AND + USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userPassword + "\'";
+        queryCriteria += SQL_COMMAND.AND + USER_TABLE.IS_ANONYMOUS_COLUMN + SQL_COMMAND.EQUAL_COMPATION + false + ";";
         final List<Usuario> userList = (List<Usuario>) dao.readByCriteria(queryCriteria);
         if (userList == null || userList.isEmpty()) {
             return null;

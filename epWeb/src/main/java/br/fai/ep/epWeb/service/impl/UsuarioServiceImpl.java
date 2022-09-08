@@ -59,7 +59,9 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity);
+            final Usuario user = (Usuario) entity;
+            user.setPathImageProfile("C:");
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<>(user);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
