@@ -35,6 +35,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                news.setCategoria(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
                 news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
                 news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
@@ -78,6 +79,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                news.setCategoria(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
                 news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
                 news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
@@ -110,6 +112,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += NEWS_TABLE.ARTICLE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += NEWS_TABLE.CONTEXT_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += NEWS_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += NEWS_TABLE.CATEGORY_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += NEWS_TABLE.KEYWORD_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += NEWS_TABLE.CREATION_DATE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += NEWS_TABLE.ID_AUTHOR_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
@@ -118,6 +121,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // artigo
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // contexto
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // situacao
+            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // categoria
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // palavra-chave
             sql += DataBaseHelper.SQL_COMMAND.DEFAULT_VALUE_DECLARTION + DataBaseHelper.SQL_COMMAND.SEPARATOR; // cricao
             sql += DataBaseHelper.SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // autor
@@ -130,6 +134,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setInt(i++, news.getArtigo());
             preparedStatement.setString(i++, news.getContexto());
             preparedStatement.setString(i++, Noticia.SITUATIONS.CREATED);
+            preparedStatement.setString(i++, news.getCategoria());
             preparedStatement.setString(i++, news.getPalavraChave());
             preparedStatement.setLong(i++, news.getIdAutor());
 
@@ -167,6 +172,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += NEWS_TABLE.ARTICLE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += NEWS_TABLE.CONTEXT_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += NEWS_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += NEWS_TABLE.CATEGORY_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += NEWS_TABLE.KEYWORD_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += NEWS_TABLE.CREATION_DATE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += NEWS_TABLE.PUBLICATION_DATE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
@@ -182,6 +188,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setInt(i++, news.getArtigo());
             preparedStatement.setString(i++, news.getContexto());
             preparedStatement.setString(i++, news.getSituacao());
+            preparedStatement.setString(i++, news.getCategoria());
             preparedStatement.setString(i++, news.getPalavraChave());
             preparedStatement.setTimestamp(i++, news.getDataCriacao());
             preparedStatement.setTimestamp(i++, news.getDataPublicacao());
@@ -261,6 +268,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 news.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
                 news.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
                 news.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                news.setSituacao(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
                 news.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
                 news.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
                 news.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));

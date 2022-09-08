@@ -8,10 +8,11 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class Noticia extends BasePojo {
-    private String titulo;
     private int artigo;
+    private String titulo;
     private String situacao;
     private String contexto;
+    private String categoria;
     private String palavraChave;
     private Timestamp dataCriacao;
     private Timestamp dataPublicacao;
@@ -31,6 +32,7 @@ public class Noticia extends BasePojo {
         public static final String ARTICLE_COLUMN = "artigo";
         public static final String CONTEXT_COLUMN = "contexto";
         public static final String SITUATION_COLUMN = "situacao";
+        public static final String CATEGORY_COLUMN = "categoria";
         public static final String KEYWORD_COLUMN = "palavra_chave";
         public static final String CREATION_DATE_COLUMN = "data_criacao";
         public static final String PUBLICATION_DATE_COLUMN = "data_publicacao";
