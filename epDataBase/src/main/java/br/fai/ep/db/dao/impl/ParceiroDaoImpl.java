@@ -200,7 +200,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + ParceiroDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement, connection);
         }
 
         return newId;
