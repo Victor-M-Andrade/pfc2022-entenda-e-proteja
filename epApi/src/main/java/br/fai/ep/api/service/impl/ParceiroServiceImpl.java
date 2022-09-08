@@ -5,6 +5,7 @@ import br.fai.ep.db.dao.impl.ParceiroDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro.PARTNER_TABLE;
+import br.fai.ep.epEntities.Usuario.USER_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,12 +56,18 @@ public class ParceiroServiceImpl implements BaseService {
             final String column = (String) key;
             if (PARTNER_TABLE.IS_LEGISLATE_SERVICE.equalsIgnoreCase(column) ||
                     PARTNER_TABLE.IS_TECHNICAL_SERVICE.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_AUTHOR_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_PARTNER_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_ANONYMOUS_COLUMN.equalsIgnoreCase(column) ||
+                    USER_TABLE.IS_ADMINISTRATOR_COLUMN.equalsIgnoreCase(column) ||
                     PARTNER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
-            } else if (PARTNER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column) ||
-                    PARTNER_TABLE.SERVICE_TYPE_COLUMN.equalsIgnoreCase(column)) {
+            } else if (PARTNER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column)) {
                 param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + "'" + criteria.get(key) + "'";
+                continue;
+            } else if (USER_TABLE.DATE_TIME_COLUMN.equalsIgnoreCase(column)) {
+                param += SQL_COMMAND.OR + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
                 continue;
             }
             param += SQL_COMMAND.OR + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";

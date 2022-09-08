@@ -46,6 +46,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
+                partner.setAdministrador(resultSet.getBoolean(Usuario.USER_TABLE.IS_ADMINISTRATOR_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -106,6 +107,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
+                partner.setAdministrador(resultSet.getBoolean(Usuario.USER_TABLE.IS_ADMINISTRATOR_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner
@@ -305,6 +307,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setAutor(resultSet.getBoolean(Usuario.USER_TABLE.IS_AUTHOR_COLUMN));
                 partner.setParceiro(resultSet.getBoolean(Usuario.USER_TABLE.IS_PARTNER_COLUMN));
                 partner.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
+                partner.setAdministrador(resultSet.getBoolean(Usuario.USER_TABLE.IS_ADMINISTRATOR_COLUMN));
                 partner.setDataHora(resultSet.getTimestamp(Usuario.USER_TABLE.DATE_TIME_COLUMN));
 
                 // on the partner

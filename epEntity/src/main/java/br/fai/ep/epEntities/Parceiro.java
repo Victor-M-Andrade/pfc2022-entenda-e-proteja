@@ -31,7 +31,6 @@ public class Parceiro extends Usuario {
         public static final String DESCRIPTION_COLUMN = "descricao";
         public static final String IS_LEGISLATE_SERVICE = "isLegislativo";
         public static final String IS_TECHNICAL_SERVICE = "isTecnico";
-        public static final String SERVICE_TYPE_COLUMN = "tipo_servico";
         public static final String COMPANY_NAME_COLUMN = "nome_empresa";
         public static final String ID_USER_COLUMN = "id_usuario";
     }
