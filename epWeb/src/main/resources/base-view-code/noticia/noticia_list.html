@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NavBar Template</title>
 
-    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/6d6eee6583.js" crossorigin="anonymous"></script>
@@ -18,6 +18,11 @@
     <script src="../resources/js/font-awesome/all.min.js"></script>
 
     <link rel="icon" href="../resources/img/logo.png">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
+
 
 </head>
 
@@ -42,7 +47,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         LGPD
@@ -55,7 +60,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Contatos
@@ -68,7 +73,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Perfil
@@ -106,246 +111,152 @@
 
         <div class="container-fluid text-center navbar-expand-md">
 
-            <div class="row align-items-start" id="accordion-parent">
+            <div class="row align-items-start">
 
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="table-responsive">
 
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-1">Título da matéria</button>
-                        </div>
+                    <table class="table table-bordered" id="tabela" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Autor</th>
+                                <th>Categoria</th>
+                                <th>Data Publicação</th>
+                                <th>Ação</th>
+                            </tr>
 
-                        <div class="collapse" id="card-1" data-parent="#accordion-parent">
-                            <div class="card-body">
 
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
+                            <tr class="col-12">
+                                <th><input class="col-10" type="text" id="txtColuna1"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                                <th><input class="col-10" type="text" id="txtColuna2"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                                <th><input class="col-10" type="text" id="txtColuna3"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                                <th><input class="col-10" type="text" id="txtColuna4"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
+                        
 
-                                <br>
+                        <tfoot>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Autor</th>
+                                <th>Categoria</th>
+                                <th>Data Publicação</th>
+                                <th>Ação</th>
+                            </tr>
+                        </tfoot>
 
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
+                        <tbody>
+                            <tr>
+                                <td>O que é LGPD?</td>
+                                <td>Zezinho</td>
+                                <td>Segurança</td>
+                                <td>01/01/2022</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../noticia/noticias_modelo.html" class="btn col-10 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+
+                            <!--Repetição, somente para testes-->
+
+                            
+                            <div>
+
+                            <tr>
+                                <td>Como proteger suas senhas?</td>
+                                <td>Zezinho</td>
+                                <td>Segurança</td>
+                                <td>01/01/2022</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../noticia/noticias_modelo.html" class="btn col-10 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Regras de Firewall</td>
+                                <td>Zezinho</td>
+                                <td>Segurança</td>
+                                <td>01/01/2022</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../noticia/noticias_modelo.html" class="btn col-10 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Como se tornar um auditor de LGPD?</td>
+                                <td>Zezinho</td>
+                                <td>Segurança</td>
+                                <td>01/01/2022</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../noticia/noticias_modelo.html" class="btn col-10 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Brasil se torna o 3º em números de tentativas de ataque a rede no mundo</td>
+                                <td>Zezinho</td>
+                                <td>Segurança</td>
+                                <td>01/01/2022</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../noticia/noticias_modelo.html" class="btn col-10 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
 
                             </div>
-                        </div>
-                    </div>
 
+
+
+                        </tbody>
+
+
+                        
+
+
+                        
+
+                    </table>
 
                 </div>
-                
-                
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-2">Título da matéria</button>
-                        </div>
-
-                        <div class="collapse" id="card-2" data-parent="#accordion-parent">
-                            <div class="card-body">
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <br>
-
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-                
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-3">Título da matéria</button>
-                        </div>
-
-                        <div class="collapse" id="card-3" data-parent="#accordion-parent">
-                            <div class="card-body">
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <br>
-
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-                
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-4">Título da matéria</button>
-                        </div>
-
-                        <div class="collapse" id="card-4" data-parent="#accordion-parent">
-                            <div class="card-body">
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <br>
-
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-                
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-5">Título da matéria</button>
-                        </div>
-
-                        <div class="collapse" id="card-5" data-parent="#accordion-parent">
-                            <div class="card-body">
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <br>
-
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-                <!--Noticia-->
-                <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-6">Título da matéria</button>
-                        </div>
-
-                        <div class="collapse" id="card-6" data-parent="#accordion-parent">
-                            <div class="card-body">
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do
-                                    eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua</p>
-
-                                <br>
-
-                                <div class="row">
-                                    <p class="col text-left">Categoria: XYZ</p>
-                                    <p class="col text-right"><a href="noticias_modelo.html">Ler matéria completa</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>     
-
 
             </div>
 
         </div>
-
 
     </div>
 
@@ -355,9 +266,9 @@
                 <div class="d-flex align-items-center justify-content-between small">
                     <div>Copyright &copy; Entenda e Proteja - 2022</div>
                     <div>
-                        <a href="#">Política de privacidade</a>
+                        <a class="termos" href="#">Política de privacidade</a>
                         &middot;
-                        <a href="#">Termos &amp; Condições</a>
+                        <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NavBar Template</title>
 
-    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/6d6eee6583.js" crossorigin="anonymous"></script>
@@ -42,7 +42,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       LGPD
                     </a>
@@ -54,7 +54,7 @@
                   </li>
 
 
-                  <li class="nav-item dropdown">
+                  <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Contatos
                     </a>
@@ -66,7 +66,7 @@
                   </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Perfil
                     </a>
@@ -103,7 +103,7 @@
                 <div class="container card border-0 rounded-lg login col-12 col-xl-8">
                     <div class="card-header">
                         <h3 class="text-center font-weight-light">Criação de conta</h3>
-                        <img class="logo" src="../resources/img/logo.png" alt="logo">
+                        <img class="logo" src="../resources/img/logo_invertido.png" alt="logo">
                     </div>
                     <div class="card-body">
                         <form>
@@ -138,13 +138,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="custom-control custom-checkbox"><input
-                                        class="custom-control-input" id="rememberPasswordCheck"
-                                        type="checkbox" /><label class="custom-control-label"
-                                        for="rememberPasswordCheck">Aceitar os Termo de Uso</label></div>
+                                <a href="#">Termos de Uso</a>
+                                <br>
+                                <br>
+                                
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
+                                    <label class="custom-control-label" for="rememberPasswordCheck">Aceitar os Termo de Uso</label>
+                                </div>
                             </div>
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-info btn-block"
-                                    href="login.html">Criar a conta</a></div>
+                            <div class="form-group mt-4 mb-0"><a class="btn btn-info btn-block" href="login.html">Criar a conta</a></div>
                         </form>
                     </div>
                     <div class="card-footer text-center">
@@ -168,9 +171,9 @@
                 <div class="d-flex align-items-center justify-content-between small">
                     <div>Copyright &copy; Entenda e Proteja - 2022</div>
                     <div>
-                        <a href="#">Política de privacidade</a>
+                        <a class="termos" href="#">Política de privacidade</a>
                         &middot;
-                        <a href="#">Termos &amp; Condições</a>
+                        <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>
                 </div>
             </div>

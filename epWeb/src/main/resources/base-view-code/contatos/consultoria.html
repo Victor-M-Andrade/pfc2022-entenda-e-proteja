@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NavBar Template</title>
 
-    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap-4.4.1-dist/css/bootstrap.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/6d6eee6583.js" crossorigin="anonymous"></script>
@@ -18,6 +18,10 @@
     <script src="../resources/js/font-awesome/all.min.js"></script>
 
     <link rel="icon" href="../resources/img/logo.png">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
 
 </head>
 
@@ -42,7 +46,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         LGPD
@@ -55,7 +59,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Contatos
@@ -67,7 +71,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Perfil
@@ -99,82 +103,233 @@
 
         <h1 class="text-center">Conheça nossos parceiros de consultoria</h1>
 
+        <br>
+
         <div class="container-fluid text-center navbar-expand-md">
 
             <div class="row align-items-start">
 
+                <div class="table-responsive">
 
-                <hr>
+                    <table class="table table-bordered" id="tabela" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                            </tr>
 
 
-                <div class="container-fluid text-center navbar-expand-md">
+                            <tr class="col-12">
+                                <th><input class="col-10 col-md-3" type="text" id="txtColuna1"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
 
-                    <div class="row align-items-start">
+                        
 
-                        <div class="col-12 py-3">
-                            <div class="h-100 card">
-                                <h3 class="card-header text-center text-dark mt-1">Empresa 1</h3>
+                        <tfoot>
+                            <tr>
+                                <th>Empresa</th>
+                            </tr>
+                        </tfoot>
 
-                                <div class="container py-4">
-                                    <div class="row">
-                                        <img class="consultoria_logo_empresa col-xl-3 col-12"
-                                            src="../resources/img/logo.png" alt="logo">
-                                        <div class="col-xl-9 col-12 text-left">
-                                            <p>A Empresa X possui equipe multidisciplinar
-                                                qualificada e experiente e ferramentas com metodologia para
-                                                implementar
-                                                de forma objetiva e assertiva.</p>
-                                            <p>Nosso serviço de adequação é realizado por profissionais certificados
-                                                pela Exin e também fazem parte da ANPPD (Associação Nacional dos
-                                                Profissionais de dados).</p>
-                                            <p>Garantimos uma experiência de treinamento atraente, instigante e
-                                                inspiradora para dar adeus aos treinamentos convencionais, entediantes e
-                                                pouco práticos.</p>
-                                            <p>Nossas ferramentas de animação são customizáveis, para atender a
-                                                necessidade e o perfil de sua equipe, com ilustrações criativas que
-                                                retratam o cotidiano corporativo, tornando cada aprendizado uma
-                                                experiência única e marcante.</p>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="h-100 card">
+                                        <h3 class="card-header text-center text-dark mt-1">Empresa 1</h3>
+        
+                                        <div class="container py-4">
+                                            <div class="row">
+                                                <img class="consultoria_logo_empresa col-xl-3 col-12"
+                                                    src="../resources/img/logo_invertido.png" alt="logo">
+                                                <div class="col-xl-9 col-12 text-left">
+                                                    <p>A Empresa X possui equipe multidisciplinar
+                                                        qualificada e experiente e ferramentas com metodologia para
+                                                        implementar
+                                                        de forma objetiva e assertiva.</p>
+                                                    <p>Nosso serviço de adequação é realizado por profissionais certificados
+                                                        pela Exin e também fazem parte da ANPPD (Associação Nacional dos
+                                                        Profissionais de dados).</p>
+                                                    <p>Garantimos uma experiência de treinamento atraente, instigante e
+                                                        inspiradora para dar adeus aos treinamentos convencionais, entediantes e
+                                                        pouco práticos.</p>
+                                                    <p>Nossas ferramentas de animação são customizáveis, para atender a
+                                                        necessidade e o perfil de sua equipe, com ilustrações criativas que
+                                                        retratam o cotidiano corporativo, tornando cada aprendizado uma
+                                                        experiência única e marcante.</p>
+                                                </div>
+        
+                                            </div>
+        
+                                            <hr>
+        
+                                            <div class="row">
+                                                <div class="col-xl-4 col-12">
+                                                    <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                                                    <h5>Telefones para contato</h5>
+                                                    <p>(35) 9 9999-9999</p>
+                                                    <p>(35) 9 9999-9999</p>
+                                                    <p>(35) 9 9999-9999</p>
+                                                </div>
+        
+                                                <div class="col-xl-4 col-12">
+                                                    <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
+                                                    <h5>Email</h5>
+                                                    <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                    <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                    <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>                                            
+                                                </div>
+        
+                                                <div class="col-xl-4 col-12">
+                                                    <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
+                                                    <h5>Website</h5>
+                                                    <p><a href="#">teste.com.br</a></p>
+                                                </div>
+                                            </div>
                                         </div>
-
+        
+        
                                     </div>
+                                </td>
+                            </tr>
 
-                                    <hr>
 
-                                    <div class="row">
-                                        <div class="col-xl-4 col-12">
-                                            <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
-                                            <h5>Telefones para contato</h5>
-                                            <p>(35) 9 9999-9999</p>
-                                            <p>(35) 9 9999-9999</p>
-                                            <p>(35) 9 9999-9999</p>
+
+                            <!--Repetição, somente para testes-->
+
+                            <div>
+                                <tr>
+                                    <td>
+                                        <div class="h-100 card">
+                                            <h3 class="card-header text-center text-dark mt-1">Empresa 2</h3>
+            
+                                            <div class="container py-4">
+                                                <div class="row">
+                                                    <img class="consultoria_logo_empresa col-xl-3 col-12"
+                                                        src="../resources/img/logo_invertido.png" alt="logo">
+                                                    <div class="col-xl-9 col-12 text-left">
+                                                        <p>A Empresa X possui equipe multidisciplinar
+                                                            qualificada e experiente e ferramentas com metodologia para
+                                                            implementar
+                                                            de forma objetiva e assertiva.</p>
+                                                        <p>Nosso serviço de adequação é realizado por profissionais certificados
+                                                            pela Exin e também fazem parte da ANPPD (Associação Nacional dos
+                                                            Profissionais de dados).</p>
+                                                        <p>Garantimos uma experiência de treinamento atraente, instigante e
+                                                            inspiradora para dar adeus aos treinamentos convencionais, entediantes e
+                                                            pouco práticos.</p>
+                                                        <p>Nossas ferramentas de animação são customizáveis, para atender a
+                                                            necessidade e o perfil de sua equipe, com ilustrações criativas que
+                                                            retratam o cotidiano corporativo, tornando cada aprendizado uma
+                                                            experiência única e marcante.</p>
+                                                    </div>
+            
+                                                </div>
+            
+                                                <hr>
+            
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                                                        <h5>Telefones para contato</h5>
+                                                        <p>(35) 9 9999-9999</p>
+                                                        <p>(35) 9 9999-9999</p>
+                                                        <p>(35) 9 9999-9999</p>
+                                                    </div>
+            
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
+                                                        <h5>Email</h5>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>                                            
+                                                    </div>
+            
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
+                                                        <h5>Website</h5>
+                                                        <p><a href="#">teste.com.br</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
                                         </div>
+                                    </td>
+                                </tr>
 
-                                        <div class="col-xl-4 col-12">
-                                            <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
-                                            <h5>Email</h5>
-                                            <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
-                                            <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
-                                            <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>                                            
+                                <tr>
+                                    <td>
+                                        <div class="h-100 card">
+                                            <h3 class="card-header text-center text-dark mt-1">Empresa 3</h3>
+            
+                                            <div class="container py-4">
+                                                <div class="row">
+                                                    <img class="consultoria_logo_empresa col-xl-3 col-12"
+                                                        src="../resources/img/logo_invertido.png" alt="logo">
+                                                    <div class="col-xl-9 col-12 text-left">
+                                                        <p>A Empresa X possui equipe multidisciplinar
+                                                            qualificada e experiente e ferramentas com metodologia para
+                                                            implementar
+                                                            de forma objetiva e assertiva.</p>
+                                                        <p>Nosso serviço de adequação é realizado por profissionais certificados
+                                                            pela Exin e também fazem parte da ANPPD (Associação Nacional dos
+                                                            Profissionais de dados).</p>
+                                                        <p>Garantimos uma experiência de treinamento atraente, instigante e
+                                                            inspiradora para dar adeus aos treinamentos convencionais, entediantes e
+                                                            pouco práticos.</p>
+                                                        <p>Nossas ferramentas de animação são customizáveis, para atender a
+                                                            necessidade e o perfil de sua equipe, com ilustrações criativas que
+                                                            retratam o cotidiano corporativo, tornando cada aprendizado uma
+                                                            experiência única e marcante.</p>
+                                                    </div>
+            
+                                                </div>
+            
+                                                <hr>
+            
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                                                        <h5>Telefones para contato</h5>
+                                                        <p>(35) 9 9999-9999</p>
+                                                        <p>(35) 9 9999-9999</p>
+                                                        <p>(35) 9 9999-9999</p>
+                                                    </div>
+            
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
+                                                        <h5>Email</h5>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>
+                                                        <p><a href="mailto:teste@teste.com">teste@teste.com</a></p>                                            
+                                                    </div>
+            
+                                                    <div class="col-xl-4 col-12">
+                                                        <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
+                                                        <h5>Website</h5>
+                                                        <p><a href="#">teste.com.br</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
                                         </div>
-
-                                        <div class="col-xl-4 col-12">
-                                            <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
-                                            <h5>Website</h5>
-                                            <p><a href="#">teste.com.br</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                                    </td>
+                                </tr>
                             </div>
-                        </div>
+                            
 
-                        <!--Repetições-->
+
+
+                        </tbody>
+
 
                         
+
+
                         
 
-                    </div>
+                    </table>
 
                 </div>
 
@@ -185,17 +340,18 @@
 
 
 
+
     </div>
 
-    <div id="layoutAuthentication_footer py-4">
+    <div id="layoutAuthentication_footer">
         <footer class="py-3 mt-auto bg-info">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div>Copyright &copy; Entenda e Proteja - 2022</div>
                     <div>
-                        <a href="#">Política de privacidade</a>
+                        <a class="termos" href="#">Política de privacidade</a>
                         &middot;
-                        <a href="#">Termos &amp; Condições</a>
+                        <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>
                 </div>
             </div>

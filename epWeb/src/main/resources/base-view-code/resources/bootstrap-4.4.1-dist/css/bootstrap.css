@@ -60,7 +60,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  ground-color: #fff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -6723,7 +6723,8 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #17a2b8 !important;
+  background: rgb(0,212,255);
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(8,83,102,1) 0%, rgba(0,0,0,1) 40%) !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,
