@@ -149,23 +149,12 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
                 connection.rollback();
                 return -1;
             }
-
-            resetValuesForNewQuery();
-            sql = "UPDATE usuario SET isautor = true where id = " + news.getIdAutor() + ";";
-            preparForUpdateOrDelete(sql);
-            preparedStatement.execute();
-            if (preparedStatement.getUpdateCount() == -1) {
-                connection.rollback();
-                return -1;
-            }
-
             connection.commit();
-
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:create | classe: " + NoticiaDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
 
         return newId;

@@ -184,23 +184,12 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 connection.rollback();
                 return -1;
             }
-
-            resetValuesForNewQuery();
-            sql = "UPDATE usuario SET isparceiro = true WHERE id = " + partner.getIdUsuario() + ";";
-            preparForUpdateOrDelete(sql);
-            preparedStatement.execute();
-            if (preparedStatement.getUpdateCount() == -1) {
-                connection.rollback();
-                return -1;
-            }
-
             connection.commit();
-
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:create | classe: " + ParceiroDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
 
         return newId;

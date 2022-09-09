@@ -1,10 +1,13 @@
 package br.fai.ep.api.service.impl;
 
+import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.NoticiaDaoImpl;
+import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Noticia.NEWS_TABLE;
-import br.fai.ep.api.service.BaseService;
+import br.fai.ep.epEntities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +31,19 @@ public class NoticiaServiceImpl implements BaseService {
 
     @Override
     public long create(final Object entity) {
-        return dao.create(entity);
+        final long newId = dao.create(entity);
+        if (newId == -1) {
+            return -1;
+        }
+        final Noticia myNew = (Noticia) entity;
+        final UsuarioDaoImpl userDao = new UsuarioDaoImpl();
+        final Usuario user = (Usuario) userDao.readById(myNew.getIdAutor());
+        user.setAutor(true);
+        if (!userDao.update(user)) {
+            dao.delete(newId);
+            return -1;
+        }
+        return newId;
     }
 
     @Override

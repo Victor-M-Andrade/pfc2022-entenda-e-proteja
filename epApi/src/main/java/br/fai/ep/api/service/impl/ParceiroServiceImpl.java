@@ -2,9 +2,12 @@ package br.fai.ep.api.service.impl;
 
 import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.ParceiroDaoImpl;
+import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Parceiro.PARTNER_TABLE;
+import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epEntities.Usuario.USER_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +32,20 @@ public class ParceiroServiceImpl implements BaseService {
 
     @Override
     public long create(final Object entity) {
-        return dao.create(entity);
+        final long newId = dao.create(entity);
+        if (newId == -1) {
+            return -1;
+        }
+
+        final Parceiro myPartnew = (Parceiro) entity;
+        final UsuarioDaoImpl userDao = new UsuarioDaoImpl();
+        final Usuario user = (Usuario) userDao.readById(myPartnew.getIdUsuario());
+        user.setParceiro(true);
+        if (!userDao.update(user)) {
+            dao.delete(newId);
+            return -1;
+        }
+        return newId;
     }
 
     @Override
