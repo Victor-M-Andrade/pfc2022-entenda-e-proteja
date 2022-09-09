@@ -12,7 +12,7 @@
 
     <groupId>br.fai.ep</groupId>
     <artifactId>entenda-e-proteja-parent</artifactId>
-    <version>1.0.0</version>
+    <version>4.0.0</version>
 
     <name>entenda-e-proteja-parent</name>
     <packaging>pom</packaging>
@@ -23,11 +23,11 @@
 
 
     <properties>
-        <entenda-e-proteja.version>3.0.0</entenda-e-proteja.version>
-        <epEntity.version>1.2.0</epEntity.version>
-        <epDataBase.version>1.2.6</epDataBase.version>
-        <epApi.version>1.3.0</epApi.version>
-<!--        <epWeb.version>1.1.0</epWeb.version>-->
+        <entenda-e-proteja.version>4.0.0</entenda-e-proteja.version>
+        <epEntity.version>1.3.0</epEntity.version>
+        <epDataBase.version>1.5.0</epDataBase.version>
+        <epApi.version>1.4.0</epApi.version>
+        <!--        <epWeb.version>1.1.0</epWeb.version>-->
 
         <!-- build-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
