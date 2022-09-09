@@ -1,3 +1,37 @@
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#layoutAuthentication_footer {
+    padding-top: 20px;
+    margin-top: auto;
+    font-size: 20px;
+    color: white;
+}
+
+.termos{
+    text-decoration: none;
+    color: white;
+}
+
+.termos:hover{
+    color: white;
+}
+
+.dropdown-item:hover{
+    background-color: rgb(134, 192, 202);
+    font-size: 110%;
+}
+
+
+
 .logo {
     padding: 10px;
 }
@@ -51,3 +85,29 @@
      margin-bottom: 15px;
  }
 
+
+
+
+
+
+#tabela{
+    border:solid 1px;
+    text-align:left;
+}
+ 
+
+ 
+#tabela thead{
+    text-align:center;
+    background:rgb(224, 246, 255);
+}
+
+#tabela tfoot{
+    text-align:center;
+    background:rgb(224, 246, 255);
+}
+
+ 
+#tabela input{
+    width:100%;
+}
