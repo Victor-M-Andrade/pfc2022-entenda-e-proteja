@@ -111,8 +111,10 @@ public class AccountController {
         user = (Usuario) service.readById(user.getId());
         if (user == null) {
             changePasswordError = false;
+            triedPasswordChange = false;
             return "redirect:/not-found";
         }
+        triedPasswordChange = false;
 
         model.addAttribute(USER_ID, id);
         model.addAttribute(OLD_USER_PASSWORD, user.getSenha());
@@ -126,8 +128,9 @@ public class AccountController {
 
     @PostMapping("/account/update-password")
     public String updatePassword(final Model model, final Usuario user) {
+        triedPasswordChange = true;
         final Usuario myUser = (Usuario) service.readById(user.getId());
-        if (myUser == null) {
+        if (myUser == null && !triedPasswordChange) {
             changePasswordError = true;
             return "redirect:/account/change-my-password/" + user.getId();
         }
@@ -137,7 +140,7 @@ public class AccountController {
         if (changePasswordError) {
             return "redirect:/account/change-my-password/" + user.getId();
         }
-
+        triedPasswordChange = false;
         return "redirect:/user/profile/" + user.getId();
     }
 
