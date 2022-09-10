@@ -19,15 +19,19 @@ public class AccountController {
     public final String USER_CREATION_DATE = "dateCreate";
     public final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
     public final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
+    public final String CHANGE_PASSWORD_ERROR = "changePasswordError";
+    public final String USER_ID = "userId";
+    public final String OLD_USER_PASSWORD = "oldUserPassword";
 
     public boolean sendedEmail = false;
     public boolean emailNotFound = false;
     public boolean authenticationError = false;
     public boolean alreadyregisteredEmail = false;
     public boolean accountCreationProblems = false;
+    public boolean changePasswordError = false;
 
     @GetMapping("/account/login")
-    public String getLoginPage(final Model model, final Usuario usuario) {
+    public String getLoginPage(final Model model, final Usuario user) {
         model.addAttribute(AUTHENTICATION_ERROR, authenticationError);
         if (authenticationError) {
             authenticationError = false;
@@ -76,7 +80,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/forgot-my-password")
-    public String getForgotMyPassowordPage(final Model model, final Usuario usuario) {
+    public String getForgotMyPassowordPage(final Model model, final Usuario user) {
         model.addAttribute(SENDED_EMAIL, sendedEmail);
         if (sendedEmail) {
             sendedEmail = false;
@@ -101,6 +105,41 @@ public class AccountController {
         return "redirect:/account/forgot-my-password";
     }
 
+    @GetMapping("/account/change-my-password/{id}")
+    public String getChangeMyPasswordPage(@PathVariable final long id, final Model model, Usuario user) {
+        user = (Usuario) service.readById(user.getId());
+        if (user == null) {
+            changePasswordError = false;
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(USER_ID, id);
+        model.addAttribute(OLD_USER_PASSWORD, user.getSenha());
+        model.addAttribute(CHANGE_PASSWORD_ERROR, changePasswordError);
+        if (changePasswordError) {
+            changePasswordError = false;
+        }
+
+        return "conta/reset-password";
+    }
+
+    @PostMapping("/account/update-password")
+    public String updatePassword(final Model model, final Usuario user) {
+        final Usuario myUser = (Usuario) service.readById(user.getId());
+        if (myUser == null) {
+            changePasswordError = true;
+            return "redirect:/account/change-my-password/" + user.getId();
+        }
+
+        myUser.setSenha(user.getSenha());
+        changePasswordError = !service.update(myUser);
+        if (changePasswordError) {
+            return "redirect:/account/change-my-password/" + user.getId();
+        }
+
+        return "redirect:/user/profile/" + user.getId();
+    }
+
     @GetMapping("/account/log-out")
     public String singOut() {
         return "redirect:/";
@@ -110,6 +149,7 @@ public class AccountController {
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
         model.addAttribute(MY_USER_REFERENCE, user);
+        model.addAttribute(USER_ID, user.getId());
         model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
         return "/usuario/perfil";
     }

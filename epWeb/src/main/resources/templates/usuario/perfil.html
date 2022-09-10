@@ -23,7 +23,7 @@
             <div class="container col-12">
                 <div class="row perfil">
 
-                    <h1 class="col-12 py-3">Seja bem vindo(a) ao seu perfil</h1>
+                    <h1 class="col-12 py-3">Seja bem-vindo(a) ao seu perfil</h1>
 
                     <div class="col-12 col-sm-5">
                         <div class="card">
@@ -73,6 +73,9 @@
                         </div>
                         <div class="mb-2">
                             <a th:href="@{/user/edit}" class="btn btn-info col-12">Editar</a>
+                        </div>
+                        <div class="mb-2">
+                            <a th:href="@{/account/change-my-password/{id} (id = ${userId})}" class="btn btn-warning col-12">Alterar minha senha</a>
                         </div>
                     </div>
                 </div>
