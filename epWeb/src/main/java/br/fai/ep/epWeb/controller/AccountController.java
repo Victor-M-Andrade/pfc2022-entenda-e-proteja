@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AccountController {
     private final ServiceInterface service = new UsuarioServiceImpl();
+
     private final String AUTHENTICATION_ERROR = "authenticationError";
     private final String EMAIL_NOT_FOUND = "emailNotFound";
     private final String SENDED_EMAIL = "sendedEmail";
-    private final String MY_USER_REFERENCE = "myUser";
-    private final String USER_CREATION_DATE = "dateCreate";
     private final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
     private final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
     private final String CHANGE_PASSWORD_ERROR = "changePasswordError";
@@ -109,7 +108,7 @@ public class AccountController {
     @GetMapping("/account/change-my-password/{id}")
     public String getChangeMyPasswordPage(@PathVariable final long id, final Model model, Usuario user) {
         user = (Usuario) service.readById(user.getId());
-        if (user == null) {
+        if (user == null && !triedPasswordChange) {
             changePasswordError = false;
             triedPasswordChange = false;
             return "redirect:/not-found";
@@ -130,7 +129,7 @@ public class AccountController {
     public String updatePassword(final Model model, final Usuario user) {
         triedPasswordChange = true;
         final Usuario myUser = (Usuario) service.readById(user.getId());
-        if (myUser == null && !triedPasswordChange) {
+        if (myUser == null) {
             changePasswordError = true;
             return "redirect:/account/change-my-password/" + user.getId();
         }
@@ -185,19 +184,5 @@ public class AccountController {
     @GetMapping("/account/log-out")
     public String singOut() {
         return "redirect:/";
-    }
-
-    @GetMapping("/user/profile/{id}")
-    public String getUserProfilePage(@PathVariable final long id, final Model model) {
-        final Usuario user = (Usuario) service.readById(id);
-        model.addAttribute(MY_USER_REFERENCE, user);
-        model.addAttribute(USER_ID, user.getId());
-        model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
-        return "/usuario/perfil";
-    }
-
-    @GetMapping("/user/edit")
-    public String getUserEditPage() {
-        return "/usuario/editar_perfil";
     }
 }
