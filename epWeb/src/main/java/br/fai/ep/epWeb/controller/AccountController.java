@@ -15,20 +15,20 @@ public class AccountController {
     private final String AUTHENTICATION_ERROR = "authenticationError";
     private final String EMAIL_NOT_FOUND = "emailNotFound";
     private final String SENDED_EMAIL = "sendedEmail";
-    public final String MY_USER_REFERENCE = "myUser";
-    public final String USER_CREATION_DATE = "dateCreate";
-    public final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
-    public final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
-    public final String CHANGE_PASSWORD_ERROR = "changePasswordError";
-    public final String USER_ID = "userId";
-    public final String OLD_USER_PASSWORD = "oldUserPassword";
+    private final String MY_USER_REFERENCE = "myUser";
+    private final String USER_CREATION_DATE = "dateCreate";
+    private final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
+    private final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
+    private final String CHANGE_PASSWORD_ERROR = "changePasswordError";
+    private final String USER_ID = "userId";
+    private final String OLD_USER_PASSWORD = "oldUserPassword";
 
-    public boolean sendedEmail = false;
-    public boolean emailNotFound = false;
+    private boolean sendedEmail = false;
+    private boolean emailNotFound = false;
     public boolean authenticationError = false;
-    public boolean alreadyregisteredEmail = false;
-    public boolean accountCreationProblems = false;
-    public boolean changePasswordError = false;
+    private boolean alreadyregisteredEmail = false;
+    private boolean accountCreationProblems = false;
+    private boolean changePasswordError = false;
     private boolean triedPasswordChange = false;
 
     @GetMapping("/account/login")
