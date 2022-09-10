@@ -30,7 +30,7 @@ public class EmailService {
                 "\n" +
                 "Recebemos sua solicitação para troca de senha.\n" +
                 "Para acessar o link de acesso à página de troca de senha, " +
-                "<a href=\"http://localhost:8100/\">clique aqui!</a>" +
+                "<a href=\"http://localhost:8100/account/change-user-password/" + userId + "\">clique aqui!</a>" +
                 "</body>" +
                 "</html>";
 

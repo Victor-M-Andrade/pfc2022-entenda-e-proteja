@@ -29,6 +29,7 @@ public class AccountController {
     public boolean alreadyregisteredEmail = false;
     public boolean accountCreationProblems = false;
     public boolean changePasswordError = false;
+    private boolean triedPasswordChange = false;
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario user) {
@@ -137,6 +138,44 @@ public class AccountController {
             return "redirect:/account/change-my-password/" + user.getId();
         }
 
+        return "redirect:/user/profile/" + user.getId();
+    }
+
+    @GetMapping("/account/change-user-password/{id}")
+    public String getChangeUserPasswordPage(@PathVariable final long id, final Model model, Usuario user) {
+        user = (Usuario) service.readById(user.getId());
+        if (user == null && !triedPasswordChange) {
+            changePasswordError = false;
+            triedPasswordChange = false;
+            return "redirect:/not-found";
+        }
+        triedPasswordChange = false;
+
+        model.addAttribute(USER_ID, id);
+        model.addAttribute(CHANGE_PASSWORD_ERROR, changePasswordError);
+        if (changePasswordError) {
+            changePasswordError = false;
+        }
+
+        return "conta/change-password";
+    }
+
+    @PostMapping("/account/update-user-password")
+    public String updateUserPassword(final Model model, final Usuario user) {
+        triedPasswordChange = true;
+        final Usuario myUser = (Usuario) service.readById(user.getId());
+        if (myUser == null) {
+            changePasswordError = true;
+            return "redirect:/account/change-user-password/" + user.getId();
+        }
+
+        myUser.setSenha(user.getSenha());
+        changePasswordError = !service.update(myUser);
+        if (changePasswordError) {
+            return "redirect:/account/change-user-password/" + user.getId();
+        }
+
+        triedPasswordChange = false;
         return "redirect:/user/profile/" + user.getId();
     }
 
