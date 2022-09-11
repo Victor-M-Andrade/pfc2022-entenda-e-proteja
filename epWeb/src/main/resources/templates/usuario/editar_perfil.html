@@ -45,45 +45,44 @@
                             <a href="#" class="btn btn-info col-12">Trocar</a>
                         </div>
                     </div>
-
                     <div class="mb-2 col-12 col-sm-7">
-
-                        <div class="mb-2 card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">Usuário</div>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" value="Zézinho" required>
+                        <div class="alert alert-danger" th:if="${updateDataError}">
+                            <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.</span>
+                        </div>
+                        <form th:action="@{/user/update-user-data}"  method="POST" th:object="${usuario}">
+                            <div class="mb-2 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">Usuário</div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" th:field="*{nome}" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Email</div>
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" value="zezinho-capixaba3301@gmail.com"
-                                               required>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Email</div>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" th:field="*{email}" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Tipo de usuário</div>
-                                    <div class="col-sm-9">ADM</div>
+                                    <input type="number" class="form-control" th:field="*{id}" hidden>
+                                    <input type="text" class="form-control" th:field="*{senha}" hidden>
+                                    <input type="text" class="form-control" th:field="*{pathImageProfile}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{parceiro}" th:checked="*{parceiro}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{autor}" th:checked="*{autor}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{administrador}" th:checked="*{administrador}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{anonimo}" th:checked="*{anonimo}" hidden>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-2">
-                            <a th:href="@{/user/profile}" class="btn btn-info col-12">Atualizar</a>
-                        </div>
-
+                            <div class="mb-2">
+                                <button class="btn btn-info col-12" type="submit">Atualizar</button>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
 </body>
