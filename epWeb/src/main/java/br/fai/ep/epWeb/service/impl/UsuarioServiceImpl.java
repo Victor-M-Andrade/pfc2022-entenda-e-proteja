@@ -14,12 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterface {
-    private final String baseEntedpoint = API_HOST + "/user";
+    private final String BASE_ENDPOINT = API_HOST + "/user";
 
     @Override
     public List<? extends BasePojo> readAll() {
-        final String endpoint = baseEntedpoint + "/read-all";
+        final String endpoint = BASE_ENDPOINT + "/read-all";
         List<Usuario> response = null;
 
         try {
@@ -36,7 +37,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
     @Override
     public Object readById(final long id) {
-        final String endpoint = baseEntedpoint + "/read-by-id/" + id;
+        final String endpoint = BASE_ENDPOINT + "/read-by-id/" + id;
         Usuario response = null;
 
         try {
@@ -54,7 +55,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
     @Override
     public long create(final Object entity) {
-        final String endpoint = baseEntedpoint + "/create";
+        final String endpoint = BASE_ENDPOINT + "/create";
         long newIdUser = Long.valueOf(-1);
 
         try {
@@ -74,7 +75,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
     @Override
     public boolean update(final Object entity) {
-        final String endpoint = baseEntedpoint + "/update";
+        final String endpoint = BASE_ENDPOINT + "/update";
         boolean response = false;
 
         try {
@@ -92,7 +93,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
     @Override
     public boolean delete(final long id) {
-        final String endpoint = baseEntedpoint + "/delete/" + id;
+        final String endpoint = BASE_ENDPOINT + "/delete/" + id;
         boolean response = false;
 
         try {
@@ -111,7 +112,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
     @Override
     public List<? extends BasePojo> readByCriteria(final Map criteria) {
-        final String endpoint = baseEntedpoint + "/read-by-criteria";
+        final String endpoint = BASE_ENDPOINT + "/read-by-criteria";
         List<Usuario> response = null;
 
         try {
@@ -129,7 +130,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
     }
 
     public boolean forgotPassword(final String userEmail) {
-        final String endpoint = baseEntedpoint + "/forgot-password";
+        final String endpoint = BASE_ENDPOINT + "/forgot-password";
         boolean response = false;
 
         try {
@@ -146,7 +147,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
     }
 
     public Usuario authentication(final String email, final String password) {
-        final String endpoint = baseEntedpoint + "/authentication";
+        final String endpoint = BASE_ENDPOINT + "/authentication";
         Usuario response = null;
         final Map<String, String> criteria = new HashMap<>();
         criteria.put(Usuario.USER_TABLE.EMAIL_COLUMN, email);
