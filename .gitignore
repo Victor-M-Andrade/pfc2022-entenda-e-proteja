@@ -241,3 +241,7 @@ buildNumber.properties
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,java,intellij+all,visualstudiocode,git,eclipse
+
+#My gitignore files and folders
+images
+images/**
