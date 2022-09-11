@@ -44,6 +44,7 @@ public class UserController {
                 triedPasswordChange = false;
                 temporaryUser = null;
                 model.addAttribute(user);
+                model.addAttribute(USER_ID, user.getId());
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
                 updateUserDataError = false;
                 return "/usuario/editar_perfil";
@@ -52,6 +53,7 @@ public class UserController {
             if (triedPasswordChange && temporaryUser != null) {
                 triedPasswordChange = false;
                 model.addAttribute(temporaryUser);
+                model.addAttribute(USER_ID, temporaryUser.getId());
                 temporaryUser = null;
 
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
