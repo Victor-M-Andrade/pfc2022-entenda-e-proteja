@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.service.BaseServiceWeb;
 import br.fai.ep.epWeb.service.ServiceInterface;
 import br.fai.ep.epWeb.service.impl.UsuarioServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
@@ -68,16 +71,41 @@ public class UserController {
     }
 
     @PostMapping("/user/update-user-data")
-    public String updateUserData(final Usuario user, final Model model) {
+    public String updateUserData(@RequestParam("fromMyFile") final MultipartFile file, final Usuario user, final Model model) {
         triedPasswordChange = true;
         temporaryUser = user;
+
+        if (file.isEmpty()) {
+            updateUserDataError = !service.update(user);
+            if (updateUserDataError) {
+                return "redirect:/user/edit/" + user.getId();
+            }
+            triedPasswordChange = false;
+            return "redirect:/user/profile/" + user.getId();
+        }
+
+        final String newNameFile = service.buildNameNewFile(user);
+        final String nameFileWithExtension = service.prepareNameWithExtension(file.getOriginalFilename(), newNameFile);
+        if (nameFileWithExtension == null) {
+            updateUserDataError = !service.update(user);
+            if (updateUserDataError) {
+                return "redirect:/user/edit/" + user.getId();
+            }
+            triedPasswordChange = false;
+            return "redirect:/user/profile/" + user.getId();
+        }
+
+        final String pathImage = service.saveFileInProfile(file, BaseServiceWeb.PATH_IMAGENS_USERS, nameFileWithExtension, newNameFile);
+        if (pathImage != null) {
+            user.setPathImageProfile(pathImage);
+        }
 
         updateUserDataError = !service.update(user);
         if (updateUserDataError) {
             return "redirect:/user/edit/" + user.getId();
         }
         triedPasswordChange = false;
-        temporaryUser = null;
         return "redirect:/user/profile/" + user.getId();
     }
+
 }

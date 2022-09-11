@@ -7,6 +7,7 @@ import br.fai.ep.epWeb.service.ServiceInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Service
 public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterface {
     private final String BASE_ENDPOINT = API_HOST + "/user";
+    private final String NAME_FILE_FORMAT = "USER_IMAGE_ID__%d_%s";
 
     @Override
     public List<? extends BasePojo> readAll() {
@@ -127,6 +129,12 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
         }
 
         return response;
+    }
+
+    @Override
+    public String buildNameNewFile(final Object entity) {
+        final Usuario user = (Usuario) entity;
+        return String.format(NAME_FILE_FORMAT, user.getId(), dateFormateForSaveFiles(user.getDataHora()));
     }
 
     public boolean forgotPassword(final String userEmail) {
