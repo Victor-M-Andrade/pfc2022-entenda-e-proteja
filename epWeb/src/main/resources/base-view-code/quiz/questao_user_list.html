@@ -21,6 +21,10 @@
 
     <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
+
 
 </head>
 
@@ -100,7 +104,7 @@
 
         <div class="text-center">
             <br>
-            <h1>Usuários</h1>
+            <h1>Suas Questões</h1>
             <br>
         </div>
         
@@ -113,48 +117,49 @@
                     <table class="table table-bordered text-center" id="tabela" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Data Criação</th>
-                                <th>Último Acesso</th>
-                                <th>Gerenciar</th>
+                                <th class="col-5">Pergunta</th>
+                                <th class="col-2">Nivel</th>
+                                <th class="col-2">Data Criação</th>
+                                <th class="col-3">Gerenciar</th>
+
                             </tr>
 
                             <tr class="col-12">
-                                <th><input class="col-10" type="text" id="txtColuna1"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                                <th><input class="col-10" type="text" id="txtColuna2"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                                <th><input class="col-10" type="text" id="txtColuna3"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                                <th><input class="col-10" type="text" id="txtColuna4"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                                <th><input class="col-10" type="text" id="txtColuna5"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna3"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
                                 <th></th>
                             </tr>
 
                         </thead>
-
-
                         <tfoot>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
+                                <th>Pergunta</th>
+                                <th>Nivel</th>
                                 <th>Data Criação</th>
-                                <th>Último Acesso</th>
                                 <th>Gerenciar</th>
                             </tr>
                         </tfoot>
-                        
-
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Zezinho</td>
-                                <td>zezinho_capixaba@gmail.com</td>
+                                <td>O que é LGPD?</td>
+                                <td>Fácil</td>
                                 <td>01/01/2022</td>
-                                <td>01/08/2022</td>
                                 <td>
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12 col-md-4">
+                                            <a href="../quiz/questao_info.html" class="btn col-11 btn-info">
+                                                <i class="fas fa-eye"></i>
+                                                Ler
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="../quiz/questao_edit.html" class="btn col-11 btn-warning">
+                                                <i class="fas fa-italic"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
                                             <a href="#" class="btn col-12 btn-danger">
                                                 <i class="fas fa-trash"></i>
                                                 Excluir
@@ -165,57 +170,30 @@
                                 
                             </tr>
 
-                        <!--Repetição-->
-                            
+
+                            <!--Repetição-->
+
                             <div>
+
                                 <tr>
-                                    <td>2</td>
-                                    <td>Victor</td>
-                                    <td>victor@test.com</td>
+                                    <td>O que é auditoria?</td>
+                                    <td>Fácil</td>
                                     <td>01/01/2022</td>
-                                    <td>01/08/2022</td>
                                     <td>
                                         <div class="row">
-                                            <div class="col-12">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_info.html" class="btn col-11 btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                    Ler
                                                 </a>
                                             </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>William</td>
-                                    <td>william@test.com</td>
-                                    <td>01/01/2022</td>
-                                    <td>01/08/2022</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_edit.html" class="btn col-11 btn-warning">
+                                                    <i class="fas fa-italic"></i>
+                                                    Editar
                                                 </a>
                                             </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-
-
-                                <tr>
-                                    <td>4</td>
-                                    <td>Lucas</td>
-                                    <td>lucas@test.com</td>
-                                    <td>01/01/2022</td>
-                                    <td>01/08/2022</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12 col-md-4">
                                                 <a href="#" class="btn col-12 btn-danger">
                                                     <i class="fas fa-trash"></i>
                                                     Excluir
@@ -228,14 +206,24 @@
 
 
                                 <tr>
-                                    <td>5</td>
-                                    <td>Alysson</td>
-                                    <td>alysson@test.com</td>
+                                    <td>Diferença entre bla bla?</td>
+                                    <td>Médio</td>
                                     <td>01/01/2022</td>
-                                    <td>01/08/2022</td>
                                     <td>
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_info.html" class="btn col-11 btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                    Ler
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_edit.html" class="btn col-11 btn-warning">
+                                                    <i class="fas fa-italic"></i>
+                                                    Editar
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
                                                 <a href="#" class="btn col-12 btn-danger">
                                                     <i class="fas fa-trash"></i>
                                                     Excluir
@@ -245,10 +233,74 @@
                                     </td>
                                     
                                 </tr>
+
+
+                                <tr>
+                                    <td>Compare</td>
+                                    <td>Médio</td>
+                                    <td>01/01/2022</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_info.html" class="btn col-11 btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                    Ler
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_edit.html" class="btn col-11 btn-warning">
+                                                    <i class="fas fa-italic"></i>
+                                                    Editar
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <a href="#" class="btn col-12 btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                    Excluir
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+
+                                <tr>
+                                    <td>Segundo O dr. Bla Bla Bla</td>
+                                    <td>Difícil</td>
+                                    <td>01/01/2022</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_info.html" class="btn col-11 btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                    Ler
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <a href="../quiz/questao_edit.html" class="btn col-11 btn-warning">
+                                                    <i class="fas fa-italic"></i>
+                                                    Editar
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <a href="#" class="btn col-12 btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                    Excluir
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+
                             </div>
 
-                        <tbody>
-                        
+
+                            
+
+                        </tbody>
+
+                       
 
                     </table>
 
@@ -262,6 +314,8 @@
 
 
     </div>
+
+    <hr>
 
     <div id="layoutAuthentication_footer">
         <footer class="py-3 mt-auto bg-info">

@@ -17,6 +17,7 @@
 
     <script src="../resources/js/font-awesome/all.min.js"></script>
 
+    <link rel="icon" href="../resources/img/logo.png">
 
 </head>
 
@@ -60,6 +61,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
                       <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+                      <a class="dropdown-item" href="#">Sobre o projeto</a>
                     </div>
                   </li>
 
@@ -98,7 +100,61 @@
 
             <div class="row align-items-start">
 
-                <h1>COLOQUE AS COISA A PARTIR DAQUI</h1>
+                <div class="container card border-0 rounded-lg login col-12 col-xl-8">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
+                        <img class="logo" src="../resources/img/logo_invertido.png" alt="logo">
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-8">
+                                    <div class="form-group"><label class="mb-1"
+                                            for="inputCompany">Nome da Empresa</label><input
+                                            class="form-control py-4" id="inputCompany" type="text"
+                                            placeholder="Insira o nome da sua empresa" /></div>
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    <label for="inputEstado">Tipo de Serviço Prestado</label>
+                                    <select id="inputEstado" class="form-control">
+                                      <option>Técnico</option>
+                                      <option>Jurídico</option>
+                                      <option>Técnico e Jurídico</option>
+                                    </select>
+                                  </div>
+                            </div>
+                            
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="mb-1"
+                                            for="inputSite">Site da empresa</label><input
+                                            class="form-control py-4" id="inputSite" type="text"
+                                            placeholder="Insira o site da empresa" /></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="mb-1"
+                                            for="inputSite">Telefone para contato</label><input
+                                            class="form-control py-4" id="inputSite" type="text"
+                                            placeholder="Insira o telefone da empresa" /></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a href="#">Termos de Uso</a>
+                                <br>
+                                <br>
+                                
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
+                                    <label class="custom-control-label" for="rememberPasswordCheck">Aceitar os Termo de Uso</label>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4 mb-0"><a class="btn btn-info btn-block" href="../usuario/perfil.html">Enviar para Análise</a></div>
+                        </form>
+                    </div>
+                    
+                </div>
 
             </div>
 

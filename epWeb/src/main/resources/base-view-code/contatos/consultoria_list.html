@@ -17,6 +17,11 @@
 
     <script src="../resources/js/font-awesome/all.min.js"></script>
 
+    <link rel="icon" href="../resources/img/logo.png">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
 
 </head>
 
@@ -62,7 +67,6 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
                       <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
-
                     </div>
                 </li>
 
@@ -97,57 +101,119 @@
             </li>
         </ol>
 
+        <h1 class="text-center">Conheça nossos parceiros de consultoria</h1>
+
+        <br>
 
         <div class="container-fluid text-center navbar-expand-md">
 
             <div class="row align-items-start">
 
-                <div class="container col-12">
-                    <div class="row perfil">
+                <div class="table-responsive">
 
-                        <h1 class="col-12 py-3">Criar Notícia</h1>
+                    <table class="table table-bordered text-center" id="tabela" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="col-6">Empresa</th>
+                                <th class="col-2">Serviço Técnico</th>
+                                <th class="col-2">Serviço Jurídico</th>
+                                <th class="col-2">Ação</th>
+                            </tr>
 
 
-                        <div class="mb-2 col-12">
+                            <tr class="col-12">
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna3"/><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                            <div class="mb-2 card">
-                                <div class="card-body">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label" for="validatedCustomFile">Escolher Capa da Notícia</label>
+                        
+
+                        <tfoot>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Serviço Técnico</th>
+                                <th>Serviço Jurídico</th>
+                                <th>Ação</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            
+                            <tr>
+                                <td>Empresa 1</td>
+                                <td>SIM</td>
+                                <td>SIM</td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="../contatos/consultoria_info.html" class="btn col-12 btn-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            Detalhes
+                                        </a>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-3">Título</div>
-                                        <div class="col-9">
-                                            <input type="text" class="form-control">
+                                </td>
+                            </tr>
+
+                            <!--Repetição-->
+
+                            <div>
+                                <tr>
+                                    <td>Empresa 2</td>
+                                    <td>SIM</td>
+                                    <td>NÃO</td>
+                                    <td>
+                                        <div class="col-12">
+                                            <a href="../contatos/consultoria_info.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                Detalhes
+                                            </a>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">Nótícia</div>
-                                        <div class="col-9">
-                                            <textarea class="form-control" rows="10"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Empresa 3</td>
+                                    <td>NÃO</td>
+                                    <td>SIM</td>
+                                    <td>
+                                        <div class="col-12">
+                                            <a href="../contatos/consultoria_info.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                Detalhes
+                                            </a>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    
-                                </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Empresa 4</td>
+                                    <td>SIM</td>
+                                    <td>SIM</td>
+                                    <td>
+                                        <div class="col-12">
+                                            <a href="../contatos/consultoria_info.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                Detalhes
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
                             </div>
 
-                            <div class="mb-2">
-                                <a href="../usuario/perfil.html" class="btn btn-info col-12">Enviar para análise</a>
-                            </div>
+                        </tbody>
 
-                        </div>
 
-                    </div>
+
+                    </table>
 
                 </div>
 
             </div>
 
         </div>
+
 
 
 
