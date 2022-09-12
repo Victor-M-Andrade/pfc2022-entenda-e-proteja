@@ -104,7 +104,6 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
-
         } catch (final Exception e) {
             System.out.println(e.getMessage());
         }

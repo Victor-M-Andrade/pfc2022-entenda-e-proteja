@@ -14,12 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
+    public static boolean deleteUserError = false;
+
     private final ServiceInterface service = new UsuarioServiceImpl();
 
+    private final String USER_ID = "userId";
     private final String MY_USER_REFERENCE = "myUser";
     private final String USER_CREATION_DATE = "dateCreate";
-    private final String USER_ID = "userId";
     private final String DATA_UPDATE_ERROR = "updateDataError";
+    private final String IS_ADMINISTRATOR_USER = "isAdministrator";
+    private final String DELETE_USER_ERROR = "deleteUserError";
+
 
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
@@ -27,12 +32,17 @@ public class UserController {
     private Usuario temporaryUser = null;
 
     @GetMapping("/user/profile/{id}")
-
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
+        model.addAttribute(IS_ADMINISTRATOR_USER, user.isAdministrador());
         model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
+
+        model.addAttribute(DELETE_USER_ERROR, deleteUserError);
+        if (deleteUserError) {
+            deleteUserError = false;
+        }
         return "/usuario/perfil";
     }
 
@@ -109,5 +119,4 @@ public class UserController {
         triedPasswordChange = false;
         return "redirect:/user/profile/" + user.getId();
     }
-
 }

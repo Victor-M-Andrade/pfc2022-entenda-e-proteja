@@ -181,6 +181,15 @@ public class AccountController {
         return "redirect:/user/profile/" + user.getId();
     }
 
+    @GetMapping("/account/delete/{id}")
+    public String deleteMyAccount(@PathVariable final long id) {
+        UserController.deleteUserError = !service.delete(id);
+        if (UserController.deleteUserError) {
+            return "redirect:/user/profile/" + id;
+        }
+        return "redirect:/account/login";
+    }
+
     @GetMapping("/account/log-out")
     public String singOut() {
         return "redirect:/";
