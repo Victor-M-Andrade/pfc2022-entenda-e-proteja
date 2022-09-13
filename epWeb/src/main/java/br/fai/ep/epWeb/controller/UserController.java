@@ -31,13 +31,18 @@ public class UserController {
 
     private Usuario temporaryUser = null;
 
+    @GetMapping("/user/option-user-admin")
+    public String getOptionUserAdminsitratorPage() {
+        return "usuario/opcoes_config_admin";
+    }
+
     @GetMapping("/user/profile/{id}")
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
-        model.addAttribute(IS_ADMINISTRATOR_USER, user.isAdministrador());
         model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
+        model.addAttribute(IS_ADMINISTRATOR_USER, user.isAdministrador());
 
         model.addAttribute(DELETE_USER_ERROR, deleteUserError);
         if (deleteUserError) {
@@ -45,6 +50,7 @@ public class UserController {
         }
         return "/usuario/perfil";
     }
+
 
     @GetMapping("/user/edit/{id}")
     public String getUserEditPage(@PathVariable final int id, final Model model) {
