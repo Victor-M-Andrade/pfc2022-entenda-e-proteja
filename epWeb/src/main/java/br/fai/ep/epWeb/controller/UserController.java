@@ -31,9 +31,9 @@ public class UserController {
 
     private Usuario temporaryUser = null;
 
-    @GetMapping("/user/option-user-admin")
+    @GetMapping("/user/administrator-area")
     public String getOptionUserAdminsitratorPage() {
-        return "usuario/opcoes_config_admin";
+        return "usuario/area-administrador";
     }
 
     @GetMapping("/user/profile/{id}")
