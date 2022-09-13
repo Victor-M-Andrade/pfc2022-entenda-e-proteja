@@ -73,10 +73,10 @@
                         <div class="mb-2">
                             <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do administrador</a>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2" th:unless="${myUser.anonimo}">
                             <a th:href="@{/user/admin-edit/{id} (id = ${userId})}"  class="btn btn-warning col-12">Editar dados do usuário</a>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2" th:unless="${myUser.anonimo}">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger col-12" data-toggle="modal"
                                     data-target="#exampleModal">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <a th:href="@{/user/read-all}" class="btn btn-dark col-12">Lista de usuários</a>
+                            <a th:href="@{/user/read-all}" class="btn btn-dark col-12" >Lista de usuários</a>
                         </div>
                     </div>
                 </div>

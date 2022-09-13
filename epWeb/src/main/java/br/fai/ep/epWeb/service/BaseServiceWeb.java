@@ -1,6 +1,8 @@
 package br.fai.ep.epWeb.service;
 
 
+import br.fai.ep.epEntities.Usuario;
+
 import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -24,5 +26,29 @@ public abstract class BaseServiceWeb {
 
     public static final String dateFormateForSaveFiles(final Timestamp time) {
         return new SimpleDateFormat(DATE_FORMAT_SAVE_FILES).format(time);
+    }
+
+    public Usuario anonymizeAllData(final Usuario user) {
+        if (!user.isAnonimo()) {
+            return user;
+        }
+        user.setNome(transformData(user.getNome()));
+        user.setEmail(transformData(user.getEmail()));
+        user.setSenha(transformData(user.getSenha()));
+        user.setPathImageProfile(transformData(user.getPathImageProfile()));
+
+        return user;
+    }
+
+    private String transformData(final String data) {
+        final char[] letters = data.toCharArray();
+        if (letters.length <= 2) {
+            return data;
+        }
+
+        for (int i = 2; i < data.length(); i++) {
+            letters[i] = '*';
+        }
+        return new String(letters);
     }
 }

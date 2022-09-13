@@ -2,8 +2,8 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.service.BaseServiceWeb;
-import br.fai.ep.epWeb.service.ServiceInterface;
 import br.fai.ep.epWeb.service.impl.UsuarioServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,8 @@ import java.util.List;
 public class UserController {
     public static boolean deleteUserError = false;
 
-    private final ServiceInterface service = new UsuarioServiceImpl();
+    @Autowired
+    private UsuarioServiceImpl service;
 
     private final String USER_ID = "userId";
     private final String MY_USER_REFERENCE = "myUser";
@@ -43,11 +44,12 @@ public class UserController {
     @GetMapping("/user/read-all")
     public String getReadAllUsersPage(final Model model) {
         final List<Usuario> userList = (List<Usuario>) service.readAll();
-        boolean existsUsers = false;
-        if (userList != null && !userList.isEmpty()) {
-            existsUsers = true;
+        if (userList == null || userList.isEmpty()) {
+            model.addAttribute(EXISTS_USERS, false);
+            return "usuario/usuarios_list";
         }
-        model.addAttribute(EXISTS_USERS, existsUsers);
+
+        model.addAttribute(EXISTS_USERS, true);
         model.addAttribute(REGISTERED_USERS, userList);
         return "usuario/usuarios_list";
     }

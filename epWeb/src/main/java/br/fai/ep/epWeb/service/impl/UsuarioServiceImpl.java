@@ -34,6 +34,11 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
             System.out.println(ex.getMessage());
         }
 
+        if (response != null && !response.isEmpty()) {
+            // realizando a anonimizacao dos dados do usuario
+            response.stream().forEach(this::anonymizeAllData);
+        }
+
         return response;
     }
 
@@ -50,6 +55,10 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
             response = requestResponse.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
+        }
+
+        if (response != null) {
+            response = response.isAnonimo() ? anonymizeAllData(response) : response;
         }
 
         return response;
