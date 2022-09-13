@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     public static boolean deleteUserError = false;
@@ -25,6 +27,7 @@ public class UserController {
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
     private final String DELETE_USER_ERROR = "deleteUserError";
 
+    public String REGISTERED_USERS = "registeredUsers";
 
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
@@ -34,6 +37,13 @@ public class UserController {
     @GetMapping("/user/administrator-area")
     public String getOptionUserAdminsitratorPage() {
         return "usuario/area-administrador";
+    }
+
+    @GetMapping("/user/read-all")
+    public String getReadAllUsersPage(final Model model) {
+        final List<Usuario> userList = (List<Usuario>) service.readAll();
+        model.addAttribute(REGISTERED_USERS, userList);
+        return "usuario/usuarios_list";
     }
 
     @GetMapping("/user/profile/{id}")
@@ -124,5 +134,11 @@ public class UserController {
         }
         triedPasswordChange = false;
         return "redirect:/user/profile/" + user.getId();
+    }
+
+    @GetMapping("/user/admin-delete/{id}")
+    public String deleteUserAccount(@PathVariable final long id) {
+        UserController.deleteUserError = !service.delete(id);
+        return "redirect:/user/read-all";
     }
 }
