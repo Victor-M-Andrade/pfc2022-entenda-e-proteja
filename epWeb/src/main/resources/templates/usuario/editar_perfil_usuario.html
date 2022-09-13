@@ -4,6 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar perfil E&P</title>
+
+    <script>
+        function password_show_hide() {
+            var x = document.getElementById("password");
+            var show_eye = document.getElementById("show_eye");
+            var hide_eye = document.getElementById("hide_eye");
+            hide_eye.classList.remove("d-none");
+            if (x.type === "password") {
+                x.type = "text";
+                show_eye.style.display = "none";
+                hide_eye.style.display = "block";
+            } else {
+                x.type = "password";
+                show_eye.style.display = "block";
+                hide_eye.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
 <div layout:fragment="body">
@@ -12,7 +30,13 @@
             <a th:href="@{/}">Home</a>
         </li>
         <li class="breadcrumb-item">
-            <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+            <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/read-all}">Lista de Usuários</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/admin-profile{id}  (userId = ${userId})}">Perfil do usuário</a>
         </li>
         <li class="breadcrumb-item active">
             Editar perfil
@@ -42,7 +66,8 @@
                         <div class="alert alert-danger" th:if="${updateDataError}">
                             <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.</span>
                         </div>
-                        <form th:action="@{/user/update-user-data}" enctype="multipart/form-data"  method="POST" th:object="${usuario}">
+                        <form th:action="@{/user/admin-update-user-data}" method="POST"
+                              th:object="${usuario}">
                             <div class="mb-2 card">
                                 <div class="card-body">
                                     <div class="row">
@@ -58,32 +83,22 @@
                                             <input type="email" class="form-control" th:field="*{email}" required>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            Imagem de perfil
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" name="fromMyFile" accept="image/*">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <input type="number" class="form-control" th:field="*{id}" hidden>
-                                    <input type="text" class="form-control" th:field="*{senha}" hidden>
+                                    <input type="number" class="form-control" th:field="*{senha}" hidden>
                                     <input type="text" class="form-control" th:field="*{pathImageProfile}" hidden>
                                     <input type="text" class="form-control" th:field="*{dataHora}" hidden>
                                     <input type="checkbox" class="form-control" th:field="*{parceiro}" th:checked="*{parceiro}" hidden>
                                     <input type="checkbox" class="form-control" th:field="*{autor}" th:checked="*{autor}" hidden>
                                     <input type="checkbox" class="form-control" th:field="*{administrador}" th:checked="*{administrador}" hidden>
-                                    <input type="checkbox" class="form-control" th:field="*{anonimo}" th:checked="*{anonimo}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{anonimo}"
+                                           th:checked="*{anonimo}" hidden>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <button class="btn btn-success col-12" type="submit">Atualizar</button>
                             </div>
                             <div class="mb-2">
-                                <a class="btn btn-secondary col-12" th:href="@{/user/profile/{id} (id = ${userId})}">Cancelar</a>
+                                <a class="btn btn-secondary col-12" th:href="@{/user/admin-profile/{id} (id = ${userId})}">Cancelar</a>
                             </div>
                         </form>
                     </div>

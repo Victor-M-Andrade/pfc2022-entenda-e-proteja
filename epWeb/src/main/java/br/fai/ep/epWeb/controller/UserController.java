@@ -76,9 +76,8 @@ public class UserController {
         return "/usuario/perfil_usuario";
     }
 
-
     @GetMapping("/user/edit/{id}")
-    public String getUserEditPage(@PathVariable final int id, final Model model) {
+    public String getMyUserEditPage(@PathVariable final int id, final Model model) {
         try {
             final Usuario user = (Usuario) service.readById(id);
             if (user != null) {
@@ -114,7 +113,7 @@ public class UserController {
     }
 
     @PostMapping("/user/update-user-data")
-    public String updateUserData(@RequestParam("fromMyFile") final MultipartFile file, final Usuario user, final Model model) {
+    public String updateMyUserData(@RequestParam("fromMyFile") final MultipartFile file, final Usuario user, final Model model) {
         triedPasswordChange = true;
         temporaryUser = user;
 
@@ -149,6 +148,55 @@ public class UserController {
         }
         triedPasswordChange = false;
         return "redirect:/user/profile/" + user.getId();
+    }
+
+    @GetMapping("/user/admin-edit/{id}")
+    public String getUserEditPage(@PathVariable final int id, final Model model) {
+        try {
+            final Usuario user = (Usuario) service.readById(id);
+            if (user != null) {
+                triedPasswordChange = false;
+                temporaryUser = null;
+                model.addAttribute(user);
+                model.addAttribute(USER_ID, user.getId());
+                model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
+                updateUserDataError = false;
+                return "/usuario/editar_perfil_usuario";
+            }
+
+            if (triedPasswordChange && temporaryUser != null) {
+                triedPasswordChange = false;
+                model.addAttribute(temporaryUser);
+                model.addAttribute(USER_ID, temporaryUser.getId());
+                temporaryUser = null;
+
+                model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
+                updateUserDataError = false;
+                return "/usuario/editar_perfil_usuario";
+            }
+
+            triedPasswordChange = false;
+            updateUserDataError = false;
+            return "redirect:/not-found";
+
+        } catch (final Exception ex) {
+            triedPasswordChange = false;
+            updateUserDataError = false;
+            return "redirect:/not-found";
+        }
+    }
+
+    @PostMapping("/user/admin-update-user-data")
+    public String updateUserData(final Usuario user, final Model model) {
+        triedPasswordChange = true;
+        temporaryUser = user;
+
+        updateUserDataError = !service.update(user);
+        if (updateUserDataError) {
+            return "redirect:/user/admin-edit/" + user.getId();
+        }
+        triedPasswordChange = false;
+        return "redirect:/user/admin-profile/" + user.getId();
     }
 
     @GetMapping("/user/admin-delete/{id}")

@@ -74,7 +74,7 @@
                             <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do administrador</a>
                         </div>
                         <div class="mb-2">
-                            <a href="#" class="btn btn-warning col-12">Editar dados do usuário</a>
+                            <a th:href="@{/user/admin-edit/{id} (id = ${userId})}"  class="btn btn-warning col-12">Editar dados do usuário</a>
                         </div>
                         <div class="mb-2">
                             <!-- Button trigger modal -->
