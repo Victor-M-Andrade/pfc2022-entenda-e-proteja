@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2" th:if="${myUser.administrador}">
                             <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do administrador</a>
                         </div>
                         <div class="mb-2">
