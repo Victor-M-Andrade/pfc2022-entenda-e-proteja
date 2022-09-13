@@ -26,6 +26,7 @@ public class UserController {
     private final String DATA_UPDATE_ERROR = "updateDataError";
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
     private final String DELETE_USER_ERROR = "deleteUserError";
+    public final String EXISTS_USERS = "existsUsers";
 
     public String REGISTERED_USERS = "registeredUsers";
 
@@ -42,6 +43,11 @@ public class UserController {
     @GetMapping("/user/read-all")
     public String getReadAllUsersPage(final Model model) {
         final List<Usuario> userList = (List<Usuario>) service.readAll();
+        boolean existsUsers = false;
+        if (userList != null && !userList.isEmpty()) {
+            existsUsers = true;
+        }
+        model.addAttribute(EXISTS_USERS, existsUsers);
         model.addAttribute(REGISTERED_USERS, userList);
         return "usuario/usuarios_list";
     }

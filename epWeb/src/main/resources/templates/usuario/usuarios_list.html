@@ -24,52 +24,59 @@
         <h1>Usuários</h1>
         <br>
     </div>
-    
+
     <div class="container-fluid text-center navbar-expand-md">
         <div class="row align-items-start">
             <div class="table-responsive">
-                <table class="table table-bordered text-center table-hover" width="100%" id="tabela" cellspacing="0">
+                <table class="table table-bordered text-center table-hover" width="100%" id="tabela" cellspacing="0" th:if="${existsUsers}">
                     <thead class="thead-dark">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Data Criação</th>
-                            <th>Gerenciar</th>
-                        </tr>
-                        <tr class="col-12">
-                            <th><input class="col-10" type="text" id="txtColuna2"/></th>
-                            <th><input class="col-10" type="text" id="txtColuna3"/></th>
-                            <th><input class="col-10" type="text" id="txtColuna4"/></th>
-                            <th><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                        </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data Criação</th>
+                        <th>Gerenciar</th>
+                    </tr>
+                    <tr class="col-12">
+                        <th><input class="col-10" type="text" id="txtColuna2"/></th>
+                        <th><input class="col-10" type="text" id="txtColuna3"/></th>
+                        <th><input class="col-10" type="text" id="txtColuna4"/></th>
+                        <th><i class="fa fa-search col-2" aria-hidden="true"></i></th>
+                    </tr>
                     </thead>
                     <tfoot class="thead-dark">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Data Criação</th>
-                            <th>Gerenciar</th>
-                        </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data Criação</th>
+                        <th>Gerenciar</th>
+                    </tr>
                     </tfoot>
                     <tbody>
-                        <tr th:each="user : ${registeredUsers}">
-                            <td th:text="${user.nome}" class="align-middle">Zezinho</td>
-                            <td th:text="${user.email}" class="align-middle">zezinho_capixaba@gmail.com</td>
-                            <td th:text="${#dates.format(new java.util.Date(user.dataHora), 'dd/MM/yyyy')}" class="align-middle"> 01/01/2022</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <a th:href="@{/user/admin-profile/{id} (id = ${user.id})}" class="btn col-12 btn-info">
-                                            <i class="fa fa-address-card" aria-hidden="true"></i>
-                                            Detalhes
-                                        </a>
-                                    </div>
+                    <tr th:each="user : ${registeredUsers}">
+                        <td th:text="${user.nome}" class="align-middle">Zezinho</td>
+                        <td th:text="${user.email}" class="align-middle">zezinho_capixaba@gmail.com</td>
+                        <td th:text="${#dates.format(new java.util.Date(user.dataHora), 'dd/MM/yyyy')}"
+                            class="align-middle"> 01/01/2022
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a th:href="@{/user/admin-profile/{id} (id = ${user.id})}"
+                                       class="btn col-12 btn-info">
+                                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                                        Detalhes
+                                    </a>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     <tbody>
                 </table>
-                
+                <div class="alert alert-danger col-12 text-center" th:unless="${existsUsers}">
+                    <span class="font-weight-bold align-middle">
+                       Não existem usuário cadastrados no sistema.
+                    </span>
+                </div>
             </div>
 
         </div>
