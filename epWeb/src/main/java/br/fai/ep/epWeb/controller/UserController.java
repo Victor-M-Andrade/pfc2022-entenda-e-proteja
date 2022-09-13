@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping("/user/profile/{id}")
-    public String getUserProfilePage(@PathVariable final long id, final Model model) {
+    public String getMyUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
@@ -59,6 +59,21 @@ public class UserController {
             deleteUserError = false;
         }
         return "/usuario/perfil";
+    }
+
+    @GetMapping("/user/admin-profile/{id}")
+    public String getUserProfilePage(@PathVariable final long id, final Model model) {
+        final Usuario user = (Usuario) service.readById(id);
+        model.addAttribute(MY_USER_REFERENCE, user);
+        model.addAttribute(USER_ID, user.getId());
+        model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
+        model.addAttribute(IS_ADMINISTRATOR_USER, user.isAdministrador());
+
+        model.addAttribute(DELETE_USER_ERROR, deleteUserError);
+        if (deleteUserError) {
+            deleteUserError = false;
+        }
+        return "/usuario/perfil_usuario";
     }
 
 
