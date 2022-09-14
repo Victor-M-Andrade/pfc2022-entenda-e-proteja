@@ -97,17 +97,13 @@ body {
  
 
  
-#tabela thead{
+#tabela thead, tfoot{
     text-align:center;
-    background:rgb(224, 246, 255);
+    background:rgb(7,73,89);
+    color: white;
 }
 
-#tabela tfoot{
-    text-align:center;
-    background:rgb(224, 246, 255);
-}
 
- 
 #tabela input{
     width:100%;
 }
