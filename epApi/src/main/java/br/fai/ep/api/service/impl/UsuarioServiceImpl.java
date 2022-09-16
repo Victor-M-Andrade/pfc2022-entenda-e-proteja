@@ -47,12 +47,6 @@ public class UsuarioServiceImpl implements BaseService {
 
     @Override
     public boolean delete(final long id) {
-        final Usuario user = (Usuario) dao.readById(id);
-        if (user.isAutor() || user.isParceiro() || user.isAdministrador()) {
-            user.setAnonimo(true);
-            return dao.update(user);
-        }
-
         return dao.delete(id);
     }
 
@@ -113,5 +107,15 @@ public class UsuarioServiceImpl implements BaseService {
         }
 
         return userList.get(0);
+    }
+
+    public boolean anonymizeUser(final long id) {
+        final Usuario user = (Usuario) dao.readById(id);
+        if (user == null) {
+            return false;
+        }
+
+        user.setAnonimo(true);
+        return update(user);
     }
 }

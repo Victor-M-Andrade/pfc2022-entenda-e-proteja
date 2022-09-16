@@ -16,18 +16,21 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    public static final String DELETE_USER_ERROR = "deleteUserError";
+    public static final String ANONYMIZE_USER_ERROR = "anonymizeUserEror";
+
     public static boolean deleteUserError = false;
+    public static boolean anonymizeUserError = false;
 
     @Autowired
     private UsuarioServiceImpl service;
 
     private final String USER_ID = "userId";
+    private final String EXISTS_USERS = "existsUsers";
     private final String MY_USER_REFERENCE = "myUser";
-    private final String USER_CREATION_DATE = "dateCreate";
     private final String DATA_UPDATE_ERROR = "updateDataError";
+    private final String USER_CREATION_DATE = "dateCreate";
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
-    private final String DELETE_USER_ERROR = "deleteUserError";
-    public final String EXISTS_USERS = "existsUsers";
 
     public String REGISTERED_USERS = "registeredUsers";
 
@@ -79,6 +82,10 @@ public class UserController {
 
         model.addAttribute(DELETE_USER_ERROR, deleteUserError);
         if (deleteUserError) {
+            deleteUserError = false;
+        }
+        model.addAttribute(ANONYMIZE_USER_ERROR, anonymizeUserError);
+        if (anonymizeUserError) {
             deleteUserError = false;
         }
         return "/usuario/perfil_usuario";
@@ -209,7 +216,19 @@ public class UserController {
 
     @GetMapping("/user/admin-delete/{id}")
     public String deleteUserAccount(@PathVariable final long id) {
-        UserController.deleteUserError = !service.delete(id);
+        deleteUserError = !service.delete(id);
+        if (deleteUserError) {
+            return "redirect:/user/admin-profile/" + id;
+        }
+        return "redirect:/user/read-all";
+    }
+
+    @GetMapping("/user/admin-anonymize-user/{id}")
+    public String anonymizeUser(@PathVariable final long id) {
+        anonymizeUserError = !service.anonymizeUser(id);
+        if (anonymizeUserError) {
+            return "redirect:/user/admin-profile/" + id;
+        }
         return "redirect:/user/read-all";
     }
 }

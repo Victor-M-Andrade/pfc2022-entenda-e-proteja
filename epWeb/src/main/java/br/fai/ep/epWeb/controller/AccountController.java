@@ -1,8 +1,8 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.epWeb.service.ServiceInterface;
 import br.fai.ep.epWeb.service.impl.UsuarioServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,24 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AccountController {
-    private final ServiceInterface service = new UsuarioServiceImpl();
+    @Autowired
+    private UsuarioServiceImpl service;
 
-    private final String AUTHENTICATION_ERROR = "authenticationError";
-    private final String EMAIL_NOT_FOUND = "emailNotFound";
+    private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
+    private final String EMAIL_NOT_FOUND = "emailNotFound";
+    private final String OLD_USER_PASSWORD = "oldUserPassword";
+    private final String AUTHENTICATION_ERROR = "authenticationError";
+    private final String CHANGE_PASSWORD_ERROR = "changePasswordError";
     private final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
     private final String ACCOUNT_CREATION_PROBLEMS = "accountCreationProblems";
-    private final String CHANGE_PASSWORD_ERROR = "changePasswordError";
-    private final String USER_ID = "userId";
-    private final String OLD_USER_PASSWORD = "oldUserPassword";
 
     private boolean sendedEmail = false;
     private boolean emailNotFound = false;
-    public boolean authenticationError = false;
-    private boolean alreadyregisteredEmail = false;
-    private boolean accountCreationProblems = false;
+    private boolean authenticationError = false;
     private boolean changePasswordError = false;
     private boolean triedPasswordChange = false;
+    private boolean alreadyregisteredEmail = false;
+    private boolean accountCreationProblems = false;
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario user) {
@@ -181,11 +182,48 @@ public class AccountController {
         return "redirect:/user/profile/" + user.getId();
     }
 
-    @GetMapping("/account/delete/{id}")
-    public String deleteMyAccount(@PathVariable final long id) {
+    @GetMapping("/account/confirm-delete-account/{id}")
+    public String confirmDeleteAccount(@PathVariable final long id) {
+        final Usuario user = (Usuario) service.readById(id);
+        if (user.isAdministrador() || user.isAutor() || user.isParceiro()) {
+            return "redirect:/account/request-use-data/" + id;
+        }
+
         UserController.deleteUserError = !service.delete(id);
         if (UserController.deleteUserError) {
             return "redirect:/user/profile/" + id;
+        }
+        return "redirect:/account/login";
+    }
+
+    @GetMapping("/account/request-use-data/{id}")
+    public String getRequestUseDataPage(@PathVariable final long id, final Model model) {
+        model.addAttribute(USER_ID, id);
+        model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
+        if (UserController.deleteUserError) {
+            UserController.deleteUserError = false;
+        }
+        model.addAttribute(UserController.ANONYMIZE_USER_ERROR, UserController.anonymizeUserError);
+        if (UserController.anonymizeUserError) {
+            UserController.anonymizeUserError = false;
+        }
+        return "usuario/confirmar-exclusao";
+    }
+
+    @GetMapping("/account/confirm-delete-my-account/{id}")
+    public String confirmeDeleteMyAccount(@PathVariable final long id) {
+        UserController.deleteUserError = !service.delete(id);
+        if (UserController.deleteUserError) {
+            return "redirect:/account/request-use-data/" + id;
+        }
+        return "redirect:/account/login";
+    }
+
+    @GetMapping("/account/anonymize-my-account/{id}")
+    public String confirmeAnonymizeMyAccount(@PathVariable final long id) {
+        UserController.deleteUserError = !service.anonymizeUser(id);
+        if (UserController.anonymizeUserError) {
+            return "redirect:/account/request-use-data/" + id;
         }
         return "redirect:/account/login";
     }

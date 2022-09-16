@@ -39,7 +39,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-3 text-center">
-                                    <img src="/resources/img/logo_invertido.png" width="200" class="rounded-circle img-fluid"/>
+                                    <img src="/resources/img/logo_invertido.png" width="200"
+                                         class="rounded-circle img-fluid"/>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +75,9 @@
                             <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do administrador</a>
                         </div>
                         <div class="mb-2" th:unless="${myUser.anonimo}">
-                            <a th:href="@{/user/admin-edit/{id} (id = ${userId})}"  class="btn btn-warning col-12">Editar dados do usuário</a>
+                            <a th:href="@{/user/admin-edit/{id} (id = ${userId})}" class="btn btn-warning col-12">Editar dados do usuário</a>
                         </div>
-                        <div class="mb-2" th:unless="${myUser.anonimo}">
+                        <div class="mb-2">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger col-12" data-toggle="modal"
                                     data-target="#exampleModal">
@@ -89,8 +90,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-center" id="exampleModalLabel">Exclusão de
-                                                Conta</h5>
+                                            <h5 class="modal-title text-center" id="exampleModalLabel">Exclusão de Conta</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -99,9 +99,9 @@
                                             Esta conta será excluída do sistema. Deseja continuar a operação?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Não,
-                                                cancelar operação
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Não, cancelar operação
                                             </button>
+                                            <a th:href="@{/user/admin-anonymize-user/{id} (id = ${userId})}" th:unless="${myUser.anonimo}" class="btn btn-warning">Apenas anonimizar usuário</a>
                                             <a th:href="@{/user/admin-delete/{id} (id = ${userId})}" class="btn btn-danger">Sim, excluir esta conta</a>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <a th:href="@{/user/read-all}" class="btn btn-dark col-12" >Lista de usuários</a>
+                            <a th:href="@{/user/read-all}" class="btn btn-dark col-12">Lista de usuários</a>
                         </div>
                     </div>
                 </div>

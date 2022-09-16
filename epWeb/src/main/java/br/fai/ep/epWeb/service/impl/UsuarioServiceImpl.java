@@ -181,4 +181,21 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
         return response;
     }
+
+    public Boolean anonymizeUser(final long id) {
+        final String endpoint = BASE_ENDPOINT + "/anonymize-user/" + id;
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
+                    httpEntity, Boolean.class);
+            response = requestResponse.getBody();
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
 }

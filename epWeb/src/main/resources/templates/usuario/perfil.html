@@ -85,8 +85,7 @@
                         </div>
                         <div class="mb-2">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger col-12" data-toggle="modal"
-                                    data-target="#exampleModal">
+                            <button type="button" class="btn btn-danger col-12" data-toggle="modal" data-target="#exampleModal">
                                 Excluir minha conta
                             </button>
 
@@ -109,7 +108,7 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Não,
                                                 cancelar operação
                                             </button>
-                                            <a th:href="@{/account/delete/{id} (id = ${userId})}"
+                                            <a th:href="@{/account/confirm-delete-account/{id} (id = ${userId})}"
                                                class="btn btn-danger">Sim, excluir minha conta</a>
                                         </div>
                                     </div>

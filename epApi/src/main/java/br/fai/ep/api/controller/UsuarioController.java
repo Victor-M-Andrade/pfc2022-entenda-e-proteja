@@ -60,4 +60,9 @@ public class UsuarioController {
     public ResponseEntity<Usuario> authenticate(@RequestBody final Map criteria) {
         return ResponseEntity.ok(service.authenticate(criteria));
     }
+
+    @DeleteMapping("/anonymize-user/{id}")
+    public ResponseEntity<Boolean> anonymizeUser(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.anonymizeUser(id));
+    }
 }
