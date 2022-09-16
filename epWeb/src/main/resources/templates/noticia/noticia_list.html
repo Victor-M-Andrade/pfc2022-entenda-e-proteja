@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de notícias E&P</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Lista de notícias
+        </li>
+    </ol>
+    <h1 class="text-center">Notícias desta categorias</h1>
+    <hr>
+
+    <div class="container-fluid text-center navbar-expand-md">
+        <div class="row align-items-start" id="accordion-parent">
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-1">Título da matéria
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="card-1" data-parent="#accordion-parent">
+                        <div class="card-body">
+
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+
+                            <br>
+
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-2">Título da matéria
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="card-2" data-parent="#accordion-parent">
+                        <div class="card-body">
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <br>
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-3">Título da matéria
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="card-3" data-parent="#accordion-parent">
+                        <div class="card-body">
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <br>
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-4">Título da matéria
+                        </button>
+                    </div>
+                    <div class="collapse" id="card-4" data-parent="#accordion-parent">
+                        <div class="card-body">
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <br>
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-5">Título da matéria
+                        </button>
+                    </div>
+                    <div class="collapse" id="card-5" data-parent="#accordion-parent">
+                        <div class="card-body">
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <br>
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Noticia-->
+            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary btn-block" data-toggle="collapse"
+                                data-target="#card-6">Título da matéria
+                        </button>
+                    </div>
+                    <div class="collapse" id="card-6" data-parent="#accordion-parent">
+                        <div class="card-body">
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do
+                                eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua</p>
+                            <br>
+                            <div class="row">
+                                <p class="col text-left">Categoria: XYZ</p>
+                                <p class="col text-right">
+                                    <a th:href="@{/news/new}">Ler matéria completa</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.fai.ep</groupId>
+        <artifactId>entenda-e-proteja-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>epApi</artifactId>
+    <version>${epApi.version}</version>
+    <name>epApi</name>
+    <description>Módulo de aplicação de toda a regra de negócio e serviços disponibilizados no projeto Entenda e Proteja</description>
+
+    <properties>
+        <revision>${entenda-e-proteja.version}</revision>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <!-- dependencia para acessar as classes do projeto epEntity -->
+        <dependency>
+            <groupId>br.fai.ep</groupId>
+            <artifactId>epEntity</artifactId>
+            <version>${epEntity.version}</version>
+        </dependency>
+        <!-- dependencia para acessar as classes do projeto epDataBase -->
+        <dependency>
+            <groupId>br.fai.ep</groupId>
+            <artifactId>epDataBase</artifactId>
+            <version>${epDataBase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+    </dependencies>
+</project>

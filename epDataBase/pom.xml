@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.fai.ep</groupId>
+        <artifactId>entenda-e-proteja-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>epDataBase</artifactId>
+    <version>${epDataBase.version}</version>
+
+    <name>epDataBase</name>
+    <packaging>jar</packaging>
+    <description>Módulo que realiza todo o CRUD do projeto Entenda e Proteja</description>
+
+    <properties>
+        <revision>${entenda-e-proteja.version}</revision>
+    </properties>
+
+    <dependencies>
+        <!-- dependencia para acessar as classes do projeto epEntity -->
+        <dependency>
+            <groupId>br.fai.ep</groupId>
+            <artifactId>epEntity</artifactId>
+        </dependency>
+
+        <!-- dependência para acessar o postgress -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+    </dependencies>
+</project>

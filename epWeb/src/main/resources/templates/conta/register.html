@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de usuário E&P</title>
+    <script>
+		function validaSenhas() {
+			let pass = document.getElementById("inputPassword");
+			let confirPass = document.getElementById("inputConfirmPassword");
+			let accept = document.getElementById("acceptTermsCheck");
+            
+            let tipoButton = "submit";
+            let existError = false;
+            let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
+
+			if (pass.value != confirPass.value) {
+				tipoButton = "button";
+                messageError += "Foram informadas senhas diferentes no compo \"Senha\" e \"Confirme sua senha\".\n";
+                existError = true;
+			}
+
+            if(!accept.checked){
+                tipoButton = "button";
+                messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n"
+                existError = true;
+            }
+
+            if(existError){
+                alert(messageError);
+            }
+
+            document.getElementById("cadastro").setAttribute("type", tipoButton);
+		}
+    </script>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Cadastro de usuário
+        </li>
+    </ol>
+
+    <div class="container-fluid text-center navbar-expand-md">
+        <div class="row align-items-start">
+            <div class="container card border-0 rounded-lg login col-12 col-xl-8">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light">Criação de conta</h3>
+                    <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" th:if="${alreadyRegisteredEmail}">
+                        <span class="font-weight-bold align-middle">O email informado já esta registrado. Por gentileza, informe outro email.</span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${accountCreationProblems}">
+                        <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.</span>
+                    </div>
+                    <form th:action="@{/account/create}" method="post" th:object="${usuario}">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputUser">Nome de usuário</label>
+                                    <input class="form-control py-4" id="inputUser" type="text"
+                                           placeholder="Insira seu nome" th:field="${usuario.nome}" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputEmail">Email</label>
+                                    <input class="form-control py-4" id="inputEmail" type="email"
+                                           placeholder="Insira o seu email" th:field="${usuario.email}" required/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputPassword">Senha</label>
+                                    <input class="form-control py-4" id="inputPassword" type="password"
+                                           placeholder="Insira a senha" th:field="${usuario.senha}" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="inputConfirmPassword">Confirme sua senha</label>
+                                    <input class="form-control py-4" id="inputConfirmPassword" type="password"
+                                           placeholder="Confirme a senha" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" id="acceptTermsCheck">
+                                <label class="form-check-label" for="acceptTermsCheck">
+                                    Aceitar os Termo de Uso
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-0">
+                            <button class="btn btn-info btn-block" id="cadastro"
+                                    onclick="validaSenhas()" type="submit"> Finalizar Cadastro
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="small">
+                        <a th:href="@{/account/login}">Já possui uma conta? Faça o login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

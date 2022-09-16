@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de notícias E&P</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            <a href="#">nível do teste</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Questionário
+        </li>
+    </ol>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h1>Questionário sobre LGPD</h1>
+        </div>
+    </div>
+    <!--Questionario-->
+    <div class="accordion" id="accordion-parent">
+
+        <!-- Pergunta 1 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Pergunta 1</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Pergunta LGPD bla bla bla bla bla bla bla bla bla?</h5>
+                <p class="card-text">Escolha uma opção:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p1" id="1a">
+                    <label class="form-check-label" for="1a">
+                        Alternativa A
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p1" id="1b">
+                    <label class="form-check-label" for="1b">
+                        Alternativa B
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p1" id="1c">
+                    <label class="form-check-label" for="1c">
+                        Alternativa C
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p1" id="1d">
+                    <label class="form-check-label" for="1d">
+                        Alternativa D
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pergunta 2 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Pergunta 2</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Pergunta LGPD bla bla bla bla bla bla bla bla bla?</h5>
+                <p class="card-text">Escolha uma opção:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p2" id="2a">
+                    <label class="form-check-label" for="2a">
+                        Alternativa A
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p2" id="2b">
+                    <label class="form-check-label" for="2b">
+                        Alternativa B
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p2" id="2c">
+                    <label class="form-check-label" for="2c">
+                        Alternativa C
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p2" id="2d">
+                    <label class="form-check-label" for="2d">
+                        Alternativa D
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pergunta 3 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Pergunta 3</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Pergunta LGPD bla bla bla bla bla bla bla bla bla?</h5>
+                <p class="card-text">Escolha uma opção:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p3" id="3a">
+                    <label class="form-check-label" for="3a">
+                        Alternativa A
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p3" id="3b">
+                    <label class="form-check-label" for="3b">
+                        Alternativa B
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p3" id="3c">
+                    <label class="form-check-label" for="3c">
+                        Alternativa C
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="p3" id="3d">
+                    <label class="form-check-label" for="3d">
+                        Alternativa D
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--Footer-->
+        <div class="card">
+            <div class="card-header">
+                <a href="#" class="btn btn-outline-primary btn-lg btn-block">Enviar Relatório</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Not-found page E&P</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Página não encontrada
+        </li>
+    </ol>
+
+    <div class="container-fluid text-center navbar-expand-md">
+        <h3>A página solicitada não foi encontrada.</h3>
+        <img src="/resources/img/not-found.png" alt="">
+        <div class="form-group mt-2 mb-0">
+            <a class="btn btn-info btn-block" th:href="@{/}"><strong>Voltar para página inicial</strong></a>
+        </div>
+        <br><br>
+    </div>
+</div>
+</body>
+</html>

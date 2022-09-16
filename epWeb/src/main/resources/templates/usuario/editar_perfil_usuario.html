@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar perfil E&P</title>
+
+    <script>
+        function password_show_hide() {
+            var x = document.getElementById("password");
+            var show_eye = document.getElementById("show_eye");
+            var hide_eye = document.getElementById("hide_eye");
+            hide_eye.classList.remove("d-none");
+            if (x.type === "password") {
+                x.type = "text";
+                show_eye.style.display = "none";
+                hide_eye.style.display = "block";
+            } else {
+                x.type = "password";
+                show_eye.style.display = "block";
+                hide_eye.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/read-all}">Lista de Usuários</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/admin-profile{id}  (userId = ${userId})}">Perfil do usuário</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Editar perfil
+        </li>
+    </ol>
+
+    <div class="container-fluid text-center navbar-expand-md">
+
+        <div class="row align-items-start">
+
+            <div class="container col-12">
+                <div class="row perfil">
+
+                    <h1 class="col-12 py-3">Edição de perfil</h1>
+
+                    <div class="col-12 col-sm-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3 text-center">
+                                    <img src="/resources/img/logo_invertido.png" width="200"
+                                         class="rounded-circle img-fluid"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 col-12 col-sm-7">
+                        <div class="alert alert-danger" th:if="${updateDataError}">
+                            <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.</span>
+                        </div>
+                        <form th:action="@{/user/admin-update-user-data}" method="POST"
+                              th:object="${usuario}">
+                            <div class="mb-2 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">Usuário</div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" th:field="*{nome}" required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Email</div>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" th:field="*{email}" required>
+                                        </div>
+                                    </div>
+                                    <input type="number" class="form-control" th:field="*{id}" hidden>
+                                    <input type="number" class="form-control" th:field="*{senha}" hidden>
+                                    <input type="text" class="form-control" th:field="*{pathImageProfile}" hidden>
+                                    <input type="text" class="form-control" th:field="*{dataHora}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{parceiro}" th:checked="*{parceiro}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{autor}" th:checked="*{autor}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{administrador}" th:checked="*{administrador}" hidden>
+                                    <input type="checkbox" class="form-control" th:field="*{anonimo}"
+                                           th:checked="*{anonimo}" hidden>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn btn-success col-12" type="submit">Atualizar</button>
+                            </div>
+                            <div class="mb-2">
+                                <a class="btn btn-secondary col-12" th:href="@{/user/admin-profile/{id} (id = ${userId})}">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

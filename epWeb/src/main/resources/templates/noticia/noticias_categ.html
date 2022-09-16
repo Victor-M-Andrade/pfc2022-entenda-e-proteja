@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de categorais E&P</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Categorias
+        </li>
+    </ol>
+    <h1 class="text-center">Catálago de notícias</h1>
+    <hr>
+
+    <div class="container-fluid text-center navbar-expand-md">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a th:href="@{/news/news-list}">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Senhas</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/senha.jpg" alt="img_senha_categ"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a th:href="@{/news/news-list}">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Armazenamento de Dados</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/armazenamento_dados.jpg"
+                                 alt="img_arm_dados_categ" class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a th:href="@{/news/news-list}">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Legislação</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/legislacao.png" alt="img_senha_categ"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a th:href="@{/news/new}">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Vazamentos</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/vazamentos.jpg" alt="img_senha_categ"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a th:href="@{/news/new}">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Tutoriais</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/tutoriais.jpg" alt="img_senha_categ"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <a href="noticia_list.html">
+                    <div class="h-100 card bg-dark text-light">
+                        <div class="card-title text-center mt-1">Ver Todas</div>
+                        <div class="card-body text-center no-padding">
+                            <img src="/resources/img/noticias/categ/ver_tudo.jpg" alt="img_senha_categ"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

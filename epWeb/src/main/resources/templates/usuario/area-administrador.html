@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Área do Admin. E&P</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Área do Administrador
+        </li>
+    </ol>
+
+    <div class="container-fluid text-center navbar-expand-md">
+
+        <div class="row align-items-start">
+
+            <div class="container col-12">
+                <div class="row perfil">
+
+                    <h1 class="col-12 py-3">Área do Administrador</h1>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="mb-2 card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Avaliação de solicitações</h5>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-warning col-12">Solicitações de nova notícias</a>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-warning col-12">Solicitações de nova notícias</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 col-12 col-sm-6">
+                        <div class="mb-2 card">
+                            <div class="card-body">
+                                <h5 class="card-title">Gerenciamento de cadastros</h5>
+                                <hr>
+                                <div class="row">
+                                    <a th:href="@{/user/read-all}" class="btn btn-info col-12">Lista de usuários</a>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-info col-12">Lista de parceiros</a>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-info col-12">Lista de notícias</a>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <a href="#" class="btn btn-info col-12">Lista de questões</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
