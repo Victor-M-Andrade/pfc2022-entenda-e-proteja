@@ -32,15 +32,15 @@ public abstract class BaseServiceWeb {
         if (!user.isAnonimo()) {
             return user;
         }
-        user.setNome(transformData(user.getNome()));
-        user.setEmail(transformData(user.getEmail()));
-        user.setSenha(transformData(user.getSenha()));
-        user.setPathImageProfile(transformData(user.getPathImageProfile()));
+        user.setNome(anonymizeData(user.getNome()));
+        user.setEmail(anonymizeData(user.getEmail()));
+        user.setSenha(anonymizeData(user.getSenha()));
+        user.setPathImageProfile(anonymizeData(user.getPathImageProfile()));
 
         return user;
     }
 
-    private String transformData(final String data) {
+    public String anonymizeData(final String data) {
         final char[] letters = data.toCharArray();
         if (letters.length <= 2) {
             return data;

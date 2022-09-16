@@ -198,7 +198,15 @@ public class AccountController {
 
     @GetMapping("/account/request-use-data/{id}")
     public String getRequestUseDataPage(@PathVariable final long id, final Model model) {
+        final Usuario usuario = (Usuario) service.readById(id);
+        final String originalName = usuario.getNome();
+        final String anonymousName = service.anonymizeData(usuario.getNome());
+
         model.addAttribute(USER_ID, id);
+        model.addAttribute("anonymous", String.format("Exemplo: nome cadastrado %s | Próximas consultas em que for mensionado: %s",
+                originalName, anonymousName))
+        ;
+
         model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
         if (UserController.deleteUserError) {
             UserController.deleteUserError = false;
@@ -207,7 +215,7 @@ public class AccountController {
         if (UserController.anonymizeUserError) {
             UserController.anonymizeUserError = false;
         }
-        return "usuario/confirmar-exclusao";
+        return "conta/confirmar-exclusao";
     }
 
     @GetMapping("/account/confirm-delete-my-account/{id}")

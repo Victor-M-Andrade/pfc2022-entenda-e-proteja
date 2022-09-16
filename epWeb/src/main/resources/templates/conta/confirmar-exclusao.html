@@ -32,7 +32,7 @@
                             estatísticas.</p>
                         <p>Pedimos a sua autorização para que estes dados sejam mantidos no sistema, mas os seus dados
                             pessoais anonimizados, ou seja, não serão mais visíveis</p>
-                        <p>Exemplo: lu***********************</p>
+                        <label th:text="${anonymous}">Exemplo: lu***********************</label>
                         <p></p>
                         <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
                             <a class="btn btn-secondary mr-2" th:href="@{/user/profile/{id} (id = ${userId})}">NÃO, CANCELAR ESTA OPERAÇÃO</a>
