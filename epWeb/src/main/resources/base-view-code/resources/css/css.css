@@ -3,6 +3,27 @@ html {
     min-height: 100%;
 }
 
+body[dark]{
+    background-color: black;
+    color: white;
+}
+
+.card {
+    color: black !important;
+}
+
+.list-group-item{
+    color: black !important;
+}
+
+.btn-outline-light{
+    color: white !important
+}
+
+.btn-outline-light:hover{
+    color: black !important
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -87,12 +108,10 @@ body {
 
 
 
-
-
-
 #tabela{
     border:solid 1px;
     text-align:left;
+    background-color: white !important;
 }
  
 
@@ -100,7 +119,7 @@ body {
 #tabela thead, tfoot{
     text-align:center;
     background:rgb(7,73,89);
-    color: white;
+    color: white !important;
 }
 
 

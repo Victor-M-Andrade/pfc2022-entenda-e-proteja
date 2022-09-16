@@ -15,18 +15,30 @@
 
     <script src="../resources/js/font-awesome/all.min.js"></script>
 
+    <script src="../resources/javascript/darkMode.js"></script>
+
 </head>
 
 <body>
 
-    <!--NavBar-->
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+<!--NavBar-->
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a href="#" class="navbar-brand logo">
+        <a href="../index.html" class="navbar-brand logo">
             <img src="../resources/img/logo.png" alt="logo">Entenda e Proteja
         </a>
 
@@ -45,7 +57,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       
                       <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
-                      <a class="dropdown-item" href="../quiz/quiz.html">Teste de conhecimento</a>
+                      <a class="dropdown-item" href="../quiz/questao_dificuldade.html">Teste de conhecimento</a>
                     </div>
                   </li>
 
@@ -57,6 +69,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
                       <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+                      <a class="dropdown-item" href="../contatos/fale_conosco.html">Fale Conosco</a>
                     </div>
                   </li>
 
@@ -76,6 +89,11 @@
 
             </ul>
         </div>
+
+        <label for="input-dark-mode">
+            <a class="button btn btn-outline-light">Dark Mode</a>
+        </label>
+        <input type="checkbox" id="input-dark-mode" hidden>
 
     </nav>
     
@@ -108,33 +126,31 @@
 
                     <p>Selecione a questão correta:</p>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" checked name="p" id="1a">
-                        <label class="form-check-label" for="1a">
-                            Alternativa A
-                        </label>
+                    <div class="form-check md-form">
+                        <input class="form-check-input" type="radio" name="p" id="1a">
+                        <label class="form-check-label" for="1a">Alternativa A</label>
+                        <textarea type="text" rows="2" class="row ml-0 col-12 form-control">Escreva aqui a resposta da Alternativa A</textarea>
                     </div>
+
+                    
         
         
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="p" id="1b">
-                        <label class="form-check-label" for="1b">
-                            Alternativa B
-                        </label>
+                        <label class="form-check-label" for="1b">Alternativa B</label>
+                        <textarea type="text" rows="2" class="row ml-0 col-12 form-control">Escreva aqui a resposta da Alternativa B</textarea>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="p" id="1c">
-                        <label class="form-check-label" for="1c">
-                            Alternativa C
-                        </label>
+                        <label class="form-check-label" for="1c">Alternativa C</label>
+                        <textarea type="text" rows="2" class="row ml-0 col-12 form-control">Escreva aqui a resposta da Alternativa C</textarea>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="p" id="1d">
-                        <label class="form-check-label" for="1d">
-                            Alternativa D
-                        </label>
+                        <label class="form-check-label" for="1d">Alternativa D</label>
+                        <textarea type="text" rows="2" class="row ml-0 col-12 form-control">Escreva aqui a resposta da Alternativa D</textarea>
                     </div>
                 </div>
 
@@ -154,9 +170,9 @@
         <footer class="py-3 mt-auto bg-info">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div>Copyright &copy; Entenda e Proteja - 2022</div>
-                    <div>
-                        <a class="termos" href="#">Política de privacidade</a>
+                    <div class="mr-4">Copyright &copy; Entenda e Proteja - 2022</div>
+                    <div class="ml-3">
+                        <a class="termos" href="../contratos/polica_privacidade.html">Política de privacidade</a>
                         &middot;
                         <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>

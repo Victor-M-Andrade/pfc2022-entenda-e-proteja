@@ -26,18 +26,30 @@
     <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
 
 
+    <script src="../resources/javascript/darkMode.js"></script>
+
 </head>
 
 <body>
 
-    <!--NavBar-->
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+<!--NavBar-->
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a href="#" class="navbar-brand logo">
+        <a href="../index.html" class="navbar-brand logo">
             <img src="../resources/img/logo.png" alt="logo">Entenda e Proteja
         </a>
 
@@ -56,7 +68,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       
                       <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
-                      <a class="dropdown-item" href="../quiz/quiz.html">Teste de conhecimento</a>
+                      <a class="dropdown-item" href="../quiz/questao_dificuldade.html">Teste de conhecimento</a>
                     </div>
                   </li>
 
@@ -68,6 +80,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
                       <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+                      <a class="dropdown-item" href="../contatos/fale_conosco.html">Fale Conosco</a>
                     </div>
                   </li>
 
@@ -88,6 +101,11 @@
             </ul>
         </div>
 
+        <label for="input-dark-mode">
+            <a class="button btn btn-outline-light">Dark Mode</a>
+        </label>
+        <input type="checkbox" id="input-dark-mode" hidden>
+
     </nav>
 
     <div class="container col-12">
@@ -107,29 +125,45 @@
             <h1>Suas Publicações</h1>
             <br>
         </div>
-        
+
+
+
         <div class="container-fluid text-center navbar-expand-md">
 
             <div class="row align-items-start">
 
                 <div class="table-responsive">
 
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered text-center" id="tabela" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Titulo</th>
-                                <th>Gerenciar</th>
+                                <th class="col-4">Titulo</th>
+                                <th class="col-2">Data Publicação</th>
+                                <th class="col-6">Gerenciar</th>
+                            </tr>
+
+
+                            <tr class="col-12">
+                                <th><input class="col-10" type="text" id="txtColuna1"/></th>
+                                <th><input class="col-10" type="text" id="txtColuna2"/></th>
+                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
+
+                        
+
                         <tfoot>
                             <tr>
                                 <th>Titulo</th>
+                                <th>Data Publicação</th>
                                 <th>Gerenciar</th>
                             </tr>
                         </tfoot>
+
                         <tbody>
                             <tr>
                                 <td>O que é LGPD?</td>
+                                <td>01/01/2022</td>
                                 <td>
                                     <div class="row">
                                         <div class="col-12 col-md-4">
@@ -155,314 +189,134 @@
                                 
                             </tr>
 
+
+
+                            <!--Repetição, somente para testes-->
+
+                            
+                            <div>
+
+                            <tr>
+                                <td>Como proteger suas senhas?</td>
+                                <td>02/02/2022</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-eye"></i>
+                                                Ler
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
+                                                <i class="fas fa-italic"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="#" class="btn col-12 btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Regras de Firewall</td>
+                                <td>03/03/2022</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-eye"></i>
+                                                Ler
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
+                                                <i class="fas fa-italic"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="#" class="btn col-12 btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Como se tornar um auditor de LGPD?</td>
+                                <td>04/04/2022</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-eye"></i>
+                                                Ler
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
+                                                <i class="fas fa-italic"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="#" class="btn col-12 btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+
+                            <tr>
+                                <td>Brasil se torna o 3º em números de tentativas de ataque a rede no mundo</td>
+                                <td>05/05/2022</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
+                                                <i class="fas fa-eye"></i>
+                                                Ler
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
+                                                <i class="fas fa-italic"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <a href="#" class="btn col-12 btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+
+                            </div>
+
+
+
                         </tbody>
 
-
-                        <!--Repetição-->
-                        
-                        <div>
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-
-                            <tbody>
-                                <tr>
-                                    <td>O que é LGPD?</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_modelo.html" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="../noticia/noticias_edit.html" class="btn col-12 btn-warning">
-                                                    <i class="fas fa-italic"></i>
-                                                    Editar
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-4">
-                                                <a href="#" class="btn col-12 btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                    Excluir
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-    
-                            </tbody>
-                        </div>
-
-                        
 
                     </table>
 
@@ -481,9 +335,9 @@
         <footer class="py-3 mt-auto bg-info">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div>Copyright &copy; Entenda e Proteja - 2022</div>
-                    <div>
-                        <a class="termos" href="#">Política de privacidade</a>
+                    <div class="mr-4">Copyright &copy; Entenda e Proteja - 2022</div>
+                    <div class="ml-3">
+                        <a class="termos" href="../contratos/polica_privacidade.html">Política de privacidade</a>
                         &middot;
                         <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>

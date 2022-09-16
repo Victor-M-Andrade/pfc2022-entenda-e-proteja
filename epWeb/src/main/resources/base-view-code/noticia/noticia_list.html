@@ -24,18 +24,30 @@
     <script type="text/javascript" src="../resources/javascript/tabelas.js"></script>
 
 
+    <script src="../resources/javascript/darkMode.js"></script>
+
 </head>
 
 <body>
 
-    <!--NavBar-->
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+<!--NavBar-->
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a href="#" class="navbar-brand logo">
+        <a href="../index.html" class="navbar-brand logo">
             <img src="../resources/img/logo.png" alt="logo">Entenda e Proteja
         </a>
 
@@ -55,7 +67,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         
                         <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
-                        <a class="dropdown-item" href="../quiz/quiz.html">Teste de conhecimento</a>
+                        <a class="dropdown-item" href="../quiz/questao_dificuldade.html">Teste de conhecimento</a>
                     </div>
                 </li>
 
@@ -68,6 +80,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
                         <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+                      <a class="dropdown-item" href="../contatos/fale_conosco.html">Fale Conosco</a>
 
                     </div>
                 </li>
@@ -89,6 +102,11 @@
 
             </ul>
         </div>
+
+        <label for="input-dark-mode">
+            <a class="button btn btn-outline-light">Dark Mode</a>
+        </label>
+        <input type="checkbox" id="input-dark-mode" hidden>
 
     </nav>
 
@@ -131,7 +149,7 @@
                                 <th><input class="col-10" type="text" id="txtColuna2"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
                                 <th><input class="col-10" type="text" id="txtColuna3"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
                                 <th><input class="col-10" type="text" id="txtColuna4"/><i class="fa fa-search col-2" aria-hidden="true"></i></th>
-                                <th></th>
+                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
 
@@ -264,9 +282,9 @@
         <footer class="py-3 mt-auto bg-info">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div>Copyright &copy; Entenda e Proteja - 2022</div>
-                    <div>
-                        <a class="termos" href="#">Política de privacidade</a>
+                    <div class="mr-4">Copyright &copy; Entenda e Proteja - 2022</div>
+                    <div class="ml-3">
+                        <a class="termos" href="../contratos/polica_privacidade.html">Política de privacidade</a>
                         &middot;
                         <a class="termos" href="#">Termos &amp; Condições</a>
                     </div>
