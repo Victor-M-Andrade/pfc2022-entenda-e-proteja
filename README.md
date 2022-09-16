@@ -1,6 +1,6 @@
 
 
-<h1 text align = "center"> 🔒🌎 EP - ENTENDA & PROTEJA 🌎🔒</h1>
+<h1 text align = "center"> 🔒🌎 E&P - ENTENDA & PROTEJA 🌎🔒</h1>
 
 
 <h6 text align = "center">Projeto desenvolvido por <a href="https://github.com/Alysson212">Alysson Vasconcelos</a>, <a href="https://github.com/LucasLima147">Lucas Lima</a>, <a href="https://github.com/Victor-M-Andrade">Victor Andrade</a>, <a href="https://github.com/wprs18">William de Paula</a>.</h6>
