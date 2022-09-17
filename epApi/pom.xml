@@ -6,13 +6,15 @@
     <parent>
         <groupId>br.fai.ep</groupId>
         <artifactId>entenda-e-proteja-parent</artifactId>
-        <version>1.0.0</version>
+        <version>5.0.0</version>
     </parent>
 
     <artifactId>epApi</artifactId>
     <version>${epApi.version}</version>
     <name>epApi</name>
-    <description>Módulo de aplicação de toda a regra de negócio e serviços disponibilizados no projeto Entenda e Proteja</description>
+    <description>Módulo de aplicação de toda a regra de negócio e serviços disponibilizados no projeto Entenda e
+        Proteja
+    </description>
 
     <properties>
         <revision>${entenda-e-proteja.version}</revision>
