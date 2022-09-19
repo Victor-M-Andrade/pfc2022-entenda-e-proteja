@@ -1,0 +1,7 @@
+atualizações:
+
+- criando nova branch
+
+- arquivo de termos de uso
+
+- subindo arquivos atualizados
