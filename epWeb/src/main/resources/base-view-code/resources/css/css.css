@@ -10,8 +10,9 @@ html[zoom]{
 
 body[dark]{
     background-color: black;
-    color: white;
+    color: white !important;
 }
+
 
 .card[dark]{
     color: white !important;
