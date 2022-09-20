@@ -13,6 +13,12 @@ body[dark]{
     color: white;
 }
 
+.card[dark]{
+    color: white !important;
+    background-color: rgb(24, 24, 24) !important;
+}
+
+
 .card {
     color: black !important;
 }
@@ -96,7 +102,7 @@ body {
     margin-bottom: 50px;
 }
 
-.noticia_categ img {
+.noticia_categ{
     height: 100%;
     width: 100%;
     object-fit: cover;
