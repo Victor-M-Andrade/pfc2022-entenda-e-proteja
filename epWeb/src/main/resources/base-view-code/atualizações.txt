@@ -5,3 +5,7 @@ atualizações:
 - arquivo de termos de uso
 
 - subindo arquivos atualizados
+
+- criando tela de termos de uso
+
+- colando botao para download do documento
