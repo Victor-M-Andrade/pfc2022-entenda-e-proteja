@@ -1,8 +1,9 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.epWeb.service.impl.UsuarioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AccountController {
-    @Autowired
-    private UsuarioServiceImpl service;
+    private final WebServiceInterface service = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
@@ -43,7 +43,7 @@ public class AccountController {
 
     @PostMapping("/account/authenticate")
     public String getAuthenticatePage(final Model model, final Usuario user) {
-        final Usuario myUser = new UsuarioServiceImpl().authentication(user.getEmail(), user.getSenha());
+        final Usuario myUser = new UserWebServiceImpl().authentication(user.getEmail(), user.getSenha());
         if (myUser == null) {
             authenticationError = true;
             return "redirect:/account/login";
@@ -97,7 +97,7 @@ public class AccountController {
 
     @PostMapping("/account/request-password-change")
     public String requestPasswordChange(final Model model, final Usuario user) {
-        sendedEmail = new UsuarioServiceImpl().forgotPassword(user.getEmail());
+        sendedEmail = new UserWebServiceImpl().forgotPassword(user.getEmail());
         if (sendedEmail) {
             emailNotFound = false;
             return "redirect:/account/forgot-my-password";
@@ -200,12 +200,11 @@ public class AccountController {
     public String getRequestUseDataPage(@PathVariable final long id, final Model model) {
         final Usuario usuario = (Usuario) service.readById(id);
         final String originalName = usuario.getNome();
-        final String anonymousName = service.anonymizeData(usuario.getNome());
+        final String anonymousName = BaseWebService.anonymizeData(usuario.getNome());
 
         model.addAttribute(USER_ID, id);
         model.addAttribute("anonymous", String.format("Exemplo: nome cadastrado %s | Próximas consultas em que for mensionado: %s",
-                originalName, anonymousName))
-        ;
+                originalName, anonymousName));
 
         model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
         if (UserController.deleteUserError) {
@@ -229,7 +228,7 @@ public class AccountController {
 
     @GetMapping("/account/anonymize-my-account/{id}")
     public String confirmeAnonymizeMyAccount(@PathVariable final long id) {
-        UserController.deleteUserError = !service.anonymizeUser(id);
+        UserController.deleteUserError = !new UserWebServiceImpl().anonymizeUser(id);
         if (UserController.anonymizeUserError) {
             return "redirect:/account/request-use-data/" + id;
         }

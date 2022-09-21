@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-public interface ServiceInterface<T> {
+public interface WebServiceInterface<T> {
 
     List<? extends BasePojo> readAll();
 
@@ -29,11 +29,11 @@ public interface ServiceInterface<T> {
     String buildNameNewFile(T entity);
 
     default String getCreationDate(final Timestamp timestamp) {
-        return BaseServiceWeb.dateFormate(timestamp);
+        return BaseWebService.dateFormate(timestamp);
     }
 
     default String getCreationDateAndTime(final Timestamp timestamp) {
-        return BaseServiceWeb.dateFormateComplete(timestamp);
+        return BaseWebService.dateFormateComplete(timestamp);
     }
 
     default String prepareNameWithExtension(final String nameFile, final String newName) {

@@ -1,9 +1,9 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.epWeb.service.BaseServiceWeb;
-import br.fai.ep.epWeb.service.impl.UsuarioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,7 @@ public class UserController {
     public static boolean deleteUserError = false;
     public static boolean anonymizeUserError = false;
 
-    @Autowired
-    private UsuarioServiceImpl service;
+    private final WebServiceInterface service = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String EXISTS_USERS = "existsUsers";
@@ -152,7 +151,7 @@ public class UserController {
             return "redirect:/user/profile/" + user.getId();
         }
 
-        final String pathImage = service.saveFileInProfile(file, BaseServiceWeb.PATH_IMAGENS_USERS, nameFileWithExtension, newNameFile);
+        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_USERS, nameFileWithExtension, newNameFile);
         if (pathImage != null) {
             user.setPathImageProfile(pathImage);
         }
@@ -225,7 +224,7 @@ public class UserController {
 
     @GetMapping("/user/admin-anonymize-user/{id}")
     public String anonymizeUser(@PathVariable final long id) {
-        anonymizeUserError = !service.anonymizeUser(id);
+        anonymizeUserError = !new UserWebServiceImpl().anonymizeUser(id);
         if (anonymizeUserError) {
             return "redirect:/user/admin-profile/" + id;
         }

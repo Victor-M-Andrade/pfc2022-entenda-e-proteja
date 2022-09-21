@@ -7,7 +7,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public abstract class BaseServiceWeb {
+public abstract class BaseWebService {
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String DATE_FORMAT_COMPLETE = "dd/MM/yyyy HH:mm:ss";
     private static final String DATE_FORMAT_SAVE_FILES = "dd-MM-yyyy_HH-mm-ss";
@@ -28,7 +28,7 @@ public abstract class BaseServiceWeb {
         return new SimpleDateFormat(DATE_FORMAT_SAVE_FILES).format(time);
     }
 
-    public Usuario anonymizeAllData(final Usuario user) {
+    public static Usuario anonymizeAllData(final Usuario user) {
         if (!user.isAnonimo()) {
             return user;
         }
@@ -40,7 +40,7 @@ public abstract class BaseServiceWeb {
         return user;
     }
 
-    public String anonymizeData(final String data) {
+    public static String anonymizeData(final String data) {
         final char[] letters = data.toCharArray();
         if (letters.length <= 2) {
             return data;

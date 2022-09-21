@@ -2,8 +2,8 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.epWeb.service.BaseServiceWeb;
-import br.fai.ep.epWeb.service.ServiceInterface;
+import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterface {
+public class UserWebServiceImpl extends BaseWebService implements WebServiceInterface {
     private final String BASE_ENDPOINT = API_HOST + "/user";
     private final String NAME_FILE_FORMAT = "USER_IMAGE_ID__%d_%s";
 
@@ -36,7 +36,7 @@ public class UsuarioServiceImpl extends BaseServiceWeb implements ServiceInterfa
 
         if (response != null && !response.isEmpty()) {
             // realizando a anonimizacao dos dados do usuario
-            response.stream().forEach(this::anonymizeAllData);
+            response.stream().forEach(BaseWebService::anonymizeAllData);
         }
 
         return response;
