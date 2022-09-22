@@ -19,6 +19,9 @@
 
     <script src="../resources/javascript/darkMode.js"></script>
 
+    <script src="../resources/javascript/aumentarLetra.js"></script>
+
+    
 </head>
 
 <body>
@@ -92,9 +95,13 @@
 
             </ul>
         </div>
+        <label for="input-zoom-mode">
+            <a class="button btn btn-outline-light">Aumentar Letra</a>
+        </label>
+        <input type="checkbox" id="input-zoom-mode" hidden>
 
         <label for="input-dark-mode">
-            <a class="button btn btn-outline-light">Dark Mode</a>
+            <a class="button btn btn-outline-light ml-3">Dark Mode</a>
         </label>
         <input type="checkbox" id="input-dark-mode" hidden>
 
@@ -117,73 +124,74 @@
 
             <div class="row">
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
+                        <div class="h-100 btn btn-outline-dark">
                             <div class="card-title text-center mt-1">Senhas</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/senha.jpg" alt="img_senha_categ"
-                                    class="img-fluid" />
+                                    class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
-                            <div class="card-title text-center mt-1">Armazenamento de Dados</div>
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Dados</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/armazenamento_dados.jpg"
-                                    alt="img_arm_dados_categ" class="img-fluid" />
+                                    alt="img_arm_dados_categ" class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
+                        <div class="h-100 btn btn-outline-dark">
                             <div class="card-title text-center mt-1">Legislação</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/legislacao.png" alt="img_senha_categ"
-                                    class="img-fluid" />
+                                    class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
+                        <div class="h-100 btn btn-outline-dark">
                             <div class="card-title text-center mt-1">Vazamentos</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/vazamentos.jpg" alt="img_senha_categ"
-                                    class="img-fluid" />
+                                    class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
+                        <div class="h-100 btn btn-outline-dark">
                             <div class="card-title text-center mt-1">Tutoriais</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/tutoriais.jpg" alt="img_senha_categ"
-                                    class="img-fluid" />
+                                    class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <div class="col-md-3 col-sm-4 col-6 mt-2 noticia_categ">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
                     <a href="noticia_list.html">
-                        <div class="h-100 card bg-light text-light">
+                        <div class="h-100 btn btn-outline-dark">
                             <div class="card-title text-center mt-1">Ver Todas</div>
                             <div class="card-body text-center no-padding">
                                 <img src="../resources/img/noticias/categ/ver_tudo.jpg" alt="img_senha_categ"
-                                    class="img-fluid" />
+                                    class="img-fluid noticia_categ" />
                             </div>
                         </div>
                     </a>
@@ -204,7 +212,7 @@
                     <div class="ml-3">
                         <a class="termos" href="../contratos/polica_privacidade.html">Política de privacidade</a>
                         &middot;
-                        <a class="termos" href="#">Termos &amp; Condições</a>
+                        <a class="termos" href="../contratos/termos_uso.html">Termos &amp; Condições</a>
                     </div>
                 </div>
             </div>

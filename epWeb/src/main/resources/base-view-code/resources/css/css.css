@@ -1,12 +1,24 @@
 html {
     height: 100%;
     min-height: 100%;
+    font-size: 100%;
+}
+
+html[zoom]{
+    font-size: 160%;
 }
 
 body[dark]{
     background-color: black;
-    color: white;
+    color: white !important;
 }
+
+
+.card[dark]{
+    color: white !important;
+    background-color: rgb(24, 24, 24) !important;
+}
+
 
 .card {
     color: black !important;
@@ -91,7 +103,7 @@ body {
     margin-bottom: 50px;
 }
 
-.noticia_categ img {
+.noticia_categ{
     height: 100%;
     width: 100%;
     object-fit: cover;
