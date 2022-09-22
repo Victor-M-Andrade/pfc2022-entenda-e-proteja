@@ -20,4 +20,14 @@ public class HomeController {
     public String getNotFoundPage() {
         return "exception/not-found";
     }
+
+    @GetMapping("/privacy-policy")
+    public String getPrivacyPolicyPage() {
+        return "contratos/politica_privacidade";
+    }
+
+    @GetMapping("/terms-conditions")
+    public String getTermsConditionsPage() {
+        return "contratos/termos_uso";
+    }
 }
