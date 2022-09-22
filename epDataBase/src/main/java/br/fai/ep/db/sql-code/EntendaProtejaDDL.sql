@@ -20,6 +20,7 @@ create table usuario(
 create table parceiro(
     id serial primary key,
     cnpj character varying(21) not null,
+    telefone character varying(17) not null,
     site_parceiro character varying(500) not null,
     situacao character varying(10) not null,
     descricao text not null,

@@ -51,6 +51,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 // on the partner
                 partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setTelefone(resultSet.getString(PARTNER_TABLE.PHONE_COLUMN));
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
@@ -112,6 +113,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 // on the partner
                 partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setTelefone(resultSet.getString(PARTNER_TABLE.PHONE_COLUMN));
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));
@@ -143,6 +145,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             String sql = DataBaseHelper.SQL_COMMAND.INSERT;
             sql += PARTNER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.OPEN_PARENTHESIS;
             sql += PARTNER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.PHONE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
@@ -152,6 +155,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTNER_TABLE.ID_USER_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += DataBaseHelper.SQL_COMMAND.VALUES;
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // cnpj
+            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // telefone
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // website
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // situacao
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // descricao
@@ -165,6 +169,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             final Parceiro partner = (Parceiro) entity;
             int i = 1;
             preparedStatement.setString(i++, partner.getCnpj());
+            preparedStatement.setString(i++, partner.getTelefone());
             preparedStatement.setString(i++, partner.getWebsite());
             preparedStatement.setString(i++, Parceiro.SITUATIONS.REQUESTED);
             preparedStatement.setString(i++, partner.getDescricao());
@@ -203,6 +208,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
         try {
             String sql = DataBaseHelper.SQL_COMMAND.UPDATE + PARTNER_TABLE.TABLE_NAME + DataBaseHelper.SQL_COMMAND.SET_UPDATE;
             sql += PARTNER_TABLE.CNPJ_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.PHONE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
@@ -216,6 +222,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             final Parceiro partner = (Parceiro) entity;
             int i = 1;
             preparedStatement.setString(i++, partner.getCnpj());
+            preparedStatement.setString(i++, partner.getTelefone());
             preparedStatement.setString(i++, partner.getWebsite());
             preparedStatement.setString(i++, partner.getSituacao());
             preparedStatement.setString(i++, partner.getDescricao());
@@ -311,6 +318,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 // on the partner
                 partner.setCnpj(resultSet.getString(PARTNER_TABLE.CNPJ_COLUMN));
+                partner.setTelefone(resultSet.getString(PARTNER_TABLE.PHONE_COLUMN));
                 partner.setWebsite(resultSet.getString(PARTNER_TABLE.WEBSITE_COLUMN));
                 partner.setSituacao(resultSet.getString(PARTNER_TABLE.SITUATION_COLUMN));
                 partner.setDescricao(resultSet.getString(PARTNER_TABLE.DESCRIPTION_COLUMN));

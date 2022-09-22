@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Parceiro extends Usuario {
     private String cnpj;
     private String website;
+    private String telefone;
     private String situacao;
     private String descricao;
     private String nomeEmpresa;
@@ -26,6 +27,7 @@ public class Parceiro extends Usuario {
         public static final String TABLE_NAME = "parceiro as P";
         public static final String SHORT_TABLE_NAME = "P.";
         public static final String CNPJ_COLUMN = "cnpj";
+        public static final String PHONE_COLUMN = "telefone";
         public static final String WEBSITE_COLUMN = "site_parceiro";
         public static final String SITUATION_COLUMN = "situacao";
         public static final String DESCRIPTION_COLUMN = "descricao";
