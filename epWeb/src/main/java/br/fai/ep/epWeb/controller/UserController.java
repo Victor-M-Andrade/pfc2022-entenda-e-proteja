@@ -26,12 +26,11 @@ public class UserController {
 
     private final String USER_ID = "userId";
     private final String EXISTS_USERS = "existsUsers";
+    private final String REGISTERED_USERS = "registeredUsers";
     private final String MY_USER_REFERENCE = "myUser";
     private final String DATA_UPDATE_ERROR = "updateDataError";
     private final String USER_CREATION_DATE = "dateCreate";
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
-
-    public String REGISTERED_USERS = "registeredUsers";
 
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
@@ -46,12 +45,13 @@ public class UserController {
     @GetMapping("/user/read-all")
     public String getReadAllUsersPage(final Model model) {
         final List<Usuario> userList = (List<Usuario>) service.readAll();
+        
+        boolean existsUsers = true;
         if (userList == null || userList.isEmpty()) {
-            model.addAttribute(EXISTS_USERS, false);
-            return "usuario/usuarios_list";
+            existsUsers = false;
         }
 
-        model.addAttribute(EXISTS_USERS, true);
+        model.addAttribute(EXISTS_USERS, existsUsers);
         model.addAttribute(REGISTERED_USERS, userList);
         return "usuario/usuarios_list";
     }
