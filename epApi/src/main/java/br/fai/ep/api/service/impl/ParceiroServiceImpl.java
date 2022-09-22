@@ -77,16 +77,16 @@ public class ParceiroServiceImpl implements BaseService {
                     USER_TABLE.IS_ANONYMOUS_COLUMN.equalsIgnoreCase(column) ||
                     USER_TABLE.IS_ADMINISTRATOR_COLUMN.equalsIgnoreCase(column) ||
                     PARTNER_TABLE.ID_USER_COLUMN.equalsIgnoreCase(column)) {
-                param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
+                param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + criteria.get(key);
                 continue;
             } else if (PARTNER_TABLE.SITUATION_COLUMN.equalsIgnoreCase(column)) {
-                param += SQL_COMMAND.OR + column + SQL_COMMAND.EQUAL_COMPATION + "'" + criteria.get(key) + "'";
+                param += SQL_COMMAND.AND + column + SQL_COMMAND.EQUAL_COMPATION + "'" + criteria.get(key) + "'";
                 continue;
             } else if (USER_TABLE.DATE_TIME_COLUMN.equalsIgnoreCase(column)) {
-                param += SQL_COMMAND.OR + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+                param += SQL_COMMAND.AND + column + "::text" + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
                 continue;
             }
-            param += SQL_COMMAND.OR + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
+            param += SQL_COMMAND.AND + column + SQL_COMMAND.ILIKE + "\'%" + criteria.get(key) + "%\'";
         }
 
         return param;
