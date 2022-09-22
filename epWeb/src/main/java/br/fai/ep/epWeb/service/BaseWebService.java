@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.service;
 
 
+import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 
 import java.io.File;
@@ -38,6 +39,23 @@ public abstract class BaseWebService {
         user.setPathImageProfile(anonymizeData(user.getPathImageProfile()));
 
         return user;
+    }
+
+    public static Parceiro anonymizeAllData(final Parceiro partner) {
+        if (!partner.isAnonimo()) {
+            return partner;
+        }
+        partner.setNome(anonymizeData(partner.getNome()));
+        partner.setEmail(anonymizeData(partner.getEmail()));
+        partner.setSenha(anonymizeData(partner.getSenha()));
+        partner.setPathImageProfile(anonymizeData(partner.getPathImageProfile()));
+
+        partner.setCnpj(anonymizeData(partner.getCnpj()));
+        partner.setWebsite(anonymizeData(partner.getWebsite()));
+        partner.setDescricao(anonymizeData(partner.getDescricao()));
+        partner.setNomeEmpresa(anonymizeData(partner.getNomeEmpresa()));
+
+        return partner;
     }
 
     public static String anonymizeData(final String data) {
