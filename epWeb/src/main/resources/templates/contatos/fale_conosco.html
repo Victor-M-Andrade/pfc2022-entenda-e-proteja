@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Fale Conosco E&P</title>
+    </head>
+
+    <body>
+        <div layout:fragment="body">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">
+                    <a th:href="@{/}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    Fale Conosco
+                </li>
+            </ol>
+
+            <div class="container-fluid text-center navbar-expand-md">
+                <div class="row align-items-start">
+                    <div class="container card border-0 rounded-lg col-12 col-xl-8 login">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light">Fale Conosco</h3>
+                            <img src="/resources/img/logo_invertido.png" alt="logo">
+                        </div>
+                        <div class="card-body">
+                            <p>Caso possua alguma ideia ou crítica construtiva nos mande um e-mail e o mais rápido
+                                possível entraremos em contato</p>
+                            <form>
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputEmailAddress">Email</label>
+                                    <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                        placeholder="Insira o endereço de email" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputEmailAddress">Assunto</label>
+                                    <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                        placeholder="Insira o assunto do email" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Mensagem</label>
+                                    <textarea type="text" class="form-control" rows="2"
+                                        placeholder="Escreva aqui sua mensagem">
+                                    </textarea>
+                                </div>
+
+                                <div class="form-group align-items-center mt-4 mb-0">
+                                    <a class="btn btn-info" href="#">Enviar mensagem</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

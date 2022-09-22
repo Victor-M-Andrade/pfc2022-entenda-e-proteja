@@ -16,6 +16,11 @@ public class HomeController {
         return "contatos/sobre";
     }
 
+    @GetMapping("/contact-us")
+    public String getContactUsPage() {
+        return "contatos/fale_conosco";
+    }
+
     @GetMapping("/not-found")
     public String getNotFoundPage() {
         return "exception/not-found";
