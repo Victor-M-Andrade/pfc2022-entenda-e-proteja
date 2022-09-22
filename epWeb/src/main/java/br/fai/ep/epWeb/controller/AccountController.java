@@ -1,8 +1,10 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class AccountController {
     private final WebServiceInterface service = new UserWebServiceImpl();
+    private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
@@ -205,6 +212,18 @@ public class AccountController {
         model.addAttribute(USER_ID, id);
         model.addAttribute("anonymous", String.format("Exemplo: nome cadastrado %s | Próximas consultas em que for mensionado: %s",
                 originalName, anonymousName));
+
+        boolean userIsPartner = false;
+        if (usuario.isParceiro()) {
+            final Map<String, Long> criteria = new HashMap<>();
+            criteria.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, usuario.getId());
+            final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(criteria);
+            if (partnerList != null && !partnerList.isEmpty() && partnerList.size() == 1) {
+                model.addAttribute("dataPartner", partnerList.get(0));
+                userIsPartner = true;
+            }
+        }
+        model.addAttribute("userIsParner", userIsPartner);
 
         model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
         if (UserController.deleteUserError) {

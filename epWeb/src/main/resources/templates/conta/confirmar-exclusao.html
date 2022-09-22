@@ -1,147 +1,169 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Solicitação do uso de dados</title>
-</head>
-<body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Confirmar exclusão
-        </li>
-    </ol>
+    <head>
+        <meta charset="UTF-8">
+        <title>Solicitação do uso de dados</title>
+    </head>
 
-    <div class="container-fluid text-center navbar-expand-md">
-        <div class="row align-items-start">
-            <div class="container card border-0 rounded-lg col-12 col-xl-12 login">
-                <div class="card-header">
-                    <h3 class="text-center font-weight-light">Solicitação do uso de dados</h3>
-                    <img src="/resources/img/logo_invertido.png" alt="logo">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <p>Verificamos que a sua conta está associada a alguns dados que podem ser usados para
-                            estatísticas.</p>
-                        <p>Pedimos a sua autorização para que estes dados sejam mantidos no sistema, mas os seus dados
-                            pessoais anonimizados, ou seja, não serão mais visíveis</p>
-                        <label th:text="${anonymous}">Exemplo: lu***********************</label>
-                        <p>Podemos manter seus dados no sistema?</p>
-                        <p></p>
-                        <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
-                            <a class="btn btn-secondary mr-2" th:href="@{/user/profile/{id} (id = ${userId})}">NÃO, CANCELAR ESTA OPERAÇÃO</a>
-                            <a class="btn btn-danger mr-2" th:href="@{/account/confirm-delete-my-account/{id} (id = ${userId})}">NÃO, EXCLUIR MEUS DADOS</a>
-                            <a class="btn btn-success mr-2" th:href="@{/account/anonymize-my-account/{id} (id = ${userId})}">SIM, MANTER MEUS DADOS</a>
+    <body>
+        <div layout:fragment="body">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a th:href="@{/}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Confirmar exclusão
+                </li>
+            </ol>
+
+            <div class="container-fluid text-center navbar-expand-md">
+                <div class="row align-items-start">
+                    <div class="container card border-0 rounded-lg col-12 col-xl-12 login">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light">Solicitação do uso de dados</h3>
+                            <img src="/resources/img/logo_invertido.png" alt="logo">
                         </div>
-                        <div th:if="${deleteUserError}">
-                            <br>
-                            <div class="alert alert-danger col-12 text-center" >
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão da sua conta. Por gentileza, tente novamente.
-                            </span>
-                            </div>
-                        </div>
-                        <div th:if="${anonymizeUserEror}">
-                            <br>
-                            <div class="alert alert-danger col-12 text-center" >
-                                <span class="font-weight-bold align-middle">
-                                    Não foi possível realizar a anonimização da sua conta. Por gentileza, tente novamente.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <hr>
-                <div class="align-items-start">
-                    <h3>Dados cadastrados como prestador de consultoria</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-center table-hover" id="tabela" width="100%" cellspacing="0">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Data</th>
-                                <th>Empresa</th>
-                                <th>Técnico</th>
-                                <th>Jurídico</th>
-                                <th>Ação</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>01/01/2022 as 10:52</td>
-                                <td>Empresa X</td>
-                                <td>Sim</td>
-                                <td>Não</td>
-                                <td>
-                                    <div class="col-12">
-                                        <a href="#" class="btn col-12 btn-info">
-                                            <i class="fas fa-info-circle"></i>
-                                            Detalhes
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <hr>
-                <div class="align-items-start">
-                    <h3>Notícias propostas ou publicadas no site</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-center table-hover" id="tabela" width="100%" cellspacing="0">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Data Publicação</th>
-                                <th>Título</th>
-                                <th>Tema</th>
-                                <th>Ação</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01/01/2022 as 10:52</td>
-                                    <td>O que é LGPD?</td>
-                                    <td>Legislação</td>
-                                    <td>
-                                        <div class="col-12">
-                                            <a href="#" class="btn col-12 btn-info">
-                                                <i class="fas fa-eye"></i>
-                                                Ler
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <div>
-                                    <tr>
-                                        <td>10/01/2022 as 12:00</td>
-                                        <td>Como proteger sua senha?</td>
-                                        <td>Segurança</td>
-                                        <td>
-                                            <div class="col-12">
-                                                <a href="#" class="btn col-12 btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                    Ler
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                        <div class="card-body">
+                            <div>
+                                <p>Verificamos que a sua conta está associada a alguns dados que podem ser usados para
+                                    estatísticas.</p>
+                                <p>Pedimos a sua autorização para que estes dados sejam mantidos no sistema, mas os seus
+                                    dados
+                                    pessoais anonimizados, ou seja, não serão mais visíveis</p>
+                                <label th:text="${anonymous}">Exemplo: lu***********************</label>
+                                <p>O que deseja fazer?</p>
+                                <p></p>
+                                <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
+                                    <a class="btn btn-secondary mr-2" th:href="@{/user/profile/{id} (id = ${userId})}">
+                                        Cancelar esta operação
+                                    </a>
+                                    <a class="btn btn-danger mr-2"
+                                        th:href="@{/account/confirm-delete-my-account/{id} (id = ${userId})}">
+                                        Excluir meus dados
+                                    </a>
+                                    <a class="btn btn-success mr-2"
+                                        th:href="@{/account/anonymize-my-account/{id} (id = ${userId})}">
+                                        Manter meus dados
+                                    </a>
                                 </div>
-                            </tbody>
-                        </table>
+                                <div th:if="${deleteUserError}">
+                                    <br>
+                                    <div class="alert alert-danger col-12 text-center">
+                                        <span class="font-weight-bold align-middle">
+                                            Não foi possível realizar a exclusão da sua conta. Por gentileza, tente
+                                            novamente.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div th:if="${anonymizeUserEror}">
+                                    <br>
+                                    <div class="alert alert-danger col-12 text-center">
+                                        <span class="font-weight-bold align-middle">
+                                            Não foi possível realizar a anonimização da sua conta. Por gentileza, tente
+                                            novamente.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="align-items-start" th:if="${userIsParner}">
+                            <hr>
+                            <h3>Dados cadastrados como prestador de consultoria</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center table-hover" id="tabela" width="100%"
+                                    cellspacing="0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>CNPJ</th>
+                                            <th>Empresa</th>
+                                            <th>Técnico</th>
+                                            <th>Jurídico</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td th:text="${dataPartner.cnpj}" class="align-middle">cnpj</td>
+                                            <td th:text="${dataPartner.nomeEmpresa}" class="align-middle">Empresa X</td>
+                                            <td class="align-middle">
+                                                <input type="checkbox" class="form-control"
+                                                    th:checked="${dataPartner.legislativo}" disabled>
+                                            </td>
+                                            <td class="align-middle">
+                                                <input type="checkbox" class="form-control"
+                                                    th:checked="${dataPartner.tecnico}" disabled>
+                                            </td>
+                                            <td>
+                                                <div class="col-12">
+                                                    <a th:href="@{/partner/detail/{id} (id = ${dataPartner.id})}"
+                                                        class="btn col-12 btn-info">
+                                                        <i class="fas fa-info-circle"></i>
+                                                        Detalhes
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="align-items-start">
+                            <hr>
+                            <h3>Notícias propostas ou publicadas no site</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center table-hover" id="tabela" width="100%"
+                                    cellspacing="0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Data Publicação</th>
+                                            <th>Título</th>
+                                            <th>Tema</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01/01/2022 as 10:52</td>
+                                            <td>O que é LGPD?</td>
+                                            <td>Legislação</td>
+                                            <td>
+                                                <div class="col-12">
+                                                    <a href="#" class="btn col-12 btn-info">
+                                                        <i class="fas fa-eye"></i>
+                                                        Ler
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <div>
+                                            <tr>
+                                                <td>10/01/2022 as 12:00</td>
+                                                <td>Como proteger sua senha?</td>
+                                                <td>Segurança</td>
+                                                <td>
+                                                    <div class="col-12">
+                                                        <a href="#" class="btn col-12 btn-info">
+                                                            <i class="fas fa-eye"></i>
+                                                            Ler
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</body>
+    </body>
+
 </html>
