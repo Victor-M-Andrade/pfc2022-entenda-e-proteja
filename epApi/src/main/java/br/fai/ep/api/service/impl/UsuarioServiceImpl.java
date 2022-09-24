@@ -5,6 +5,7 @@ import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epEntities.Usuario.USER_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.Map;
 public class UsuarioServiceImpl implements BaseService {
     @Autowired
     private UsuarioDaoImpl dao;
+    private final String CONTACT_EP = "contato_entenda_e_proteja@outlook.com";
+
 
     @Override
     public List<? extends BasePojo> readAll() {
@@ -117,5 +120,11 @@ public class UsuarioServiceImpl implements BaseService {
 
         user.setAnonimo(true);
         return update(user);
+    }
+
+    public boolean sendemail(final MailDto mailDto) {
+        final EmailService emailService = new EmailService();
+        final String bodyEmail = emailService.buildMessageContactUs(mailDto);
+        return emailService.send(CONTACT_EP, mailDto.getReason(), bodyEmail);
     }
 }

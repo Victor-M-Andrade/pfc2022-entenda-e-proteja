@@ -2,6 +2,7 @@ package br.fai.ep.api.controller;
 
 import br.fai.ep.api.service.impl.UsuarioServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -64,5 +65,10 @@ public class UsuarioController {
     @DeleteMapping("/anonymize-user/{id}")
     public ResponseEntity<Boolean> anonymizeUser(@PathVariable("id") final long id) {
         return ResponseEntity.ok(service.anonymizeUser(id));
+    }
+
+    @PostMapping("/send-mail")
+    public ResponseEntity<Boolean> authenticate(@RequestBody final MailDto mail) {
+        return ResponseEntity.ok(service.sendemail(mail));
     }
 }

@@ -1,6 +1,7 @@
 package br.fai.ep.api.email;
 
 import br.fai.ep.api.EpApiApplication;
+import br.fai.ep.epEntities.DTO.MailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.MailException;
@@ -17,7 +18,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
+    private final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
 
     public String buildMessage(final String username, final long userId) {
         final String message = "<html lang=\"pt-br\">" +
@@ -31,6 +32,25 @@ public class EmailService {
                 "Recebemos sua solicitação para troca de senha.\n" +
                 "Para acessar o link de acesso à página de troca de senha, " +
                 "<a href=\"http://localhost:8100/account/change-user-password/" + userId + "\">clique aqui!</a>" +
+                "</body>" +
+                "</html>";
+
+        return message;
+    }
+
+    public String buildMessageContactUs(final MailDto mail) {
+        final String message = "<html lang=\"pt-br\">" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">" +
+                "    <title>Suporte Projeto E&P </title>" +
+                "</head>" +
+                "<body>" +
+                "<strong>Email de contato</strong>: " + mail.getMailContact() + "<br>" +
+                "<strong>Nome para identificação</strong>: " + mail.getUsername() + "<br>" +
+                "<strong>Razão do contato</strong>: " + mail.getReason() + "<br><br>" +
+                "<p style=\"white-space: pre;\">" +
+                mail.getMessage().replaceAll("(\r\n|\n)", "<br />") +
+                "</p>" +
                 "</body>" +
                 "</html>";
 

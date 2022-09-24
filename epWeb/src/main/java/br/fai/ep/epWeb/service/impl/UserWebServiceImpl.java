@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
@@ -190,6 +191,23 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
             final RestTemplate restTemplace = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>("");
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
+                    httpEntity, Boolean.class);
+            response = requestResponse.getBody();
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    public Boolean sendEmail(final MailDto mailDto) {
+        final String endpoint = BASE_ENDPOINT + "/send-mail";
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<MailDto> httpEntity = new HttpEntity<>(mailDto);
+            final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
         } catch (final Exception e) {
