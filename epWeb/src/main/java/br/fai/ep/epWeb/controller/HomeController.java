@@ -17,7 +17,7 @@ public class HomeController {
     private final String SENDED_EMAIL = "sendedEmail";
     private final String SENDED_EMAIL_ERROR = "sendedEmailError";
 
-    private boolean sendedEmail = true;
+    private boolean sendedEmail = false;
     private boolean sendEmailError = false;
 
     private MailDto temporaryMailDto = null;
@@ -39,13 +39,14 @@ public class HomeController {
             sendedEmail = false;
         }
 
-        model.addAttribute(SENDED_EMAIL_ERROR, sendedEmail);
-        if (sendedEmail) {
-            sendedEmail = false;
+        model.addAttribute(SENDED_EMAIL_ERROR, sendEmailError);
+        if (sendEmailError) {
+            sendEmailError = false;
         }
 
         if (temporaryMailDto != null) {
             mail = temporaryMailDto;
+            temporaryMailDto = null;
         }
         model.addAttribute("mailDto", mail);
 
