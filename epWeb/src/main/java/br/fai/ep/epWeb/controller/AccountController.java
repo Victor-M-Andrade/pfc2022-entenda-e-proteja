@@ -23,6 +23,7 @@ public class AccountController {
 
     private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
+    private final String MY_USER_OBJECT = "myUser";
     private final String EMAIL_NOT_FOUND = "emailNotFound";
     private final String OLD_USER_PASSWORD = "oldUserPassword";
     private final String AUTHENTICATION_ERROR = "authenticationError";
@@ -38,12 +39,20 @@ public class AccountController {
     private boolean alreadyregisteredEmail = false;
     private boolean accountCreationProblems = false;
 
+    private Usuario temporaryUser = null;
+
     @GetMapping("/account/login")
-    public String getLoginPage(final Model model, final Usuario user) {
+    public String getLoginPage(final Model model, Usuario user) {
         model.addAttribute(AUTHENTICATION_ERROR, authenticationError);
         if (authenticationError) {
             authenticationError = false;
         }
+
+        if (temporaryUser != null) {
+            user = temporaryUser;
+            temporaryUser = null;
+        }
+        model.addAttribute(MY_USER_OBJECT, user);
 
         return "conta/login";
     }
@@ -53,6 +62,7 @@ public class AccountController {
         final Usuario myUser = new UserWebServiceImpl().authentication(user.getEmail(), user.getSenha());
         if (myUser == null) {
             authenticationError = true;
+            temporaryUser = user;
             return "redirect:/account/login";
         }
 
@@ -60,7 +70,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/register")
-    public String getRegisterPage(final Model model, final Usuario user) {
+    public String getRegisterPage(final Model model, Usuario user) {
         model.addAttribute(ALREADY_REGISTERED_EMAIL, alreadyregisteredEmail);
         if (alreadyregisteredEmail) {
             alreadyregisteredEmail = false;
@@ -70,17 +80,26 @@ public class AccountController {
         if (accountCreationProblems) {
             accountCreationProblems = false;
         }
+
+        if (temporaryUser != null) {
+            user = temporaryUser;
+            temporaryUser = null;
+        }
+        model.addAttribute(MY_USER_OBJECT, user);
+
         return "conta/register";
     }
 
     @PostMapping("/account/create")
-    private String createUser(final Usuario user, final Model model) {
+    private String createUser(final Usuario user) {
         final long newIdUser = service.create(user);
         if (newIdUser == -1) {
             accountCreationProblems = true;
+            temporaryUser = user;
             return "redirect:/account/register";
         } else if (newIdUser == -2) {
             alreadyregisteredEmail = true;
+            temporaryUser = user;
             return "redirect:/account/register";
         }
 
@@ -88,7 +107,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/forgot-my-password")
-    public String getForgotMyPassowordPage(final Model model, final Usuario user) {
+    public String getForgotMyPassowordPage(final Model model, Usuario user) {
         model.addAttribute(SENDED_EMAIL, sendedEmail);
         if (sendedEmail) {
             sendedEmail = false;
@@ -99,17 +118,22 @@ public class AccountController {
             emailNotFound = false;
         }
 
+        if (temporaryUser != null) {
+            user = temporaryUser;
+            temporaryUser = null;
+        }
+        model.addAttribute(MY_USER_OBJECT, user);
+
         return "conta/password";
     }
 
     @PostMapping("/account/request-password-change")
     public String requestPasswordChange(final Model model, final Usuario user) {
         sendedEmail = new UserWebServiceImpl().forgotPassword(user.getEmail());
-        if (sendedEmail) {
-            emailNotFound = false;
-            return "redirect:/account/forgot-my-password";
+        if (!sendedEmail) {
+            emailNotFound = true;
+            temporaryUser = user;
         }
-        emailNotFound = true;
         return "redirect:/account/forgot-my-password";
     }
 
@@ -152,9 +176,8 @@ public class AccountController {
     }
 
     @GetMapping("/account/change-user-password/{id}")
-    public String getChangeUserPasswordPage(@PathVariable final long id, final Model model, Usuario user) {
-        user = (Usuario) service.readById(user.getId());
-        if (user == null && !triedPasswordChange) {
+    public String getChangeUserPasswordPage(@PathVariable final long id, final Model model, final Usuario user) {
+        if (service.readById(id) == null && !triedPasswordChange) {
             changePasswordError = false;
             triedPasswordChange = false;
             return "redirect:/not-found";

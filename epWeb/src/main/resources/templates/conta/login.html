@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Login E&P</title>
 </head>
+
 <body>
 <div layout:fragment="body">
     <ol class="breadcrumb">
@@ -29,23 +30,17 @@
                     <div class="alert alert-danger" th:if="${authenticationError}">
                         <span class="font-weight-bold align-middle">Email ou senha inválidos</span>
                     </div>
-                    <form th:action="@{/account/authenticate}" method="post" th:object="${usuario}">
+                    <form th:action="@{/account/authenticate}" method="post" th:object="${myUser}">
                         <div class="form-group">
                             <label class="small mb-1" for="inputEmailAddress">Email</label>
                             <input class="form-control py-4" id="inputEmailAddress" type="email"
-                                   placeholder="Insira o endereço de email" required th:field="${usuario.email}"/>
+                                   placeholder="Insira o endereço de email" required th:field="${myUser.email}"/>
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="inputPassword">Senha</label>
                             <input class="form-control py-4" id="inputPassword" type="password"
-                                   placeholder="Insira a senha" required th:field="${usuario.senha}"/>
+                                   placeholder="Insira a senha" required th:field="${myUser.senha}"/>
                         </div>
-                        <!-- <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
-                                <label class="custom-control-label" for="rememberPasswordCheck">Lembre-me</label>
-                            </div>
-                        </div> -->
                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                             <a class="small" th:href="@{/account/forgot-my-password}">Esqueceu a senha?</a>
                             <button class="btn btn-info" type="submit">Autenticar</button>
@@ -62,4 +57,5 @@
     </div>
 </div>
 </body>
+
 </html>
