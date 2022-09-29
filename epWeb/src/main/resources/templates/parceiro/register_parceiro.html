@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de consultor E&P</title>
+    <script>
+            function phoneFormat(phone) {
+
+                var phoneValue = phone.value;
+
+                if (isNaN(phoneValue[phoneValue.length - 1])) { // impede entrar outro caractere que não seja número
+                    phone.value = phoneValue.substring(0, phoneValue.length - 1);
+                    return;
+                }
+
+                phone.setAttribute("maxlength", "14");
+                if (phoneValue.length == 1) phone.value = "(" + phone.value;
+                if (phoneValue.length == 3) phone.value += ") ";
+                if (phoneValue.length == 9) phone.value += "-";
+            }
+
+            function acceptTermsValidade() {
+                let accept = document.getElementById("acceptTermsCheck");
+
+                let tipoButton = "submit";
+                let existError = false;
+                let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
+
+                if (!accept.checked) {
+                    tipoButton = "button";
+                    messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n"
+                    existError = true;
+                }
+
+                if (existError) {
+                    alert(messageError);
+                }
+
+                document.getElementById("cadastro").setAttribute("type", tipoButton);
+            }
+
+
+    </script>
+</head>
+
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Solicitar cadastro de consultor
+        </li>
+    </ol>
+
+    <div class="container-fluid text-center navbar-expand-md">
+        <div class="row align-items-start">
+            <div class="container card border-0 rounded-lg login col-12 col-xl-8">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
+                    <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" th:if="${alreadyRegisteredCnpj}">
+                                <span class="font-weight-bold align-middle">
+                                    O CNPJ informado já esta registrado. Por gentileza, informe outro CNPJ.
+                                </span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${registrationRequestProblems}">
+                                <span class="font-weight-bold align-middle">
+                                    Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente
+                                    novamente.
+                                </span>
+                    </div>
+                    <form th:action="@{/partner/request-register}" method="post" th:object="${myPartner}">
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputCompany">
+                                        Nome da Empresa
+                                    </label>
+                                    <input class="form-control py-4" id="inputCompany" type="text"
+                                           placeholder="Insira o nome da sua empresa" required
+                                           th:field="${myPartner.nomeEmpresa}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputSite">
+                                        CNPJ</label>
+                                    <input class="form-control py-4" id="inputAssunto" type="text"
+                                           placeholder="Insira o CNPJ da empresa" required
+                                           th:field="${myPartner.cnpj}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputSite">
+                                        Site da empresa
+                                    </label>
+                                    <input class="form-control py-4" id="inputSite" type="url"
+                                           placeholder="Insira o site da empresa" required
+                                           th:field="${myPartner.website}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputTelefone">
+                                        Telefone para contato
+                                    </label>
+                                    <input class="form-control py-4" id="inputTelefone" type="tel"
+                                           placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
+                                           th:field="${myPartner.telefone}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputCompany">
+                                        Tipo de serviço de consultoria:
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                           th:field="${myPartner.legislativo}">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                                        Legislativo
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                           th:field="${myPartner.tecnico}">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                                        Técnico
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Descrição do serviços oferecidos</label>
+                            <textarea type="text" class="form-control" rows="10"
+                                      placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
+                                      required th:field="${myPartner.descricao}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" id="acceptTermsCheck">
+                                <label class="form-check-label" for="acceptTermsCheck">
+                                    Aceitar os <a th:href="@{/terms-conditions}">Termo de Uso</a>
+                                </label>
+                            </div>
+                        </div>
+                        <input th:field="${myPartner.idUsuario}" hidden/>
+                        <div class="form-group mt-4 mb-0">
+                            <button class="btn btn-info btn-block" type="submit"
+                                    onclick="acceptTermsValidade()">
+                                Enviar para Análise
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

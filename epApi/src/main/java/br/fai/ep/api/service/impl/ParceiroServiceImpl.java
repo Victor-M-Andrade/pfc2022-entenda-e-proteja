@@ -32,12 +32,18 @@ public class ParceiroServiceImpl implements BaseService {
 
     @Override
     public long create(final Object entity) {
-        final long newId = dao.create(entity);
+        final Parceiro myPartnew = (Parceiro) entity;
+        final String criteria = "WHERE cnpj = \'" + myPartnew.getCnpj() + "\';";
+        final List<? extends BasePojo> partnerList = dao.readByCriteria(criteria);
+        if (partnerList != null && !partnerList.isEmpty()) {
+            return -2; // representa que existe um parceiro com o cnpj informado
+        }
+
+        final long newId = dao.create(myPartnew);
         if (newId == -1) {
             return -1;
         }
 
-        final Parceiro myPartnew = (Parceiro) entity;
         final UsuarioDaoImpl userDao = new UsuarioDaoImpl();
         final Usuario user = (Usuario) userDao.readById(myPartnew.getIdUsuario());
         user.setParceiro(true);

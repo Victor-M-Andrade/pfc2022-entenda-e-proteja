@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +18,17 @@ import java.util.Map;
 public class PartnerController {
     private final WebServiceInterface service = new PartnerWebServiceImpl();
 
+    private final String USER_ID = "userId";
     private final String EXISTS_PARTNER = "existsPartner";
     private final String REGISTERED_PARTNER = "registeredPartner";
     private final String MY_PARTNER_REFERENCE = "myPartner";
+    private final String ALREADY_REGISTERED_CNPJ = "alreadyRegisteredCnpj";
+    private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
+    private boolean alreadyRegisteredCnpj = false;
+    private boolean registrationRequestProblems = false;
+
+    private Parceiro temporaryPartner = null;
 
     @GetMapping("/partner/list")
     public String getPartnerListPage(final Model model) {
@@ -45,4 +53,45 @@ public class PartnerController {
 
         return "parceiro/consultoria_info";
     }
+
+    @GetMapping("/partner/register/{id}")
+    public String getRegisterPartnerPage(@PathVariable final long id, final Model model, Parceiro partner) {
+        model.addAttribute(USER_ID, id);
+
+        model.addAttribute(ALREADY_REGISTERED_CNPJ, alreadyRegisteredCnpj);
+        if (alreadyRegisteredCnpj) {
+            alreadyRegisteredCnpj = false;
+        }
+
+        model.addAttribute(REGISTRATION_REQUEST_PROBLEMS, registrationRequestProblems);
+        if (registrationRequestProblems) {
+            registrationRequestProblems = false;
+        }
+
+        if (temporaryPartner != null) {
+            partner = temporaryPartner;
+            temporaryPartner = null;
+        }
+        partner.setIdUsuario(id);
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
+        return "parceiro/register_parceiro";
+    }
+
+    @PostMapping("/partner/request-register")
+    public String requestPartnerRegistration(final Parceiro partner) {
+        final long newPartnerId = service.create(partner);
+        if (newPartnerId == -1) {
+            registrationRequestProblems = true;
+            temporaryPartner = partner;
+            return "redirect:/partner/register/" + partner.getIdUsuario();
+        } else if (newPartnerId == -2) {
+            alreadyRegisteredCnpj = true;
+            temporaryPartner = partner;
+            return "redirect:/partner/register/" + partner.getIdUsuario();
+        }
+
+        return "redirect:/partner/detail/" + newPartnerId;
+
+    }
+
 }

@@ -41,7 +41,7 @@
                                     <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
                                     <h5>Telefones para contato</h5>
                                     <p th:unless="${myPartner.anonimo}">
-                                        <a th:href="'tel:' + ${myPartner.email}" th:text="${myPartner.telefone}">
+                                        <a th:href="'tel:' + ${myPartner.telefone}" th:text="${myPartner.telefone}">
                                             (35) 99999-9999
                                         </a>
                                     </p>
