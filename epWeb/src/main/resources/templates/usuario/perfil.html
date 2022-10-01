@@ -46,7 +46,7 @@
                         <div class="mb-2">
                             <a href="#" class="btn btn-info col-12 btn-enviar-livro">Suas publicações</a>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2" th:unless="${myUser.parceiro}">
                             <a th:href="@{/partner/register/{id} (id = ${userId})}"
                                class="btn btn-info col-12 btn-enviar-livro">
                                 Solicitar cadastro de consultor
@@ -80,11 +80,19 @@
                             </div>
                         </div>
                         <div class="mb-2" th:if="${myUser.administrador}">
-                            <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do
-                                administrador</a>
+                            <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">
+                                Área do administrador
+                            </a>
+                        </div>
+                        <div class="mb-2" th:if="${myUser.parceiro}">
+                            <a th:href="@{/partner/my-data-as-partner/{id} (id = ${userId})}"
+                               class="btn btn-primary col-12">
+                                Seus dados de consultor
+                            </a>
                         </div>
                         <div class="mb-2">
-                            <a th:href="@{/user/edit/{id} (id = ${userId})}" class="btn btn-info col-12">Editar
+                            <a th:href="@{/user/edit/{id} (id = ${userId})}"
+                               class="btn btn-warning col-12">Editar
                                 meus dados</a>
                         </div>
                         <div class="mb-2">
