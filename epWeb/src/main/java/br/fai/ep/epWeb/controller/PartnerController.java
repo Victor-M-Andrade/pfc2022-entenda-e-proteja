@@ -36,8 +36,9 @@ public class PartnerController {
 
     @GetMapping("/partner/list")
     public String getPartnerListPage(final Model model) {
-        final Map<String, Boolean> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
         map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
+        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.APPROVED);
         final List<Parceiro> userList = (List<Parceiro>) service.readByCriteria(map);
 
         boolean existsParner = true;
