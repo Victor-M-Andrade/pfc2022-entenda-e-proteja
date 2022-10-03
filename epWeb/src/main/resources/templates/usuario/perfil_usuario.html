@@ -5,117 +5,152 @@
     <meta charset="UTF-8">
     <title>Perfil do usuário E&P</title>
 </head>
+
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/administrator-area}">Área do Administrador</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/read-all}">Lista de Usuários</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Perfil do usuário
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/read-all}">Lista de Usuários</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Perfil do usuário
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md">
+        <div class="container-fluid text-center navbar-expand-md">
 
-        <div class="row align-items-start">
+            <div class="row align-items-start">
 
-            <div class="container col-12">
-                <div class="row perfil">
+                <div class="container col-12">
+                    <div class="row perfil">
 
-                    <h1 class="col-12 py-3">Perfil do Usuário</h1>
-                    <div class="alert alert-danger col-12 text-center" th:if="${deleteUserError}">
-                        <span class="font-weight-bold align-middle">
-                            Não foi possível realizar a exclusão desta conta. Por gentileza, tente novamente.
-                        </span>
-                    </div>
-                    <div class="col-12 col-sm-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3 text-center">
-                                    <img src="/resources/img/logo_invertido.png" width="200"
-                                         class="rounded-circle img-fluid"/>
-                                </div>
-                            </div>
+                        <h1 class="col-12 py-3">Perfil do Usuário</h1>
+                        <div class="alert alert-danger col-12 text-center" th:if="${deleteUserError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível realizar a exclusão desta conta. Por gentileza, tente novamente.
+                            </span>
                         </div>
-                    </div>
-
-                    <div class="mb-2 col-12 col-sm-7">
-                        <div class="mb-2 card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">Usuário</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myUser.nome}"> Nome do Usuário</label>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Email</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myUser.email}"></label>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Data e Hora de criação da conta</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${dateCreate}"></label>
+                        <div class="alert alert-danger col-12 text-center" th:if="${anonymizeUserError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível realizar a anonimização da conta. Por gentileza, tente novamente.
+                            </span>
+                        </div>
+                        <div class="alert alert-danger col-12 text-center" th:if="${updateDataError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível realizar a atualização da conta. Por gentileza, tente novamente.
+                            </span>
+                        </div>
+                        <div class="col-12 col-sm-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3 text-center">
+                                        <img src="/resources/img/logo_invertido.png" width="200"
+                                            class="rounded-circle img-fluid" />
                                     </div>
                                 </div>
                             </div>
+                            <div class="mb-2">
+                                <a th:href="@{/user/administrator-area}" class="btn btn-primary col-12">
+                                    Área do administrador
+                                </a>
+                            </div>
+                            <div th:if="${!myUser.anonimo}">
+                                <hr>
+                                <div class="mb-2" th:unless="${myUser.administrador}">
+                                    <a th:href="@{/user/give-admin-permission/{userID} (userID = ${userId})}"
+                                        class="btn btn-success col-12">
+                                        Tornar usuário um administrador
+                                    </a>
+                                </div>
+                                <div class="mb-2" th:if="${myUser.administrador}">
+                                    <a th:href="@{/user/remove-admin-permission/{userID} (userID = ${userId})}"
+                                        class="btn btn-danger col-12">
+                                        Remover permissão de administrador
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <a th:href="@{/user/administrator-area}" class="btn btn-success col-12">Área do administrador</a>
-                        </div>
-                        <div class="mb-2" th:unless="${myUser.anonimo}">
-                            <a th:href="@{/user/admin-edit/{id} (id = ${userId})}" class="btn btn-warning col-12">Editar dados do usuário</a>
-                        </div>
-                        <div class="mb-2">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger col-12" data-toggle="modal"
+                        <div class="mb-2 col-12 col-sm-7">
+                            <div class="mb-2 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">Usuário</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myUser.nome}"> Nome do Usuário</label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Email</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myUser.email}"></label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Data e Hora de criação da conta</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${dateCreate}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2" th:unless="${myUser.anonimo}">
+                                <a th:href="@{/user/admin-edit/{id} (id = ${userId})}"
+                                    class="btn btn-warning col-12">Editar dados do usuário</a>
+                            </div>
+                            <div class="mb-2">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger col-12" data-toggle="modal"
                                     data-target="#exampleModal">
-                                Excluir conta do usuário
-                            </button>
+                                    Excluir conta do usuário
+                                </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-center" id="exampleModalLabel">Exclusão de Conta</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Esta conta será excluída do sistema. Deseja continuar a operação?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Não, cancelar operação
-                                            </button>
-                                            <a th:href="@{/user/admin-anonymize-user/{id} (id = ${userId})}" th:unless="${myUser.anonimo}" class="btn btn-warning">Apenas anonimizar usuário</a>
-                                            <a th:href="@{/user/admin-delete/{id} (id = ${userId})}" class="btn btn-danger">Sim, excluir esta conta</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="exampleModalLabel">Exclusão de
+                                                    Conta</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Esta conta será excluída do sistema. Deseja continuar a operação?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Não, cancelar operação
+                                                </button>
+                                                <a th:href="@{/user/admin-anonymize-user/{id} (id = ${userId})}"
+                                                    th:unless="${myUser.anonimo}" class="btn btn-warning">Apenas
+                                                    anonimizar usuário</a>
+                                                <a th:href="@{/user/admin-delete/{id} (id = ${userId})}"
+                                                    class="btn btn-danger">Sim, excluir esta conta</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-2">
-                            <a th:href="@{/user/read-all}" class="btn btn-dark col-12">Lista de usuários</a>
+                            <div class="mb-2">
+                                <a th:href="@{/user/read-all}" class="btn btn-dark col-12">Lista de usuários</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

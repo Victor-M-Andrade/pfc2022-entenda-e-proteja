@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class UserController {
     public static final String DELETE_USER_ERROR = "deleteUserError";
-    public static final String ANONYMIZE_USER_ERROR = "anonymizeUserEror";
+    public static final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
 
     public static boolean deleteUserError = false;
     public static boolean anonymizeUserError = false;
@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping("/user/read-all")
     public String getReadAllUsersPage(final Model model) {
         final List<Usuario> userList = (List<Usuario>) service.readAll();
-        
+
         boolean existsUsers = true;
         if (userList == null || userList.isEmpty()) {
             existsUsers = false;
@@ -77,7 +77,6 @@ public class UserController {
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
         model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
-        model.addAttribute(IS_ADMINISTRATOR_USER, user.isAdministrador());
 
         model.addAttribute(DELETE_USER_ERROR, deleteUserError);
         if (deleteUserError) {
@@ -86,6 +85,11 @@ public class UserController {
         model.addAttribute(ANONYMIZE_USER_ERROR, anonymizeUserError);
         if (anonymizeUserError) {
             deleteUserError = false;
+        }
+
+        model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
+        if (updateUserDataError) {
+            updateUserDataError = false;
         }
         return "/usuario/perfil_usuario";
     }
@@ -229,5 +233,31 @@ public class UserController {
             return "redirect:/user/admin-profile/" + id;
         }
         return "redirect:/user/read-all";
+    }
+
+    @GetMapping("/user/give-admin-permission/{userID}")
+    public String giveAdminPermission(@PathVariable final long userID) {
+        final Usuario user = (Usuario) service.readById(userID);
+        if (user == null) {
+            updateUserDataError = false;
+            return "redirect:/user/admin-profile/" + userID;
+        }
+
+        user.setAdministrador(true);
+        updateUserDataError = !service.update(user);
+        return "redirect:/user/admin-profile/" + user.getId();
+    }
+
+    @GetMapping("/user/remove-admin-permission/{userID}")
+    public String removeAdminPermission(@PathVariable final long userID) {
+        final Usuario user = (Usuario) service.readById(userID);
+        if (user == null) {
+            updateUserDataError = false;
+            return "redirect:/user/admin-profile/" + userID;
+        }
+
+        user.setAdministrador(false);
+        updateUserDataError = !service.update(user);
+        return "redirect:/user/admin-profile/" + user.getId();
     }
 }

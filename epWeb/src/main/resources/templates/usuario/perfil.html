@@ -45,14 +45,11 @@
                             <div class="mb-2">
                                 <a href="#" class="btn btn-info col-12 btn-enviar-livro">Proposta uma nova notícia</a>
                             </div>
-                            <div th:unless="${myUser.parceiro}">
-                                <hr>
-                                <div class="mb-2" th:unless="${myUser.parceiro}">
-                                    <a th:href="@{/partner/register/{id} (id = ${userId})}"
-                                        class="btn btn-info col-12 btn-enviar-livro">
-                                        Solicitar cadastro de consultor
-                                    </a>
-                                </div>
+                            <div class="mb-2" th:unless="${myUser.parceiro}">
+                                <a th:href="@{/partner/register/{id} (id = ${userId})}"
+                                    class="btn btn-info col-12 btn-enviar-livro">
+                                    Solicitar cadastro de consultor
+                                </a>
                             </div>
                             <div th:if="${myUser.administrador} or ${myUser.parceiro} or ${myUser.autor}">
                                 <hr>
