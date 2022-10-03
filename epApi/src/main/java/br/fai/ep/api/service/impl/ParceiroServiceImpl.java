@@ -64,7 +64,7 @@ public class ParceiroServiceImpl implements BaseService {
     @Override
     public boolean delete(final long id) {
         final Parceiro partner = (Parceiro) readById(id);
-        if (partner != null) {
+        if (partner == null) {
             return false;
         }
         if (!dao.delete(id)) {
