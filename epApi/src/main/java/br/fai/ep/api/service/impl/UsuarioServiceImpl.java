@@ -122,6 +122,16 @@ public class UsuarioServiceImpl implements BaseService {
         return update(user);
     }
 
+    public boolean removeUserAnonymization(final long id) {
+        final Usuario user = (Usuario) dao.readById(id);
+        if (user == null) {
+            return false;
+        }
+
+        user.setAnonimo(false);
+        return update(user);
+    }
+
     public boolean sendemail(final MailDto mailDto) {
         final EmailService emailService = new EmailService();
         final String bodyEmail = emailService.buildMessageContactUs(mailDto);

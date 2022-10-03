@@ -60,6 +60,9 @@
                                     Área do administrador
                                 </a>
                             </div>
+                            <div class="mb-2">
+                                <a th:href="@{/user/read-all}" class="btn btn-primary col-12">Lista de usuários</a>
+                            </div>
                             <div th:if="${!myUser.anonimo}">
                                 <hr>
                                 <div class="mb-2" th:unless="${myUser.administrador}">
@@ -101,9 +104,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mb-2" th:if="${myUser.anonimo}">
+                                <a th:href="@{/user/remove-user-anonymization/{id} (id = ${userId})}"
+                                    class="btn btn-success col-12">
+                                    Remover anonimização do usuário
+                                </a>
+                            </div>
                             <div class="mb-2" th:unless="${myUser.anonimo}">
-                                <a th:href="@{/user/admin-edit/{id} (id = ${userId})}"
-                                    class="btn btn-warning col-12">Editar dados do usuário</a>
+                                <a th:href="@{/user/admin-edit/{id} (id = ${userId})}" class="btn btn-warning col-12">
+                                    Editar dados do usuário
+                                </a>
                             </div>
                             <div class="mb-2">
                                 <!-- Button trigger modal -->
@@ -141,9 +151,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-2">
-                                <a th:href="@{/user/read-all}" class="btn btn-dark col-12">Lista de usuários</a>
                             </div>
                         </div>
                     </div>

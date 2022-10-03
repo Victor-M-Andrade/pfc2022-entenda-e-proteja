@@ -190,7 +190,24 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
         try {
             final RestTemplate restTemplace = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>("");
-            final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
+            final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Boolean.class);
+            response = requestResponse.getBody();
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    public Boolean removeUserAnonymization(final long id) {
+        final String endpoint = BASE_ENDPOINT + "/remove-user-anonymization/" + id;
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
         } catch (final Exception e) {

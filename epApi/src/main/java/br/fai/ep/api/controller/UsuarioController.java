@@ -62,9 +62,14 @@ public class UsuarioController {
         return ResponseEntity.ok(service.authenticate(criteria));
     }
 
-    @DeleteMapping("/anonymize-user/{id}")
+    @GetMapping("/anonymize-user/{id}")
     public ResponseEntity<Boolean> anonymizeUser(@PathVariable("id") final long id) {
         return ResponseEntity.ok(service.anonymizeUser(id));
+    }
+
+    @GetMapping("/remove-user-anonymization/{id}")
+    public ResponseEntity<Boolean> removeUserAnonymization(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.removeUserAnonymization(id));
     }
 
     @PostMapping("/send-mail")

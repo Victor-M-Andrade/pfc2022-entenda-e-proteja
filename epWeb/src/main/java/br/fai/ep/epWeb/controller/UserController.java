@@ -229,10 +229,13 @@ public class UserController {
     @GetMapping("/user/admin-anonymize-user/{id}")
     public String anonymizeUser(@PathVariable final long id) {
         anonymizeUserError = !new UserWebServiceImpl().anonymizeUser(id);
-        if (anonymizeUserError) {
-            return "redirect:/user/admin-profile/" + id;
-        }
-        return "redirect:/user/read-all";
+        return "redirect:/user/admin-profile/" + id;
+    }
+
+    @GetMapping("/user/remove-user-anonymization/{id}")
+    public String removeUserAnonymization(@PathVariable final long id) {
+        updateUserDataError = !new UserWebServiceImpl().removeUserAnonymization(id);
+        return "redirect:/user/admin-profile/" + id;
     }
 
     @GetMapping("/user/give-admin-permission/{userID}")
