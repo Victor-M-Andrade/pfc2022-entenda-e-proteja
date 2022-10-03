@@ -19,7 +19,7 @@ create table usuario(
 -- tabela com dados das pessoas que irão prestar consultoria as empresas(clientes) 
 create table parceiro(
     id serial primary key,
-    cnpj character varying(21) not null,
+    cnpj character varying(21) not null unique,
     telefone character varying(17) not null,
     site_parceiro character varying(500) not null,
     situacao character varying(10) not null,
@@ -38,7 +38,7 @@ add constraint ck_partiner_situation check(
 create table cliente(
     id serial primary key,
     nome character varying(100) not null,
-    cnpj character varying(21) not null,
+    cnpj character varying(21) not null unique,
     aceite boolean not null,
     data_hora timestamp without time zone not null default now()
 );
