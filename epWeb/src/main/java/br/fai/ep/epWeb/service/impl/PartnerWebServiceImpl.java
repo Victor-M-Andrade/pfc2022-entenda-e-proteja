@@ -2,7 +2,6 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro;
-import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
@@ -70,7 +69,7 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
             final RestTemplate restTemplace = new RestTemplate();
             final Parceiro partner = (Parceiro) entity;
             partner.setPathImageProfile("C:");
-            final HttpEntity<Usuario> httpEntity = new HttpEntity<>(partner);
+            final HttpEntity<Parceiro> httpEntity = new HttpEntity<>(partner);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
@@ -138,7 +137,7 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
 
     @Override
     public String buildNameNewFile(final Object entity) {
-        final Parceiro user = (Parceiro) entity;
-        return String.format(NAME_FILE_FORMAT, user.getId(), dateFormateForSaveFiles(user.getDataHora()));
+        final Parceiro partner = (Parceiro) entity;
+        return String.format(NAME_FILE_FORMAT, partner.getId(), dateFormateForSaveFiles(partner.getDataHora()));
     }
 }

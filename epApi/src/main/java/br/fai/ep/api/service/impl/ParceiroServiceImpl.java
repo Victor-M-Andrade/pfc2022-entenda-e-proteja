@@ -19,6 +19,8 @@ import java.util.Map;
 public class ParceiroServiceImpl implements BaseService {
     @Autowired
     private ParceiroDaoImpl dao;
+    @Autowired
+    private UsuarioServiceImpl userService;
 
     @Override
     public List<? extends BasePojo> readAll() {
@@ -61,7 +63,17 @@ public class ParceiroServiceImpl implements BaseService {
 
     @Override
     public boolean delete(final long id) {
-        return dao.delete(id);
+        final Parceiro partner = (Parceiro) readById(id);
+        if (partner != null) {
+            return false;
+        }
+        if (!dao.delete(id)) {
+            return false;
+        }
+
+        final Usuario user = (Usuario) userService.readById(partner.getIdUsuario());
+        user.setParceiro(false);
+        return userService.update(user);
     }
 
     @Override

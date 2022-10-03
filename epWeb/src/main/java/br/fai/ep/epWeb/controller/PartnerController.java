@@ -23,6 +23,7 @@ public class PartnerController {
     private final String REGISTERED_PARTNER = "registeredPartner";
     private final String MY_PARTNER_REFERENCE = "myPartner";
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
+    private final String DELETE_PARTNER_ERROR = "deletePartnerError";
     private final String ALREADY_REGISTERED_CNPJ = "alreadyRegisteredCnpj";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
@@ -31,6 +32,7 @@ public class PartnerController {
     private boolean registrationRequestProblems = false;
 
     private Parceiro temporaryPartner = null;
+    private boolean deletePartnerError;
 
     @GetMapping("/partner/list")
     public String getPartnerListPage(final Model model) {
@@ -104,6 +106,11 @@ public class PartnerController {
             return "redirect:/not-found";
         }
 
+        model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
+        if (deletePartnerError) {
+            deletePartnerError = false;
+        }
+
         model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
         model.addAttribute(USER_ID, partnerList.get(0).getIdUsuario());
         return "parceiro/perfil_consultor";
@@ -139,5 +146,23 @@ public class PartnerController {
         }
 
         return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+    }
+
+    @GetMapping("/partner/delete-my-data-as-partner/{id}")
+    public String deleteMyDataAsPartner(@PathVariable final long id) {
+        final Map<String, Long> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, id);
+        final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
+        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
+            deletePartnerError = true;
+            return "redirect:/partner/my-data-as-partner/" + id;
+        }
+
+
+        deletePartnerError = !service.delete(partnerList.get(0).getId());
+        if (deletePartnerError) {
+            return "redirect:/partner/my-data-as-partner/" + id;
+        }
+        return "redirect:/user/profile/" + partnerList.get(0).getIdUsuario();
     }
 }

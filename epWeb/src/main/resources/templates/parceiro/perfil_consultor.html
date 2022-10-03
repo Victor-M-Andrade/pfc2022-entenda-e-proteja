@@ -7,114 +7,153 @@
 </head>
 
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Dados de consultor
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Dados de consultor
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md">
+        <div class="container-fluid text-center navbar-expand-md">
 
-        <div class="row align-items-start">
+            <div class="row align-items-start">
 
-            <div class="container col-12">
-                <div class="row perfil">
+                <div class="container col-12">
+                    <div class="row perfil">
 
-                    <h1 class="col-12 py-3">Meus dados de consultor</h1>
-                    <div class="alert alert-danger col-12 text-center" th:if="${deleteUserError}">
-                                <span class="font-weight-bold align-middle">
-                                    Não foi possível realizar a exclusão do seu registro como consultor. Por gentileza,
-                                    tente novamente.
-                                </span>
-                    </div>
-                    <div class="col-12 col-sm-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3 text-center">
-                                    <img src="/resources/img/logo_invertido.png" width="200"
-                                         class="rounded-circle img-fluid"/>
+                        <h1 class="col-12 py-3">Meus dados de consultor</h1>
+                        <div class="alert alert-danger col-12 text-center" th:if="${deletePartnerError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível realizar a exclusão do seu registro como consultor. Por gentileza,
+                                tente novamente.
+                            </span>
+                        </div>
+                        <div class="col-12 col-sm-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3 text-center">
+                                        <img src="/resources/img/logo_invertido.png" width="200"
+                                            class="rounded-circle img-fluid" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mb-2 col-12 col-sm-7">
-                        <div class="mb-2 card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">Nome da empresa</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myPartner.nomeEmpresa}">XXXXX</label>
+                        <div class="mb-2 col-12 col-sm-7">
+                            <div class="mb-2 card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">Nome da empresa</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myPartner.nomeEmpresa}">XXXXX</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Telefone de contato</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myPartner.telefone}">(XX) XXXX-XXXX</label>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Telefone de contato</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myPartner.telefone}">(XX) XXXX-XXXX</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">CNPJ da empresa</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myPartner.cnpj}">XXXXXXXXX</label>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">CNPJ da empresa</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myPartner.cnpj}">XXXXXXXXX</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        Tipo de serviço
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="row">
-                                            <div class="col-sm-5">
-                                                <label class="col-12">Legislativo</label>
-                                                <input type="checkbox" class="form-control"
-                                                       th:checked="${myPartner.legislativo}" disabled>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            Tipo de serviço
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label class="col-12">Legislativo</label>
+                                                    <input type="checkbox" class="form-control"
+                                                        th:checked="${myPartner.legislativo}" disabled>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <label class="col-12">Técnico</label>
+                                                    <input type="checkbox" class="form-control"
+                                                        th:checked="${myPartner.tecnico}" disabled>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-5">
-                                                <label class="col-12">Técnico</label>
-                                                <input type="checkbox" class="form-control"
-                                                       th:checked="${myPartner.tecnico}" disabled>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Situação do cadastro</div>
+                                        <div class="col-sm-9">
+                                            <label th:text="${myPartner.situacao}">XXXXXXXXX</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <a class="btn btn-secondary col-12" th:href="@{/user/profile/{id} (id = ${userId})}">
+                                    Voltar para o meu perfil
+                                </a>
+                            </div>
+                            <div class="mb-2">
+                                <a th:href="@{/partner/delete-my-data-as-partner/{id} (id = ${myPartner.id})}"
+                                    class="btn btn-warning col-12">
+                                    Editar meus dados
+                                </a>
+                            </div>
+                            <div class="mb-2">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger col-12" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    Excluir meu registro de consultor
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="exampleModalLabel">
+                                                    Exclusão de registro de consultor(a)
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Todas as solicitações de consultoria feitas para este perfil serão
+                                                excluidos.
+                                                Deseja continuar com a operação?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Não, cancelar operação
+                                                </button>
+                                                <a th:href="@{/partner/delete-my-data-as-partner/{id} (id = ${userId})}"
+                                                    class="btn btn-danger">
+                                                    Sim, excluir meu registro
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">Situação do cadastro</div>
-                                    <div class="col-sm-9">
-                                        <label th:text="${myPartner.situacao}">XXXXXXXXX</label>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div class="mb-2">
-                            <a class="btn btn-secondary col-12"
-                               th:href="@{/user/profile/{id} (id = ${userId})}">
-                                Voltar para o meu perfil
-                            </a>
-                        </div>
-                        <div class="mb-2">
-                            <a th:href="@{/partner/edit-my-data-as-partner/{id} (id = ${myPartner.id})}"
-                               class="btn btn-warning col-12">
-                                Editar meus dados
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
 </body>
 
 </html>
