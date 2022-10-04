@@ -34,6 +34,11 @@
                                 tente novamente.
                             </span>
                         </div>
+                        <div class="alert alert-danger col-12 text-center" th:if="${updatePartnerError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível completar a nova solicitação. Por gentileza, tente novamente.
+                            </span>
+                        </div>
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">
@@ -42,6 +47,11 @@
                                             class="rounded-circle img-fluid" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="mb-2">
+                                <a class="btn btn-secondary col-12" th:href="@{/user/profile/{id} (id = ${userId})}">
+                                    Voltar para o meu perfil
+                                </a>
                             </div>
                         </div>
 
@@ -97,9 +107,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-2">
-                                <a class="btn btn-secondary col-12" th:href="@{/user/profile/{id} (id = ${userId})}">
-                                    Voltar para o meu perfil
+                            <div class="mb-2" th:if="${myPartner.situacao == 'REPROVADO'}">
+                                <a th:href="@{/partner/new-registration-request/{id} (id = ${myPartner.id})}"
+                                    class="btn btn-success col-12">
+                                    Fazer nova solicitação de registro como consultor
                                 </a>
                             </div>
                             <div class="mb-2">

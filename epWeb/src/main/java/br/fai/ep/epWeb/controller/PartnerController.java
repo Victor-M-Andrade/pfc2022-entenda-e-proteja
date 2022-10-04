@@ -4,6 +4,7 @@ import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
+import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Controller
 public class PartnerController {
     private final WebServiceInterface service = new PartnerWebServiceImpl();
+    private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String EXISTS_PARTNER = "existsPartner";
@@ -51,9 +53,90 @@ public class PartnerController {
         return "parceiro/consultoria_list";
     }
 
+    @GetMapping("/partner/request-register-list")
+    public String getRequestRegisterListPage(final Model model) {
+        final Map<String, String> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REQUESTED);
+        final List<Parceiro> userList = (List<Parceiro>) service.readByCriteria(map);
+
+        boolean existsParner = true;
+        if (userList == null || userList.isEmpty()) {
+            existsParner = false;
+        }
+
+        model.addAttribute(EXISTS_PARTNER, existsParner);
+        model.addAttribute(REGISTERED_PARTNER, userList);
+        return "parceiro/solicitacoes_registro_consultor";
+    }
+
+    @GetMapping("/partner/evaluate-registration-request/{id}")
+    public String getRequestRegisterListPage(@PathVariable final long id, final Model model) {
+        final Parceiro partner = (Parceiro) service.readById(id);
+        if (partner == null) {
+            return "redirect:/not-found";
+        }
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
+        }
+
+        return "parceiro/avaliar_registro_consultor";
+    }
+
+    @GetMapping("/partner/approve-registration-request/{id}")
+    public String getApproveRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) service.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
+        updatePartnerError = !service.update(partner);
+        if (updatePartnerError) {
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+        return "redirect:/partner/request-register-list";
+    }
+
+    @GetMapping("/partner/reprove-registration-request/{id}")
+    public String getReproveRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) service.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.REPROVED);
+        updatePartnerError = !service.update(partner);
+        if (updatePartnerError) {
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        return "redirect:/partner/request-register-list";
+    }
+
+    @GetMapping("/partner/new-registration-request/{id}")
+    public String getNewRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) service.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.REQUESTED);
+        updatePartnerError = !service.update(partner);
+        return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+    }
+
     @GetMapping("/partner/detail/{id}")
     public String getPartnerDetailPage(@PathVariable final long id, final Model model) {
         final Parceiro partner = (Parceiro) service.readById(id);
+        if (partner == null) {
+            return "redirect:/not-found";
+        }
+
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
 
         return "parceiro/consultoria_info";
@@ -110,6 +193,11 @@ public class PartnerController {
         model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
         if (deletePartnerError) {
             deletePartnerError = false;
+        }
+
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
         }
 
         model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
