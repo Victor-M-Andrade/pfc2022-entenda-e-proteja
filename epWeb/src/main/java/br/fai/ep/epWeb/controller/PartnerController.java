@@ -41,31 +41,32 @@ public class PartnerController {
         final Map<String, Object> map = new HashMap<>();
         map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
         map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.APPROVED);
-        final List<Parceiro> userList = (List<Parceiro>) service.readByCriteria(map);
+        final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
 
         boolean existsParner = true;
-        if (userList == null || userList.isEmpty()) {
+        if (partnerList == null || partnerList.isEmpty()) {
             existsParner = false;
         }
 
         model.addAttribute(EXISTS_PARTNER, existsParner);
-        model.addAttribute(REGISTERED_PARTNER, userList);
+        model.addAttribute(REGISTERED_PARTNER, partnerList);
         return "parceiro/consultoria_list";
     }
 
     @GetMapping("/partner/request-register-list")
     public String getRequestRegisterListPage(final Model model) {
-        final Map<String, String> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
         map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REQUESTED);
-        final List<Parceiro> userList = (List<Parceiro>) service.readByCriteria(map);
+        final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
 
         boolean existsParner = true;
-        if (userList == null || userList.isEmpty()) {
+        if (partnerList == null || partnerList.isEmpty()) {
             existsParner = false;
         }
 
         model.addAttribute(EXISTS_PARTNER, existsParner);
-        model.addAttribute(REGISTERED_PARTNER, userList);
+        model.addAttribute(REGISTERED_PARTNER, partnerList);
         return "parceiro/solicitacoes_registro_consultor";
     }
 
