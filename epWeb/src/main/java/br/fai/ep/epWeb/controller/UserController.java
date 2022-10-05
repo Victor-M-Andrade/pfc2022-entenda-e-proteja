@@ -28,6 +28,7 @@ public class UserController {
     private final String DATA_UPDATE_ERROR = "updateDataError";
     private final String USER_CREATION_DATE = "dateCreate";
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
+    private final String DEFAULT_IMAGE_PATH = "/resources/img/logo_invertido.png";
 
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
@@ -91,6 +92,7 @@ public class UserController {
         temporaryUser = user;
 
         if (file.isEmpty()) {
+            user.setPathImageProfile(DEFAULT_IMAGE_PATH);
             updateUserDataError = !service.update(user);
             if (updateUserDataError) {
                 return "redirect:/user/edit/" + user.getId();
@@ -102,6 +104,7 @@ public class UserController {
         final String newNameFile = service.buildNameNewFile(user);
         final String nameFileWithExtension = service.prepareNameWithExtension(file.getOriginalFilename(), newNameFile);
         if (nameFileWithExtension == null) {
+            user.setPathImageProfile(DEFAULT_IMAGE_PATH);
             updateUserDataError = !service.update(user);
             if (updateUserDataError) {
                 return "redirect:/user/edit/" + user.getId();

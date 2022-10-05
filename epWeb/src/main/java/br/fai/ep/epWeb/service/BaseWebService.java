@@ -4,7 +4,6 @@ package br.fai.ep.epWeb.service;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 
-import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -15,7 +14,9 @@ public abstract class BaseWebService {
 
     protected final String API_HOST = "http://localhost:8080/api";
 
-    public static final String PATH_IMAGENS_USERS = "images" + File.separator + "users";
+    public static final String PATH_IMAGENS_USERS = "/images/users";
+    public static final String PATH_IMAGENS_NEWS = "/images/news";
+    public static final String PATH_IMAGENS_PARTNER = "/images/partners";
 
     public static final String dateFormate(final Timestamp time) {
         return new SimpleDateFormat(DATE_FORMAT).format(time);

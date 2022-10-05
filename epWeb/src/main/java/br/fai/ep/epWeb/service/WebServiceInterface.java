@@ -56,7 +56,7 @@ public interface WebServiceInterface<T> {
             this.deleteFileIfExists(folderPath, nameFile);
             final Path dest = Paths.get(folderPath + File.separator + nameFileWithExtension);
             Files.copy(myfile.getInputStream(), dest, StandardCopyOption.REPLACE_EXISTING);
-            return dest.toString();
+            return folderPath + "/" + nameFileWithExtension;
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
         }
