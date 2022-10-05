@@ -36,4 +36,20 @@ public class Parceiro extends Usuario {
         public static final String COMPANY_NAME_COLUMN = "nome_empresa";
         public static final String ID_USER_COLUMN = "id_usuario";
     }
+
+    public enum REGISTER_ERROR {
+        REGISTRATION_REQUEST_PROBLEMNS(-1),
+        ALREADY_REGISTERED_CNPJ(-2),
+        ALREADY_REGISTERED_PARTNER(-3);
+
+        private final long typeError;
+
+        REGISTER_ERROR(final long error) {
+            typeError = error;
+        }
+
+        public long getError() {
+            return typeError;
+        }
+    }
 }

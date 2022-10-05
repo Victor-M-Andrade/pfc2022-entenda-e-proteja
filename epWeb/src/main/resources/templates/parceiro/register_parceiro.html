@@ -80,6 +80,12 @@
                         <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-danger" th:if="${alreadyRegisteredPartner}">
+                            <span class="font-weight-bold align-middle">
+                                Você já possuí um cadastro como consultor.
+                                Verifique seu perfil ou entre em contato com o suporte.
+                            </span>
+                        </div>
                         <div class="alert alert-danger" th:if="${alreadyRegisteredCnpj}">
                             <span class="font-weight-bold align-middle">
                                 O CNPJ informado já esta registrado. Por gentileza, informe outro CNPJ.

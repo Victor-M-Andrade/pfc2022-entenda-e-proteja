@@ -7,6 +7,7 @@ import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Parceiro.PARTNER_TABLE;
+import br.fai.ep.epEntities.Parceiro.REGISTER_ERROR;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epEntities.Usuario.USER_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,16 @@ public class ParceiroServiceImpl implements BaseService {
     @Override
     public long create(final Object entity) {
         final Parceiro myPartnew = (Parceiro) entity;
-        final String criteria = "WHERE cnpj = \'" + myPartnew.getCnpj() + "\';";
-        final List<? extends BasePojo> partnerList = dao.readByCriteria(criteria);
+        String criteria = "WHERE " + PARTNER_TABLE.CNPJ_COLUMN + "= \'" + myPartnew.getCnpj() + "\';";
+        List<? extends BasePojo> partnerList = dao.readByCriteria(criteria);
         if (partnerList != null && !partnerList.isEmpty()) {
-            return -2; // representa que existe um parceiro com o cnpj informado
+            return REGISTER_ERROR.ALREADY_REGISTERED_CNPJ.getError(); // representa que existe um parceiro com o cnpj informado
+        }
+
+        criteria = "WHERE " + PARTNER_TABLE.ID_USER_COLUMN + " = \'" + myPartnew.getIdUsuario() + "\';";
+        partnerList = dao.readByCriteria(criteria);
+        if (partnerList != null && !partnerList.isEmpty()) {
+            return REGISTER_ERROR.ALREADY_REGISTERED_PARTNER.getError(); // reprenta que o usuario ja tem um cadastro como parceiro
         }
 
         final long newId = dao.create(myPartnew);
@@ -51,8 +58,9 @@ public class ParceiroServiceImpl implements BaseService {
         user.setParceiro(true);
         if (!userDao.update(user)) {
             dao.delete(newId);
-            return -1;
+            return REGISTER_ERROR.REGISTRATION_REQUEST_PROBLEMNS.getError();
         }
+
         return newId;
     }
 

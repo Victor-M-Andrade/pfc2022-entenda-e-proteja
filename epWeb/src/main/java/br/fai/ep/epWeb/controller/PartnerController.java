@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Parceiro;
+import br.fai.ep.epEntities.Parceiro.REGISTER_ERROR;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.WebServiceInterface;
@@ -26,11 +27,13 @@ public class PartnerController {
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
     private final String DELETE_PARTNER_ERROR = "deletePartnerError";
     private final String ALREADY_REGISTERED_CNPJ = "alreadyRegisteredCnpj";
+    private final String ALREADY_REGISTERED_PARTNER = "alreadyRegisteredPartner";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
     private boolean updatePartnerError = false;
     private boolean deletePartnerError = false;
     private boolean alreadyRegisteredCnpj = false;
+    private boolean alreadyRegisteredPartner = false;
     private boolean registrationRequestProblems = false;
 
     private Parceiro temporaryPartner = null;
@@ -85,6 +88,11 @@ public class PartnerController {
             alreadyRegisteredCnpj = false;
         }
 
+        model.addAttribute(ALREADY_REGISTERED_PARTNER, alreadyRegisteredPartner);
+        if (alreadyRegisteredPartner) {
+            alreadyRegisteredCnpj = false;
+        }
+
         model.addAttribute(REGISTRATION_REQUEST_PROBLEMS, registrationRequestProblems);
         if (registrationRequestProblems) {
             registrationRequestProblems = false;
@@ -102,15 +110,19 @@ public class PartnerController {
     @PostMapping("/partner/request-register")
     public String requestPartnerRegistration(final Parceiro partner) {
         final long newPartnerId = service.create(partner);
-        if (newPartnerId == -1) {
+        if (newPartnerId == REGISTER_ERROR.REGISTRATION_REQUEST_PROBLEMNS.getError()) {
             registrationRequestProblems = true;
-            temporaryPartner = partner;
-            return "redirect:/partner/register/" + partner.getIdUsuario();
-        } else if (newPartnerId == -2) {
+        } else if (newPartnerId == REGISTER_ERROR.ALREADY_REGISTERED_CNPJ.getError()) {
             alreadyRegisteredCnpj = true;
+        } else if (newPartnerId == REGISTER_ERROR.ALREADY_REGISTERED_PARTNER.getError()) {
+            alreadyRegisteredPartner = true;
+        }
+
+        if (newPartnerId < 0) {
             temporaryPartner = partner;
             return "redirect:/partner/register/" + partner.getIdUsuario();
         }
+
 
         return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
     }
