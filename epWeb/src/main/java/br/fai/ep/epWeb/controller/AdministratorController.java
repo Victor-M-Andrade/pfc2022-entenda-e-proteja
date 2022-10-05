@@ -39,13 +39,14 @@ public class AdministratorController {
 
     private boolean deleteUserError = false;
     private boolean anonymizeUserError = false;
-    private boolean triedPasswordChange = false;
+    private boolean triedUpdateUserData = false;
     private boolean updateUserDataError = false;
 
     private boolean updatePartnerError = false;
     private boolean deletePartnerError = false;
 
     private Usuario temporaryUser = null;
+    private Parceiro temporaryPartner = null;
 
     // ADMIN USER AREA
     @GetMapping("/user/administrator-area")
@@ -95,7 +96,7 @@ public class AdministratorController {
         try {
             final Usuario user = (Usuario) userWebService.readById(id);
             if (user != null) {
-                triedPasswordChange = false;
+                triedUpdateUserData = false;
                 temporaryUser = null;
                 model.addAttribute(user);
                 model.addAttribute(USER_ID, user.getId());
@@ -104,8 +105,8 @@ public class AdministratorController {
                 return FoldersName.ADMIN_USER_FOLDER + "/editar_perfil_usuario";
             }
 
-            if (triedPasswordChange && temporaryUser != null) {
-                triedPasswordChange = false;
+            if (triedUpdateUserData && temporaryUser != null) {
+                triedUpdateUserData = false;
                 model.addAttribute(temporaryUser);
                 model.addAttribute(USER_ID, temporaryUser.getId());
                 temporaryUser = null;
@@ -115,12 +116,12 @@ public class AdministratorController {
                 return FoldersName.ADMIN_USER_FOLDER + "/editar_perfil_usuario";
             }
 
-            triedPasswordChange = false;
+            triedUpdateUserData = false;
             updateUserDataError = false;
             return "redirect:/not-found";
 
         } catch (final Exception ex) {
-            triedPasswordChange = false;
+            triedUpdateUserData = false;
             updateUserDataError = false;
             return "redirect:/not-found";
         }
@@ -128,14 +129,14 @@ public class AdministratorController {
 
     @PostMapping("/user/admin-update-user-data")
     public String updateUserData(final Usuario user, final Model model) {
-        triedPasswordChange = true;
+        triedUpdateUserData = true;
         temporaryUser = user;
 
         updateUserDataError = !userWebService.update(user);
         if (updateUserDataError) {
             return "redirect:/user/admin-edit/" + user.getId();
         }
-        triedPasswordChange = false;
+        triedUpdateUserData = false;
         return "redirect:/user/admin-profile/" + user.getId();
     }
 
@@ -335,5 +336,37 @@ public class AdministratorController {
 
         model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
         return FoldersName.ADMIN_PARTNER_FOLDER + "/consultor_detail";
+    }
+
+    @GetMapping("/partner/edit-partner-data/{id}")
+    public String getEditPartnerDataPage(@PathVariable final long id, final Model model) {
+        Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
+        }
+
+        if (temporaryPartner != null) {
+            partner = temporaryPartner;
+            temporaryPartner = null;
+        }
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
+        model.addAttribute(USER_ID, partner.getIdUsuario());
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/consultor_edit";
+    }
+
+    @PostMapping("/partner/update-partner-data")
+    public String updatePartnerDataPage(final Model model, final Parceiro partner) {
+        updatePartnerError = !partnerWebService.update(partner);
+        if (updatePartnerError) {
+            temporaryPartner = partner;
+            return "redirect:/partner/edit-partner-data/" + partner.getId();
+        }
+
+        return "redirect:/partner/admin-detail/" + partner.getIdUsuario();
     }
 }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>editar dados de consulto E&P</title>
+    <script>
+        function phoneFormat(phone) {
+            var phoneValue = phone.value;
+            if (isNaN(phoneValue[phoneValue.length - 1])) { // impede entrar outro caractere que não seja número
+                phone.value = phoneValue.substring(0, phoneValue.length - 1);
+                return;
+            }
+
+            phone.setAttribute("maxlength", "14");
+            if (phoneValue.length == 1) phone.value = "(" + phone.value;
+            if (phoneValue.length == 3) phone.value += ") ";
+            if (phoneValue.length == 9) phone.value += "-";
+        }
+
+        function checkTypeService() {
+            let checkLegislativo = document.getElementById("checkLegislativo");
+            let checkTecnico = document.getElementById("checkTecnico");
+
+            if (checkLegislativo.checked || checkTecnico.checked) {
+                return true;
+            }
+            return false;
+
+        }
+
+        function validate() {
+            let tipoButton = "submit";
+            let existError = false;
+            let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
+
+            if (!checkTypeService()) {
+                tipoButton = "button";
+                messageError += "Selecione pelo menos um dos tipos de serviços.\n"
+                existError = true;
+            }
+
+            if (existError) {
+                alert(messageError);
+            }
+            document.getElementById("updateData").setAttribute("type", tipoButton);
+        }
+    </script>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/partner/admin-list}">Lista de consultores</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a th:href="@{/partner/admin-list}">Dados de consultor</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Editar dados do consultor
+            </li>
+        </ol>
+
+        <div class="container-fluid text-center navbar-expand-md">
+            <div class="row align-items-start">
+                <div class="container card border-0 rounded-lg login col-12 col-xl-8">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
+                        <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-danger" th:if="${updatePartnerError}">
+                            <span class="font-weight-bold align-middle">
+                                Desculpe, não foi possível concluir a atualização dos dados. Por gentileza,
+                                tente novamente.
+                            </span>
+                        </div>
+                    </div>
+                    <form th:action="@{/partner/update-partner-data}" method="post" th:object="${myPartner}">
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputCompany">
+                                        Nome da Empresa
+                                    </label>
+                                    <input class="form-control py-4" id="inputCompany" type="text"
+                                        placeholder="Insira o nome da sua empresa" required th:field="*{nomeEmpresa}" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputCnpj">CNPJ</label>
+                                    <input class="form-control py-4" id="inputCnpj" type="text"
+                                        placeholder="Insira o CNPJ da empresa" required th:field="*{cnpj}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputSite">
+                                        Site da empresa
+                                    </label>
+                                    <input class="form-control py-4" id="inputSite" type="url"
+                                        placeholder="Insira o site da empresa" required th:field="*{website}" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="mb-1" for="inputTelefone">
+                                        Telefone para contato
+                                    </label>
+                                    <input class="form-control py-4" id="inputTelefone" type="tel"
+                                        placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
+                                        th:field="*{telefone}">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="mb-1">
+                                        Tipo de serviço de consultoria:
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="checkLegislativo"
+                                        th:field="*{legislativo}" th:checked="*{legislativo}">
+                                    <label class="form-check-label" for="checkLegislativo">
+                                        Legislativo
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="checkTecnico"
+                                        th:field="*{tecnico}" th:checked="*{tecnico}">
+                                    <label class="form-check-label" for="checkTecnico">
+                                        Técnico
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDescricao">Descrição do serviços oferecidos</label>
+                            <textarea type="text" class="form-control" rows="10"
+                                placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
+                                required th:field="${myPartner.descricao}" id="txtDescricao"></textarea>
+                        </div>
+                        <input th:field="*{id}" hidden />
+                        <input th:field="*{situacao}" hidden />
+                        <input th:field="*{idUsuario}" hidden />
+                        <div class="form-group mt-4 mb-0">
+                            <button class="btn btn-success btn-block" id="updateData" type="submit"
+                                onclick="validate()">
+                                Atualizar dados
+                            </button>
+                        </div>
+                        <div class="form-group mt-2 mb-0">
+                            <a class="btn btn-secondary btn-block"
+                                th:href="@{/partner/admin-detail/{id} (id = ${userId})}">
+                                Cancelar operacao
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -161,7 +161,7 @@ public class PartnerController {
     }
 
     @PostMapping("/partner/update-my-data-as-partner")
-    public String getEditMyDataAsPartnerPage(final Model model, final Parceiro partner) {
+    public String updateMyDataAsPartnerPage(final Model model, final Parceiro partner) {
         updatePartnerError = !service.update(partner);
         if (updatePartnerError) {
             temporaryPartner = partner;
