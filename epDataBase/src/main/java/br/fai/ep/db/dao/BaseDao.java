@@ -9,6 +9,8 @@ public abstract class BaseDao {
     protected PreparedStatement preparedStatement;
     protected ResultSet resultSet;
 
+    protected final String DEFAULT_IMAGE_PATH = "/resources/img/logo_invertido.png";
+
     public void preparForReadingOrCreating(final String sql, final boolean isGenerateKeys, final boolean isAutoCommit) throws SQLException {
         try {
             connection = ConnectionFactory.getConnection();

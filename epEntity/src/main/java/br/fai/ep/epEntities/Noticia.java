@@ -16,6 +16,7 @@ public class Noticia extends BasePojo {
     private String palavraChave;
     private Timestamp dataCriacao;
     private Timestamp dataPublicacao;
+    private String pathImageNews;
     private long idAutor;
     private long idPublicador;
 
@@ -36,6 +37,7 @@ public class Noticia extends BasePojo {
         public static final String KEYWORD_COLUMN = "palavra_chave";
         public static final String CREATION_DATE_COLUMN = "data_criacao";
         public static final String PUBLICATION_DATE_COLUMN = "data_publicacao";
+        public static final String PATH_IMG_NEWS = "path_img_news";
         public static final String ID_AUTHOR_COLUMN = "id_autor";
         public static final String ID_PUBLISHER_COLUMN = "id_publicador";
     }

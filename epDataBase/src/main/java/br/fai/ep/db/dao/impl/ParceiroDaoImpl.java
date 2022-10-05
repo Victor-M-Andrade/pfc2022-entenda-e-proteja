@@ -58,6 +58,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
                 partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setPathImagePartner(resultSet.getString(PARTNER_TABLE.PATH_IMG_PARTNER));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);
@@ -120,6 +121,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
                 partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setPathImagePartner(resultSet.getString(PARTNER_TABLE.PATH_IMG_PARTNER));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
             }
         } catch (final Exception e) {
@@ -152,6 +154,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTNER_TABLE.IS_LEGISLATE_SERVICE + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.IS_TECHNICAL_SERVICE + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.SEPARATOR;
+            sql += PARTNER_TABLE.PATH_IMG_PARTNER + DataBaseHelper.SQL_COMMAND.SEPARATOR;
             sql += PARTNER_TABLE.ID_USER_COLUMN + DataBaseHelper.SQL_COMMAND.CLOSE_PARENTHESIS;
             sql += DataBaseHelper.SQL_COMMAND.VALUES;
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // cnpj
@@ -162,6 +165,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // isLegislativo
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // isTecnico
             sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // nome_empresa
+            sql += DataBaseHelper.SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // path_img_partner
             sql += DataBaseHelper.SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; //id_usuario
 
             preparForReadingOrCreating(sql, true, false);
@@ -176,6 +180,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setBoolean(i++, partner.isLegislativo());
             preparedStatement.setBoolean(i++, partner.isTecnico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
+            preparedStatement.setString(i++, DEFAULT_IMAGE_PATH);
             preparedStatement.setLong(i++, partner.getIdUsuario());
 
             preparedStatement.execute();
@@ -212,6 +217,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += PARTNER_TABLE.WEBSITE_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.SITUATION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.DESCRIPTION_COLUMN + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
+            sql += PARTNER_TABLE.PATH_IMG_PARTNER + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.IS_LEGISLATE_SERVICE + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.IS_TECHNICAL_SERVICE + DataBaseHelper.SQL_COMMAND.PARAM_UPDATE_TO_COMPLETE;
             sql += PARTNER_TABLE.COMPANY_NAME_COLUMN + DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
@@ -226,6 +232,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, partner.getWebsite());
             preparedStatement.setString(i++, partner.getSituacao());
             preparedStatement.setString(i++, partner.getDescricao());
+            preparedStatement.setString(i++, partner.getPathImagePartner());
             preparedStatement.setBoolean(i++, partner.isLegislativo());
             preparedStatement.setBoolean(i++, partner.isTecnico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
@@ -325,6 +332,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
                 partner.setLegislativo(resultSet.getBoolean(PARTNER_TABLE.IS_LEGISLATE_SERVICE));
                 partner.setTecnico(resultSet.getBoolean(PARTNER_TABLE.IS_TECHNICAL_SERVICE));
                 partner.setNomeEmpresa(resultSet.getString(PARTNER_TABLE.COMPANY_NAME_COLUMN));
+                partner.setPathImagePartner(resultSet.getString(PARTNER_TABLE.PATH_IMG_PARTNER));
                 partner.setIdUsuario(resultSet.getLong(PARTNER_TABLE.ID_USER_COLUMN));
 
                 partnerList.add(partner);

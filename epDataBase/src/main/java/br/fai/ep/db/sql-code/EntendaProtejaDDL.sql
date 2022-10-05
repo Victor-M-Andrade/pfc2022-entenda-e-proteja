@@ -27,6 +27,7 @@ create table parceiro(
     isLegislativo boolean not null default false,
     isTecnico boolean not null default false,
     nome_empresa character varying(100) not null,
+    path_img_partner character varying(1000) not null,
     id_usuario integer not null references usuario(id) on update cascade on delete cascade
 );
 alter table parceiro
@@ -72,6 +73,7 @@ create table noticia(
     palavra_chave character varying (50) not null,
     data_criacao timestamp without time zone not null default now(),
     data_publicacao timestamp without time zone,
+    path_img_news character varying(1000) not null,
     id_autor integer not null references usuario(id) on update cascade on delete cascade,
     id_publicador integer references usuario(id) on update cascade on delete cascade
 );

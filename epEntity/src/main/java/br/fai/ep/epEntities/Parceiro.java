@@ -12,6 +12,7 @@ public class Parceiro extends Usuario {
     private String situacao;
     private String descricao;
     private String nomeEmpresa;
+    private String pathImagePartner;
     private boolean legislativo;
     private boolean tecnico;
     private long idUsuario;
@@ -34,6 +35,7 @@ public class Parceiro extends Usuario {
         public static final String IS_LEGISLATE_SERVICE = "isLegislativo";
         public static final String IS_TECHNICAL_SERVICE = "isTecnico";
         public static final String COMPANY_NAME_COLUMN = "nome_empresa";
+        public static final String PATH_IMG_PARTNER = "path_img_partner";
         public static final String ID_USER_COLUMN = "id_usuario";
     }
 
