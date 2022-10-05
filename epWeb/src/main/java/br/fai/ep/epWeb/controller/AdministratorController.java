@@ -30,18 +30,16 @@ public class AdministratorController {
     private final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
 
     private final String EXISTS_PARTNER = "existsPartner";
+    private final String IS_NEW_EVALUATION = "isNewEvaluation";
     private final String REGISTERED_PARTNER = "registeredPartner";
     private final String MY_PARTNER_REFERENCE = "myPartner";
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
 
+    private boolean deleteUserError = false;
+    private boolean updatePartnerError = false;
+    private boolean anonymizeUserError = false;
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
-    private final boolean alreadyRegisteredCnpj = false;
-    private boolean updatePartnerError = false;
-    private final boolean registrationRequestProblems = false;
-    private final boolean deletePartnerError = false;
-    public static boolean deleteUserError = false;
-    public static boolean anonymizeUserError = false;
 
     private Usuario temporaryUser = null;
     private final Parceiro temporaryPartner = null;
@@ -214,6 +212,7 @@ public class AdministratorController {
             updatePartnerError = false;
         }
 
+        model.addAttribute(IS_NEW_EVALUATION, false);
         return "parceiro/avaliar_registro_consultor";
     }
 
@@ -266,5 +265,21 @@ public class AdministratorController {
         model.addAttribute(EXISTS_PARTNER, existsParner);
         model.addAttribute(REGISTERED_PARTNER, partnerList);
         return "parceiro/solicitacoes_consultor_reprovadas";
+    }
+
+    @GetMapping("/partner/new-evaluate-registration-request/{id}")
+    public String getNewRequestRegisterListPage(@PathVariable final long id, final Model model) {
+        final Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            return "redirect:/not-found";
+        }
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
+        }
+
+        model.addAttribute(IS_NEW_EVALUATION, true);
+        return "parceiro/avaliar_registro_consultor";
     }
 }

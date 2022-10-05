@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Solicitacao de registro de consultor E&P</title>
+    <title>Solicitacoes de consultores reprovadas E&P</title>
 </head>
 
 <body>
@@ -16,11 +16,12 @@
                 <a th:href="@{/user/administrator-area}">Área do Administrador</a>
             </li>
             <li class="breadcrumb-item">
-                Solicitações de cadastro como consultor
+                Solicitacoes de consultores reprovadas
             </li>
         </ol>
 
-        <h1 class="text-center">Solicitacao de cadastro como consultor</h1>
+        <h1 class="text-center">Solicitacoes de consultores reprovadas</h1>
+        <br>
         <a th:href="@{/user/administrator-area}" class="btn btn-secondary col-12 py-2">
             Área do administrador
         </a>
@@ -69,10 +70,10 @@
                                 </td>
                                 <td>
                                     <div class="col-12">
-                                        <a th:href="@{/partner/evaluate-registration-request/{id} (id = ${partner.id})}"
+                                        <a th:href="@{/partner/new-evaluate-registration-request/{id} (id = ${partner.id})}"
                                             class="btn col-12 btn-info">
                                             <i class="fas fa-info-circle"></i>
-                                            Avaliar
+                                            Reavaliar
                                         </a>
                                     </div>
                                 </td>

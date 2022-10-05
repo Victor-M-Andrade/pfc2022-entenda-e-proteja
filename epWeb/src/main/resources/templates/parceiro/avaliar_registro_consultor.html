@@ -15,8 +15,11 @@
             <li class="breadcrumb-item">
                 <a th:href="@{/user/administrator-area}">Área do Administrador</a>
             </li>
-            <li class="breadcrumb-item">
+            <li class="breadcrumb-item" th:unless="${isNewEvaluation}">
                 <a th:href="@{/partner/request-register-list}">Solicitações de cadastro</a>
+            </li>
+            <li class="breadcrumb-item" th:if="${isNewEvaluation}">
+                <a th:href="@{/partner/reproved-register-list}">Solicitações de cadastro reprovados</a>
             </li>
             <li class="breadcrumb-item">
                 Avaliar consultor
@@ -92,9 +95,14 @@
                                 <a th:href="@{/partner/reprove-registration-request/{id} (id = ${myPartner.id})}"
                                     class="btn btn-danger col-12">Reprovar registro</a>
                             </div>
-                            <div class="col-12 py-2">
+                            <div class="col-12 py-2" th:unless="${isNewEvaluation}">
                                 <a th:href="@{/partner/request-register-list}" class="btn btn-secondary col-12">
                                     Cancelar avaliacao
+                                </a>
+                            </div>
+                            <div class="col-12 py-2" th:if="${isNewEvaluation}">
+                                <a th:href="@{/partner/reproved-register-list}" class="btn btn-secondary col-12">
+                                    Cancelar nova avaliacao
                                 </a>
                             </div>
                         </div>
