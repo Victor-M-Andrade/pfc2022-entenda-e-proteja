@@ -159,9 +159,16 @@
                         <input th:field="${myPartner.situacao}" hidden />
                         <input th:field="${myPartner.idUsuario}" hidden />
                         <div class="form-group mt-4 mb-0">
-                            <button class="btn btn-info btn-block" id="updateData" type="submit" onclick="validate()">
+                            <button class="btn btn-success btn-block" id="updateData" type="submit"
+                                onclick="validate()">
                                 Atualizar dados
                             </button>
+                        </div>
+                        <div class="form-group mt-2 mb-0">
+                            <a class="btn btn-secondary btn-block"
+                                th:href="@{/user/my-data-as-partner/{id} (id = ${userId})}">
+                                Cancelar operacao
+                            </a>
                         </div>
                     </form>
                 </div>
