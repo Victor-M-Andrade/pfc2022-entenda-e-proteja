@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.DTO.MailDto;
+import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class HomeController {
 
     @GetMapping("/about-project")
     public String getAboutProjectPage() {
-        return "contatos/sobre";
+        return FoldersName.CONTACT_FOLDER + "/sobre";
     }
 
     @GetMapping("/contact-us")
@@ -50,7 +51,7 @@ public class HomeController {
         }
         model.addAttribute("mailDto", mail);
 
-        return "contatos/fale_conosco";
+        return FoldersName.CONTACT_FOLDER + "/fale_conosco";
     }
 
     @PostMapping("/send-email")
@@ -71,11 +72,11 @@ public class HomeController {
 
     @GetMapping("/privacy-policy")
     public String getPrivacyPolicyPage() {
-        return "contratos/politica_privacidade";
+        return FoldersName.CONTRACTS_FOLDER + "/politica_privacidade";
     }
 
     @GetMapping("/terms-conditions")
     public String getTermsConditionsPage() {
-        return "contratos/termos_uso";
+        return FoldersName.CONTRACTS_FOLDER + "/termos_uso";
     }
 }

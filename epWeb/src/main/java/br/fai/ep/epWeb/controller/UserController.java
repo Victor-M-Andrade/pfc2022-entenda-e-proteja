@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -23,8 +24,6 @@ public class UserController {
     private final WebServiceInterface service = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
-    private final String EXISTS_USERS = "existsUsers";
-    private final String REGISTERED_USERS = "registeredUsers";
     private final String MY_USER_REFERENCE = "myUser";
     private final String DATA_UPDATE_ERROR = "updateDataError";
     private final String USER_CREATION_DATE = "dateCreate";
@@ -47,7 +46,7 @@ public class UserController {
         if (deleteUserError) {
             deleteUserError = false;
         }
-        return "/usuario/perfil";
+        return FoldersName.USER_FOLDER + "/perfil";
     }
 
     @GetMapping("/user/edit/{id}")
@@ -72,7 +71,7 @@ public class UserController {
 
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
                 updateUserDataError = false;
-                return "/usuario/editar_perfil";
+                return FoldersName.USER_FOLDER + "/editar_perfil";
             }
 
             triedPasswordChange = false;

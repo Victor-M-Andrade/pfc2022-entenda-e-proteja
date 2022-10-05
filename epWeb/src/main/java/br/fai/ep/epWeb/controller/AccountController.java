@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
@@ -54,7 +55,7 @@ public class AccountController {
         }
         model.addAttribute(MY_USER_OBJECT, user);
 
-        return "conta/login";
+        return FoldersName.ACCOUNT_FOLDER + "/login";
     }
 
     @PostMapping("/account/authenticate")
@@ -87,7 +88,7 @@ public class AccountController {
         }
         model.addAttribute(MY_USER_OBJECT, user);
 
-        return "conta/register";
+        return FoldersName.ACCOUNT_FOLDER + "/register";
     }
 
     @PostMapping("/account/create")
@@ -124,7 +125,7 @@ public class AccountController {
         }
         model.addAttribute(MY_USER_OBJECT, user);
 
-        return "conta/password";
+        return FoldersName.ACCOUNT_FOLDER + "/password";
     }
 
     @PostMapping("/account/request-password-change")
@@ -154,7 +155,7 @@ public class AccountController {
             changePasswordError = false;
         }
 
-        return "conta/reset-password";
+        return FoldersName.ACCOUNT_FOLDER + "/reset-password";
     }
 
     @PostMapping("/account/update-password")
@@ -190,7 +191,7 @@ public class AccountController {
             changePasswordError = false;
         }
 
-        return "conta/change-password";
+        return FoldersName.ACCOUNT_FOLDER + "/change-password";
     }
 
     @PostMapping("/account/update-user-password")
@@ -256,7 +257,7 @@ public class AccountController {
         if (UserController.anonymizeUserError) {
             UserController.anonymizeUserError = false;
         }
-        return "conta/confirmar-exclusao";
+        return FoldersName.ACCOUNT_FOLDER + "/confirmar-exclusao";
     }
 
     @GetMapping("/account/confirm-delete-my-account/{id}")

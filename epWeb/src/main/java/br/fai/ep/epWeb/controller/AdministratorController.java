@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -42,12 +43,11 @@ public class AdministratorController {
     private boolean updateUserDataError = false;
 
     private Usuario temporaryUser = null;
-    private final Parceiro temporaryPartner = null;
 
     // ADMIN USER AREA
     @GetMapping("/user/administrator-area")
     public String getOptionUserAdminsitratorPage() {
-        return "usuario/area-administrador";
+        return FoldersName.ADMIN_FOLDER + "/area-administrador";
     }
 
     @GetMapping("/user/read-all")
@@ -61,7 +61,7 @@ public class AdministratorController {
 
         model.addAttribute(EXISTS_USERS, existsUsers);
         model.addAttribute(REGISTERED_USERS, userList);
-        return "usuario/usuarios_list";
+        return FoldersName.ADMIN_USER_FOLDER + "/usuarios_list";
     }
 
     @GetMapping("/user/admin-profile/{id}")
@@ -84,7 +84,7 @@ public class AdministratorController {
         if (updateUserDataError) {
             updateUserDataError = false;
         }
-        return "/usuario/perfil_usuario";
+        return FoldersName.ADMIN_USER_FOLDER + "/perfil_usuario";
     }
 
     @GetMapping("/user/admin-edit/{id}")
@@ -98,7 +98,7 @@ public class AdministratorController {
                 model.addAttribute(USER_ID, user.getId());
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
                 updateUserDataError = false;
-                return "/usuario/editar_perfil_usuario";
+                return FoldersName.ADMIN_USER_FOLDER + "/editar_perfil_usuario";
             }
 
             if (triedPasswordChange && temporaryUser != null) {
@@ -109,7 +109,7 @@ public class AdministratorController {
 
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
                 updateUserDataError = false;
-                return "/usuario/editar_perfil_usuario";
+                return FoldersName.ADMIN_USER_FOLDER + "/editar_perfil_usuario";
             }
 
             triedPasswordChange = false;
@@ -197,7 +197,7 @@ public class AdministratorController {
 
         model.addAttribute(EXISTS_PARTNER, existsParner);
         model.addAttribute(REGISTERED_PARTNER, partnerList);
-        return "parceiro/solicitacoes_registro_consultor";
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/solicitacoes_registro_consultor";
     }
 
     @GetMapping("/partner/evaluate-registration-request/{id}")
@@ -213,7 +213,7 @@ public class AdministratorController {
         }
 
         model.addAttribute(IS_NEW_EVALUATION, false);
-        return "parceiro/avaliar_registro_consultor";
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/avaliar_registro_consultor";
     }
 
     @GetMapping("/partner/approve-registration-request/{id}")
@@ -264,7 +264,7 @@ public class AdministratorController {
 
         model.addAttribute(EXISTS_PARTNER, existsParner);
         model.addAttribute(REGISTERED_PARTNER, partnerList);
-        return "parceiro/solicitacoes_consultor_reprovadas";
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/solicitacoes_consultor_reprovadas";
     }
 
     @GetMapping("/partner/new-evaluate-registration-request/{id}")
@@ -280,6 +280,6 @@ public class AdministratorController {
         }
 
         model.addAttribute(IS_NEW_EVALUATION, true);
-        return "parceiro/avaliar_registro_consultor";
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/avaliar_registro_consultor";
     }
 }

@@ -2,9 +2,9 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
-import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,6 @@ import java.util.Map;
 @Controller
 public class PartnerController {
     private final WebServiceInterface service = new PartnerWebServiceImpl();
-    private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String EXISTS_PARTNER = "existsPartner";
@@ -50,7 +49,7 @@ public class PartnerController {
 
         model.addAttribute(EXISTS_PARTNER, existsParner);
         model.addAttribute(REGISTERED_PARTNER, partnerList);
-        return "parceiro/consultoria_list";
+        return FoldersName.PARTNER_FOLDER + "/consultoria_list";
     }
 
     @GetMapping("/partner/new-registration-request/{id}")
@@ -75,7 +74,7 @@ public class PartnerController {
 
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
 
-        return "parceiro/consultoria_info";
+        return FoldersName.PARTNER_FOLDER + "/consultoria_info";
     }
 
     @GetMapping("/partner/register/{id}")
@@ -98,7 +97,7 @@ public class PartnerController {
         }
         partner.setIdUsuario(id);
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
-        return "parceiro/register_parceiro";
+        return FoldersName.PARTNER_FOLDER + "/register_parceiro";
     }
 
     @PostMapping("/partner/request-register")
@@ -138,7 +137,7 @@ public class PartnerController {
 
         model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
         model.addAttribute(USER_ID, partnerList.get(0).getIdUsuario());
-        return "parceiro/perfil_consultor";
+        return FoldersName.PARTNER_FOLDER + "/perfil_consultor";
     }
 
     @GetMapping("/partner/edit-my-data-as-partner/{id}")
@@ -159,7 +158,7 @@ public class PartnerController {
         }
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
         model.addAttribute(USER_ID, partner.getIdUsuario());
-        return "parceiro/editar_parceiro";
+        return FoldersName.PARTNER_FOLDER + "/editar_parceiro";
     }
 
     @PostMapping("/partner/update-my-data-as-partner")
