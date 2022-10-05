@@ -5,92 +5,102 @@
     <meta charset="UTF-8">
     <title>Editar perfil E&P</title>
 </head>
+
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Editar perfil
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Editar perfil
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md">
+        <div class="container-fluid text-center navbar-expand-md">
 
-        <div class="row align-items-start">
+            <div class="row align-items-start">
 
-            <div class="container col-12">
-                <div class="row perfil">
+                <div class="container col-12">
+                    <div class="row perfil">
 
-                    <h1 class="col-12 py-3">Edição de perfil</h1>
+                        <h1 class="col-12 py-3">Edição de perfil</h1>
 
-                    <div class="col-12 col-sm-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3 text-center">
-                                    <img src="/resources/img/logo_invertido.png" width="200"
-                                         class="rounded-circle img-fluid"/>
+                        <div class="col-12 col-sm-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3 text-center">
+                                        <img src="/resources/img/logo_invertido.png" width="200"
+                                            class="rounded-circle img-fluid" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-2 col-12 col-sm-7">
-                        <div class="alert alert-danger" th:if="${updateDataError}">
-                            <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.</span>
-                        </div>
-                        <form th:action="@{/user/update-user-data}" enctype="multipart/form-data"  method="POST" th:object="${usuario}">
-                            <div class="mb-2 card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-3">Usuário</div>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" th:field="*{nome}" required>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">Email</div>
-                                        <div class="col-sm-9">
-                                            <input type="email" class="form-control" th:field="*{email}" required>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            Imagem de perfil
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" name="fromMyFile" accept="image/*">
+                        <div class="mb-2 col-12 col-sm-7">
+                            <div class="alert alert-danger" th:if="${updateDataError}">
+                                <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a
+                                    atualização dos dados. Por gentileza, tente novamente.</span>
+                            </div>
+                            <form th:action="@{/user/update-user-data}" enctype="multipart/form-data" method="POST"
+                                th:object="${usuario}">
+                                <div class="mb-2 card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">Usuário</div>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" th:field="*{nome}" required>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">Email</div>
+                                            <div class="col-sm-9">
+                                                <input type="email" class="form-control" th:field="*{email}" required>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                Imagem de perfil
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="mb-3">
+                                                    <input class="form-control" type="file" name="fromMyFile"
+                                                        accept="image/*">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="number" class="form-control" th:field="*{id}" hidden>
+                                        <input type="text" class="form-control" th:field="*{senha}" hidden>
+                                        <input type="text" class="form-control" th:field="*{pathImageProfile}" hidden>
+                                        <input type="text" class="form-control" th:field="*{dataHora}" hidden>
+                                        <input type="checkbox" class="form-control" th:field="*{parceiro}"
+                                            th:checked="*{parceiro}" hidden>
+                                        <input type="checkbox" class="form-control" th:field="*{autor}"
+                                            th:checked="*{autor}" hidden>
+                                        <input type="checkbox" class="form-control" th:field="*{administrador}"
+                                            th:checked="*{administrador}" hidden>
+                                        <input type="checkbox" class="form-control" th:field="*{anonimo}"
+                                            th:checked="*{anonimo}" hidden>
                                     </div>
-                                    <input type="number" class="form-control" th:field="*{id}" hidden>
-                                    <input type="text" class="form-control" th:field="*{senha}" hidden>
-                                    <input type="text" class="form-control" th:field="*{pathImageProfile}" hidden>
-                                    <input type="text" class="form-control" th:field="*{dataHora}" hidden>
-                                    <input type="checkbox" class="form-control" th:field="*{parceiro}" th:checked="*{parceiro}" hidden>
-                                    <input type="checkbox" class="form-control" th:field="*{autor}" th:checked="*{autor}" hidden>
-                                    <input type="checkbox" class="form-control" th:field="*{administrador}" th:checked="*{administrador}" hidden>
-                                    <input type="checkbox" class="form-control" th:field="*{anonimo}" th:checked="*{anonimo}" hidden>
                                 </div>
-                            </div>
-                            <div class="mb-2">
-                                <button class="btn btn-success col-12" type="submit">Atualizar</button>
-                            </div>
-                            <div class="mb-2">
-                                <a class="btn btn-secondary col-12" th:href="@{/user/profile/{id} (id = ${userId})}">Cancelar</a>
-                            </div>
-                        </form>
+                                <div class="mb-2">
+                                    <button class="btn btn-success col-12" type="submit">Atualizar</button>
+                                </div>
+                                <div class="mb-2">
+                                    <a class="btn btn-secondary col-12"
+                                        th:href="@{/user/profile/{id} (id = ${userId})}">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

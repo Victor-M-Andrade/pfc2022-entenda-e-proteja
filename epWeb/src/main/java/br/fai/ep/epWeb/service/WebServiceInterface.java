@@ -48,13 +48,14 @@ public interface WebServiceInterface<T> {
 
     default String saveFileInProfile(final MultipartFile myfile, final String folderPath, final String nameFileWithExtension, final String nameFile) {
         try {
-            final Path imagesPath = Paths.get(folderPath);
+            final String targetDirectory = System.getProperty("user.dir") + folderPath;
+            final Path imagesPath = Paths.get(targetDirectory);
             if (!Files.exists(imagesPath)) {
                 Files.createDirectories(imagesPath);
             }
 
-            this.deleteFileIfExists(folderPath, nameFile);
-            final Path dest = Paths.get(folderPath + File.separator + nameFileWithExtension);
+            this.deleteFileIfExists(targetDirectory, nameFile);
+            final Path dest = Paths.get(targetDirectory + File.separator + nameFileWithExtension);
             Files.copy(myfile.getInputStream(), dest, StandardCopyOption.REPLACE_EXISTING);
             return folderPath + "/" + nameFileWithExtension;
         } catch (final Exception ex) {

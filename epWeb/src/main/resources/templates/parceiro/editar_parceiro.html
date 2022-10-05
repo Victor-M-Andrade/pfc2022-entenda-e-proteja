@@ -80,7 +80,8 @@
                             </span>
                         </div>
                     </div>
-                    <form th:action="@{/partner/update-my-data-as-partner}" method="post" th:object="${myPartner}">
+                    <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
+                        th:object="${myPartner}">
                         <div class="form-row">
                             <div class="col-md-7">
                                 <div class="form-group">
@@ -120,6 +121,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
+                            <input class="form-control" type="file" name="partnerProfile" accept="image/*">
+                        </div>
                         <hr>
                         <div class="form-row">
                             <div class="col-md-4">
@@ -158,6 +163,8 @@
                         <input th:field="${myPartner.id}" hidden />
                         <input th:field="${myPartner.situacao}" hidden />
                         <input th:field="${myPartner.idUsuario}" hidden />
+                        <input th:field="${myPartner.pathImagePartner}" hidden>
+                        <input th:field="${myPartner.dataHora}" hidden>
                         <div class="form-group mt-4 mb-0">
                             <button class="btn btn-success btn-block" id="updateData" type="submit"
                                 onclick="validate()">

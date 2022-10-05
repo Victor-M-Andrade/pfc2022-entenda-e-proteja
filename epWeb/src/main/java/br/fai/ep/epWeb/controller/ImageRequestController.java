@@ -13,10 +13,12 @@ import java.nio.file.Files;
 @Controller
 public class ImageRequestController {
 
+    private final String targetDirectory = System.getProperty("user.dir");
+
     @GetMapping("/images/users/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesUserImage(@PathVariable("urlImagemLocal") final String nomeImagem) {
-        final File imagemArquivo = new File(BaseWebService.PATH_IMAGENS_USERS + "/" + nomeImagem);
+        final File imagemArquivo = new File(targetDirectory + BaseWebService.PATH_IMAGENS_USERS + "/" + nomeImagem);
         try {
             return Files.readAllBytes(imagemArquivo.toPath());
         } catch (final IOException e) {
@@ -27,7 +29,7 @@ public class ImageRequestController {
     @GetMapping("/images/news/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesNewsImage(@PathVariable("urlImagemLocal") final String nomeImagem) {
-        final File imagemArquivo = new File(BaseWebService.PATH_IMAGENS_USERS + "/" + nomeImagem);
+        final File imagemArquivo = new File(targetDirectory + BaseWebService.PATH_IMAGENS_NEWS + "/" + nomeImagem);
         try {
             return Files.readAllBytes(imagemArquivo.toPath());
         } catch (final IOException e) {
@@ -38,7 +40,7 @@ public class ImageRequestController {
     @GetMapping("/images/partners/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesPartnerImage(@PathVariable("urlImagemLocal") final String nomeImagem) {
-        final File imagemArquivo = new File(BaseWebService.PATH_IMAGENS_USERS + "/" + nomeImagem);
+        final File imagemArquivo = new File(targetDirectory + BaseWebService.PATH_IMAGENS_PARTNER + "/" + nomeImagem);
         try {
             return Files.readAllBytes(imagemArquivo.toPath());
         } catch (final IOException e) {

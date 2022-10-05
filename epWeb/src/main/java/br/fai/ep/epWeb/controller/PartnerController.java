@@ -4,6 +4,7 @@ import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Parceiro.REGISTER_ERROR;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -173,13 +176,40 @@ public class PartnerController {
     }
 
     @PostMapping("/partner/update-my-data-as-partner")
-    public String updateMyDataAsPartnerPage(final Model model, final Parceiro partner) {
+    public String updateMyDataAsPartnerPage(@RequestParam("partnerProfile") final MultipartFile file, final Model model, final Parceiro partner) {
+        temporaryPartner = partner;
+        if (file.isEmpty()) {
+            updatePartnerError = !service.update(partner);
+            if (updatePartnerError) {
+                temporaryPartner = partner;
+                return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
+            }
+            temporaryPartner = null;
+            return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+        }
+        final String newNameFile = service.buildNameNewFile(partner);
+        final String nameFileWithExtension = service.prepareNameWithExtension(file.getOriginalFilename(), newNameFile);
+        if (nameFileWithExtension == null) {
+            updatePartnerError = !service.update(partner);
+            if (updatePartnerError) {
+                temporaryPartner = partner;
+                return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
+            }
+            temporaryPartner = null;
+            return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+        }
+
+        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_PARTNER, nameFileWithExtension, newNameFile);
+        if (pathImage != null) {
+            partner.setPathImagePartner(pathImage);
+        }
+
         updatePartnerError = !service.update(partner);
         if (updatePartnerError) {
             temporaryPartner = partner;
             return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
         }
-
+        temporaryPartner = null;
         return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
     }
 
