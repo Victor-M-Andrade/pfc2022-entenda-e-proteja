@@ -67,6 +67,21 @@
                                     Perfil de usuario do consultor
                                 </a>
                             </div>
+                            <div th:if="${!myPartner.anonimo}">
+                                <hr>
+                                <div class="mb-2" th:if="${myPartner.situacao == 'APROVADO'}">
+                                    <a th:href="@{/partner/deactivate-partner/{userId} (userId = ${myPartner.idUsuario})}"
+                                        class="btn btn-danger col-12">
+                                        desativar consultor
+                                    </a>
+                                </div>
+                                <div class="mb-2" th:unless="${myPartner.situacao  == 'APROVADO'}">
+                                    <a th:href="@{/partner/reactivate-partner/{userId} (userId = ${myPartner.idUsuario})}"
+                                        class="btn btn-success col-12">
+                                        Ativar administrador
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="mb-2 col-12 col-sm-7">

@@ -381,4 +381,36 @@ public class AdministratorController {
 
         return "redirect:/partner/admin-detail/" + partner.getIdUsuario();
     }
+
+    @GetMapping("/partner/deactivate-partner/{userId}")
+    public String deactivatePartner(@PathVariable final long userId) {
+        final Map<String, Long> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, userId);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
+            updatePartnerError = true;
+            return "redirect:/partner/admin-detail/" + userId;
+        }
+
+        final Parceiro partner = partnerList.get(0);
+        partner.setSituacao(Parceiro.SITUATIONS.EXCLUDED);
+        updatePartnerError = !partnerWebService.update(partner);
+        return "redirect:/partner/admin-detail/" + userId;
+    }
+
+    @GetMapping("/partner/reactivate-partner/{userId}")
+    public String reactivatePartner(@PathVariable final long userId) {
+        final Map<String, Long> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, userId);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
+            updatePartnerError = true;
+            return "redirect:/partner/admin-detail/" + userId;
+        }
+
+        final Parceiro partner = partnerList.get(0);
+        partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
+        updatePartnerError = !partnerWebService.update(partner);
+        return "redirect:/partner/admin-detail/" + userId;
+    }
 }
