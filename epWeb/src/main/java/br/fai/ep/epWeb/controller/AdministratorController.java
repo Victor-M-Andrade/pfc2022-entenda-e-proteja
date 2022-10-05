@@ -1,7 +1,8 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
-import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,31 +10,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdministratorController {
-    public static final String DELETE_USER_ERROR = "deleteUserError";
-    public static final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
 
-    public static boolean deleteUserError = false;
-    public static boolean anonymizeUserError = false;
+    private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
+    private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
 
-    private final WebServiceInterface service = new UserWebServiceImpl();
-
-    // ADMIN USER AREA
     private final String USER_ID = "userId";
     private final String EXISTS_USERS = "existsUsers";
     private final String REGISTERED_USERS = "registeredUsers";
-    private final String MY_USER_REFERENCE = "myUser";
     private final String DATA_UPDATE_ERROR = "updateDataError";
+    private final String DELETE_USER_ERROR = "deleteUserError";
+    private final String MY_USER_REFERENCE = "myUser";
     private final String USER_CREATION_DATE = "dateCreate";
+    private final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
+
+    private final String EXISTS_PARTNER = "existsPartner";
+    private final String REGISTERED_PARTNER = "registeredPartner";
+    private final String MY_PARTNER_REFERENCE = "myPartner";
+    private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
 
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
+    private final boolean alreadyRegisteredCnpj = false;
+    private boolean updatePartnerError = false;
+    private final boolean registrationRequestProblems = false;
+    private final boolean deletePartnerError = false;
+    public static boolean deleteUserError = false;
+    public static boolean anonymizeUserError = false;
 
     private Usuario temporaryUser = null;
+    private final Parceiro temporaryPartner = null;
 
+    // ADMIN USER AREA
     @GetMapping("/user/administrator-area")
     public String getOptionUserAdminsitratorPage() {
         return "usuario/area-administrador";
@@ -41,7 +54,7 @@ public class AdministratorController {
 
     @GetMapping("/user/read-all")
     public String getReadAllUsersPage(final Model model) {
-        final List<Usuario> userList = (List<Usuario>) service.readAll();
+        final List<Usuario> userList = (List<Usuario>) userWebService.readAll();
 
         boolean existsUsers = true;
         if (userList == null || userList.isEmpty()) {
@@ -55,10 +68,10 @@ public class AdministratorController {
 
     @GetMapping("/user/admin-profile/{id}")
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
-        final Usuario user = (Usuario) service.readById(id);
+        final Usuario user = (Usuario) userWebService.readById(id);
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
-        model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));
+        model.addAttribute(USER_CREATION_DATE, userWebService.getCreationDateAndTime(user.getDataHora()));
 
         model.addAttribute(DELETE_USER_ERROR, deleteUserError);
         if (deleteUserError) {
@@ -79,7 +92,7 @@ public class AdministratorController {
     @GetMapping("/user/admin-edit/{id}")
     public String getUserEditPage(@PathVariable final int id, final Model model) {
         try {
-            final Usuario user = (Usuario) service.readById(id);
+            final Usuario user = (Usuario) userWebService.readById(id);
             if (user != null) {
                 triedPasswordChange = false;
                 temporaryUser = null;
@@ -117,7 +130,7 @@ public class AdministratorController {
         triedPasswordChange = true;
         temporaryUser = user;
 
-        updateUserDataError = !service.update(user);
+        updateUserDataError = !userWebService.update(user);
         if (updateUserDataError) {
             return "redirect:/user/admin-edit/" + user.getId();
         }
@@ -127,7 +140,7 @@ public class AdministratorController {
 
     @GetMapping("/user/admin-delete/{id}")
     public String deleteUserAccount(@PathVariable final long id) {
-        deleteUserError = !service.delete(id);
+        deleteUserError = !userWebService.delete(id);
         if (deleteUserError) {
             return "redirect:/user/admin-profile/" + id;
         }
@@ -148,28 +161,110 @@ public class AdministratorController {
 
     @GetMapping("/user/give-admin-permission/{userID}")
     public String giveAdminPermission(@PathVariable final long userID) {
-        final Usuario user = (Usuario) service.readById(userID);
+        final Usuario user = (Usuario) userWebService.readById(userID);
         if (user == null) {
             updateUserDataError = false;
             return "redirect:/user/admin-profile/" + userID;
         }
 
         user.setAdministrador(true);
-        updateUserDataError = !service.update(user);
+        updateUserDataError = !userWebService.update(user);
         return "redirect:/user/admin-profile/" + user.getId();
     }
 
     @GetMapping("/user/remove-admin-permission/{userID}")
     public String removeAdminPermission(@PathVariable final long userID) {
-        final Usuario user = (Usuario) service.readById(userID);
+        final Usuario user = (Usuario) userWebService.readById(userID);
         if (user == null) {
             updateUserDataError = false;
             return "redirect:/user/admin-profile/" + userID;
         }
 
         user.setAdministrador(false);
-        updateUserDataError = !service.update(user);
+        updateUserDataError = !userWebService.update(user);
         return "redirect:/user/admin-profile/" + user.getId();
     }
 
+    //ADMIN PARTNER AREA
+    @GetMapping("/partner/request-register-list")
+    public String getRequestRegisterListPage(final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REQUESTED);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+
+        boolean existsParner = true;
+        if (partnerList == null || partnerList.isEmpty()) {
+            existsParner = false;
+        }
+
+        model.addAttribute(EXISTS_PARTNER, existsParner);
+        model.addAttribute(REGISTERED_PARTNER, partnerList);
+        return "parceiro/solicitacoes_registro_consultor";
+    }
+
+    @GetMapping("/partner/evaluate-registration-request/{id}")
+    public String getRequestRegisterListPage(@PathVariable final long id, final Model model) {
+        final Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            return "redirect:/not-found";
+        }
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
+        }
+
+        return "parceiro/avaliar_registro_consultor";
+    }
+
+    @GetMapping("/partner/approve-registration-request/{id}")
+    public String getApproveRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
+        updatePartnerError = !partnerWebService.update(partner);
+        if (updatePartnerError) {
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+        return "redirect:/partner/request-register-list";
+    }
+
+    @GetMapping("/partner/reprove-registration-request/{id}")
+    public String getReproveRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.REPROVED);
+        updatePartnerError = !partnerWebService.update(partner);
+        if (updatePartnerError) {
+            return "redirect:/partner/evaluate-registration-request/" + id;
+        }
+
+        return "redirect:/partner/request-register-list";
+    }
+
+    @GetMapping("/partner/reproved-register-list")
+    public String getReproveRegisterListPage(final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+
+        map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
+        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REPROVED);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+
+        boolean existsParner = true;
+        if (partnerList == null || partnerList.isEmpty()) {
+            existsParner = false;
+        }
+
+        model.addAttribute(EXISTS_PARTNER, existsParner);
+        model.addAttribute(REGISTERED_PARTNER, partnerList);
+        return "parceiro/solicitacoes_consultor_reprovadas";
+    }
 }

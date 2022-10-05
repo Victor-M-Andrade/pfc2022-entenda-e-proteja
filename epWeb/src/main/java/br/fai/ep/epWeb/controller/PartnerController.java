@@ -34,7 +34,7 @@ public class PartnerController {
     private boolean registrationRequestProblems = false;
 
     private Parceiro temporaryPartner = null;
-    private boolean deletePartnerError;
+    private boolean deletePartnerError = false;
 
     @GetMapping("/partner/list")
     public String getPartnerListPage(final Model model) {
@@ -51,71 +51,6 @@ public class PartnerController {
         model.addAttribute(EXISTS_PARTNER, existsParner);
         model.addAttribute(REGISTERED_PARTNER, partnerList);
         return "parceiro/consultoria_list";
-    }
-
-    @GetMapping("/partner/request-register-list")
-    public String getRequestRegisterListPage(final Model model) {
-        final Map<String, Object> map = new HashMap<>();
-        map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
-        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REQUESTED);
-        final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
-
-        boolean existsParner = true;
-        if (partnerList == null || partnerList.isEmpty()) {
-            existsParner = false;
-        }
-
-        model.addAttribute(EXISTS_PARTNER, existsParner);
-        model.addAttribute(REGISTERED_PARTNER, partnerList);
-        return "parceiro/solicitacoes_registro_consultor";
-    }
-
-    @GetMapping("/partner/evaluate-registration-request/{id}")
-    public String getRequestRegisterListPage(@PathVariable final long id, final Model model) {
-        final Parceiro partner = (Parceiro) service.readById(id);
-        if (partner == null) {
-            return "redirect:/not-found";
-        }
-        model.addAttribute(MY_PARTNER_REFERENCE, partner);
-        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
-        if (updatePartnerError) {
-            updatePartnerError = false;
-        }
-
-        return "parceiro/avaliar_registro_consultor";
-    }
-
-    @GetMapping("/partner/approve-registration-request/{id}")
-    public String getApproveRegisterListPage(@PathVariable final long id) {
-        final Parceiro partner = (Parceiro) service.readById(id);
-        if (partner == null) {
-            updatePartnerError = true;
-            return "redirect:/partner/evaluate-registration-request/" + id;
-        }
-
-        partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
-        updatePartnerError = !service.update(partner);
-        if (updatePartnerError) {
-            return "redirect:/partner/evaluate-registration-request/" + id;
-        }
-        return "redirect:/partner/request-register-list";
-    }
-
-    @GetMapping("/partner/reprove-registration-request/{id}")
-    public String getReproveRegisterListPage(@PathVariable final long id) {
-        final Parceiro partner = (Parceiro) service.readById(id);
-        if (partner == null) {
-            updatePartnerError = true;
-            return "redirect:/partner/evaluate-registration-request/" + id;
-        }
-
-        partner.setSituacao(Parceiro.SITUATIONS.REPROVED);
-        updatePartnerError = !service.update(partner);
-        if (updatePartnerError) {
-            return "redirect:/partner/evaluate-registration-request/" + id;
-        }
-
-        return "redirect:/partner/request-register-list";
     }
 
     @GetMapping("/partner/new-registration-request/{id}")
@@ -247,7 +182,6 @@ public class PartnerController {
             deletePartnerError = true;
             return "redirect:/partner/my-data-as-partner/" + id;
         }
-
 
         deletePartnerError = !service.delete(partnerList.get(0).getId());
         if (deletePartnerError) {

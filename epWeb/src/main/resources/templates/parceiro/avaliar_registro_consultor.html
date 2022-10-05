@@ -16,7 +16,7 @@
                 <a th:href="@{/user/administrator-area}">Área do Administrador</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/partner/request-register-list}">Solicitações de cadastro como consultor</a>
+                <a th:href="@{/partner/request-register-list}">Solicitações de cadastro</a>
             </li>
             <li class="breadcrumb-item">
                 Avaliar consultor
@@ -78,10 +78,9 @@
                                 </p>
                             </div>
                         </div>
-                        <hr>
                         <div class="alert alert-danger col-12 text-center" th:if="${updatePartnerError}">
                             <span class="font-weight-bold align-middle">
-                                Não foi possível completar a operação, Por favor, tente novamente.
+                                Não foi possível completar a operação, Por favor, tente novamente
                             </span>
                         </div>
                         <div class="row">
@@ -93,13 +92,12 @@
                                 <a th:href="@{/partner/reprove-registration-request/{id} (id = ${myPartner.id})}"
                                     class="btn btn-danger col-12">Reprovar registro</a>
                             </div>
+                            <div class="col-12 py-2">
+                                <a th:href="@{/partner/request-register-list}" class="btn btn-secondary col-12">
+                                    Cancelar avaliacao
+                                </a>
+                            </div>
                         </div>
-                        <div class="row py-2">
-                            <a th:href="@{/partner/request-register-list}" class="btn btn-secondary col-12">
-                                Cancelar avaliacao
-                            </a>
-                        </div>
-
                     </div>
                 </div>
             </div>
