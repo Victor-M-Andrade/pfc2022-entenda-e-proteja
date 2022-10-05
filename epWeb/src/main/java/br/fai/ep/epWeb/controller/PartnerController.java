@@ -112,7 +112,7 @@ public class PartnerController {
             return "redirect:/partner/register/" + partner.getIdUsuario();
         }
 
-        return "redirect:/partner/detail/" + newPartnerId;
+        return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
     }
 
     @GetMapping("/partner/my-data-as-partner/{id}")
