@@ -86,7 +86,7 @@
                                 Não foi possível completar a operação, Por favor, tente novamente
                             </span>
                         </div>
-                        <div class="row">
+                        <div class="row" th:unless="${isNewEvaluation}">
                             <div class="col-6">
                                 <a th:href="@{/partner/approve-registration-request/{id} (id = ${myPartner.id})}"
                                     class="btn btn-success col-12">Aprovar registro</a>
@@ -100,9 +100,17 @@
                                     Cancelar avaliacao
                                 </a>
                             </div>
-                            <div class="col-12 py-2" th:if="${isNewEvaluation}">
-                                <a th:href="@{/partner/reproved-register-list}" class="btn btn-secondary col-12">
-                                    Cancelar nova avaliacao
+                        </div>
+                        <div class="row" th:if="${isNewEvaluation}">
+                            <div class="col-6">
+                                <a th:href="@{/partner/new-approve-registration-request/{id} (id = ${myPartner.id})}"
+                                    class="btn btn-success col-12">
+                                    Aprovar registro
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a th:href="@{/partner/request-register-list}" class="btn btn-secondary col-12">
+                                    Cancelar avaliacao
                                 </a>
                             </div>
                         </div>

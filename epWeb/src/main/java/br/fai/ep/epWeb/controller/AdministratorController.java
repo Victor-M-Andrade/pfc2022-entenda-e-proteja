@@ -282,4 +282,20 @@ public class AdministratorController {
         model.addAttribute(IS_NEW_EVALUATION, true);
         return FoldersName.ADMIN_PARTNER_FOLDER + "/avaliar_registro_consultor";
     }
+
+    @GetMapping("/partner/new-approve-registration-request/{id}")
+    public String getNewApproveRegisterListPage(@PathVariable final long id) {
+        final Parceiro partner = (Parceiro) partnerWebService.readById(id);
+        if (partner == null) {
+            updatePartnerError = true;
+            return "redirect:/partner/new-evaluate-registration-request/" + id;
+        }
+
+        partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
+        updatePartnerError = !partnerWebService.update(partner);
+        if (updatePartnerError) {
+            return "redirect:/partner/new-evaluate-registration-request/" + id;
+        }
+        return "redirect:/partner/reproved-register-list";
+    }
 }
