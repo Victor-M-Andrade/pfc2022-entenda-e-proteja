@@ -18,27 +18,33 @@
             if (phoneValue.length == 9) phone.value += "-";
         }
 
-        function acceptTermsValidade() {
-            let accept = document.getElementById("acceptTermsCheck");
+        function checkTypeService() {
+            let checkLegislativo = document.getElementById("checkLegislativo");
+            let checkTecnico = document.getElementById("checkTecnico");
 
+            if (checkLegislativo.checked || checkTecnico.checked) {
+                return true;
+            }
+            return false;
+
+        }
+
+        function validate() {
             let tipoButton = "submit";
             let existError = false;
             let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
 
-            if (!accept.checked) {
+            if (!checkTypeService()) {
                 tipoButton = "button";
-                messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n"
+                messageError += "Selecione pelo menos um dos tipos de serviços.\n"
                 existError = true;
             }
 
             if (existError) {
                 alert(messageError);
             }
-
-            document.getElementById("cadastro").setAttribute("type", tipoButton);
+            document.getElementById("updateData").setAttribute("type", tipoButton);
         }
-
-
     </script>
 </head>
 
@@ -126,18 +132,18 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchLegislativo"
-                                        th:field="${myPartner.legislativo}">
-                                    <label class="form-check-label" for="flexSwitchLegislativo">
+                                    <input class="form-check-input" type="checkbox" id="checkLegislativo"
+                                        th:field="${myPartner.legislativo}" th:checked="${myPartner.legislativo}">
+                                    <label class="form-check-label" for="checkLegislativo">
                                         Legislativo
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchTecnico"
-                                        th:field="${myPartner.tecnico}">
-                                    <label class="form-check-label" for="flexSwitchTecnico">
+                                    <input class="form-check-input" type="checkbox" id="checkTecnico"
+                                        th:field="${myPartner.tecnico}" th:checked="${myPartner.tecnico}">
+                                    <label class="form-check-label" for="checkTecnico">
                                         Técnico
                                     </label>
                                 </div>
@@ -153,7 +159,7 @@
                         <input th:field="${myPartner.situacao}" hidden />
                         <input th:field="${myPartner.idUsuario}" hidden />
                         <div class="form-group mt-4 mb-0">
-                            <button class="btn btn-info btn-block" type="submit">
+                            <button class="btn btn-info btn-block" id="updateData" type="submit" onclick="validate()">
                                 Atualizar dados
                             </button>
                         </div>
