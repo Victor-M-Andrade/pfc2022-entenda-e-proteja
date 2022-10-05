@@ -52,6 +52,7 @@ public abstract class BaseWebService {
 
         partner.setCnpj(anonymizeData(partner.getCnpj()));
         partner.setWebsite(anonymizeData(partner.getWebsite()));
+        partner.setTelefone(anonymizeData(partner.getTelefone()));
         partner.setDescricao(anonymizeData(partner.getDescricao()));
         partner.setNomeEmpresa(anonymizeData(partner.getNomeEmpresa()));
 

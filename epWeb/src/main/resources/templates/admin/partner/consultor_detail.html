@@ -143,7 +143,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2" th:if="${!myPartner.anonimo}">
                                 <a th:href="@{/partner/edit-partner-data/{id} (id = ${myPartner.id})}"
                                     class="btn btn-warning col-12">
                                     Editar dados do consultor

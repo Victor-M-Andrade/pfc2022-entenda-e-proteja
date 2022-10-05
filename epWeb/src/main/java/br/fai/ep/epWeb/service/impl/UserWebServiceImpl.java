@@ -137,6 +137,10 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
             System.out.println(ex.getMessage());
         }
 
+        if (response != null && !response.isEmpty()) {
+            response.stream().forEach(BaseWebService::anonymizeAllData);
+        }
+
         return response;
     }
 
