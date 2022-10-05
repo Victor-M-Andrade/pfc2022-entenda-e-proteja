@@ -341,6 +341,11 @@ public class AdministratorController {
             return "redirect:/not-found";
         }
 
+        model.addAttribute(UPDATE_PARTNER_ERROR, updatePartnerError);
+        if (updatePartnerError) {
+            updatePartnerError = false;
+        }
+
         model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
         if (deletePartnerError) {
             deletePartnerError = false;
@@ -412,5 +417,22 @@ public class AdministratorController {
         partner.setSituacao(Parceiro.SITUATIONS.APPROVED);
         updatePartnerError = !partnerWebService.update(partner);
         return "redirect:/partner/admin-detail/" + userId;
+    }
+
+    @GetMapping("/partner/delte-partner/{userId}")
+    public String deletePartner(@PathVariable final long userId) {
+        final Map<String, Long> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, userId);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
+            deletePartnerError = true;
+            return "redirect:/partner/admin-detail/" + userId;
+        }
+
+        deletePartnerError = !partnerWebService.delete(partnerList.get(0).getId());
+        if (deletePartnerError) {
+            return "redirect:/partner/admin-detail/" + userId;
+        }
+        return "redirect:/partner/admin-list";
     }
 }

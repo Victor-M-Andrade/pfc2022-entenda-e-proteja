@@ -33,7 +33,7 @@
                         <h1 class="col-12 py-3">Meus dados de consultor</h1>
                         <div class="alert alert-danger col-12 text-center" th:if="${deletePartnerError}">
                             <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão do seu registro como consultor. Por gentileza,
+                                Não foi possível realizar a exclusão do consultor. Por gentileza,
                                 tente novamente.
                             </span>
                         </div>
@@ -179,7 +179,7 @@
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                     Não, cancelar operação
                                                 </button>
-                                                <a th:href="@{/partner/delete-my-data-as-partner/{id} (id = ${myPartner.idUsuario})}"
+                                                <a th:href="@{/partner/delte-partner/{id} (id = ${myPartner.idUsuario})}"
                                                     class="btn btn-danger">
                                                     Sim, excluir Este consultor
                                                 </a>
