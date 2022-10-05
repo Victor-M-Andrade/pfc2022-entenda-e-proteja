@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,9 +307,20 @@ public class AdministratorController {
 
     @GetMapping("/partner/admin-list")
     public String getPartnerListPage(final Model model) {
+        final List<Parceiro> partnerList = new ArrayList<>();
+
         final Map<String, Object> map = new HashMap<>();
         map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.APPROVED);
-        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        final List<Parceiro> approvedPartnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (approvedPartnerList != null && !approvedPartnerList.isEmpty()) {
+            approvedPartnerList.stream().forEach(partner -> partnerList.add(partner));
+        }
+
+        map.replace(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.EXCLUDED);
+        final List<Parceiro> excludedPartnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (excludedPartnerList != null && !excludedPartnerList.isEmpty()) {
+            excludedPartnerList.stream().forEach(partner -> partnerList.add(partner));
+        }
 
         boolean existsParner = true;
         if (partnerList == null || partnerList.isEmpty()) {
