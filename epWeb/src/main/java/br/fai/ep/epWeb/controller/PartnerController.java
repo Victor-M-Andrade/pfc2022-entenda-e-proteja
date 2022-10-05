@@ -28,12 +28,12 @@ public class PartnerController {
     private final String ALREADY_REGISTERED_CNPJ = "alreadyRegisteredCnpj";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
-    private boolean alreadyRegisteredCnpj = false;
     private boolean updatePartnerError = false;
+    private boolean deletePartnerError = false;
+    private boolean alreadyRegisteredCnpj = false;
     private boolean registrationRequestProblems = false;
 
     private Parceiro temporaryPartner = null;
-    private boolean deletePartnerError = false;
 
     @GetMapping("/partner/list")
     public String getPartnerListPage(final Model model) {
@@ -73,7 +73,6 @@ public class PartnerController {
         }
 
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
-
         return FoldersName.PARTNER_FOLDER + "/consultoria_info";
     }
 

@@ -33,14 +33,17 @@ public class AdministratorController {
     private final String EXISTS_PARTNER = "existsPartner";
     private final String IS_NEW_EVALUATION = "isNewEvaluation";
     private final String REGISTERED_PARTNER = "registeredPartner";
+    private final String DELETE_PARTNER_ERROR = "deletePartnerError";
     private final String MY_PARTNER_REFERENCE = "myPartner";
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
 
     private boolean deleteUserError = false;
-    private boolean updatePartnerError = false;
     private boolean anonymizeUserError = false;
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
+
+    private boolean updatePartnerError = false;
+    private boolean deletePartnerError = false;
 
     private Usuario temporaryUser = null;
 
@@ -187,6 +190,7 @@ public class AdministratorController {
     @GetMapping("/partner/request-register-list")
     public String getRequestRegisterListPage(final Model model) {
         final Map<String, Object> map = new HashMap<>();
+        map.put(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN, false);
         map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.REQUESTED);
         final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
 
@@ -297,5 +301,39 @@ public class AdministratorController {
             return "redirect:/partner/new-evaluate-registration-request/" + id;
         }
         return "redirect:/partner/reproved-register-list";
+    }
+
+    @GetMapping("/partner/admin-list")
+    public String getPartnerListPage(final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.SITUATION_COLUMN, Parceiro.SITUATIONS.APPROVED);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+
+        boolean existsParner = true;
+        if (partnerList == null || partnerList.isEmpty()) {
+            existsParner = false;
+        }
+
+        model.addAttribute(EXISTS_PARTNER, existsParner);
+        model.addAttribute(REGISTERED_PARTNER, partnerList);
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/consultores_aprovados";
+    }
+
+    @GetMapping("/partner/admin-detail/{id}")
+    public String getPartnerDetailPage(@PathVariable final long id, final Model model) {
+        final Map<String, Long> map = new HashMap<>();
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, id);
+        final List<Parceiro> partnerList = (List<Parceiro>) partnerWebService.readByCriteria(map);
+        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
+        if (deletePartnerError) {
+            deletePartnerError = false;
+        }
+
+        model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
+        return FoldersName.ADMIN_PARTNER_FOLDER + "/consultor_detail";
     }
 }

@@ -63,6 +63,12 @@
                             <div class="mb-2">
                                 <a th:href="@{/user/read-all}" class="btn btn-primary col-12">Lista de usuários</a>
                             </div>
+                            <div class="mb-2" th:if="${myUser.parceiro}">
+                                <a th:href="@{/partner/admin-detail/{id} (id = ${myUser.id})}"
+                                    class="btn btn-primary col-12">
+                                    Dados de consultor do usuario
+                                </a>
+                            </div>
                             <div th:if="${!myUser.anonimo}">
                                 <hr>
                                 <div class="mb-2" th:unless="${myUser.administrador}">
