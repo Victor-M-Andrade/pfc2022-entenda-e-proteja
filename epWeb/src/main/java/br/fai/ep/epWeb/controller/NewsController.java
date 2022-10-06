@@ -14,7 +14,7 @@ public class NewsController {
 
     @GetMapping("/news/categories")
     public String getCategoriesPage() {
-        return FoldersName.NEWS_FOLDER + "//noticias_categ";
+        return FoldersName.NEWS_FOLDER + "/noticias_categ";
     }
 
     @GetMapping("/news/new")
