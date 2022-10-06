@@ -41,4 +41,12 @@ public class Noticia extends BasePojo {
         public static final String ID_AUTHOR_COLUMN = "id_autor";
         public static final String ID_PUBLISHER_COLUMN = "id_publicador";
     }
+
+    public static class CATOGORY {
+        public static final String PASSWORDS = "senhas";
+        public static final String DATA = "Armazenamento de Dados";
+        public static final String LEGISLATION = "Legislação";
+        public static final String LEAKAGE = "Vazamento";
+        public static final String TUTORIALS = "Tutoriais";
+    }
 }
