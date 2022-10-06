@@ -45,6 +45,15 @@
             }
             document.getElementById("updateData").setAttribute("type", tipoButton);
         }
+
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("uploadPreview").src = oFREvent.target.result;
+            }
+        }
     </script>
 </head>
 
@@ -70,7 +79,7 @@
                 <div class="container card border-0 rounded-lg login col-12 col-xl-8">
                     <div class="card-header">
                         <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
-                        <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
+                        <img class="logo" th:src="@{${myPartner.pathImagePartner}}" id="uploadPreview" alt="logo">
                     </div>
                     <div class="card-body">
                         <div class="alert alert-danger" th:if="${updatePartnerError}">
@@ -123,7 +132,8 @@
                         </div>
                         <div class="form-group">
                             <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
-                            <input class="form-control" type="file" name="partnerProfile" accept="image/*">
+                            <input class="form-control" type="file" name="partnerProfile" accept="image/*"
+                                id="uploadImage" onchange="PreviewImage();">
                         </div>
                         <hr>
                         <div class="form-row">
