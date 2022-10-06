@@ -43,7 +43,10 @@
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <a href="#" class="btn btn-info col-12 btn-enviar-livro">Proposta uma nova notícia</a>
+                                <a th:href="@{/news/create-new-news/{id} (id = ${userId})}"
+                                    class="btn btn-info col-12 btn-enviar-livro">
+                                    Criar proposta de notícia
+                                </a>
                             </div>
                             <div class="mb-2" th:unless="${myUser.parceiro}">
                                 <a th:href="@{/partner/register/{id} (id = ${userId})}"
@@ -66,7 +69,8 @@
                                 </div>
 
                                 <div class="mb-2" th:if="${myUser.autor}">
-                                    <a href="#" class="btn btn-primary col-12 btn-enviar-livro">
+                                    <a th:href="@{/news/user-news-list/{id} (id = ${userId})}"
+                                        class="btn btn-primary col-12 btn-enviar-livro">
                                         Área do autor
                                     </a>
                                 </div>
