@@ -122,7 +122,7 @@ public class NewsController {
 
     @PostMapping("/news/request-news-publication")
     public String requestnewsRegistration(@RequestParam("newsCover") final MultipartFile file, final Noticia news) {
-        news.setPathImageNews("/resources/img/noticias/capa/banner_exemplo.png");
+        news.setPathImageNews("/resources/img/noticias/capa/fundo_anonimo.png");
         news.setDataCriacao(Timestamp.from(Instant.now()));
 
         temporaryNews = news;
