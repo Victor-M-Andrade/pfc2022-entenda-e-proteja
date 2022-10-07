@@ -38,17 +38,20 @@
                             <p>O que deseja fazer?</p>
                             <p></p>
                             <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
-                                <a class="btn btn-secondary mr-2" th:href="@{/user/profile/{id} (id = ${userId})}">
-                                    Cancelar esta operação
-                                </a>
-                                <a class="btn btn-danger mr-2"
-                                    th:href="@{/account/confirm-delete-my-account/{id} (id = ${userId})}">
-                                    Excluir meus dados
-                                </a>
-                                <a class="btn btn-success mr-2"
-                                    th:href="@{/account/anonymize-my-account/{id} (id = ${userId})}">
-                                    Manter meus dados
-                                </a>
+                                <div class="col-12">
+                                    <a class="btn btn-secondary col-sm-3 py-2"
+                                        th:href="@{/user/profile/{id} (id = ${userId})}">
+                                        Cancelar esta operação
+                                    </a>
+                                    <a class="btn btn-danger col-sm-3 py-2"
+                                        th:href="@{/account/confirm-delete-my-account/{id} (id = ${userId})}">
+                                        Excluir meus dados
+                                    </a>
+                                    <a class="btn btn-success col-sm-3 py-2"
+                                        th:href="@{/account/anonymize-my-account/{id} (id = ${userId})}">
+                                        Anonimizar dados
+                                    </a>
+                                </div>
                             </div>
                             <div th:if="${deleteUserError}">
                                 <br>
