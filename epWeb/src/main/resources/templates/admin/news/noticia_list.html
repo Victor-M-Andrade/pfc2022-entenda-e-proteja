@@ -67,13 +67,13 @@
                                 <td class="align-middle">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="py-2" data-toggle="modal"
-                                        th:attr="data-target='#userId'+${news.idAutor}">
+                                        th:attr="data-target='#newsId'+${news.id}">
                                         <i class="fa fa-address-card"></i>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" th:id="'userId' + ${news.idAutor}" tabindex="-1"
-                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" th:id="'newsId' + ${news.id}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -107,13 +107,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-info" data-dismiss="modal">
-                                                        Detalhes do autor
-                                                    </button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">
                                                         Fechar dialog
                                                     </button>
+                                                    <a th:href="@{/user/admin-profile/{id} (id = ${news.idAutor})}"
+                                                        class="btn btn-info">
+                                                        Detalhes do autor
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

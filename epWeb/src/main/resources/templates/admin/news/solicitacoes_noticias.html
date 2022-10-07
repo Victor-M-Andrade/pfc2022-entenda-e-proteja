@@ -103,13 +103,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-info" data-dismiss="modal">
-                                                        Detalhes do autor
-                                                    </button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">
                                                         Fechar dialog
                                                     </button>
+                                                    <a th:href="@{/user/admin-profile/{id} (id = ${news.idAutor})}"
+                                                        class="btn btn-info">
+                                                        Detalhes do autor
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
