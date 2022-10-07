@@ -3,6 +3,7 @@ package br.fai.ep.epWeb.service.impl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Noticia;
+import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
@@ -146,6 +147,10 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
             System.out.println(ex.getMessage());
         }
 
+        if (response != null && !response.isEmpty()) {
+            response.stream().forEach(AnonymizeData::anonymizeAllData);
+        }
+
         return response;
     }
 
@@ -161,6 +166,10 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
             response = requestResponse.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
+        }
+
+        if (response != null) {
+            response = response.isAnonimo() ? AnonymizeData.anonymizeAllData(response) : response;
         }
 
         return response;
@@ -179,6 +188,10 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
+        }
+
+        if (response != null && !response.isEmpty()) {
+            response.stream().forEach(AnonymizeData::anonymizeAllData);
         }
 
         return response;

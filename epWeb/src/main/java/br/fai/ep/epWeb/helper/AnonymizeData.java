@@ -1,5 +1,6 @@
 package br.fai.ep.epWeb.helper;
 
+import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 
@@ -32,6 +33,15 @@ public class AnonymizeData {
         partner.setNomeEmpresa(anonymizeData(partner.getNomeEmpresa()));
 
         return partner;
+    }
+
+    public static NewsDto anonymizeAllData(final NewsDto newsDto) {
+        if (!newsDto.isAnonimo()) {
+            return newsDto;
+        }
+        newsDto.setAuthorName(anonymizeData(newsDto.getAuthorName()));
+        newsDto.setAuthorEmail(anonymizeData(newsDto.getAuthorEmail()));
+        return newsDto;
     }
 
     public static String anonymizeData(final String data) {
