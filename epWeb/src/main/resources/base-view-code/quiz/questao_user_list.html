@@ -30,22 +30,22 @@
 
     <script src="../resources/javascript/aumentarLetra.js"></script>
 
-    
+
 </head>
 
 <body>
 
-      <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
     </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
-<!--NavBar-->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <!--NavBar-->
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
@@ -65,41 +65,44 @@
 
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      LGPD
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        LGPD
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      
-                      <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
-                      <a class="dropdown-item" href="../quiz/questao_dificuldade.html">Teste de conhecimento</a>
-                    </div>
-                  </li>
 
-
-                  <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Contatos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
-                      <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
-                      <a class="dropdown-item" href="../contatos/fale_conosco.html">Fale Conosco</a>
+                        <a class="dropdown-item" href="../noticia/noticias_categ.html">Notícias</a>
+                        <a class="dropdown-item" href="../quiz/questao_dificuldade.html">Teste de conhecimento</a>
                     </div>
-                  </li>
+                </li>
 
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Perfil
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contatos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="../conta/login.html">Entrar</a>
-                      <a class="dropdown-item" href="../conta/register.html">Cadastrar</a>
-                      <a class="dropdown-item" href="../usuario/perfil.html">Ver Perfil</a>
-                      <a class="dropdown-item" href="../usuario/editar_perfil.html">Editar Perfil</a>
-                      <a class="dropdown-item" href="#">Sair</a>
+                        <a class="dropdown-item" href="../contatos/consultoria_list.html">Empresas Cadastradas</a>
+                        <a class="dropdown-item" href="../contatos/sobre.html">Sobre o projeto</a>
+                        <a class="dropdown-item" href="../contatos/fale_conosco.html">Fale Conosco</a>
                     </div>
-                  </li>
+                </li>
+
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../conta/login.html">Entrar</a>
+                        <a class="dropdown-item" href="../conta/register.html">Cadastrar</a>
+                        <a class="dropdown-item" href="../usuario/perfil.html">Ver Perfil</a>
+                        <a class="dropdown-item" href="../usuario/editar_perfil.html">Editar Perfil</a>
+                        <a class="dropdown-item" href="#">Sair</a>
+                    </div>
+                </li>
 
             </ul>
         </div>
@@ -132,14 +135,15 @@
             <h1>Suas Questões</h1>
             <br>
         </div>
-        
+
         <div class="container-fluid text-center navbar-expand-md">
 
             <div class="row align-items-start">
 
                 <div class="table-responsive">
 
-                    <table class="table table-bordered text-center" id="tabela" width="100%" cellspacing="0">
+                    <table class="table table-bordered text-center table-hover" id="tabela" width="100%"
+                        cellspacing="0">
                         <thead>
                             <tr>
                                 <th class="col-5">Pergunta</th>
@@ -150,9 +154,9 @@
                             </tr>
 
                             <tr class="col-12">
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1"/></th>
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2"/></th>
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna3"/></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna3" /></th>
                                 <th><i class="fa fa-search" aria-hidden="true"></i></th>
                             </tr>
 
@@ -192,7 +196,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                             </tr>
 
 
@@ -226,7 +230,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
 
 
@@ -256,7 +260,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
 
 
@@ -286,7 +290,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
 
                                 <tr>
@@ -315,17 +319,17 @@
                                             </div>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
 
                             </div>
 
 
-                            
+
 
                         </tbody>
 
-                       
+
 
                     </table>
 

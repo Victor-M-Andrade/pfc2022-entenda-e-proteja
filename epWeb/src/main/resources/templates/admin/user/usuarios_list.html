@@ -33,9 +33,9 @@
                             Não existem usuário cadastrados no sistema.
                         </span>
                     </div>
-                    <table class="table table-bordered text-center table-hover" width="100%" id="tabela" cellspacing="0"
-                        th:if="${existsUsers}">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered text-center table-hover table-hover" width="100%" id="tabela"
+                        cellspacing="0" th:if="${existsUsers}">
+                        <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Email</th>
@@ -49,7 +49,7 @@
                                 <th><i class="fa fa-search col-2" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
-                        <tfoot class="thead-dark">
+                        <tfoot>
                             <tr>
                                 <th>Nome</th>
                                 <th>Email</th>

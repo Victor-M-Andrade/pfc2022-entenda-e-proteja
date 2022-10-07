@@ -33,9 +33,9 @@
                             Não existem consultores aprovados no sistema no momento.
                         </span>
                     </div>
-                    <table class="table table-bordered text-center py-2" id="tabela" width="100%" cellspacing="0"
-                        th:if="${existsPartner}">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered text-center table-hover py-2" id="tabela" width="100%"
+                        cellspacing="0" th:if="${existsPartner}">
+                        <thead>
                             <tr>
                                 <th class="col-6">Empresa</th>
                                 <th class="col-2">Situação</th>
@@ -51,7 +51,7 @@
                                 <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
-                        <tfoot class="thead-dark">
+                        <tfoot>
                             <tr>
                                 <th>Empresa</th>
                                 <th>Situação</th>
