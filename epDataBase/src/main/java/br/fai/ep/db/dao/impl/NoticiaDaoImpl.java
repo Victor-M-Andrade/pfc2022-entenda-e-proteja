@@ -335,6 +335,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+                newsDto.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
 
                 newsDtoList.add(newsDto);
             }
@@ -388,6 +389,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+                newsDto.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
             }
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:readAllNewsDto | classe: " + NoticiaDaoImpl.class);
@@ -437,6 +439,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
 
                 newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
                 newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+                newsDto.setAnonimo(resultSet.getBoolean(Usuario.USER_TABLE.IS_ANONYMOUS_COLUMN));
 
                 newsDtoList.add(newsDto);
             }

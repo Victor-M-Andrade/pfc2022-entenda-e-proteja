@@ -9,4 +9,5 @@ import lombok.Setter;
 public class NewsDto extends Noticia {
     private String authorName;
     private String authorEmail;
+    private boolean anonimo;
 }
