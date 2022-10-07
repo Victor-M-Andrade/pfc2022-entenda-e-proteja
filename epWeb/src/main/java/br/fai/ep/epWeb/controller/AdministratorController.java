@@ -521,4 +521,52 @@ public class AdministratorController {
 
         return FoldersName.ADMIN_NEWS_FOLDER + "/valiar-noticia";
     }
+
+    @GetMapping("/news/approve-news-publication/{id}")
+    public String approveNewsPublication(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/evaluate-news/" + id;
+        }
+
+        news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
+        updateNewsError = !newsWebService.update(news);
+        if (updateNewsError) {
+            return "redirect:/news/evaluate-news/" + id;
+        }
+        return "redirect:/news/publication-request-list";
+    }
+
+    @GetMapping("/news/reject-news-publication/{id}")
+    public String rejectNewsPublication(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/evaluate-news/" + id;
+        }
+
+        news.setSituacao(Noticia.SITUATIONS.REJECTED);
+        updateNewsError = !newsWebService.update(news);
+        if (updateNewsError) {
+            return "redirect:/news/evaluate-news/" + id;
+        }
+        return "redirect:/news/publication-request-list";
+    }
+
+    @GetMapping("/news/new-approve-news-publication/{id}")
+    public String newApproveNewsPublication(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/new-evaluate-news/" + id;
+        }
+
+        news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
+        updateNewsError = !newsWebService.update(news);
+        if (updateNewsError) {
+            return "redirect:/news/new-evaluate-news/" + id;
+        }
+        return "redirect:/news/rejected-news-list";
+    }
 }

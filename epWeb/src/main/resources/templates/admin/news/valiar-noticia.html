@@ -32,10 +32,12 @@
                 <div class="col-md-12 text-center py-2">
                     <div th:unless="${isNewEvaluation}">
                         <div>
-                            <a href="#" class="btn btn-success col-sm-5 py-2">
+                            <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                                class="btn btn-success col-sm-5 py-2">
                                 Publicar notícia
                             </a>
-                            <a href="#" class="btn btn-danger col-sm-5 py-2">
+                            <a th:href="@{/news/reject-news-publication/{id} (id = ${myNews.id})}"
+                                class="btn btn-danger col-sm-5 py-2">
                                 Rejeitar notícia
                             </a>
                         </div>
@@ -47,7 +49,8 @@
                     </div>
                     <div th:if="${isNewEvaluation}">
                         <div>
-                            <a href="#" class="btn btn-success col-sm-5 py-2">
+                            <a th:href="@{/news/new-approve-news-publication/{id} (id = ${myNews.id})}"
+                                class="btn btn-success col-sm-5 py-2">
                                 Publicar notícia
                             </a>
                             <a th:href="@{/news/rejected-news-list}" class="btn btn-danger col-sm-5 py-2">
