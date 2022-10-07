@@ -648,4 +648,19 @@ public class AdministratorController {
         updateNewsError = !newsWebService.update(news);
         return "redirect:/news/admin-news-detail/" + id;
     }
+
+    @GetMapping("/news/admin-delete-news/{id}")
+    public String deleteNews(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            deleteNewsError = true;
+            return "redirect:/news/admin-news-detail/" + id;
+        }
+
+        deleteNewsError = !newsWebService.delete(id);
+        if (deleteNewsError) {
+            return "redirect:/news/admin-news-detail/" + id;
+        }
+        return "redirect:/news/admin-list";
+    }
 }

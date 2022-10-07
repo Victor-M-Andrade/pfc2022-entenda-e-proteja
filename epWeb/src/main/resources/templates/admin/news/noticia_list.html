@@ -36,13 +36,15 @@
                         th:if="${existsNews}">
                         <thead>
                             <tr>
-                                <th class="col-6">Titulo</th>
+                                <th class="col-4">Titulo</th>
                                 <th class="col-2">Category</th>
+                                <th class="col-2">Status</th>
                                 <th class="col-2">ID Autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
                             <tr class="col-12">
                                 <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
                                 <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
                                 <th></th>
                                 <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
@@ -50,8 +52,9 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th class="col-6">Titulo</th>
+                                <th class="col-4">Titulo</th>
                                 <th class="col-2">Category</th>
+                                <th class="col-2">Status</th>
                                 <th class="col-2">ID Autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
@@ -60,6 +63,7 @@
                             <tr th:each="news : ${publicationNews}">
                                 <td th:text="${news.titulo}" class="align-middle">titulo</td>
                                 <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                                <td th:text="${news.situacao}" class="align-middle">status</td>
                                 <td class="align-middle">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="py-2" data-toggle="modal"
