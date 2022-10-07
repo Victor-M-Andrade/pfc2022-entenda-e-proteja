@@ -24,6 +24,7 @@ public class Noticia extends BasePojo {
         public static final String CREATED = "CRIADO";
         public static final String PUBLISHED = "PUBLICADO";
         public static final String REJECTED = "RECUSADO";
+        public static final String EXCLUDED = "EXCLUIDO";
     }
 
     public static class NEWS_TABLE extends TABLE {

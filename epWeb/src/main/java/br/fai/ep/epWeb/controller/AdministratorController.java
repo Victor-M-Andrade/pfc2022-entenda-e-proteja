@@ -569,4 +569,50 @@ public class AdministratorController {
         }
         return "redirect:/news/rejected-news-list";
     }
+
+    @GetMapping("/news/admin-list")
+    public String getNewsListPage(final Model model) {
+        final List<NewsDto> newsDtoList = new ArrayList<>();
+
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.PUBLISHED);
+        final List<NewsDto> publishedList = newsWebService.readByDtoCriteria(map);
+        if (publishedList != null && !publishedList.isEmpty()) {
+            publishedList.stream().forEach(newsDtoList::add);
+        }
+
+        map.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.EXCLUDED);
+        final List<NewsDto> excludedList = newsWebService.readByDtoCriteria(map);
+        if (excludedList != null && !excludedList.isEmpty()) {
+            excludedList.stream().forEach(newsDtoList::add);
+        }
+
+        boolean existsNews = true;
+        if (newsDtoList == null || newsDtoList.isEmpty()) {
+            existsNews = false;
+        }
+
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(PUBLICATION_NEWS, newsDtoList);
+        return FoldersName.ADMIN_NEWS_FOLDER + "/noticia_list";
+    }
+
+    @GetMapping("/news/admin-news-detail/{id}")
+    public String getAdminNewsDetailPage(@PathVariable final long id, final Model model) {
+        final NewsDto newsDto = newsWebService.readByNewsDtoId(id);
+        if (newsDto == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(USER_ID, newsDto.getIdAutor());
+        model.addAttribute(MY_NEWS_REFERENCE, newsDto);
+        model.addAttribute(IS_NEW_EVALUATION, true);
+
+        model.addAttribute(UPDATE_NEWS_ERROR, updateNewsError);
+        if (updateNewsError) {
+            updateNewsError = false;
+        }
+
+        return FoldersName.ADMIN_NEWS_FOLDER + "/noticia_detail";
+    }
 }

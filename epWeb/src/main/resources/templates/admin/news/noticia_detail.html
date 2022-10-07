@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Noticia - XYZ E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item" th:if="${isNewEvaluation}">
+                <a th:href="@{/news/admin-list}">Notícias publicadas</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Detalhes da notícia
+            </li>
+        </ol>
+        <h1 class="text-center">Detalhes da notícia</h1>
+        <div class="container-fluid text-center navbar-expand-md">
+            <hr>
+            <div class="row align-items-start">
+                <div class="col-md-12 text-center py-2">
+                    <div>
+                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                            th:if="${myNews.situacao == 'PUBLICADO'}" class="btn btn-primary col-sm-3 py-2">
+                            Desativar notícia
+                        </a>
+                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                            th:unless="${myNews.situacao == 'PUBLICADO'}" class="btn btn-success col-sm-3 py-2">
+                            Reativar notícia
+                        </a>
+                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                            class="btn btn-info col-sm-3 py-2">
+                            Noticias do autor
+                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger col-sm-3 py-2" data-toggle="modal"
+                            data-target="#exampleModal">
+                            Excluir Notícia
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-center" id="exampleModalLabel">
+                                            Exclusão de notícia
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Essa notícia será apagada permanentemente. Deseja continuar com a operação?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Não, cancelar operação
+                                        </button>
+                                        <a th:href="@{/news/delete-user-news/{id} (id = ${myNews.id})}"
+                                            class="btn btn-danger">
+                                            Sim, excluir notícia
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <a th:href="@{/news/admin-list}" class="btn btn-secondary col-sm-9 py-2">
+                            Voltar a lista de notícias
+                        </a>
+                    </div>
+                    <hr>
+                </div>
+                <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
+                    <span class="font-weight-bold align-middle">
+                        Não foi possível realizar a atualização da notícia. Por gentileza, tente novamente.
+                    </span>
+                </div>
+                <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteNewsError}">
+                    <span class="font-weight-bold align-middle">
+                        Não foi possível realizar a exclusão da notícia. Por gentileza, tente novamente.
+                    </span>
+                </div>
+                <hr>
+                <img class="d-block w-100 banner_noticia py-2" th:src="@{${myNews.pathImageNews}}" alt="banner_exemplo">
+                <div class="col col-xl-10 col-md-12 col-sm-12 col-12 text-left">
+                    <br>
+                    <h1 th:text="${myNews.titulo}">Meu titulo</h1>
+                </div>
+                <div class="col col-xl-2 col-md-12 col-sm-12 col-12 text-left">
+                    <li class="list-group-item" th:text="${authorName}">Autor: Zezinho</li>
+                    <li class="list-group-item"
+                        th:text="${#dates.format(new java.util.Date(myNews.dataCriacao), 'dd/MM/yyyy')}">Data:
+                        01/01/2000</li>
+                    <li class="list-group-item" th:text="${myNews.categoria}">Categoria: XYZ</li>
+                </div>
+                <div class="col col-xl-12 col-md-12 col-sm-12 col-12 text-left">
+                    <hr>
+                    <p style="white-space: pre;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit, sed
+                        do eiusmod
+                        tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed
+                        do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
