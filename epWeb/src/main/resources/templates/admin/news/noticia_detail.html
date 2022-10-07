@@ -36,7 +36,7 @@
                             th:unless="${myNews.situacao == 'PUBLICADO'}" class="btn btn-success col-sm-3 py-2">
                             Reativar notícia
                         </a>
-                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                        <a th:href="@{/news/admin-user-news-list/{id} (id = ${myNews.idAutor})}"
                             class="btn btn-info col-sm-3 py-2">
                             Noticias do autor
                         </a>

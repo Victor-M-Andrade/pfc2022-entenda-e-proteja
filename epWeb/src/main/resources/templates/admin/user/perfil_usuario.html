@@ -69,6 +69,12 @@
                                     Dados de consultor do usuario
                                 </a>
                             </div>
+                            <div class="mb-2" th:if="${myUser.autor}">
+                                <a th:href="@{/news/admin-user-news-list/{id} (id = ${myUser.id})}"
+                                    class="btn btn-primary col-12">
+                                    Notícias do usuário
+                                </a>
+                            </div>
                             <div th:if="${!myUser.anonimo}">
                                 <hr>
                                 <div class="mb-2" th:unless="${myUser.administrador}">

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitacao de registro de consultor E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item">
+                Notícias do usuário
+            </li>
+        </ol>
+
+        <h1 class="text-center">Notícias do usuário</h1>
+        <div class="col-12 text-center">
+            <a th:href="@{/user/admin-profile/{id} (id = ${userId})}" class="btn btn-primary col-sm-5 py-2">
+                Perfil do usuário
+            </a>
+            <a th:href="@{/news/admin-list}" class="btn btn-primary col-sm-5 py-2">
+                Lista de notícias
+            </a>
+        </div>
+        <div class="col-12 text-center py-2">
+            <a th:href="@{/user/administrator-area}" class="btn btn-secondary col-10">
+                Área do administrador
+            </a>
+        </div>
+        <hr>
+        <div class="container-fluid text-center navbar-expand-md py-2">
+            <div class="row align-items-start">
+                <div class="table-responsive">
+                    <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
+                        <span class="font-weight-bold align-middle">
+                            O usuário não possuí notícias publicadas no sistema no momento.
+                        </span>
+                    </div>
+                    <table class="table table-bordered text-center table-hover table-hover" id="tabela" width="100%"
+                        cellspacing="0" th:if="${existsNews}">
+                        <thead>
+                            <tr>
+                                <th>Situação</th>
+                                <th>Titulo</th>
+                                <th>Categoria</th>
+                                <th>Data Criação</th>
+                                <th>Ação</th>
+                            </tr>
+                            <tr class="col-12">
+                                <th><input class="col-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10" type="text" id="txtColuna2" /></th>
+                                <th><input class="col-10" type="text" id="txtColuna3" /></th>
+                                <th><input class="col-10" type="text" id="txtColuna4" /></th>
+                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Situação</th>
+                                <th>Titulo</th>
+                                <th>Categoria</th>
+                                <th>Data Criação</th>
+                                <th>Ação</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr th:each="news : ${publicationNews}">
+                                <td th:text="${news.situacao}" class="align-middle">situacao</td>
+                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                                <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                                <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
+                                    class="align-middle">
+                                    01/01/2022
+                                </td>
+                                <td>
+                                    <div class="col-12">
+                                        <a th:href="@{/news/admin-news-detail/{id} (id = ${news.id})}"
+                                            class="btn col-12 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

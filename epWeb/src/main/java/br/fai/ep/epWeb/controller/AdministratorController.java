@@ -663,4 +663,21 @@ public class AdministratorController {
         }
         return "redirect:/news/admin-list";
     }
+
+    @GetMapping("/news/admin-user-news-list/{id}")
+    public String getNewsListPage(@PathVariable final long id, final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Noticia.NEWS_TABLE.ID_AUTHOR_COLUMN, id);
+        final List<NewsDto> userNewsList = newsWebService.readByDtoCriteria(map);
+
+        boolean existsNews = true;
+        if (userNewsList == null || userNewsList.isEmpty()) {
+            existsNews = false;
+        }
+
+        model.addAttribute(USER_ID, id);
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(PUBLICATION_NEWS, userNewsList);
+        return FoldersName.ADMIN_NEWS_FOLDER + "/noticias_usuario";
+    }
 }
