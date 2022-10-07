@@ -113,49 +113,56 @@
                             </table>
                         </div>
                     </div>
-                    <div class="align-items-start">
+                    <div class="align-items-start" th:if="${userIsAuthor}">
                         <hr>
-                        <h3>Notícias propostas ou publicadas no site</h3>
+                        <h3>Notícias escritas</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered text-center table-hover table-hover" id="tabela"
                                 width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Data Publicação</th>
-                                        <th>Título</th>
-                                        <th>Tema</th>
+                                        <th>Situação</th>
+                                        <th>Titulo</th>
+                                        <th>Categoria</th>
+                                        <th>Data Criação</th>
                                         <th>Ação</th>
                                     </tr>
+                                    <tr class="col-12">
+                                        <th><input class="col-10" type="text" id="txtColuna1" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna2" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna3" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna4" /></th>
+                                        <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                                    </tr>
                                 </thead>
-                                <tbody>
+                                <tfoot>
                                     <tr>
-                                        <td>01/01/2022 as 10:52</td>
-                                        <td>O que é LGPD?</td>
-                                        <td>Legislação</td>
+                                        <th>Situação</th>
+                                        <th>Titulo</th>
+                                        <th>Categoria</th>
+                                        <th>Data Criação</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr th:each="news : ${newsList}">
+                                        <td th:text="${news.situacao}" class="align-middle">situacao</td>
+                                        <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                                        <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                                        <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
+                                            class="align-middle">
+                                            01/01/2022
+                                        </td>
                                         <td>
                                             <div class="col-12">
-                                                <a href="#" class="btn col-12 btn-info">
+                                                <a th:href="@{/news/user-news-detail/{id} (id = ${news.id})}"
+                                                    class="btn col-12 btn-info">
                                                     <i class="fas fa-eye"></i>
                                                     Ler
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
-                                    <div>
-                                        <tr>
-                                            <td>10/01/2022 as 12:00</td>
-                                            <td>Como proteger sua senha?</td>
-                                            <td>Segurança</td>
-                                            <td>
-                                                <div class="col-12">
-                                                    <a href="#" class="btn col-12 btn-info">
-                                                        <i class="fas fa-eye"></i>
-                                                        Ler
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </div>
                                 </tbody>
                             </table>
                         </div>

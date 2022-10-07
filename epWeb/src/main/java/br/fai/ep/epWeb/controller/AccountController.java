@@ -1,10 +1,12 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class AccountController {
     private final WebServiceInterface service = new UserWebServiceImpl();
     private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
+    private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
@@ -248,6 +251,18 @@ public class AccountController {
             }
         }
         model.addAttribute("userIsParner", userIsPartner);
+
+        boolean userIsAuthor = false;
+        if (usuario.isAutor()) {
+            final Map<String, Long> criteria = new HashMap<>();
+            criteria.put(Noticia.NEWS_TABLE.ID_AUTHOR_COLUMN, usuario.getId());
+            final List<Noticia> newsList = (List<Noticia>) newsWebService.readByCriteria(criteria);
+            if (newsList != null && !newsList.isEmpty()) {
+                model.addAttribute("newsList", newsList);
+                userIsAuthor = true;
+            }
+        }
+        model.addAttribute("userIsAuthor", userIsAuthor);
 
         model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
         if (UserController.deleteUserError) {
