@@ -25,15 +25,18 @@ import java.util.Map;
 @Controller
 public class NewsController {
     final NewsWebServiceImpl service = new NewsWebServiceImpl();
+    final UserWebServiceImpl userWebService = new UserWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String NEWS_LIST = "newsList";
     private final String EXISTS_NEWS = "existsNews";
     private final String AUTHOR_NAME = "authorName";
     private final String MY_NEWS_REFERENCE = "myNews";
+    private final String DELETE_NEWS_ERROR = "deleteNewsError";
     private final String CATEFORY_LIST_REFERENCE = "categoryList";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
+    private boolean deleteUserNewsError = false;
     private boolean registrationRequestProblems = false;
 
     final List<String> categoryList = Arrays.asList(new String[]{CATOGORY.DATA, CATOGORY.LEAKAGE, CATOGORY.LEGISLATION, CATOGORY.PASSWORDS, CATOGORY.TUTORIALS});
@@ -139,13 +142,51 @@ public class NewsController {
     @GetMapping("/news/user-news-detail/{id}")
     public String getUserNewsDetailPage(@PathVariable final long id, final Model model) {
         final Noticia news = (Noticia) service.readById(id);
-        final Usuario user = (Usuario) new UserWebServiceImpl().readById(news.getIdAutor());
+        if (news == null) {
+            return "redirect:/not-found";
+        }
 
+        final Usuario user = (Usuario) userWebService.readById(news.getIdAutor());
+        if (user == null) {
+            return "redirect:/not-found";
+        }
 
         model.addAttribute(USER_ID, news.getIdAutor());
         model.addAttribute(MY_NEWS_REFERENCE, news);
         model.addAttribute(AUTHOR_NAME, user.getNome());
 
+        model.addAttribute(DELETE_NEWS_ERROR, deleteUserNewsError);
+        if (deleteUserNewsError) {
+            deleteUserNewsError = false;
+        }
+
         return FoldersName.NEWS_FOLDER + "/user_news";
+    }
+
+    @GetMapping("/news/delete-user-news/{id}")
+    public String deleteUserNews(@PathVariable final long id) {
+        final Noticia news = (Noticia) service.readById(id);
+        if (news == null) {
+            deleteUserNewsError = true;
+            return "redirect:/news/user-news-detail/" + id;
+        }
+        deleteUserNewsError = !service.delete(id);
+        if (deleteUserNewsError) {
+            return "redirect:/news/user-news-detail/" + id;
+        }
+
+        final Map<String, Long> criteria = new HashMap<>();
+        criteria.put(Noticia.NEWS_TABLE.ID_AUTHOR_COLUMN, news.getIdAutor());
+        final List<Noticia> newsList = (List<Noticia>) service.readByCriteria(criteria);
+        if (newsList == null || newsList.isEmpty()) {
+            final Usuario user = (Usuario) userWebService.readById(news.getIdAutor());
+            user.setAutor(false);
+
+            deleteUserNewsError = !userWebService.update(user);
+            final String url = deleteUserNewsError ? "redirect:/news/user-news-detail/" : "redirect:/user/profile/";
+            return url + news.getIdAutor();
+        }
+
+        return "redirect:/news/user-news-list/" + news.getIdAutor();
     }
 }
