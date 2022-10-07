@@ -20,12 +20,12 @@
             </li>
         </ol>
         <h1 class="text-center">Suas notícias</h1>
+        <a th:href="@{/user/profile/{id} (id = ${userId})}" class="btn btn-secondary col-12 py-2">
+            Voltar ao seu perfil
+        </a>
         <hr>
-
         <div class="container-fluid text-center navbar-expand-md">
-
             <div class="row align-items-start">
-
                 <div class="table-responsive">
                     <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
                         <span class="font-weight-bold align-middle">
