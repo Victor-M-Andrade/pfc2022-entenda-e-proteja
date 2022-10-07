@@ -28,11 +28,11 @@
             <div class="row align-items-start">
                 <div class="col-md-12 text-center py-2">
                     <div>
-                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                        <a th:href="@{/news/deactivate-news/{id} (id = ${myNews.id})}"
                             th:if="${myNews.situacao == 'PUBLICADO'}" class="btn btn-primary col-sm-3 py-2">
                             Desativar notícia
                         </a>
-                        <a th:href="@{/news/approve-news-publication/{id} (id = ${myNews.id})}"
+                        <a th:href="@{/news/activate-news/{id} (id = ${myNews.id})}"
                             th:unless="${myNews.situacao == 'PUBLICADO'}" class="btn btn-success col-sm-3 py-2">
                             Reativar notícia
                         </a>

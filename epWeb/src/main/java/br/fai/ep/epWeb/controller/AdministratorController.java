@@ -46,6 +46,7 @@ public class AdministratorController {
     private final String PUBLICATION_NEWS = "publicationNews";
     private final String MY_NEWS_REFERENCE = "myNews";
     private final String UPDATE_NEWS_ERROR = "updateNewsError";
+    private final String DELETE_NEWS_ERROR = "deleteNewsError";
 
     private boolean deleteUserError = false;
     private boolean anonymizeUserError = false;
@@ -56,6 +57,7 @@ public class AdministratorController {
     private boolean deletePartnerError = false;
 
     private boolean updateNewsError = false;
+    private boolean deleteNewsError = false;
 
     private Usuario temporaryUser = null;
     private Parceiro temporaryPartner = null;
@@ -613,6 +615,37 @@ public class AdministratorController {
             updateNewsError = false;
         }
 
+        model.addAttribute(DELETE_NEWS_ERROR, deleteNewsError);
+        if (deleteNewsError) {
+            deleteNewsError = false;
+        }
+
         return FoldersName.ADMIN_NEWS_FOLDER + "/noticia_detail";
+    }
+
+    @GetMapping("/news/deactivate-news/{id}")
+    public String deactivateNews(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/admin-news-detail/" + id;
+        }
+
+        news.setSituacao(Noticia.SITUATIONS.EXCLUDED);
+        updateNewsError = !newsWebService.update(news);
+        return "redirect:/news/admin-news-detail/" + id;
+    }
+
+    @GetMapping("/news/activate-news/{id}")
+    public String activateNews(@PathVariable final long id) {
+        final Noticia news = (Noticia) newsWebService.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/admin-news-detail/" + id;
+        }
+
+        news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
+        updateNewsError = !newsWebService.update(news);
+        return "redirect:/news/admin-news-detail/" + id;
     }
 }

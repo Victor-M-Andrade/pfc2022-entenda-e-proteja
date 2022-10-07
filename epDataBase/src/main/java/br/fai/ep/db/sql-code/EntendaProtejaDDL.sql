@@ -79,7 +79,7 @@ create table noticia(
 );
 alter table noticia
 add constraint ck_news_situation check(
-        situacao in ('CRIADO', 'PUBLICADO', 'RECUSADO')
+        situacao in ('CRIADO', 'PUBLICADO', 'RECUSADO', 'EXCLUIDO')
     );
 /**
  TABELAS REFERENTES AO MODULO TESTE DE CONHECIMENTO
