@@ -7,7 +7,7 @@
     <parent>
         <groupId>br.fai.ep</groupId>
         <artifactId>entenda-e-proteja-parent</artifactId>
-        <version>5.5.0</version>
+        <version>5.6.0</version>
     </parent>
 
     <artifactId>epEntity</artifactId>
