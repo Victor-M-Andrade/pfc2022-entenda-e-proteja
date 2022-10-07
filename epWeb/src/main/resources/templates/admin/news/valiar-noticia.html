@@ -58,14 +58,14 @@
                             </a>
                         </div>
                     </div>
+                    <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
+                        <span class="font-weight-bold align-middle">
+                            Não foi possível concluir a avaliação da notícia. Por gentileza, tente novamente.
+                        </span>
+                    </div>
                     <hr>
                 </div>
-                <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
-                    <span class="font-weight-bold align-middle">
-                        Não foi possível concluir a avaliação da notícia. Por gentileza, tente novamente.
-                    </span>
-                </div>
-                <hr>
+
                 <img class="d-block w-100 banner_noticia py-2" th:src="@{${myNews.pathImageNews}}" alt="banner_exemplo">
                 <div class="col col-xl-10 col-md-12 col-sm-12 col-12 text-left">
                     <br>
