@@ -199,7 +199,11 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setTimestamp(i++, news.getDataCriacao());
             preparedStatement.setTimestamp(i++, news.getDataPublicacao());
             preparedStatement.setLong(i++, news.getIdAutor());
-            preparedStatement.setLong(i++, news.getIdPublicador());
+            if (news.getIdPublicador() <= 0) {
+                preparedStatement.setNull(i++, 0);
+            } else {
+                preparedStatement.setLong(i++, news.getIdPublicador());
+            }
             preparedStatement.setLong(i++, news.getId());
 
             preparedStatement.execute();

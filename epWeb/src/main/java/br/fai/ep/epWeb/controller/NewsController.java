@@ -36,7 +36,8 @@ public class NewsController {
     private final String CATEFORY_LIST_REFERENCE = "categoryList";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
-    private boolean deleteUserNewsError = false;
+    private boolean deleteNewsError = false;
+    private boolean updateNewsError = false;
     private boolean registrationRequestProblems = false;
 
     final List<String> categoryList = Arrays.asList(new String[]{CATOGORY.DATA, CATOGORY.LEAKAGE, CATOGORY.LEGISLATION, CATOGORY.PASSWORDS, CATOGORY.TUTORIALS});
@@ -155,9 +156,9 @@ public class NewsController {
         model.addAttribute(MY_NEWS_REFERENCE, news);
         model.addAttribute(AUTHOR_NAME, user.getNome());
 
-        model.addAttribute(DELETE_NEWS_ERROR, deleteUserNewsError);
-        if (deleteUserNewsError) {
-            deleteUserNewsError = false;
+        model.addAttribute(DELETE_NEWS_ERROR, deleteNewsError);
+        if (deleteNewsError) {
+            deleteNewsError = false;
         }
 
         return FoldersName.NEWS_FOLDER + "/user_news";
@@ -167,11 +168,11 @@ public class NewsController {
     public String deleteUserNews(@PathVariable final long id) {
         final Noticia news = (Noticia) service.readById(id);
         if (news == null) {
-            deleteUserNewsError = true;
+            deleteNewsError = true;
             return "redirect:/news/user-news-detail/" + id;
         }
-        deleteUserNewsError = !service.delete(id);
-        if (deleteUserNewsError) {
+        deleteNewsError = !service.delete(id);
+        if (deleteNewsError) {
             return "redirect:/news/user-news-detail/" + id;
         }
 
@@ -182,11 +183,25 @@ public class NewsController {
             final Usuario user = (Usuario) userWebService.readById(news.getIdAutor());
             user.setAutor(false);
 
-            deleteUserNewsError = !userWebService.update(user);
-            final String url = deleteUserNewsError ? "redirect:/news/user-news-detail/" : "redirect:/user/profile/";
+            deleteNewsError = !userWebService.update(user);
+            final String url = deleteNewsError ? "redirect:/news/user-news-detail/" : "redirect:/user/profile/";
             return url + news.getIdAutor();
         }
 
         return "redirect:/news/user-news-list/" + news.getIdAutor();
+    }
+
+    @GetMapping("/news/new-publication-request/{id}")
+    public String newPublicationRequest(@PathVariable final long id) {
+        final Noticia news = (Noticia) service.readById(id);
+        if (news == null) {
+            updateNewsError = true;
+            return "redirect:/news/user-news-detail/" + id;
+        }
+        news.setSituacao(Noticia.SITUATIONS.CREATED);
+        news.setDataCriacao(Timestamp.from(Instant.now()));
+
+        updateNewsError = !service.update(news);
+        return "redirect:/news/user-news-detail/" + id;
     }
 }

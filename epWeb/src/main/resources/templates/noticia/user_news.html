@@ -70,6 +70,15 @@
                             Voltar às suas notícias
                         </a>
                     </div>
+                    <div class="py-2" th:if="${myNews.situacao == 'RECUSADO'}">
+                        <hr>
+                        <p>A publicação desta notícia foi recusada. Atualize as informações da notícia e faça uma nova
+                            solicitação para avaliação</p>
+                        <a th:href="@{/news/new-publication-request/{id} (id = ${myNews.id})}"
+                            class="btn btn-success col-sm-10 py-2">
+                            Enviar notícia para avaliação.
+                        </a>
+                    </div>
                     <hr>
                 </div>
                 <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteNewsError}">
