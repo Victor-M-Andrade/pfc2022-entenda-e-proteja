@@ -5,6 +5,7 @@ import br.fai.ep.db.dao.impl.NoticiaDaoImpl;
 import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Noticia.NEWS_TABLE;
 import br.fai.ep.epEntities.Usuario;
@@ -82,5 +83,19 @@ public class NoticiaServiceImpl implements BaseService {
         }
 
         return param;
+    }
+
+    public List<NewsDto> readAllNewsDto() {
+        return dao.readAllNewsDto();
+    }
+
+    public NewsDto readByNewsDtoId(final long id) {
+        return dao.readByNewsDtoId(id);
+    }
+
+    public List<NewsDto> readByDtoCriteria(final Map criteria) {
+        String queryCriteria = SQL_COMMAND.WHERE + " 1=1 ";
+        queryCriteria += buildCriteriaParameters(criteria) + ";";
+        return dao.readByDtoCriteria(queryCriteria);
     }
 }

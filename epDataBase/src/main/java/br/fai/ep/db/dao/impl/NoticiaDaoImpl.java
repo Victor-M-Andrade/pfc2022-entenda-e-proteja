@@ -5,8 +5,10 @@ import br.fai.ep.db.dao.BaseDao;
 import br.fai.ep.db.dao.BaseDaoInterface;
 import br.fai.ep.db.helper.DataBaseHelper;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Noticia.NEWS_TABLE;
+import br.fai.ep.epEntities.Usuario;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -298,5 +300,155 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
         }
 
         return newsList;
+    }
+
+    public List<NewsDto> readAllNewsDto() {
+        List<NewsDto> newsDtoList = null;
+        resetValuesForNewQuery();
+
+        try {
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + Noticia.NEWS_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.ON;
+            sql += Noticia.NEWS_TABLE.SHORT_TABLE_NAME + NEWS_TABLE.ID_AUTHOR_COLUMN;
+            sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
+            sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
+
+            preparForReadingOrCreating(sql, false, true);
+            resultSet = preparedStatement.executeQuery();
+
+            newsDtoList = new ArrayList<>();
+            while (resultSet.next()) {
+                final NewsDto newsDto = new NewsDto();
+                newsDto.setId(resultSet.getLong(NEWS_TABLE.ID_COLUMN));
+                newsDto.setTitulo(resultSet.getString(NEWS_TABLE.TITLE_COLUMN));
+                newsDto.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
+                newsDto.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
+                newsDto.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                newsDto.setCategoria(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
+                newsDto.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                newsDto.setPathImageNews(resultSet.getString(NEWS_TABLE.PATH_IMG_NEWS));
+                newsDto.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
+                newsDto.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                newsDto.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
+                newsDto.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
+
+                newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
+                newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+
+                newsDtoList.add(newsDto);
+            }
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readAllNewsDto | classe: " + NoticiaDaoImpl.class);
+            if (e instanceof SQLException) {
+                System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
+            }
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return newsDtoList;
+    }
+
+    public NewsDto readByNewsDtoId(final long id) {
+        NewsDto newsDto = null;
+        resetValuesForNewQuery();
+
+        try {
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + Noticia.NEWS_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.ON;
+            sql += Noticia.NEWS_TABLE.SHORT_TABLE_NAME + NEWS_TABLE.ID_AUTHOR_COLUMN;
+            sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
+            sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
+            sql += DataBaseHelper.SQL_COMMAND.AND;
+            sql += Noticia.NEWS_TABLE.SHORT_TABLE_NAME + Noticia.NEWS_TABLE.ID_COLUMN;
+            sql += DataBaseHelper.SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE;
+
+            preparForReadingOrCreating(sql, false, true);
+            preparedStatement.setLong(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                newsDto = new NewsDto();
+                newsDto.setId(resultSet.getLong(NEWS_TABLE.ID_COLUMN));
+                newsDto.setTitulo(resultSet.getString(NEWS_TABLE.TITLE_COLUMN));
+                newsDto.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
+                newsDto.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
+                newsDto.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                newsDto.setCategoria(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
+                newsDto.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                newsDto.setPathImageNews(resultSet.getString(NEWS_TABLE.PATH_IMG_NEWS));
+                newsDto.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
+                newsDto.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                newsDto.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
+                newsDto.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
+
+                newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
+                newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+            }
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readAllNewsDto | classe: " + NoticiaDaoImpl.class);
+            if (e instanceof SQLException) {
+                System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
+            }
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return newsDto;
+    }
+
+    public List<NewsDto> readByDtoCriteria(final String criteria) {
+        List<NewsDto> newsDtoList = null;
+        resetValuesForNewQuery();
+
+        try {
+            String sql = DataBaseHelper.SQL_COMMAND.SELECT_FULL + Noticia.NEWS_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.INNER_JOIN + Usuario.USER_TABLE.TABLE_NAME;
+            sql += DataBaseHelper.SQL_COMMAND.ON;
+            sql += Noticia.NEWS_TABLE.SHORT_TABLE_NAME + NEWS_TABLE.ID_AUTHOR_COLUMN;
+            sql += DataBaseHelper.SQL_COMMAND.EQUAL_COMPATION;
+            sql += Usuario.USER_TABLE.SHORT_TABLE_NAME + Usuario.USER_TABLE.ID_COLUMN;
+            sql += " " + criteria;
+
+            preparForReadingOrCreating(sql, false, true);
+            resultSet = preparedStatement.executeQuery();
+
+            newsDtoList = new ArrayList<>();
+            while (resultSet.next()) {
+                final NewsDto newsDto = new NewsDto();
+                newsDto.setId(resultSet.getLong(NEWS_TABLE.ID_COLUMN));
+                newsDto.setTitulo(resultSet.getString(NEWS_TABLE.TITLE_COLUMN));
+                newsDto.setArtigo(resultSet.getInt(NEWS_TABLE.ARTICLE_COLUMN));
+                newsDto.setContexto(resultSet.getString(NEWS_TABLE.CONTEXT_COLUMN));
+                newsDto.setSituacao(resultSet.getString(NEWS_TABLE.SITUATION_COLUMN));
+                newsDto.setCategoria(resultSet.getString(NEWS_TABLE.CATEGORY_COLUMN));
+                newsDto.setPalavraChave(resultSet.getString(NEWS_TABLE.KEYWORD_COLUMN));
+                newsDto.setPathImageNews(resultSet.getString(NEWS_TABLE.PATH_IMG_NEWS));
+                newsDto.setDataCriacao(resultSet.getTimestamp(NEWS_TABLE.CREATION_DATE_COLUMN));
+                newsDto.setDataPublicacao(resultSet.getTimestamp(NEWS_TABLE.PUBLICATION_DATE_COLUMN));
+                newsDto.setIdAutor(resultSet.getLong(NEWS_TABLE.ID_AUTHOR_COLUMN));
+                newsDto.setIdPublicador(resultSet.getLong(NEWS_TABLE.ID_PUBLISHER_COLUMN));
+
+                newsDto.setAuthorName(resultSet.getString(Usuario.USER_TABLE.NAME_COLUMN));
+                newsDto.setAuthorEmail(resultSet.getString(Usuario.USER_TABLE.EMAIL_COLUMN));
+
+                newsDtoList.add(newsDto);
+            }
+
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readByCriteria | classe: " + NoticiaDaoImpl.class);
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return newsDtoList;
     }
 }
