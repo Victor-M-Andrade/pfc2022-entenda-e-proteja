@@ -1,100 +1,100 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Categ. de notícias E&P</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Categ. de notícias E&P</title>
+</head>
 
-    <body>
-        <div layout:fragment="body">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a th:href="@{/}">Home</a>
-                </li>
-                <li class="breadcrumb-item active">
-                    Categorias de notícias
-                </li>
-            </ol>
-            <h1 class="text-center">Catálago de notícias</h1>
-            <hr>
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Categorias de notícias
+            </li>
+        </ol>
+        <h1 class="text-center">Catálago de notícias</h1>
+        <hr>
 
-            <div class="container-fluid text-center navbar-expand-md">
-                <div class="row">
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a th:href="@{/news/news-list}">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Senhas</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/senha.jpg" alt="img_senha_categ"
-                                        class="img-fluid" />
-                                </div>
+        <div class="container-fluid text-center navbar-expand-md">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-by-category/3}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Senhas</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/senha.jpg" alt="img_senha_categ"
+                                    class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a th:href="@{/news/news-list}">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Armazenamento de Dados</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/armazenamento_dados.jpg"
-                                        alt="img_arm_dados_categ" class="img-fluid" />
-                                </div>
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-by-category/0}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Armazenamento de Dados</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/armazenamento_dados.jpg"
+                                    alt="img_arm_dados_categ" class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a th:href="@{/news/news-list}">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Legislação</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/legislacao.png" alt="img_senha_categ"
-                                        class="img-fluid" />
-                                </div>
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-by-category/2}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Legislação</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/legislacao.png" alt="img_senha_categ"
+                                    class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a th:href="@{/news/new}">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Vazamentos</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/vazamentos.jpg" alt="img_senha_categ"
-                                        class="img-fluid" />
-                                </div>
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-by-category/1}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Vazamentos</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/vazamentos.jpg" alt="img_senha_categ"
+                                    class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a th:href="@{/news/new}">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Tutoriais</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/tutoriais.jpg" alt="img_senha_categ"
-                                        class="img-fluid" />
-                                </div>
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-by-category/4}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Tutoriais</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/tutoriais.jpg" alt="img_senha_categ"
+                                    class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="col-md-3 col-sm-4 col-6 mt-2">
-                        <a href="noticia_list.html">
-                            <div class="h-100 btn btn-outline-dark">
-                                <div class="card-title text-center mt-1">Ver Todas</div>
-                                <div class="card-body text-center no-padding">
-                                    <img src="/resources/img/noticias/categ/ver_tudo.jpg" alt="img_senha_categ"
-                                        class="img-fluid" />
-                                </div>
+                <div class="col-md-3 col-sm-4 col-6 mt-2">
+                    <a th:href="@{/news/news-list}">
+                        <div class="h-100 btn btn-outline-dark">
+                            <div class="card-title text-center mt-1">Todas as notícias</div>
+                            <div class="card-body text-center no-padding">
+                                <img src="/resources/img/noticias/categ/ver_tudo.jpg" alt="img_senha_categ"
+                                    class="img-fluid" />
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>

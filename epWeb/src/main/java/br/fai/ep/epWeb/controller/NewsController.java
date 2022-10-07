@@ -1,5 +1,6 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Noticia.CATOGORY;
 import br.fai.ep.epEntities.Usuario;
@@ -17,10 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class NewsController {
@@ -34,6 +32,7 @@ public class NewsController {
     private final String MY_NEWS_REFERENCE = "myNews";
     private final String DELETE_NEWS_ERROR = "deleteNewsError";
     private final String UPDATE_NEWS_ERROR = "updateNewsError";
+    private final String SEARCH_BY_CATEGORY = "isSearchByCategory";
     private final String CATEFORY_LIST_REFERENCE = "categoryList";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
@@ -46,7 +45,44 @@ public class NewsController {
     private Noticia temporaryNews = null;
 
     @GetMapping("/news/news-list")
-    public String getNewsListPage() {
+    public String getNewsListPage(final Model model) {
+        final Map<String, String> criteria = new HashMap<>();
+        criteria.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.PUBLISHED);
+        final List<NewsDto> newsDtoList = service.readByDtoCriteria(criteria);
+
+        boolean existsNews = false;
+        if (newsDtoList != null && !newsDtoList.isEmpty()) {
+            existsNews = true;
+        }
+
+        model.addAttribute(NEWS_LIST, newsDtoList);
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(SEARCH_BY_CATEGORY, false);
+        return FoldersName.NEWS_FOLDER + "/noticia_list";
+    }
+
+    @GetMapping("/news/news-by-category/{categIdentification}")
+    public String getNewsListPage(@PathVariable final int categIdentification, final Model model) {
+        String category = null;
+        List<NewsDto> newsDtoList = new ArrayList<>();
+        if (categIdentification == 0 || categIdentification <= categoryList.size()) {
+            category = categoryList.get(categIdentification);
+        }
+        if (category != null) {
+            final Map<String, String> criteria = new HashMap<>();
+            criteria.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.PUBLISHED);
+            criteria.put(Noticia.NEWS_TABLE.CATEGORY_COLUMN, category);
+            newsDtoList = service.readByDtoCriteria(criteria);
+        }
+
+        boolean existsNews = false;
+        if (newsDtoList != null && !newsDtoList.isEmpty()) {
+            existsNews = true;
+        }
+
+        model.addAttribute(NEWS_LIST, newsDtoList);
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(SEARCH_BY_CATEGORY, true);
         return FoldersName.NEWS_FOLDER + "/noticia_list";
     }
 
@@ -55,8 +91,13 @@ public class NewsController {
         return FoldersName.NEWS_FOLDER + "/noticias_categ";
     }
 
-    @GetMapping("/news/new")
-    public String getNewPAge() {
+    @GetMapping("/news/new/{id}")
+    public String getNewPAge(@PathVariable final long id, final Model model) {
+        final NewsDto newsDto = service.readByNewsDtoId(id);
+        if (newsDto == null) {
+            return "redirect:/not-found";
+        }
+        model.addAttribute(MY_NEWS_REFERENCE, newsDto);
         return FoldersName.NEWS_FOLDER + "/noticias_modelo";
     }
 
