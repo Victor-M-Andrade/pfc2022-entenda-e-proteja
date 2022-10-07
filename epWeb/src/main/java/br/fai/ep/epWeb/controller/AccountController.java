@@ -2,8 +2,8 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.helper.FoldersName;
-import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -231,7 +231,7 @@ public class AccountController {
     public String getRequestUseDataPage(@PathVariable final long id, final Model model) {
         final Usuario usuario = (Usuario) service.readById(id);
         final String originalName = usuario.getNome();
-        final String anonymousName = BaseWebService.anonymizeData(usuario.getNome());
+        final String anonymousName = AnonymizeData.anonymizeData(usuario.getNome());
 
         model.addAttribute(USER_ID, id);
         model.addAttribute("anonymous", String.format("Exemplo: nome cadastrado %s | Próximas consultas em que for mensionado: %s",

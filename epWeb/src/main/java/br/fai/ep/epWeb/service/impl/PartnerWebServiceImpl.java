@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro;
+import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
@@ -32,7 +33,7 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
         }
 
         if (response != null && !response.isEmpty()) {
-            response.stream().forEach(BaseWebService::anonymizeAllData);
+            response.stream().forEach(AnonymizeData::anonymizeAllData);
         }
 
         return response;
@@ -54,7 +55,7 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
         }
 
         if (response != null) {
-            response = response.isAnonimo() ? anonymizeAllData(response) : response;
+            response = response.isAnonimo() ? AnonymizeData.anonymizeAllData(response) : response;
         }
 
         return response;
@@ -132,7 +133,7 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
         }
 
         if (response != null && !response.isEmpty()) {
-            response.stream().forEach(BaseWebService::anonymizeAllData);
+            response.stream().forEach(AnonymizeData::anonymizeAllData);
         }
 
         return response;
