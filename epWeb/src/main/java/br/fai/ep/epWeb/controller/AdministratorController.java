@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -533,6 +535,7 @@ public class AdministratorController {
         }
 
         news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
+        news.setDataPublicacao(Timestamp.from(Instant.now()));
         updateNewsError = !newsWebService.update(news);
         if (updateNewsError) {
             return "redirect:/news/evaluate-news/" + id;
@@ -565,6 +568,7 @@ public class AdministratorController {
         }
 
         news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
+        news.setDataPublicacao(Timestamp.from(Instant.now()));
         updateNewsError = !newsWebService.update(news);
         if (updateNewsError) {
             return "redirect:/news/new-evaluate-news/" + id;
