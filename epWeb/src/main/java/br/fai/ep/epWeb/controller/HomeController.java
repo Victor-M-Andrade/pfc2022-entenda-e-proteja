@@ -1,20 +1,24 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.DTO.MailDto;
+import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
-    @Autowired
-    private UserWebServiceImpl userWebService;
+    private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
+    private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
 
+    private final String EXISTS_NEWS = "existsNews";
     private final String SENDED_EMAIL = "sendedEmail";
     private final String SENDED_EMAIL_ERROR = "sendedEmailError";
 
@@ -24,7 +28,16 @@ public class HomeController {
     private MailDto temporaryMailDto = null;
 
     @GetMapping("/")
-    public String getHomePage() {
+    public String getHomePage(final Model model) {
+        final List<NewsDto> newsDtoList = newsWebService.readLastNewsDtoWithLimit(5);
+
+        boolean existNews = true;
+        if (newsDtoList == null || newsDtoList.isEmpty()) {
+            existNews = false;
+        }
+
+        model.addAttribute(EXISTS_NEWS, existNews);
+        model.addAttribute("newsList", newsDtoList);
         return "home";
     }
 

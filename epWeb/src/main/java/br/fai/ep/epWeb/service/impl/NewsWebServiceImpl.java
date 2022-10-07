@@ -196,4 +196,40 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         return response;
     }
+
+    public List<? extends BasePojo> readLastNewsWithLimit(final int limit) {
+        final String endpoint = BASE_ENDPOINT + "/read-all-limit/" + limit;
+        List<Noticia> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final ResponseEntity<Noticia[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, Noticia[].class);
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public List<NewsDto> readLastNewsDtoWithLimit(final int limit) {
+        final String endpoint = BASE_ENDPOINT + "/read-all-dto-limit/" + limit;
+        List<NewsDto> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final ResponseEntity<NewsDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, NewsDto[].class);
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if (response != null && !response.isEmpty()) {
+            response.stream().forEach(AnonymizeData::anonymizeAllData);
+        }
+
+        return response;
+    }
 }

@@ -64,4 +64,15 @@ public class NoticiaController {
     public ResponseEntity<List<NewsDto>> readByDtoCriteria(@RequestBody final Map criteria) {
         return ResponseEntity.ok(service.readByDtoCriteria(criteria));
     }
+
+    @GetMapping("/read-all-limit/{limit}")
+    public ResponseEntity<List<? extends BasePojo>> readLastNewsWithLimit(@PathVariable("limit") final int limit) {
+        return ResponseEntity.ok(service.readLastNewsWithLimit(limit));
+    }
+
+    @GetMapping("/read-all-dto-limit/{limit}")
+    public ResponseEntity<List<NewsDto>> readLastNewsDtoWithLimit(@PathVariable("limit") final int limit) {
+        return ResponseEntity.ok(service.readLastNewsDtoWithLimit(limit));
+    }
+
 }

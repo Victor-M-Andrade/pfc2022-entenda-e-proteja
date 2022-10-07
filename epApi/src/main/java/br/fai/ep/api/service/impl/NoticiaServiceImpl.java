@@ -98,4 +98,12 @@ public class NoticiaServiceImpl implements BaseService {
         queryCriteria += buildCriteriaParameters(criteria) + ";";
         return dao.readByDtoCriteria(queryCriteria);
     }
+
+    public List<? extends BasePojo> readLastNewsWithLimit(final int limit) {
+        return dao.readLastNewsWithLimit(limit);
+    }
+
+    public List<NewsDto> readLastNewsDtoWithLimit(final int limit) {
+        return dao.readLastNewsDtoWithLimit(limit);
+    }
 }
