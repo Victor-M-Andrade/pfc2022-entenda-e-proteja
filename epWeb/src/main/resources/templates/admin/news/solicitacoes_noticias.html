@@ -118,7 +118,8 @@
                                 </td>
                                 <td>
                                     <div class="col-12">
-                                        <a href="#" class="btn col-12 btn-info">
+                                        <a th:href="@{/news/evaluate-news/{id} (id = ${news.id})}"
+                                            class="btn col-12 btn-info">
                                             <i class="fas fa-eye"></i>
                                             Ler
                                         </a>

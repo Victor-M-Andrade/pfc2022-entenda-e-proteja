@@ -44,6 +44,8 @@ public class AdministratorController {
 
     private final String EXISTS_NEWS = "existsNews";
     private final String PUBLICATION_NEWS = "publicationNews";
+    private final String MY_NEWS_REFERENCE = "myNews";
+    private final String UPDATE_NEWS_ERROR = "updateNewsError";
 
     private boolean deleteUserError = false;
     private boolean anonymizeUserError = false;
@@ -52,6 +54,8 @@ public class AdministratorController {
 
     private boolean updatePartnerError = false;
     private boolean deletePartnerError = false;
+
+    private boolean updateNewsError = false;
 
     private Usuario temporaryUser = null;
     private Parceiro temporaryPartner = null;
@@ -478,5 +482,43 @@ public class AdministratorController {
         model.addAttribute(EXISTS_NEWS, existsNews);
         model.addAttribute(PUBLICATION_NEWS, newsList);
         return FoldersName.ADMIN_NEWS_FOLDER + "/noticias_rejeitadas";
+    }
+
+    @GetMapping("/news/evaluate-news/{id}")
+    public String getEvalueateNewsPage(@PathVariable final long id, final Model model) {
+        final NewsDto newsDto = newsWebService.readByNewsDtoId(id);
+        if (newsDto == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(USER_ID, newsDto.getIdAutor());
+        model.addAttribute(MY_NEWS_REFERENCE, newsDto);
+        model.addAttribute(IS_NEW_EVALUATION, false);
+
+        model.addAttribute(UPDATE_NEWS_ERROR, updateNewsError);
+        if (updateNewsError) {
+            updateNewsError = false;
+        }
+
+        return FoldersName.ADMIN_NEWS_FOLDER + "/valiar-noticia";
+    }
+
+    @GetMapping("/news/new-evaluate-news/{id}")
+    public String getNewEvalueateNewsPage(@PathVariable final long id, final Model model) {
+        final NewsDto newsDto = newsWebService.readByNewsDtoId(id);
+        if (newsDto == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(USER_ID, newsDto.getIdAutor());
+        model.addAttribute(MY_NEWS_REFERENCE, newsDto);
+        model.addAttribute(IS_NEW_EVALUATION, true);
+
+        model.addAttribute(UPDATE_NEWS_ERROR, updateNewsError);
+        if (updateNewsError) {
+            updateNewsError = false;
+        }
+
+        return FoldersName.ADMIN_NEWS_FOLDER + "/valiar-noticia";
     }
 }
