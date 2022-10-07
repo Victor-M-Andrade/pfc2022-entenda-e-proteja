@@ -210,4 +210,67 @@ public class NewsController {
         updateNewsError = !service.update(news);
         return "redirect:/news/user-news-detail/" + id;
     }
+
+    @GetMapping("/news/user-news-edit/{id}")
+    public String getUserNewsEditPage(@PathVariable final long id, final Model model) {
+        final Noticia news = (Noticia) service.readById(id);
+        if (news == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(USER_ID, news.getIdAutor());
+        model.addAttribute(MY_NEWS_REFERENCE, news);
+        model.addAttribute(CATEFORY_LIST_REFERENCE, categoryList);
+
+        model.addAttribute(UPDATE_NEWS_ERROR, updateNewsError);
+        if (updateNewsError) {
+            updateNewsError = false;
+        }
+        return FoldersName.NEWS_FOLDER + "/news_edit";
+    }
+
+    @PostMapping("/news/update-user-news")
+    public String updateteNews(@RequestParam("newsCover") final MultipartFile file, final Noticia news) {
+        temporaryNews = (Noticia) service.readById(news.getId());
+        if (temporaryNews == null) {
+            updateNewsError = true;
+            return "redirect:/news/user-news-edit/" + news.getId();
+        }
+        news.setDataCriacao(temporaryNews.getDataCriacao());
+        news.setDataPublicacao(temporaryNews.getDataPublicacao());
+
+        if (file.isEmpty()) {
+            updateNewsError = !service.update(news);
+            if (updateNewsError) {
+                temporaryNews = news;
+                return "redirect:/news/user-news-edit/" + news.getId();
+            }
+            temporaryNews = null;
+            return "redirect:/news/user-news-detail/" + news.getId();
+        }
+        final String newNameFile = service.buildNameNewFile(news);
+        final String nameFileWithExtension = service.prepareNameWithExtension(file.getOriginalFilename(), newNameFile);
+        if (nameFileWithExtension == null) {
+            updateNewsError = !service.update(news);
+            if (updateNewsError) {
+                temporaryNews = news;
+                return "redirect:/news/user-news-edit/" + news.getId();
+            }
+            temporaryNews = null;
+            return "redirect:/news/user-news-detail/" + news.getId();
+        }
+
+        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_NEWS, nameFileWithExtension, newNameFile);
+        if (pathImage != null) {
+            news.setPathImageNews(pathImage);
+        }
+
+        updateNewsError = !service.update(news);
+        if (updateNewsError) {
+            temporaryNews = news;
+            return "redirect:/news/user-news-edit/" + news.getId();
+        }
+        temporaryNews = null;
+        return "redirect:/news/user-news-detail/" + news.getId();
+    }
 }

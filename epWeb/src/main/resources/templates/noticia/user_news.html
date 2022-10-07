@@ -19,7 +19,7 @@
                 <a th:href="@{/news/user-news-list/{id} (id = ${userId})}">Suas notícias</a>
             </li>
             <li class="breadcrumb-item active">
-                Noticia
+                Detalhes da notícia
             </li>
         </ol>
         <h1 class="text-center">Detalhes da notícia</h1>
@@ -28,7 +28,10 @@
             <div class="row align-items-start">
                 <div class="col-md-12 text-center py-2">
                     <div>
-                        <a href="#" class="btn btn-warning col-sm-5 py-2">Editar notícia</a>
+                        <a th:href="@{/news/user-news-edit/{id} (id = ${myNews.id})}"
+                            class="btn btn-warning col-sm-5 py-2">
+                            Editar notícia
+                        </a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger col-sm-5 py-2" data-toggle="modal"
                             data-target="#exampleModal">

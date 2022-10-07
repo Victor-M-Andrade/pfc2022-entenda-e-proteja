@@ -43,7 +43,7 @@ public class Noticia extends BasePojo {
     }
 
     public static class CATOGORY {
-        public static final String PASSWORDS = "senhas";
+        public static final String PASSWORDS = "Senhas";
         public static final String DATA = "Armazenamento de Dados";
         public static final String LEGISLATION = "Legislação";
         public static final String LEAKAGE = "Vazamento";
