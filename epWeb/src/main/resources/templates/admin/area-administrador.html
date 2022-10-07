@@ -33,7 +33,9 @@
                                         </a>
                                     </div>
                                     <div class="row py-2">
-                                        <a href="#" class="btn btn-warning col-12">Propostas de notícias</a>
+                                        <a th:href="@{/news/publication-request-list}" class="btn btn-warning col-12">
+                                            Propostas de notícias
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +50,7 @@
                                         </a>
                                     </div>
                                     <div class="row py-2">
-                                        <a href="#" class="btn btn-danger col-12">
+                                        <a th:href="@{/news/rejected-news-list}" class="btn btn-danger col-12">
                                             Notícias reprovadas
                                         </a>
                                     </div>

@@ -1,8 +1,11 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epEntities.DTO.NewsDto;
+import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ public class AdministratorController {
 
     private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
     private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
+    private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
 
     private final String USER_ID = "userId";
     private final String EXISTS_USERS = "existsUsers";
@@ -37,6 +41,9 @@ public class AdministratorController {
     private final String DELETE_PARTNER_ERROR = "deletePartnerError";
     private final String MY_PARTNER_REFERENCE = "myPartner";
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
+
+    private final String EXISTS_NEWS = "existsNews";
+    private final String PUBLICATION_NEWS = "publicationNews";
 
     private boolean deleteUserError = false;
     private boolean anonymizeUserError = false;
@@ -438,5 +445,38 @@ public class AdministratorController {
             return "redirect:/partner/admin-detail/" + userId;
         }
         return "redirect:/partner/admin-list";
+    }
+
+    //ADMIN NEWS AREA
+    @GetMapping("/news/publication-request-list")
+    public String getPublicationRequestListPage(final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.CREATED);
+        final List<NewsDto> newsList = newsWebService.readByDtoCriteria(map);
+
+        boolean existsNews = true;
+        if (newsList == null || newsList.isEmpty()) {
+            existsNews = false;
+        }
+
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(PUBLICATION_NEWS, newsList);
+        return FoldersName.ADMIN_NEWS_FOLDER + "/solicitacoes_noticias";
+    }
+
+    @GetMapping("/news/rejected-news-list")
+    public String getRejectedNewsListPage(final Model model) {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.REJECTED);
+        final List<NewsDto> newsList = newsWebService.readByDtoCriteria(map);
+
+        boolean existsNews = true;
+        if (newsList == null || newsList.isEmpty()) {
+            existsNews = false;
+        }
+
+        model.addAttribute(EXISTS_NEWS, existsNews);
+        model.addAttribute(PUBLICATION_NEWS, newsList);
+        return FoldersName.ADMIN_NEWS_FOLDER + "/noticias_rejeitadas";
     }
 }
