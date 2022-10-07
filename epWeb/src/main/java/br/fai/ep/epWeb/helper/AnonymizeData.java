@@ -12,8 +12,7 @@ public class AnonymizeData {
         user.setNome(anonymizeData(user.getNome()));
         user.setEmail(anonymizeData(user.getEmail()));
         user.setSenha(anonymizeData(user.getSenha()));
-        user.setPathImageProfile(anonymizeData(user.getPathImageProfile()));
-
+        user.setPathImageProfile("/resources/img/logo_invertido.png");
         return user;
     }
 
@@ -24,13 +23,14 @@ public class AnonymizeData {
         partner.setNome(anonymizeData(partner.getNome()));
         partner.setEmail(anonymizeData(partner.getEmail()));
         partner.setSenha(anonymizeData(partner.getSenha()));
-        partner.setPathImageProfile(anonymizeData(partner.getPathImageProfile()));
+        partner.setPathImageProfile("/resources/img/logo_invertido.png");
 
         partner.setCnpj(anonymizeData(partner.getCnpj()));
         partner.setWebsite(anonymizeData(partner.getWebsite()));
         partner.setTelefone(anonymizeData(partner.getTelefone()));
         partner.setDescricao(anonymizeData(partner.getDescricao()));
         partner.setNomeEmpresa(anonymizeData(partner.getNomeEmpresa()));
+        partner.setPathImagePartner("/resources/img/logo_invertido.png");
 
         return partner;
     }

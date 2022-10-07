@@ -5,214 +5,127 @@
     <meta charset="UTF-8">
     <title>Lista de notícias E&P</title>
 </head>
+
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Lista de notícias
-        </li>
-    </ol>
-    <h1 class="text-center">Notícias desta categorias</h1>
-    <hr>
-
-    <div class="container-fluid text-center navbar-expand-md">
-        <div class="row align-items-start" id="accordion-parent">
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-1">Título da matéria
-                        </button>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Lista de notícias
+            </li>
+        </ol>
+        <h1 class="text-center">Notícias desta categorias</h1>
+        <hr>
+        <div class="col-12 text-center">
+            <a th:href="@{/user/admin-profile/{id} (id = ${userId})}" class="btn btn-primary col-sm-5 py-2">
+                Lista de categorias
+            </a>
+            <a th:href="@{/news/admin-list}" class="btn btn-primary col-sm-5 py-2">
+                Todas as noticias
+            </a>
+        </div>
+        <hr>
+        <div class="container-fluid text-center navbar-expand-md py-2">
+            <div class="row align-items-start">
+                <div class="table-responsive">
+                    <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
+                        <span class="font-weight-bold align-middle">
+                            Não existem notícias publicadas no sistema no momento.
+                        </span>
                     </div>
+                    <table class="table table-bordered text-center table-hover" id="tabela" width="100%" cellspacing="0"
+                        th:if="${existsNews}">
+                        <thead>
+                            <tr>
+                                <th class="col-4">Titulo</th>
+                                <th class="col-2">Category</th>
+                                <th class="col-2">ID Autor</th>
+                                <th class="col-2">Ação</th>
+                            </tr>
+                            <tr class="col-12">
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
+                                <th></th>
+                                <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="col-4">Titulo</th>
+                                <th class="col-2">Category</th>
+                                <th class="col-2">ID Autor</th>
+                                <th class="col-2">Ação</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr th:each="news : ${publicationNews}">
+                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                                <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                                <td class="align-middle">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="py-2" data-toggle="modal"
+                                        th:attr="data-target='#newsId'+${news.id}">
+                                        <i class="fa fa-address-card"></i>
+                                    </button>
 
-                    <div class="collapse" id="card-1" data-parent="#accordion-parent">
-                        <div class="card-body">
+                                    <!-- Modal -->
+                                    <div class="modal fade" th:id="'newsId' + ${news.id}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-center" id="exampleModalLabel">
+                                                        Dados do Autor
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-2 card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><strong>Nome</strong></div>
+                                                                <div class="col-sm-9">
+                                                                    <label th:text="${news.authorName}">
+                                                                        Nome do Autor
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer text-center">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                        Fechar dialog
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-
-                            <br>
-
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-2">Título da matéria
-                        </button>
-                    </div>
-
-                    <div class="collapse" id="card-2" data-parent="#accordion-parent">
-                        <div class="card-body">
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <br>
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-3">Título da matéria
-                        </button>
-                    </div>
-
-                    <div class="collapse" id="card-3" data-parent="#accordion-parent">
-                        <div class="card-body">
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <br>
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-4">Título da matéria
-                        </button>
-                    </div>
-                    <div class="collapse" id="card-4" data-parent="#accordion-parent">
-                        <div class="card-body">
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <br>
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-5">Título da matéria
-                        </button>
-                    </div>
-                    <div class="collapse" id="card-5" data-parent="#accordion-parent">
-                        <div class="card-body">
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <br>
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Noticia-->
-            <div class="accordion col-xl-6 col-sm-12 col-12 mt-2 materia_resumo">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-primary btn-block" data-toggle="collapse"
-                                data-target="#card-6">Título da matéria
-                        </button>
-                    </div>
-                    <div class="collapse" id="card-6" data-parent="#accordion-parent">
-                        <div class="card-body">
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do
-                                eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua</p>
-                            <br>
-                            <div class="row">
-                                <p class="col text-left">Categoria: XYZ</p>
-                                <p class="col text-right">
-                                    <a th:href="@{/news/new}">Ler matéria completa</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12">
+                                        <a th:href="@{/news/admin-news-detail/{id} (id = ${news.id})}"
+                                            class="btn col-12 btn-info">
+                                            <i class="fas fa-eye"></i>
+                                            Ler
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
