@@ -23,10 +23,8 @@
             </li>
         </ol>
         <h1 class="text-center">Detalhes da notícia</h1>
-        <hr>
-
-
         <div class="container-fluid text-center navbar-expand-md">
+            <hr>
             <div class="row align-items-start">
                 <div class="col-md-12 text-center py-2">
                     <div>
@@ -68,12 +66,19 @@
                     </div>
                     <div class="py-2">
                         <a th:href="@{/news/user-news-list/{id} (id = ${userId})}"
-                            class="btn btn-secondary col-sm-10 py-2">Voltar às suas
-                            notícias</a>
+                            class="btn btn-secondary col-sm-10 py-2">
+                            Voltar às suas notícias
+                        </a>
                     </div>
+                    <hr>
                 </div>
-
-                <img class="d-block w-100 banner_noticia" th:src="@{${myNews.pathImageNews}}" alt="banner_exemplo">
+                <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteNewsError}">
+                    <span class="font-weight-bold align-middle">
+                        Erro ao realizar a exclusão da notícia. Por gentileza, tente novamente.
+                    </span>
+                </div>
+                <hr>
+                <img class="d-block w-100 banner_noticia py-2" th:src="@{${myNews.pathImageNews}}" alt="banner_exemplo">
                 <div class="col col-xl-10 col-md-12 col-sm-12 col-12 text-left">
                     <br>
                     <h1 th:text="${myNews.titulo}">Meu titulo</h1>
