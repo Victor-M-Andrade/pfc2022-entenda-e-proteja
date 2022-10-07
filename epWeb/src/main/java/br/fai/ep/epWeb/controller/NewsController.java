@@ -33,6 +33,7 @@ public class NewsController {
     private final String AUTHOR_NAME = "authorName";
     private final String MY_NEWS_REFERENCE = "myNews";
     private final String DELETE_NEWS_ERROR = "deleteNewsError";
+    private final String UPDATE_NEWS_ERROR = "updateNewsError";
     private final String CATEFORY_LIST_REFERENCE = "categoryList";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
@@ -159,6 +160,11 @@ public class NewsController {
         model.addAttribute(DELETE_NEWS_ERROR, deleteNewsError);
         if (deleteNewsError) {
             deleteNewsError = false;
+        }
+
+        model.addAttribute(UPDATE_NEWS_ERROR, updateNewsError);
+        if (updateNewsError) {
+            updateNewsError = false;
         }
 
         return FoldersName.NEWS_FOLDER + "/user_news";

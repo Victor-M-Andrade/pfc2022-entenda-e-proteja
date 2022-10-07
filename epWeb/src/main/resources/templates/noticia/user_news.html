@@ -78,12 +78,17 @@
                             class="btn btn-success col-sm-10 py-2">
                             Enviar notícia para avaliação.
                         </a>
+                        <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
+                            <span class="font-weight-bold align-middle">
+                                Não foi possível realizar a nova solicitação. Por gentileza, tente novamente.
+                            </span>
+                        </div>
                     </div>
                     <hr>
                 </div>
                 <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteNewsError}">
                     <span class="font-weight-bold align-middle">
-                        Erro ao realizar a exclusão da notícia. Por gentileza, tente novamente.
+                        Não foi possível realizar a exclusão da notícia. Por gentileza, tente novamente.
                     </span>
                 </div>
                 <hr>
