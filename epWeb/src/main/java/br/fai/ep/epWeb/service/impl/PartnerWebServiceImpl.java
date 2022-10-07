@@ -68,7 +68,6 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
         try {
             final RestTemplate restTemplace = new RestTemplate();
             final Parceiro partner = (Parceiro) entity;
-            partner.setPathImageProfile("C:");
             final HttpEntity<Parceiro> httpEntity = new HttpEntity<>(partner);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
