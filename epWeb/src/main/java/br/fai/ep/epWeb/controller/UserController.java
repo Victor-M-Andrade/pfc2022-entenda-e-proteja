@@ -37,6 +37,10 @@ public class UserController {
     @GetMapping("/user/profile/{id}")
     public String getMyUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) service.readById(id);
+        if (user == null) {
+            return "redirect:/not-found";
+        }
+
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
         model.addAttribute(USER_CREATION_DATE, service.getCreationDateAndTime(user.getDataHora()));

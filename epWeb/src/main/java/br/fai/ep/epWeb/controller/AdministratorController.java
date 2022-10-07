@@ -72,6 +72,10 @@ public class AdministratorController {
     @GetMapping("/user/admin-profile/{id}")
     public String getUserProfilePage(@PathVariable final long id, final Model model) {
         final Usuario user = (Usuario) userWebService.readById(id);
+        if (user == null) {
+            return "redirect:/not-found";
+        }
+
         model.addAttribute(MY_USER_REFERENCE, user);
         model.addAttribute(USER_ID, user.getId());
         model.addAttribute(USER_CREATION_DATE, userWebService.getCreationDateAndTime(user.getDataHora()));
