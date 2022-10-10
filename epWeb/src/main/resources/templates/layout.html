@@ -80,8 +80,7 @@
                             Perfil
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" th:href="@{/account/login}">Entrar</a>
-                            <a class="dropdown-item" th:href="@{/account/register}">Cadastrar</a>
+
                             <a class="dropdown-item" th:href="@{/user/administrator-area}">Área do administrador</a>
                             <!-- <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
                     <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a> -->
@@ -89,18 +88,30 @@
                         </div>
                     </li>
 
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Acessibilidade
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <label for="input-zoom-mode">
+                                <a class="dropdown-item">Aumentar Letra</a>
+                            </label>
+                            <input type="checkbox" id="input-zoom-mode" hidden>
+                            <label for="input-dark-mode">
+                                <a class="dropdown-item">Modo Escuro</a>
+                            </label>
+                            <input type="checkbox" id="input-dark-mode" hidden>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
 
-            <label for="input-zoom-mode">
-                <a class="button btn btn-outline-light">Aumentar Letra</a>
-            </label>
-            <input type="checkbox" id="input-zoom-mode" hidden>
 
-            <label for="input-dark-mode">
-                <a class="button btn btn-outline-light ml-3">Dark Mode</a>
-            </label>
-            <input type="checkbox" id="input-dark-mode" hidden>
+
+            <a class="button btn btn-outline-light mr-4" th:href="@{/account/login}">Entrar</a>
+            <a class="button btn btn-outline-light mr-4" th:href="@{/account/register}">Cadastrar</a>
 
         </nav>
 
