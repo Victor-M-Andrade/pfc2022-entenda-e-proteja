@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.DTO.NewsDto;
+import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -10,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -29,7 +32,9 @@ public class HomeController {
 
     @GetMapping("/")
     public String getHomePage(final Model model) {
-        final List<NewsDto> newsDtoList = newsWebService.readLastNewsDtoWithLimit(5);
+        final Map<String, String> criteria = new HashMap<>();
+        criteria.put(Noticia.NEWS_TABLE.SITUATION_COLUMN, Noticia.SITUATIONS.PUBLISHED);
+        final List<NewsDto> newsDtoList = newsWebService.readLastNewsByDtoCriteriaWithLimit(criteria, 5);
 
         boolean existNews = true;
         if (newsDtoList == null || newsDtoList.isEmpty()) {

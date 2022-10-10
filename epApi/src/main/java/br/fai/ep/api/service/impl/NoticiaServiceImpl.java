@@ -106,4 +106,10 @@ public class NoticiaServiceImpl implements BaseService {
     public List<NewsDto> readLastNewsDtoWithLimit(final int limit) {
         return dao.readLastNewsDtoWithLimit(limit);
     }
+
+    public List<NewsDto> readLastNewsByDtoCriteriaWithLimit(final Map criteria, final int limit) {
+        String queryCriteria = SQL_COMMAND.WHERE + " 1=1 ";
+        queryCriteria += buildCriteriaParameters(criteria);
+        return dao.readLastNewsByDtoCriteriaWithLimit(queryCriteria, limit);
+    }
 }
