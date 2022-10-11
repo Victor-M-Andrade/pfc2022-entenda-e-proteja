@@ -140,11 +140,16 @@
                                 th:field="${myQuest.alternativaD}" required></textarea>
                         </div>
                     </div>
+
+                    <div class="col-12 py-2 text-center">
+                        <button type="submit" id="createQuestButton" class="btn btn-info col-sm-5" onclick="validade()">
+                            Criar questão
+                        </button>
+                        <a th:href="@{/question/list}" class="btn btn-secondary col-sm-5">
+                            Cancelar operação
+                        </a>
+                    </div>
                 </div>
-                <hr>
-                <button type="submit" id="createQuestButton" class="btn btn-info btn-block" onclick="validade()">
-                    Enviar Questão para Análise
-                </button>
             </form>
         </div>
     </div>

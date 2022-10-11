@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class QuestController {
+public class QuestionController {
 
     QuestWebServiceImpl service = new QuestWebServiceImpl();
 
@@ -31,7 +31,7 @@ public class QuestController {
         model.addAttribute(EXISTS_QUESTS, existQuests);
         model.addAttribute(QUEST_LIST_REFERENCE, questList);
 
-        return FoldersName.ADMIN_QUEST_FOLDER + "/quest_list";
+        return FoldersName.ADMIN_QUEST_FOLDER + "/question_list";
     }
 
     @GetMapping("/question/register")
@@ -46,7 +46,7 @@ public class QuestController {
             temporaryQuest = null;
         }
         model.addAttribute(MY_QUEST_REFERENCE, quest);
-        return FoldersName.ADMIN_QUEST_FOLDER + "/quest_register";
+        return FoldersName.ADMIN_QUEST_FOLDER + "/question_register";
     }
 
     @PostMapping("/question/create-quest")
