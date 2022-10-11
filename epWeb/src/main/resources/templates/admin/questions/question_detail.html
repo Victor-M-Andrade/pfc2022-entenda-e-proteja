@@ -85,7 +85,7 @@
             <!-- Pergunta 1 -->
             <div class="card">
                 <div class="card-header">
-                    <h3 th:text="${myQuest.pergunta}">Pergunta sobre LGPD?</h3>
+                    <h3 style="white-space: pre;" th:utext="${myQuest.pergunta}">Pergunta sobre LGPD?</h3>
                     <h6 th:if="${myQuest.nivel == 1}">Nível: Fácil</h6>
                     <h6 th:if="${myQuest.nivel == 2}">Nível: Médio</h6>
                     <h6 th:if="${myQuest.nivel == 3}">Nível: Difícil</h6>
