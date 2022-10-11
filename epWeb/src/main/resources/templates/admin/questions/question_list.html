@@ -44,6 +44,7 @@
                         <thead>
                             <tr>
                                 <th class="col-6">Empresa</th>
+                                <th class="col-1">Nível</th>
                                 <th class="col-1">A</th>
                                 <th class="col-1">B</th>
                                 <th class="col-1">C</th>
@@ -52,6 +53,7 @@
                             </tr>
                             <tr class="col-12">
                                 <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -61,7 +63,8 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th class="col-6">Empresa</th>
+                                <th class="col-5">Empresa</th>
+                                <th class="col-1">Nível</th>
                                 <th class="col-1">A</th>
                                 <th class="col-1">B</th>
                                 <th class="col-1">C</th>
@@ -72,6 +75,11 @@
                         <tbody>
                             <tr th:each="quest : ${questList}">
                                 <td th:text="${quest.pergunta}" class="align-middle">Empresa 1</td>
+                                <td class="align-middle">
+                                    <p th:if="${quest.nivel == 1}">Fácil</p>
+                                    <p th:if="${quest.nivel == 2}">Médio</p>
+                                    <p th:if="${quest.nivel == 3}">Difícil</p>
+                                </td>
                                 <td class="align-middle">
                                     <input type="checkbox" class="form-control" th:checked="${quest.resposta == 'A'}"
                                         disabled>
