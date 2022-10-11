@@ -6,6 +6,7 @@ import br.fai.ep.epWeb.service.impl.QuestWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -19,8 +20,10 @@ public class QuestionController {
     public final String MY_QUEST_REFERENCE = "myQuest";
     public final String QUEST_LIST_REFERENCE = "questList";
     public final String QUEST_REGISTER_ERROR = "questRegisterError";
+    public final String DELETE_QUESTION_ERROR = "deleteQuestionError";
 
     private boolean questRegisterError;
+    private boolean deleteQuestionError;
 
     private Questao temporaryQuest = null;
 
@@ -50,14 +53,35 @@ public class QuestionController {
     }
 
     @PostMapping("/question/create-quest")
-    public String createQuest(final Questao quest) {
-        final long newQuestId = service.create(quest);
+    public String createQuest(final Questao question) {
+        final long newQuestId = service.create(question);
         if (newQuestId == -1) {
             questRegisterError = true;
-            temporaryQuest = quest;
+            temporaryQuest = question;
             return "redirect:/question/register";
         }
 
-        return "redirect:/question/list";
+        return "redirect:/question/detail/" + newQuestId;
+    }
+
+    @GetMapping("/question/detail/{id}")
+    public String getQuestionDetailPage(@PathVariable final long id, final Model model) {
+        final Questao question = (Questao) service.readById(id);
+        if (question == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(DELETE_QUESTION_ERROR, deleteQuestionError);
+        deleteQuestionError = false;
+
+        model.addAttribute(MY_QUEST_REFERENCE, question);
+        return FoldersName.ADMIN_QUEST_FOLDER + "/question_detail";
+    }
+
+    @GetMapping("/question/delete-question/{id}")
+    public String deleteQuestion(@PathVariable final long id) {
+        deleteQuestionError = !service.delete(id);
+        final String redirectPage = deleteQuestionError ? "/question/detail/" + id : "/question/list";
+        return "redirect:" + redirectPage;
     }
 }

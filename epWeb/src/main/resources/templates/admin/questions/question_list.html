@@ -90,7 +90,8 @@
                                 </td>
                                 <td>
                                     <div class="col-12">
-                                        <a href="#" class="btn col-12 btn-info">
+                                        <a th:href="@{/question/detail/{id} (id = ${quest.id})}"
+                                            class="btn col-12 btn-info">
                                             <i class="fas fa-info-circle"></i>
                                             Detalhes
                                         </a>
