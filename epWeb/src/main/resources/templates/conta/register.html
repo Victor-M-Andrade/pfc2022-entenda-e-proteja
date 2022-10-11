@@ -68,6 +68,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputUser">Nome de usuário</label>
+                                    <span data-tooltip="Dado Público">
                                     <input class="form-control py-4" id="inputUser" type="text"
                                            placeholder="Insira seu nome" th:field="${myUser.nome}" required/>
                                 </div>
@@ -75,6 +76,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputEmail">Email</label>
+                                    <span data-tooltip="Dado Privado">
                                     <input class="form-control py-4" id="inputEmail" type="email"
                                            placeholder="Insira o seu email" th:field="${myUser.email}"
                                            required/>
@@ -86,6 +88,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputPassword">Senha</label>
+                                    <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputPassword" type="password"
                                            placeholder="Insira a senha" th:field="${myUser.senha}" required/>
                                 </div>
@@ -94,6 +97,7 @@
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputConfirmPassword">Confirme sua
                                         senha</label>
+                                    <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputConfirmPassword" type="password"
                                            placeholder="Confirme a senha" required/>
                                 </div>

@@ -146,3 +146,26 @@ body {
 #tabela input{
     width:100%;
 }
+
+
+
+[data-tooltip] {
+    position: relative;
+  }
+
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 60px;
+    padding: 5px;
+    border-radius: 3px;
+    left: calc(100% - 110px);
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #0095ff;
+    color: White;
+  }
+
+  [data-tooltip]:hover:after {
+    display: block;
+  }

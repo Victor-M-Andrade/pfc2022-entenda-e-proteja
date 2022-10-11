@@ -33,11 +33,13 @@
                     <form th:action="@{/account/authenticate}" method="post" th:object="${myUser}">
                         <div class="form-group">
                             <label class="small mb-1" for="inputEmailAddress">Email</label>
+                            <span data-tooltip="Dado Privado">
                             <input class="form-control py-4" id="inputEmailAddress" type="email"
                                    placeholder="Insira o endereço de email" required th:field="${myUser.email}"/>
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="inputPassword">Senha</label>
+                            <span data-tooltip="Dado Anônimo">
                             <input class="form-control py-4" id="inputPassword" type="password"
                                    placeholder="Insira a senha" required th:field="${myUser.senha}"/>
                         </div>
