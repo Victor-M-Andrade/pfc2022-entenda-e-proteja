@@ -11,4 +11,5 @@ public class FoldersName {
     public static final String ADMIN_USER_FOLDER = "admin/user";
     public static final String ADMIN_PARTNER_FOLDER = "admin/partner";
     public static final String ADMIN_NEWS_FOLDER = "admin/news";
+    public static final String ADMIN_QUEST_FOLDER = "admin/quests";
 }

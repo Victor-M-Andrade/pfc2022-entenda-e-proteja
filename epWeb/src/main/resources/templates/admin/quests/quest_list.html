@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de consultores E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Lista de questões
+            </li>
+        </ol>
+
+        <h1 class="text-center">Lista de consultores</h1>
+        <br>
+        <div class="col-12 text-center">
+            <a th:href="@{/user/administrator-area}" class="btn btn-secondary col-sm-5 py-2">
+                Área do administrador
+            </a>
+            <a th:href="@{/question/register}" class="btn btn-success col-sm-5 py-2">
+                Criar questões
+            </a>
+        </div>
+
+        <div class="container-fluid text-center navbar-expand-md py-2">
+            <div class="row align-items-start">
+                <div class="table-responsive">
+                    <div class="alert alert-danger col-12 text-center" th:unless="${existsQuest}">
+                        <span class="font-weight-bold align-middle">
+                            Não existem questões cadastradas no sistema no momento.
+                        </span>
+                    </div>
+                    <table class="table table-bordered text-center table-hover py-2" id="tabela" width="100%"
+                        cellspacing="0" th:if="${existsQuest}">
+                        <thead>
+                            <tr>
+                                <th class="col-6">Empresa</th>
+                                <th class="col-1">A</th>
+                                <th class="col-1">B</th>
+                                <th class="col-1">C</th>
+                                <th class="col-1">D</th>
+                                <th class="col-2">Ação</th>
+                            </tr>
+                            <tr class="col-12">
+                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="col-6">Empresa</th>
+                                <th class="col-1">A</th>
+                                <th class="col-1">B</th>
+                                <th class="col-1">C</th>
+                                <th class="col-1">D</th>
+                                <th class="col-2">Ação</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr th:each="quest : ${questList}">
+                                <td th:text="${quest.pergunta}" class="align-middle">Empresa 1</td>
+                                <td class="align-middle">
+                                    <input type="checkbox" class="form-control" th:checked="${quest.resposta == 'A'}"
+                                        disabled>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="checkbox" class="form-control" th:checked="${quest.resposta == 'B'}"
+                                        disabled>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="checkbox" class="form-control" th:checked="${quest.resposta == 'C'}"
+                                        disabled>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="checkbox" class="form-control" th:checked="${quest.resposta == 'D'}"
+                                        disabled>
+                                </td>
+                                <td>
+                                    <div class="col-12">
+                                        <a href="#" class="btn col-12 btn-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            Detalhes
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
