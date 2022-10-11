@@ -21,9 +21,11 @@ public class QuestionController {
     public final String QUEST_LIST_REFERENCE = "questList";
     public final String QUEST_REGISTER_ERROR = "questRegisterError";
     public final String DELETE_QUESTION_ERROR = "deleteQuestionError";
+    public final String UPDATE_QUESTION_ERROR = "updateQuestionError";
 
     private boolean questRegisterError;
     private boolean deleteQuestionError;
+    private boolean updateQuestionError;
 
     private Questao temporaryQuest = null;
 
@@ -76,6 +78,30 @@ public class QuestionController {
 
         model.addAttribute(MY_QUEST_REFERENCE, question);
         return FoldersName.ADMIN_QUEST_FOLDER + "/question_detail";
+    }
+
+    @GetMapping("/question/edit-question/{id}")
+    public String getQuestionEditPage(@PathVariable final long id, final Model model) {
+        final Questao question = (temporaryQuest != null) ? temporaryQuest : (Questao) service.readById(id);
+        if (question == null) {
+            return "redirect:/not-found";
+        }
+
+        model.addAttribute(UPDATE_QUESTION_ERROR, updateQuestionError);
+        updateQuestionError = false;
+
+        model.addAttribute(MY_QUEST_REFERENCE, question);
+        return FoldersName.ADMIN_QUEST_FOLDER + "/question_edit";
+    }
+
+    @PostMapping("/question/update-question")
+    public String updateQuestion(final Questao question) {
+        updateQuestionError = !service.update(question);
+        if (updateQuestionError) {
+            temporaryQuest = question;
+        }
+        final String redirectPage = updateQuestionError ? "/question/edit-question/" : "/question/detail/";
+        return "redirect:" + redirectPage + question.getId();
     }
 
     @GetMapping("/question/delete-question/{id}")

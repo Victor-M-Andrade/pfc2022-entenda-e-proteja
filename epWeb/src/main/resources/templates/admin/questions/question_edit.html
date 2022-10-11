@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de notícias E&P</title>
+    <script>
+        function selectQuestLevel() {
+            var rdEasyLevel = document.getElementById("easyLevel");
+            var rdMediumLevel = document.getElementById("mediumLevel");
+            var rdHardLevel = document.getElementById("hardLevel");
+
+            return (rdEasyLevel.checked || rdMediumLevel.checked || rdHardLevel.checked) ? true : false;
+        }
+
+        function selectAnswer() {
+            var rdAnswerA = document.getElementById("answerA");
+            var rdAnswerB = document.getElementById("answerB");
+            var rdAnswerC = document.getElementById("answerC");
+            var rdAnswerD = document.getElementById("answerD");
+
+            return (rdAnswerA.checked || rdAnswerB.checked || rdAnswerC.checked || rdAnswerD.checked) ? true : false;
+        }
+
+        function validade() {
+            let tipoButton = "submit";
+            let existError = false;
+            let messageError = "Preenchimento inválido.\n\nProblemas encontrado:\n";
+
+            if (!selectQuestLevel()) {
+                tipoButton = "button";
+                messageError += "Selecione o nível da questão.\n"
+                existError = true;
+            }
+
+            if (!selectAnswer()) {
+                tipoButton = "button";
+                messageError += "Selecione a resposta correta.\n"
+                existError = true;
+            }
+
+            if (existError) {
+                alert(messageError);
+            }
+            document.getElementById("createQuestButton").setAttribute("type", tipoButton);
+        }
+    </script>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/administrator-area}">Área do Administrador</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/question/list}">Lista de questões</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/question/detail/{id} (id = ${myQuest.id})}">Lista de questões</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Editar Questão
+            </li>
+        </ol>
+
+        <div class="row">
+            <div class="col-12 col-md-12 text-center">
+                <h1>Criar questão</h1>
+
+                <div class="alert alert-danger py-2" th:if="${updateQuestionError}">
+                    <span class="font-weight-bold align-middle">
+                        Desculpe, não foi possível atualizar questão. Por gentileza, tente novamente.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--Questionario-->
+        <div class="accordion" id="accordion-parent">
+            <form th:action="@{/question/update-question}" method="post" th:object="${myQuest}">
+                <!-- Pergunta 1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <label for="">Pergunta:</label>
+                        <textarea type="text" class="form-control" rows="5" th:field="${myQuest.pergunta}"></textarea>
+                        <div class="row">
+                            <div class="col-sm-2">Nível da questão</div>
+                            <div class="col-sm-10 text-left">
+                                <div class="form-check">
+                                    <input class="form-check-input" th:field="${myQuest.nivel}" type="radio"
+                                        th:value="1" th:checked="${myQuest.nivel == 1}" id="easyLevel">
+                                    <label class="form-check-label" for="easyLevel">Fácil</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" th:field="${myQuest.nivel}" type="radio"
+                                        th:value="2" th:checked="${myQuest.nivel == 2}" id="mediumLevel">
+                                    <label class="form-check-label" for="mediumLevel">Médio</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" th:field="${myQuest.nivel}" type="radio"
+                                        th:value="3" th:checked="${myQuest.nivel == 3}" id="hardLevel">
+                                    <label class="form-check-label" for="hardLevel">Difícil</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p>Escreva as alternativas e selecione a correta:</p>
+                        <div class="form-check md-form">
+                            <input class="form-check-input" type="radio" th:field="${myQuest.resposta}" th:value="'A'"
+                                id="answerA" th:checked="${myQuest.resposta == 'A'}">
+                            <label class="form-check-label" for="answerA">Alternativa A</label>
+                            <textarea type="text" rows="2" class="row ml-0 col-12 form-control"
+                                placeholder="Escreva aqui a resposta da Alternativa A"
+                                th:field="${myQuest.alternativaA}" required></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:field="${myQuest.resposta}" th:value="'B'"
+                                id="answerB" th:checked="${myQuest.resposta == 'B'}">
+                            <label class="form-check-label" for="answerB">Alternativa B</label>
+                            <textarea type="text" rows="2" class="row ml-0 col-12 form-control"
+                                placeholder="Escreva aqui a resposta da Alternativa B"
+                                th:field="${myQuest.alternativaB}" required></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:field="${myQuest.resposta}" th:value="'C'"
+                                id="answerC" th:checked="${myQuest.resposta == 'C'}">
+                            <label class="form-check-label" for="answerC">Alternativa C</label>
+                            <textarea type="text" rows="2" class="row ml-0 col-12 form-control"
+                                placeholder="Escreva aqui a resposta da Alternativa C"
+                                th:field="${myQuest.alternativaC}" required></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:field="${myQuest.resposta}" th:value="'D'"
+                                id="answerD" th:checked="${myQuest.resposta == 'D'}">
+                            <label class="form-check-label" for="answerD">Alternativa D</label>
+                            <textarea type="text" rows="2" class="row ml-0 col-12 form-control"
+                                placeholder="Escreva aqui a resposta da Alternativa D"
+                                th:field="${myQuest.alternativaD}" required></textarea>
+                        </div>
+                        <input type="text" th:field="${myQuest.id}" hidden>
+                    </div>
+
+                    <div class="col-12 py-2 text-center">
+                        <button type="submit" id="createQuestButton" class="btn btn-info col-sm-5" onclick="validade()">
+                            Atualizar questão
+                        </button>
+                        <a th:href="@{/question/detail/{id} (id = ${myQuest.id})}" class="btn btn-secondary col-sm-5">
+                            Cancelar operação
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
