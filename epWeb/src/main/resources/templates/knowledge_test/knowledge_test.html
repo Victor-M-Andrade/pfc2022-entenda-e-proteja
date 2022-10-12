@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de notícias E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/knowledge-test/select-level}">Nível do teste</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Teste de conhecimento
+            </li>
+        </ol>
+
+        <div class="row">
+            <div class="col-12 col-md-12 text-center">
+                <h1>Teste de conhecimento sobre a LGPD</h1>
+            </div>
+            <div class="col-12 col-md-12 text-center py-2">
+                <a th:href="@{/knowledge-test/select-level}" class="btn btn-secondary col-12">
+                    Selecionar outro nível
+                </a>
+            </div>
+            <div class="alert alert-danger col-12 col-md-12 text-center py-2" th:unless="${existsQuestions}">
+                <span class="font-weight-bold align-middle">
+                    Desculpe, mas não temos questões disponíveis neste nível no momento.
+                </span>
+            </div>
+        </div>
+
+        <div class="accordion py-2" id="accordion-parent">
+            <form action="" method="post" th:object="${myQuestionnaire}" th:if="${existsQuestions}" class="py-2">
+
+                <div class="card" th:each="questionDto, itemStat : *{questions}">
+
+                    <div class="card-header">
+                        <h3 th:text="'Pergunta ' + (${itemStat.index} + 1)">Pergunta N</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="white-space: pre;"
+                            th:utext="*{questions[__${itemStat.index}__].pergunta}">
+                            Pergunta LGPD?
+                        </h5>
+                        <p class=" card-text">Escolha uma opção:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"
+                                th:field="*{questions[__${itemStat.index}__].userAswer}" th:value="'A'" required
+                                th:id="'question' + *{questions[__${itemStat.index}__].id} + '_A'"
+                                th:checked="*{questions[__${itemStat.index}__].userAswer == 'A'}">
+                            <label class="form-check-label"
+                                th:for="'question' + *{questions[__${itemStat.index}__].id} + '_A'"
+                                th:utext="*{questions[__${itemStat.index}__].alternativaA}">
+                                Alternativa A
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"
+                                th:field="*{questions[__${itemStat.index}__].userAswer}" th:value="'B'" required
+                                th:id="'question' + *{questions[__${itemStat.index}__].id} + '_B'"
+                                th:checked="*{questions[__${itemStat.index}__].userAswer == 'B'}">
+                            <label class="form-check-label"
+                                th:for="'question' + *{questions[__${itemStat.index}__].id} + '_B'"
+                                th:utext="*{questions[__${itemStat.index}__].alternativaB}">
+                                Alternativa B
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"
+                                th:field="*{questions[__${itemStat.index}__].userAswer}" th:value="'C'" required
+                                th:id="'question' + *{questions[__${itemStat.index}__].id} + '_C'"
+                                th:checked="*{questions[__${itemStat.index}__].userAswer == 'C'}">
+                            <label class="form-check-label"
+                                th:for="'question' + *{questions[__${itemStat.index}__].id} + '_C'"
+                                th:utext="*{questions[__${itemStat.index}__].alternativaC}">
+                                Alternativa C
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"
+                                th:field="*{questions[__${itemStat.index}__].userAswer}" th:value="'D'" required
+                                th:id="'question' + *{questions[__${itemStat.index}__].id} + '_D'"
+                                th:checked="*{questions[__${itemStat.index}__].userAswer == 'D'}">
+                            <label class="form-check-label"
+                                th:for="'question' + *{questions[__${itemStat.index}__].id} + '_D'"
+                                th:utext="*{questions[__${itemStat.index}__].alternativaD}">
+                                Alternativa D
+                            </label>
+                        </div>
+                        <input th:field="*{questions[__${itemStat.index}__].id}" hidden>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+                            Enviar Relatório
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+        </div>
+    </div>
+</body>
+
+</html>

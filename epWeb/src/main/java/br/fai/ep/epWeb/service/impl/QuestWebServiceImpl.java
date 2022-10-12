@@ -1,7 +1,7 @@
 package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
-import br.fai.ep.epEntities.Questao;
+import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
@@ -19,12 +19,12 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public List<? extends BasePojo> readAll() {
         final String endpoint = BASE_ENDPOINT + "/read-all";
-        List<Questao> response = null;
+        List<br.fai.ep.epEntities.Questao> response = null;
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>("");
-            final ResponseEntity<Questao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, Questao[].class);
+            final ResponseEntity<br.fai.ep.epEntities.Questao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, br.fai.ep.epEntities.Questao[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
@@ -36,13 +36,13 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public Object readById(final long id) {
         final String endpoint = BASE_ENDPOINT + "/read-by-id/" + id;
-        Questao response = null;
+        br.fai.ep.epEntities.Questao response = null;
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>("");
-            final ResponseEntity<Questao> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
-                    httpEntity, Questao.class);
+            final ResponseEntity<br.fai.ep.epEntities.Questao> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, br.fai.ep.epEntities.Questao.class);
             response = requestResponse.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
@@ -58,8 +58,8 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final Questao news = (Questao) entity;
-            final HttpEntity<Questao> httpEntity = new HttpEntity<>(news);
+            final br.fai.ep.epEntities.Questao news = (br.fai.ep.epEntities.Questao) entity;
+            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>(news);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
@@ -77,7 +77,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<Questao> httpEntity = new HttpEntity<>((Questao) entity);
+            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((br.fai.ep.epEntities.Questao) entity);
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
                     httpEntity, Boolean.class);
             response = responseEntity.getBody();
@@ -109,13 +109,13 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public List<? extends BasePojo> readByCriteria(final Map criteria) {
         final String endpoint = BASE_ENDPOINT + "/read-by-criteria";
-        List<Questao> response = null;
+        List<br.fai.ep.epEntities.Questao> response = null;
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
             final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
-            final ResponseEntity<Questao[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
-                    httpEntity, Questao[].class);
+            final ResponseEntity<br.fai.ep.epEntities.Questao[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+                    httpEntity, br.fai.ep.epEntities.Questao[].class);
             response = Arrays.asList(responseEntity.getBody());
 
         } catch (final Exception ex) {
@@ -128,5 +128,23 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public String buildNameNewFile(final Object entity) {
         return "";
+    }
+
+    public List<QuestionDto> readByDtoCriteria(final Map criteria) {
+        final String endpoint = BASE_ENDPOINT + "/read-by-dto-criteria";
+        List<QuestionDto> response = null;
+
+        try {
+            final RestTemplate restTemplace = new RestTemplate();
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final ResponseEntity<QuestionDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+                    httpEntity, QuestionDto[].class);
+            response = Arrays.asList(responseEntity.getBody());
+
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
     }
 }

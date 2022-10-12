@@ -4,6 +4,7 @@ import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.QuestaoDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epEntities.Questao.QUESTION_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,11 @@ public class QuestaoServiceImpl implements BaseService {
         }
 
         return param;
+    }
+
+    public List<QuestionDto> readByDtoCritia(final Map criteria) {
+        String queryCriteria = SQL_COMMAND.WHERE + " 1=1 ";
+        queryCriteria += buildCriteriaParameters(criteria) + ";";
+        return dao.readByDtoCritia(queryCriteria);
     }
 }

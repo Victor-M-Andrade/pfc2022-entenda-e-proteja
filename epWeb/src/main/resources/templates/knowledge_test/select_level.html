@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Info. do Consultor E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                Nível do teste
+            </li>
+        </ol>
+
+        <h1 class="text-center">Informações do consultor</h1>
+        <br>
+        <div class="row d-flex justify-content-center col-xl-12 col-12">
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <a th:href="@{/knowledge-test/test/1}" class="btn btn-success btn-block">
+                    <h1 class="mt-5 mb-5">FÁCIL</h1>
+                </a>
+            </div>
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <a th:href="@{/knowledge-test/test/2}" class="btn btn-warning btn-block text-light">
+                    <h1 class="mt-5 mb-5">MÉDIO</h1>
+                </a>
+            </div>
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <a th:href="@{/knowledge-test/test/3}" class="btn btn-danger btn-block">
+                    <h1 class="mt-5 mb-5">DIFÍCIL</h1>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

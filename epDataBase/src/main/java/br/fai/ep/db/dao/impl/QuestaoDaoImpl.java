@@ -5,6 +5,7 @@ import br.fai.ep.db.dao.BaseDao;
 import br.fai.ep.db.dao.BaseDaoInterface;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epEntities.Questao.QUESTION_TABLE;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
 
     @Override
     public List<? extends BasePojo> readAll() {
-        List<Questao> questionList = null;
+        List<br.fai.ep.epEntities.Questao> questionList = null;
         resetValuesForNewQuery();
 
         try {
@@ -120,7 +121,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
 
             preparForReadingOrCreating(sql, true, false);
 
-            final Questao question = (Questao) entity;
+            final Questao question = (br.fai.ep.epEntities.Questao) entity;
             int i = 1;
             preparedStatement.setString(i++, question.getPergunta());
             preparedStatement.setString(i++, question.getAlternativaA());
@@ -171,7 +172,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += QUESTION_TABLE.ID_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
 
-            final Questao question = (Questao) entity;
+            final Questao question = (br.fai.ep.epEntities.Questao) entity;
             int i = 1;
             preparedStatement.setString(i++, question.getPergunta());
             preparedStatement.setString(i++, question.getAlternativaA());
@@ -236,7 +237,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
 
     @Override
     public List<? extends BasePojo> readByCriteria(final String criteria) {
-        List<Questao> questionList = null;
+        List<br.fai.ep.epEntities.Questao> questionList = null;
         resetValuesForNewQuery();
 
         try {
@@ -249,6 +250,43 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             questionList = new ArrayList<>();
             while (resultSet.next()) {
                 final Questao question = new Questao();
+                question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
+                question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
+                question.setPergunta(resultSet.getString(QUESTION_TABLE.QUESTION_COLUMN));
+                question.setAlternativaA(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_A_COLUMN));
+                question.setAlternativaB(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_B_COLUMN));
+                question.setAlternativaC(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_C_COLUMN));
+                question.setAlternativaD(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_D_COLUMN));
+                question.setResposta(resultSet.getString(QUESTION_TABLE.ANSWER_COLUMN));
+                question.setNivel(resultSet.getInt(QUESTION_TABLE.LEVEL_COLUMN));
+                questionList.add(question);
+            }
+
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readByCriteria | classe: " + QuestaoDaoImpl.class);
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return questionList;
+    }
+
+    public List<QuestionDto> readByDtoCritia(final String criteria) {
+        List<QuestionDto> questionList = null;
+        resetValuesForNewQuery();
+
+        try {
+            String sql = SQL_COMMAND.SELECT_FULL + QUESTION_TABLE.TABLE_NAME;
+            sql += " " + criteria;
+
+            preparForReadingOrCreating(sql, false, true);
+            resultSet = preparedStatement.executeQuery();
+
+            questionList = new ArrayList<>();
+            while (resultSet.next()) {
+                final QuestionDto question = new QuestionDto();
                 question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
                 question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
                 question.setPergunta(resultSet.getString(QUESTION_TABLE.QUESTION_COLUMN));

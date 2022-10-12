@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.helper;
 
 public class FoldersName {
     public static final String USER_FOLDER = "usuario";
+    public static final String KNOWLEDGE_TEST = "knowledge_test";
     public static final String PARTNER_FOLDER = "parceiro";
     public static final String ACCOUNT_FOLDER = "conta";
     public static final String CONTACT_FOLDER = "contatos";
