@@ -46,7 +46,7 @@
 
             if (!accept.checked) {
                 tipoButton = "button";
-                messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n"
+                messageError += "Só será possível cadastar seus dados se os Termos de Uso forem aceitados.\n"
                 existError = true;
             }
 
@@ -104,6 +104,7 @@
                                         <label class="mb-1" for="inputCompany">
                                             Nome da Empresa
                                         </label>
+                                        <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputCompany" type="text"
                                             placeholder="Insira o nome da sua empresa" required
                                             th:field="${myPartner.nomeEmpresa}" />
@@ -113,6 +114,7 @@
                                     <div class="form-group">
                                         <label class="mb-1" for="inputSite">
                                             CNPJ</label>
+                                        <span data-tooltip="Dado Privado">
                                         <input class="form-control py-4" id="inputAssunto" type="text"
                                             placeholder="Insira o CNPJ da empresa" required
                                             th:field="${myPartner.cnpj}" />
@@ -125,6 +127,7 @@
                                         <label class="mb-1" for="inputSite">
                                             Site da empresa
                                         </label>
+                                        <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputSite" type="url"
                                             placeholder="Insira o site da empresa" required
                                             th:field="${myPartner.website}" />
@@ -135,6 +138,7 @@
                                         <label class="mb-1" for="inputTelefone">
                                             Telefone para contato
                                         </label>
+                                        <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputTelefone" type="tel"
                                             placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
                                             th:field="${myPartner.telefone}">
@@ -170,7 +174,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="">Descrição do serviços oferecidos</label>
+
+                                <label for="">Descrição dos serviços oferecidos</label>
+
                                 <textarea type="text" class="form-control" rows="10"
                                     placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
                                     required th:field="${myPartner.descricao}"></textarea>
