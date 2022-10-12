@@ -5,15 +5,13 @@ import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.RestService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -170,15 +168,18 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
     public Usuario authentication(final String email, final String password) {
         final String endpoint = BASE_ENDPOINT + "/authentication";
         Usuario response = null;
-        final Map<String, String> criteria = new HashMap<>();
-        criteria.put(Usuario.USER_TABLE.EMAIL_COLUMN, email);
-        criteria.put(Usuario.USER_TABLE.PASSWORD_COLUMN, password);
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpHeaders httpHeaders = RestService.getAuthenticationHeaders(email, password);
+            final HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
             final ResponseEntity<Usuario> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Usuario.class);
+
+            if (responseEntity.getStatusCode() != HttpStatus.OK) {
+                return null;
+            }
+
             response = responseEntity.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());

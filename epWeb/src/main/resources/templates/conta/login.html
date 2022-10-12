@@ -7,55 +7,55 @@
 </head>
 
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Login
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Login
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md">
+        <div class="container-fluid text-center navbar-expand-md">
 
-        <div class="row align-items-start">
+            <div class="row align-items-start">
 
-            <div class="container card border-0 rounded-lg col-12 col-xl-8 login">
-                <div class="card-header">
-                    <h3 class="text-center font-weight-light">Entrar na sua conta</h3>
-                    <img src="/resources/img/logo_invertido.png" alt="logo">
-                </div>
-                <div class="card-body">
-                    <div class="alert alert-danger" th:if="${authenticationError}">
-                        <span class="font-weight-bold align-middle">Email ou senha inválidos</span>
+                <div class="container card border-0 rounded-lg col-12 col-xl-8 login">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light">Entrar na sua conta</h3>
+                        <img src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
-                    <form th:action="@{/account/authenticate}" method="post" th:object="${myUser}">
-                        <div class="form-group">
-                            <label class="small mb-1" for="inputEmailAddress">Email</label>
-                            <input class="form-control py-4" id="inputEmailAddress" type="email"
-                                   placeholder="Insira o endereço de email" required th:field="${myUser.email}"/>
+                    <div class="card-body">
+                        <div class="alert alert-danger" th:if="${authenticationError}">
+                            <span class="font-weight-bold align-middle">Email ou senha inválidos</span>
                         </div>
-                        <div class="form-group">
-                            <label class="small mb-1" for="inputPassword">Senha</label>
-                            <input class="form-control py-4" id="inputPassword" type="password"
-                                   placeholder="Insira a senha" required th:field="${myUser.senha}"/>
+                        <form th:action="@{/account/authenticate}" method="post">
+                            <div class="form-group">
+                                <label class="small mb-1" for="username">Email</label>
+                                <input class="form-control py-4" id="username" name="username" type="email"
+                                    placeholder="Insira o endereço de email" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1" for="password">Senha</label>
+                                <input class="form-control py-4" id="password" name="password" type="password"
+                                    placeholder="Insira a senha" required />
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a class="small" th:href="@{/account/forgot-my-password}">Esqueceu a senha?</a>
+                                <button class="btn btn-info" type="submit">Autenticar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="small">
+                            <a th:href="@{/account/register}">Precisa de uma conta? Cadastre-se!</a>
                         </div>
-                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                            <a class="small" th:href="@{/account/forgot-my-password}">Esqueceu a senha?</a>
-                            <button class="btn btn-info" type="submit">Autenticar</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <div class="small">
-                        <a th:href="@{/account/register}">Precisa de uma conta? Cadastre-se!</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

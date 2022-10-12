@@ -56,22 +56,20 @@ public class AccountController {
             user = temporaryUser;
             temporaryUser = null;
         }
-        model.addAttribute(MY_USER_OBJECT, user);
-
         return FoldersName.ACCOUNT_FOLDER + "/login";
     }
 
-    @PostMapping("/account/authenticate")
-    public String getAuthenticatePage(final Model model, final Usuario user) {
-        final Usuario myUser = new UserWebServiceImpl().authentication(user.getEmail(), user.getSenha());
-        if (myUser == null) {
-            authenticationError = true;
-            temporaryUser = user;
-            return "redirect:/account/login";
-        }
-
-        return "redirect:/user/profile/" + myUser.getId();
-    }
+//    @PostMapping("/account/authenticate")
+//    public String getAuthenticatePage(final Model model, final Usuario user) {
+//        final Usuario myUser = new UserWebServiceImpl().authentication(user.getEmail(), user.getSenha());
+//        if (myUser == null) {
+//            authenticationError = true;
+//            temporaryUser = user;
+//            return "redirect:/account/login";
+//        }
+//
+//        return "redirect:/user/profile/" + myUser.getId();
+//    }
 
     @GetMapping("/account/register")
     public String getRegisterPage(final Model model, Usuario user) {

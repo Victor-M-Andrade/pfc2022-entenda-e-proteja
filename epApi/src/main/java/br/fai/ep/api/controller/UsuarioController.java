@@ -4,6 +4,7 @@ import br.fai.ep.api.service.impl.UsuarioServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
+import br.fai.ep.epEntities.security.HeaderPattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,8 +59,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/authentication")
-    public ResponseEntity<Usuario> authenticate(@RequestBody final Map criteria) {
-        return ResponseEntity.ok(service.authenticate(criteria));
+    public ResponseEntity<Usuario> authenticate(@RequestHeader(HeaderPattern.HEADER_AUTHORIZATION) final String encodedData) {
+        final Usuario user = service.authenticate(encodedData);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+
+        }
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/anonymize-user/{id}")

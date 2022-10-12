@@ -18,6 +18,7 @@ public class Usuario extends BasePojo {
     private boolean anonimo;
     private boolean administrador;
     private Timestamp dataHora;
+    private String token;
 
     public static class USER_TABLE extends TABLE {
         public static final String TABLE_NAME = "usuario as U";
@@ -32,5 +33,12 @@ public class Usuario extends BasePojo {
         public static final String PATH_IMG_PROFILE = "path_img_profile";
         public static final String ACCEPT_COLUMN = "aceite";
         public static final String DATE_TIME_COLUMN = "data_hora";
+    }
+
+    public static class ROLE_NAME {
+        public static final String ADMINISTRATOR = "ADMIN";
+        public static final String PARTNER = "PARTINER";
+        public static final String AUTHOR = "AUTHOR";
+        public static final String USER = "USER";
     }
 }

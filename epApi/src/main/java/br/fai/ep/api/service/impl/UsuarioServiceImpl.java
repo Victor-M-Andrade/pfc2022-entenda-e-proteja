@@ -2,15 +2,28 @@ package br.fai.ep.api.service.impl;
 
 import br.fai.ep.api.email.EmailService;
 import br.fai.ep.api.service.BaseService;
+import br.fai.ep.api.service.JwtService;
 import br.fai.ep.db.dao.impl.UsuarioDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.MailDto;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epEntities.Usuario.USER_TABLE;
+import br.fai.ep.epEntities.security.AesEncryptor;
+import br.fai.ep.epEntities.security.HeaderPattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +31,11 @@ import java.util.Map;
 public class UsuarioServiceImpl implements BaseService {
     @Autowired
     private UsuarioDaoImpl dao;
-    private final String CONTACT_EP = "contato_entenda_e_proteja@outlook.com";
 
+    @Autowired
+    private JwtService jwtService;
+
+    private final String CONTACT_EP = "contato_entenda_e_proteja@outlook.com";
 
     @Override
     public List<? extends BasePojo> readAll() {
@@ -97,19 +113,90 @@ public class UsuarioServiceImpl implements BaseService {
         return emailService.send(userEmail, subject, message);
     }
 
-    public Usuario authenticate(final Map criteria) {
-        final String userEmail = (String) criteria.get(USER_TABLE.EMAIL_COLUMN);
-        final String userPassword = (String) criteria.get(USER_TABLE.PASSWORD_COLUMN);
+    public Usuario authenticate(final String encodedData) {
+        final Map<CREDENCIAIS, String> credentialsMap = decodeAndGetUsernameAndPassword(encodedData);
+        if (credentialsMap == null || credentialsMap.size() != 2) {
+            return null;
 
-        String queryCriteria = SQL_COMMAND.WHERE + USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userEmail + "\'";
-        queryCriteria += SQL_COMMAND.AND + USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + userPassword + "\'";
+        }
+
+        final String username = credentialsMap.get(CREDENCIAIS.USER_EMAIL);
+        final String password = credentialsMap.get(CREDENCIAIS.PASSWORD);
+
+        String queryCriteria = SQL_COMMAND.WHERE + USER_TABLE.EMAIL_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + username + "\'";
+        queryCriteria += SQL_COMMAND.AND + USER_TABLE.PASSWORD_COLUMN + SQL_COMMAND.EQUAL_COMPATION + "\'" + password + "\'";
         queryCriteria += SQL_COMMAND.AND + USER_TABLE.IS_ANONYMOUS_COLUMN + SQL_COMMAND.EQUAL_COMPATION + false + ";";
         final List<Usuario> userList = (List<Usuario>) dao.readByCriteria(queryCriteria);
         if (userList == null || userList.isEmpty()) {
             return null;
         }
 
-        return userList.get(0);
+        final Usuario user = userList.get(0);
+        final String token = jwtService.getJWTToken(user);
+        user.setSenha(null);
+        user.setToken(token);
+        return user;
+    }
+
+    private enum CREDENCIAIS {
+        USER_EMAIL,
+        PASSWORD,
+    }
+
+    private Map<CREDENCIAIS, String> decodeAndGetUsernameAndPassword(final String encodedData) {
+        // AES + dados
+        final String[] splittedData = encodedData.split(HeaderPattern.HEADER_AES_PREFIX);
+        if (splittedData.length != 2) {
+            return null;
+        }
+
+        try {
+            // dados
+            final byte[] base64Decode = Base64.getDecoder().decode(splittedData[1]);
+            final String decodedString = AesEncryptor.decrypt(base64Decode);
+
+            final String[] firstPart = decodedString.split("Username=");
+            if (firstPart.length != 2) {
+                return null;
+            }
+
+            // nome_usuario;Password=senha
+            final String[] credentials = firstPart[1].split(";Password=");
+            if (credentials.length != 2) {
+                return null;
+            }
+
+            final Map<CREDENCIAIS, String> credentialsMap = new HashMap<CREDENCIAIS, String>();
+            credentialsMap.put(CREDENCIAIS.USER_EMAIL, credentials[0]);
+            credentialsMap.put(CREDENCIAIS.PASSWORD, credentials[1]);
+
+            return credentialsMap;
+
+        } catch (final UnsupportedEncodingException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final InvalidAlgorithmParameterException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final NoSuchPaddingException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final IllegalBlockSizeException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final BadPaddingException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final NoSuchProviderException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } catch (final InvalidKeyException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public boolean anonymizeUser(final long id) {
