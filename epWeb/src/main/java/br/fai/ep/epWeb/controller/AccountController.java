@@ -278,27 +278,32 @@ public class AccountController {
         return FoldersName.ACCOUNT_FOLDER + "/confirmar-exclusao";
     }
 
-    @GetMapping("/account/confirm-delete-my-account/{id}")
-    public String confirmeDeleteMyAccount(@PathVariable final long id) {
-        UserController.deleteUserError = !service.delete(id);
+    @GetMapping("/account/confirm-delete-my-account")
+    public String confirmeDeleteMyAccount() {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        UserController.deleteUserError = !service.delete(authenticatedUser.getId());
         if (UserController.deleteUserError) {
             return "redirect:/account/request-use-data";
         }
-        return "redirect:/account/login";
+        return "redirect:/log-out";
     }
 
-    @GetMapping("/account/anonymize-my-account/{id}")
-    public String confirmeAnonymizeMyAccount(@PathVariable final long id) {
-        UserController.deleteUserError = !new UserWebServiceImpl().anonymizeUser(id);
+    @GetMapping("/account/anonymize-my-account")
+    public String confirmeAnonymizeMyAccount() {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        UserController.deleteUserError = !new UserWebServiceImpl().anonymizeUser(authenticatedUser.getId());
         if (UserController.anonymizeUserError) {
             return "redirect:/account/request-use-data";
         }
-        return "redirect:/account/login";
-    }
-
-    @GetMapping("/account/log-out")
-    public String singOut() {
-        return "redirect:/";
+        return "redirect:/log-out";
     }
 
 }
