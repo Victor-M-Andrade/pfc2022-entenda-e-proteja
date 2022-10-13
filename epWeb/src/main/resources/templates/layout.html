@@ -86,7 +86,10 @@
                             <a class="dropdown-item" th:href="@{/account/register}">Cadastrar</a>
                         </div>
                         <div sec:authorize="isAuthenticated()">
-                            <a class="dropdown-item" th:href="@{/user/administrator-area}">Área do administrador</a>
+                            <a class="dropdown-item" sec:authorize="hasRole('ADMIN')"
+                                th:href="@{/user/administrator-area}">
+                                Área do administrador
+                            </a>
                             <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
                             <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a>
                             <a class="dropdown-item" th:href="@{/log-out}">Sair</a>
