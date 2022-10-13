@@ -127,9 +127,14 @@ public class AccountController {
         return "redirect:/account/forgot-my-password";
     }
 
-    @GetMapping("/account/change-my-password/{id}")
-    public String getChangeMyPasswordPage(@PathVariable final long id, final Model model, Usuario user) {
-        user = (Usuario) service.readById(user.getId());
+    @GetMapping("/account/change-my-password")
+    public String getChangeMyPasswordPage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
         if (user == null && !triedPasswordChange) {
             changePasswordError = false;
             triedPasswordChange = false;
@@ -137,7 +142,8 @@ public class AccountController {
         }
         triedPasswordChange = false;
 
-        model.addAttribute(USER_ID, id);
+        model.addAttribute(USER_ID, user.getId());
+        model.addAttribute(MY_USER_OBJECT, user);
         model.addAttribute(OLD_USER_PASSWORD, user.getSenha());
         model.addAttribute(CHANGE_PASSWORD_ERROR, changePasswordError);
         if (changePasswordError) {
@@ -153,13 +159,13 @@ public class AccountController {
         final Usuario myUser = (Usuario) service.readById(user.getId());
         if (myUser == null) {
             changePasswordError = true;
-            return "redirect:/account/change-my-password/" + user.getId();
+            return "redirect:/account/change-my-password";
         }
 
         myUser.setSenha(user.getSenha());
         changePasswordError = !service.update(myUser);
         if (changePasswordError) {
-            return "redirect:/account/change-my-password/" + user.getId();
+            return "redirect:/account/change-my-password";
         }
         triedPasswordChange = false;
         return "redirect:/user/profile";
