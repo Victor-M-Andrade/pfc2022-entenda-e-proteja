@@ -132,6 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/authenticate").permitAll()
                 .defaultSuccessUrl("/account/get-id-authenticated-user")
+                .failureUrl("/account/login-error")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("account/log-out"))

@@ -39,7 +39,6 @@ public class AccountController {
 
     private boolean sendedEmail = false;
     private boolean emailNotFound = false;
-    private boolean authenticationError = false;
     private boolean changePasswordError = false;
     private boolean triedPasswordChange = false;
     private boolean alreadyregisteredEmail = false;
@@ -48,16 +47,14 @@ public class AccountController {
     private Usuario temporaryUser = null;
 
     @GetMapping("/account/login")
-    public String getLoginPage(final Model model, Usuario user) {
-        model.addAttribute(AUTHENTICATION_ERROR, authenticationError);
-        if (authenticationError) {
-            authenticationError = false;
-        }
+    public String getLoginPage(final Model model, final Usuario user) {
+        model.addAttribute(AUTHENTICATION_ERROR, false);
+        return FoldersName.ACCOUNT_FOLDER + "/login";
+    }
 
-        if (temporaryUser != null) {
-            user = temporaryUser;
-            temporaryUser = null;
-        }
+    @GetMapping("/account/login-error")
+    public String getLoginPageWithMessageError(final Model model, final Usuario user) {
+        model.addAttribute(AUTHENTICATION_ERROR, true);
         return FoldersName.ACCOUNT_FOLDER + "/login";
     }
 
