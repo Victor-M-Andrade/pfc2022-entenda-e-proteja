@@ -49,8 +49,7 @@
                                 </a>
                             </div>
                             <div class="mb-2" th:unless="${myUser.parceiro}">
-                                <a th:href="@{/partner/register/{id} (id = ${userId})}"
-                                    class="btn btn-info col-12 btn-enviar-livro">
+                                <a th:href="@{/partner/register}" class="btn btn-info col-12 btn-enviar-livro">
                                     Solicitar cadastro de consultor
                                 </a>
                             </div>
@@ -62,8 +61,7 @@
                                     </a>
                                 </div>
                                 <div class="mb-2" th:if="${myUser.parceiro}">
-                                    <a th:href="@{/partner/my-data-as-partner/{id} (id = ${userId})}"
-                                        class="btn btn-primary col-12">
+                                    <a th:href="@{/partner/my-data-as-partner}" class="btn btn-primary col-12">
                                         Área do consultor
                                     </a>
                                 </div>

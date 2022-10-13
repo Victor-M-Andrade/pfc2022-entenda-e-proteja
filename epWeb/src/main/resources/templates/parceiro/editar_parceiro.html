@@ -67,7 +67,7 @@
                 <a th:href="@{/user/profile}">Meu perfil</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/partner/my-data-as-partner/{id} (id = ${userId})}">Dados de consultor</a>
+                <a th:href="@{/partner/my-data-as-partner}">Dados de consultor</a>
             </li>
             <li class="breadcrumb-item active">
                 Editar meus dados de consultor
@@ -182,8 +182,7 @@
                             </button>
                         </div>
                         <div class="form-group mt-2 mb-0">
-                            <a class="btn btn-secondary btn-block"
-                                th:href="@{/partner/my-data-as-partner/{id} (id = ${userId})}">
+                            <a class="btn btn-secondary btn-block" th:href="@{/partner/my-data-as-partner}">
                                 Cancelar operacao
                             </a>
                         </div>

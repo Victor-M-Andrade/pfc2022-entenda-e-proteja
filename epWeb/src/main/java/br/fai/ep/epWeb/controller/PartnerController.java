@@ -4,6 +4,7 @@ import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Parceiro.REGISTER_ERROR;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
@@ -22,8 +23,8 @@ import java.util.Map;
 @Controller
 public class PartnerController {
     private final WebServiceInterface service = new PartnerWebServiceImpl();
+    private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
-    private final String USER_ID = "userId";
     private final String EXISTS_PARTNER = "existsPartner";
     private final String REGISTERED_PARTNER = "registeredPartner";
     private final String MY_PARTNER_REFERENCE = "myPartner";
@@ -68,7 +69,7 @@ public class PartnerController {
 
         partner.setSituacao(Parceiro.SITUATIONS.REQUESTED);
         updatePartnerError = !service.update(partner);
-        return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+        return "redirect:/partner/my-data-as-partner";
     }
 
     @GetMapping("/partner/detail/{id}")
@@ -82,9 +83,12 @@ public class PartnerController {
         return FoldersName.PARTNER_FOLDER + "/consultoria_info";
     }
 
-    @GetMapping("/partner/register/{id}")
-    public String getRegisterPartnerPage(@PathVariable final long id, final Model model, Parceiro partner) {
-        model.addAttribute(USER_ID, id);
+    @GetMapping("/partner/register")
+    public String getRegisterPartnerPage(final Model model, Parceiro partner) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
 
         model.addAttribute(ALREADY_REGISTERED_CNPJ, alreadyRegisteredCnpj);
         if (alreadyRegisteredCnpj) {
@@ -105,7 +109,7 @@ public class PartnerController {
             partner = temporaryPartner;
             temporaryPartner = null;
         }
-        partner.setIdUsuario(id);
+        partner.setIdUsuario(authenticatedUser.getId());
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
         return FoldersName.PARTNER_FOLDER + "/register_parceiro";
     }
@@ -123,16 +127,21 @@ public class PartnerController {
 
         if (newPartnerId < 0) {
             temporaryPartner = partner;
-            return "redirect:/partner/register/" + partner.getIdUsuario();
+            return "redirect:/partner/register";
         }
 
-        return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+        return "redirect:/partner/my-data-as-partner";
     }
 
-    @GetMapping("/partner/my-data-as-partner/{id}")
-    public String getMyDataAsPartnerPage(@PathVariable final long id, final Model model) {
+    @GetMapping("/partner/my-data-as-partner")
+    public String getMyDataAsPartnerPage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
         final Map<String, Long> map = new HashMap<>();
-        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, id);
+        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, authenticatedUser.getId());
         final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
         if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
             return "redirect:/not-found";
@@ -149,7 +158,6 @@ public class PartnerController {
         }
 
         model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
-        model.addAttribute(USER_ID, partnerList.get(0).getIdUsuario());
         return FoldersName.PARTNER_FOLDER + "/perfil_consultor";
     }
 
@@ -170,7 +178,6 @@ public class PartnerController {
             temporaryPartner = null;
         }
         model.addAttribute(MY_PARTNER_REFERENCE, partner);
-        model.addAttribute(USER_ID, partner.getIdUsuario());
         return FoldersName.PARTNER_FOLDER + "/editar_parceiro";
     }
 
@@ -184,7 +191,7 @@ public class PartnerController {
                 return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
             }
             temporaryPartner = null;
-            return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+            return "redirect:/partner/my-data-as-partner";
         }
         final String newNameFile = service.buildNameNewFile(partner);
         final String nameFileWithExtension = service.prepareNameWithExtension(file.getOriginalFilename(), newNameFile);
@@ -195,7 +202,7 @@ public class PartnerController {
                 return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
             }
             temporaryPartner = null;
-            return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+            return "redirect:/partner/my-data-as-partner";
         }
 
         final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_PARTNER, nameFileWithExtension, newNameFile);
@@ -209,22 +216,14 @@ public class PartnerController {
             return "redirect:/partner/edit-my-data-as-partner/" + partner.getId();
         }
         temporaryPartner = null;
-        return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
+        return "redirect:/partner/my-data-as-partner";
     }
 
     @GetMapping("/partner/delete-my-data-as-partner/{id}")
     public String deleteMyDataAsPartner(@PathVariable final long id) {
-        final Map<String, Long> map = new HashMap<>();
-        map.put(Parceiro.PARTNER_TABLE.ID_USER_COLUMN, id);
-        final List<Parceiro> partnerList = (List<Parceiro>) service.readByCriteria(map);
-        if (partnerList == null || partnerList.isEmpty() || partnerList.size() > 1) {
-            deletePartnerError = true;
-            return "redirect:/partner/my-data-as-partner/" + id;
-        }
-
-        deletePartnerError = !service.delete(partnerList.get(0).getId());
+        deletePartnerError = !service.delete(id);
         if (deletePartnerError) {
-            return "redirect:/partner/my-data-as-partner/" + id;
+            return "redirect:/partner/my-data-as-partner";
         }
         return "redirect:/user/profile";
     }
