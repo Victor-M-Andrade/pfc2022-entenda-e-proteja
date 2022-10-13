@@ -225,7 +225,7 @@ public class AccountController {
         if (UserController.deleteUserError) {
             return "redirect:/user/profile";
         }
-        return "redirect:/";
+        return "redirect:/log-out";
     }
 
     @GetMapping("/account/request-use-data/{id}")
