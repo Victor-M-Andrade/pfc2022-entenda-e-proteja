@@ -6,7 +6,7 @@
     <parent>
         <groupId>br.fai.ep</groupId>
         <artifactId>entenda-e-proteja-parent</artifactId>
-        <version>5.6.0</version>
+        <version>6.0.0</version>
     </parent>
 
     <artifactId>epApi</artifactId>
