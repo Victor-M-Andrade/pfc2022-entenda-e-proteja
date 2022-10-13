@@ -218,7 +218,7 @@ public class AccountController {
 
         final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
         if (user.isAdministrador() || user.isAutor() || user.isParceiro()) {
-            return "redirect:/account/request-use-data/" + authenticatedUser.getId();
+            return "redirect:/account/request-use-data";
         }
 
         UserController.deleteUserError = !service.delete(authenticatedUser.getId());
@@ -228,13 +228,18 @@ public class AccountController {
         return "redirect:/log-out";
     }
 
-    @GetMapping("/account/request-use-data/{id}")
-    public String getRequestUseDataPage(@PathVariable final long id, final Model model) {
-        final Usuario usuario = (Usuario) service.readById(id);
+    @GetMapping("/account/request-use-data")
+    public String getRequestUseDataPage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        final Usuario usuario = (Usuario) service.readById(authenticatedUser.getId());
         final String originalName = usuario.getNome();
         final String anonymousName = AnonymizeData.anonymizeData(usuario.getNome());
 
-        model.addAttribute(USER_ID, id);
+        model.addAttribute(USER_ID, authenticatedUser.getId());
         model.addAttribute("anonymous", String.format("Exemplo: nome cadastrado %s | Próximas consultas em que for mensionado: %s",
                 originalName, anonymousName));
 
@@ -277,7 +282,7 @@ public class AccountController {
     public String confirmeDeleteMyAccount(@PathVariable final long id) {
         UserController.deleteUserError = !service.delete(id);
         if (UserController.deleteUserError) {
-            return "redirect:/account/request-use-data/" + id;
+            return "redirect:/account/request-use-data";
         }
         return "redirect:/account/login";
     }
@@ -286,7 +291,7 @@ public class AccountController {
     public String confirmeAnonymizeMyAccount(@PathVariable final long id) {
         UserController.deleteUserError = !new UserWebServiceImpl().anonymizeUser(id);
         if (UserController.anonymizeUserError) {
-            return "redirect:/account/request-use-data/" + id;
+            return "redirect:/account/request-use-data";
         }
         return "redirect:/account/login";
     }
