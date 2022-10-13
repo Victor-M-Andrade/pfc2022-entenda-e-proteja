@@ -19,6 +19,7 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     private final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
+    public String URL_WEBSITE_EP = "http://localhost:8100";
 
     public String buildMessage(final String username, final long userId) {
         final String message = "<html lang=\"pt-br\">" +
@@ -31,7 +32,7 @@ public class EmailService {
                 "\n" +
                 "Recebemos sua solicitação para troca de senha.\n" +
                 "Para acessar o link de acesso à página de troca de senha, " +
-                "<a href=\"http://localhost:8100/account/change-user-password/" + userId + "\">clique aqui!</a>" +
+                "<a href=\"" + URL_WEBSITE_EP + "/account/check-exists-user/" + userId + "\">clique aqui!</a>" +
                 "</body>" +
                 "</html>";
 
