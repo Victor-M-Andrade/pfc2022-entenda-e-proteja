@@ -5,6 +5,7 @@ import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Noticia.CATOGORY;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -22,10 +23,10 @@ import java.util.*;
 
 @Controller
 public class NewsController {
-    final NewsWebServiceImpl service = new NewsWebServiceImpl();
-    final UserWebServiceImpl userWebService = new UserWebServiceImpl();
+    private final NewsWebServiceImpl service = new NewsWebServiceImpl();
+    private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
+    private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
-    private final String USER_ID = "userId";
     private final String NEWS_LIST = "newsList";
     private final String EXISTS_NEWS = "existsNews";
     private final String AUTHOR_NAME = "authorName";
@@ -101,9 +102,12 @@ public class NewsController {
         return FoldersName.NEWS_FOLDER + "/noticias_modelo";
     }
 
-    @GetMapping("/news/create-new-news/{id}")
-    public String getCreateNewNewsPage(@PathVariable final long id, final Model model, Noticia news) {
-        model.addAttribute(USER_ID, id);
+    @GetMapping("/news/create-new-news")
+    public String getCreateNewNewsPage(final Model model, Noticia news) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
 
         model.addAttribute(REGISTRATION_REQUEST_PROBLEMS, registrationRequestProblems);
         if (registrationRequestProblems) {
@@ -114,7 +118,7 @@ public class NewsController {
             news = temporaryNews;
             temporaryNews = null;
         }
-        news.setIdAutor(id);
+        news.setIdAutor(authenticatedUser.getId());
         model.addAttribute(MY_NEWS_REFERENCE, news);
         model.addAttribute(CATEFORY_LIST_REFERENCE, categoryList);
         return FoldersName.NEWS_FOLDER + "/news_register";
@@ -132,7 +136,7 @@ public class NewsController {
             if (newNewsId < 0) {
                 registrationRequestProblems = true;
                 temporaryNews = news;
-                return "redirect:/news/create-new-news/" + news.getIdAutor();
+                return "redirect:/news/create-new-news";
             }
             temporaryNews = null;
             return "redirect:/news/user-news-detail/" + newNewsId;
@@ -144,7 +148,7 @@ public class NewsController {
             if (newNewsId < 0) {
                 registrationRequestProblems = true;
                 temporaryNews = news;
-                return "redirect:/news/create-new-news/" + news.getIdAutor();
+                return "redirect:/news/create-new-news";
             }
             temporaryNews = null;
             return "redirect:/news/user-news-detail/" + newNewsId;
@@ -159,16 +163,21 @@ public class NewsController {
         if (newNewsId < 0) {
             registrationRequestProblems = true;
             temporaryNews = news;
-            return "redirect:/news/create-new-news/" + news.getIdAutor();
+            return "redirect:/news/create-new-news";
         }
         temporaryNews = null;
         return "redirect:/news/user-news-detail/" + newNewsId;
     }
 
-    @GetMapping("/news/user-news-list/{id}")
-    public String getUserNewsListPage(@PathVariable final long id, final Model model) {
+    @GetMapping("/news/user-news-list")
+    public String getUserNewsListPage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
         final Map<String, Long> criteria = new HashMap<>();
-        criteria.put(Noticia.NEWS_TABLE.ID_AUTHOR_COLUMN, id);
+        criteria.put(Noticia.NEWS_TABLE.ID_AUTHOR_COLUMN, authenticatedUser.getId());
         final List<Noticia> newsList = (List<Noticia>) service.readByCriteria(criteria);
 
         boolean existsNews = true;
@@ -176,7 +185,6 @@ public class NewsController {
             existsNews = false;
         }
 
-        model.addAttribute(USER_ID, id);
         model.addAttribute(EXISTS_NEWS, existsNews);
         model.addAttribute(NEWS_LIST, newsList);
         return FoldersName.NEWS_FOLDER + "/user_news_list";
@@ -194,7 +202,6 @@ public class NewsController {
             return "redirect:/not-found";
         }
 
-        model.addAttribute(USER_ID, news.getIdAutor());
         model.addAttribute(MY_NEWS_REFERENCE, news);
         model.addAttribute(AUTHOR_NAME, user.getNome());
 
@@ -237,7 +244,7 @@ public class NewsController {
             return "redirect:/user/profile";
         }
 
-        return "redirect:/news/user-news-list/" + news.getIdAutor();
+        return "redirect:/news/user-news-list";
     }
 
     @GetMapping("/news/new-publication-request/{id}")
@@ -261,7 +268,6 @@ public class NewsController {
             return "redirect:/not-found";
         }
 
-        model.addAttribute(USER_ID, news.getIdAutor());
         model.addAttribute(MY_NEWS_REFERENCE, news);
         model.addAttribute(CATEFORY_LIST_REFERENCE, categoryList);
 

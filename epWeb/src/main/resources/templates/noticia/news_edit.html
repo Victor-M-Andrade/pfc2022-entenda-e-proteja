@@ -46,6 +46,7 @@
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
             }
         }
+
     </script>
 </head>
 
@@ -59,7 +60,7 @@
                 <a th:href="@{/user/profile}">Meu perfil</a>
             </li>
             <li class="breadcrumb-item active">
-                <a th:href="@{/news/user-news-list/{id} (id = ${userId})}">Suas notícias</a>
+                <a th:href="@{/news/user-news-list}">Suas notícias</a>
             </li>
             <li class="breadcrumb-item active">
                 <a th:href="@{/news/user-news-detail/{id} (id = ${myNews.id})}">Detalhes da notícia</a>
