@@ -13,7 +13,7 @@
                 <a th:href="@{/}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+                <a th:href="@{/user/profile}">Meu perfil</a>
             </li>
             <li class="breadcrumb-item active">
                 Confirmar exclusão
@@ -39,8 +39,7 @@
                             <p></p>
                             <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
                                 <div class="col-12">
-                                    <a class="btn btn-secondary col-sm-3 py-2"
-                                        th:href="@{/user/profile/{id} (id = ${userId})}">
+                                    <a class="btn btn-secondary col-sm-3 py-2" th:href="@{/user/profile}">
                                         Cancelar esta operação
                                     </a>
                                     <a class="btn btn-danger col-sm-3 py-2"

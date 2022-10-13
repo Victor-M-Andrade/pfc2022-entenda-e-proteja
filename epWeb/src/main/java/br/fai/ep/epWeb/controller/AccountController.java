@@ -5,12 +5,10 @@ import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.helper.FoldersName;
-import br.fai.ep.epWeb.security.CustomUserDetail;
+import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +24,7 @@ public class AccountController {
     private final UserWebServiceImpl service = new UserWebServiceImpl();
     private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
     private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
+    private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
     private final String USER_ID = "userId";
     private final String SENDED_EMAIL = "sendedEmail";
@@ -40,6 +39,7 @@ public class AccountController {
     private boolean sendedEmail = false;
     private boolean emailNotFound = false;
     private boolean changePasswordError = false;
+    private boolean authenticationError = false;
     private boolean triedPasswordChange = false;
     private boolean alreadyregisteredEmail = false;
     private boolean accountCreationProblems = false;
@@ -48,27 +48,16 @@ public class AccountController {
 
     @GetMapping("/account/login")
     public String getLoginPage(final Model model, final Usuario user) {
-        model.addAttribute(AUTHENTICATION_ERROR, false);
+        model.addAttribute(AUTHENTICATION_ERROR, authenticationError);
+        authenticationError = false;
         return FoldersName.ACCOUNT_FOLDER + "/login";
     }
 
     @GetMapping("/account/login-error")
-    public String getLoginPageWithMessageError(final Model model, final Usuario user) {
-        model.addAttribute(AUTHENTICATION_ERROR, true);
-        return FoldersName.ACCOUNT_FOLDER + "/login";
+    public String getLoginPageWithMessageError() {
+        authenticationError = true;
+        return "redirect:/account/login";
     }
-
-//    @PostMapping("/account/authenticate")
-//    public String getAuthenticatePage(final Model model, final Usuario user) {
-//        final Usuario myUser = new UserWebServiceImpl().authentication(user.getEmail(), user.getSenha());
-//        if (myUser == null) {
-//            authenticationError = true;
-//            temporaryUser = user;
-//            return "redirect:/account/login";
-//        }
-//
-//        return "redirect:/user/profile/" + myUser.getId();
-//    }
 
     @GetMapping("/account/register")
     public String getRegisterPage(final Model model, Usuario user) {
@@ -104,7 +93,7 @@ public class AccountController {
             return "redirect:/account/register";
         }
 
-        return "redirect:/user/profile/" + newIdUser;
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/account/forgot-my-password")
@@ -173,7 +162,7 @@ public class AccountController {
             return "redirect:/account/change-my-password/" + user.getId();
         }
         triedPasswordChange = false;
-        return "redirect:/user/profile/" + user.getId();
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/account/check-exists-user/{id}")
@@ -222,7 +211,7 @@ public class AccountController {
 
         UserController.deleteUserError = !service.delete(id);
         if (UserController.deleteUserError) {
-            return "redirect:/user/profile/" + id;
+            return "redirect:/user/profile";
         }
         return "redirect:/account/login";
     }
@@ -295,26 +284,4 @@ public class AccountController {
         return "redirect:/";
     }
 
-    @GetMapping("/account/get-id-authenticated-user")
-    public String getIdAuthenticatedUser() {
-        String redirectPage = "/";
-        try {
-            final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication == null) {
-                return "redirect:/";
-            }
-
-            final CustomUserDetail userDatails = (CustomUserDetail) authentication.getPrincipal();
-            if (userDatails == null) {
-                return "redirect:/";
-            }
-
-            final Usuario authenticatedUser = userDatails.getUsuario();
-            redirectPage = (authenticatedUser != null) ? "/user/profile/" + authenticatedUser.getId() : redirectPage;
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            return "redirect:" + redirectPage;
-        }
-    }
 }

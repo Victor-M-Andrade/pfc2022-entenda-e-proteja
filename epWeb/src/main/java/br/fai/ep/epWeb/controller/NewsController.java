@@ -231,8 +231,10 @@ public class NewsController {
             user.setAutor(false);
 
             deleteNewsError = !userWebService.update(user);
-            final String url = deleteNewsError ? "redirect:/news/user-news-detail/" : "redirect:/user/profile/";
-            return url + news.getIdAutor();
+            if (deleteNewsError) {
+                return "redirect:/news/user-news-detail/" + news.getIdAutor();
+            }
+            return "redirect:/user/profile";
         }
 
         return "redirect:/news/user-news-list/" + news.getIdAutor();

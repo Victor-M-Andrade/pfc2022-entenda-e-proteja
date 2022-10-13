@@ -13,14 +13,14 @@
                 <a th:href="@{/}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/user/profile/{id} (id = ${userId})}">Meu perfil</a>
+                <a th:href="@{/user/profile}">Meu perfil</a>
             </li>
             <li class="breadcrumb-item active">
                 Suas notícias
             </li>
         </ol>
         <h1 class="text-center">Suas notícias</h1>
-        <a th:href="@{/user/profile/{id} (id = ${userId})}" class="btn btn-secondary col-12 py-2">
+        <a th:href="@{/user/profile}" class="btn btn-secondary col-12 py-2">
             Voltar ao seu perfil
         </a>
         <hr>

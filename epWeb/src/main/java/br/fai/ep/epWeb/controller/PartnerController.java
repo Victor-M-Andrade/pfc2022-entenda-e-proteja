@@ -126,7 +126,6 @@ public class PartnerController {
             return "redirect:/partner/register/" + partner.getIdUsuario();
         }
 
-
         return "redirect:/partner/my-data-as-partner/" + partner.getIdUsuario();
     }
 
@@ -227,6 +226,6 @@ public class PartnerController {
         if (deletePartnerError) {
             return "redirect:/partner/my-data-as-partner/" + id;
         }
-        return "redirect:/user/profile/" + partnerList.get(0).getIdUsuario();
+        return "redirect:/user/profile";
     }
 }

@@ -131,11 +131,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/authenticate").permitAll()
-                .defaultSuccessUrl("/account/get-id-authenticated-user")
+                .defaultSuccessUrl("/user/profile")
                 .failureUrl("/account/login-error")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("account/log-out"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/log-out"))
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling().accessDeniedPage("/not-found");
     }

@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -22,6 +23,7 @@ public class UserController {
     public static boolean anonymizeUserError = false;
 
     private final WebServiceInterface service = new UserWebServiceImpl();
+    private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
     private final String USER_ID = "userId";
     private final String MY_USER_REFERENCE = "myUser";
@@ -34,9 +36,14 @@ public class UserController {
 
     private Usuario temporaryUser = null;
 
-    @GetMapping("/user/profile/{id}")
-    public String getMyUserProfilePage(@PathVariable final long id, final Model model) {
-        final Usuario user = (Usuario) service.readById(id);
+    @GetMapping("/user/profile")
+    public String getMyUserProfilePage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
         if (user == null) {
             return "redirect:/not-found";
         }
@@ -100,7 +107,7 @@ public class UserController {
                 return "redirect:/user/edit/" + user.getId();
             }
             triedPasswordChange = false;
-            return "redirect:/user/profile/" + user.getId();
+            return "redirect:/user/profile";
         }
 
         final String newNameFile = service.buildNameNewFile(user);
@@ -111,7 +118,7 @@ public class UserController {
                 return "redirect:/user/edit/" + user.getId();
             }
             triedPasswordChange = false;
-            return "redirect:/user/profile/" + user.getId();
+            return "redirect:/user/profile";
         }
 
         final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_USERS, nameFileWithExtension, newNameFile);
@@ -124,6 +131,6 @@ public class UserController {
             return "redirect:/user/edit/" + user.getId();
         }
         triedPasswordChange = false;
-        return "redirect:/user/profile/" + user.getId();
+        return "redirect:/user/profile";
     }
 }
