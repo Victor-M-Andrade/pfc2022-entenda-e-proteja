@@ -9,7 +9,6 @@ import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -60,10 +59,15 @@ public class UserController {
         return FoldersName.USER_FOLDER + "/perfil";
     }
 
-    @GetMapping("/user/edit/{id}")
-    public String getMyUserEditPage(@PathVariable final int id, final Model model) {
+    @GetMapping("/user/edit")
+    public String getMyUserEditPage(final Model model) {
         try {
-            final Usuario user = (Usuario) service.readById(id);
+            final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+            if (authenticatedUser == null) {
+                return "redirect:/not-found";
+            }
+
+            final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
             if (user != null) {
                 triedPasswordChange = false;
                 temporaryUser = null;
@@ -104,7 +108,7 @@ public class UserController {
         if (file.isEmpty()) {
             updateUserDataError = !service.update(user);
             if (updateUserDataError) {
-                return "redirect:/user/edit/" + user.getId();
+                return "redirect:/user/edit";
             }
             triedPasswordChange = false;
             return "redirect:/user/profile";
@@ -115,7 +119,7 @@ public class UserController {
         if (nameFileWithExtension == null) {
             updateUserDataError = !service.update(user);
             if (updateUserDataError) {
-                return "redirect:/user/edit/" + user.getId();
+                return "redirect:/user/edit";
             }
             triedPasswordChange = false;
             return "redirect:/user/profile";
@@ -128,7 +132,7 @@ public class UserController {
 
         updateUserDataError = !service.update(user);
         if (updateUserDataError) {
-            return "redirect:/user/edit/" + user.getId();
+            return "redirect:/user/edit";
         }
         triedPasswordChange = false;
         return "redirect:/user/profile";
