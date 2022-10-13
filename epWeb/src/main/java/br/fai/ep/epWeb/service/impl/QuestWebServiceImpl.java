@@ -137,7 +137,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
             final ResponseEntity<QuestionDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, QuestionDto[].class);
             response = Arrays.asList(responseEntity.getBody());

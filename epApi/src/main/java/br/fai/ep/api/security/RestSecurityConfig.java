@@ -32,6 +32,9 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/news/read-by-dto-criteria").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/news/read-by-dto-id/**").permitAll()
 
+                // question
+                .antMatchers(HttpMethod.POST, "/api/question/read-by-dto-criteria").permitAll()
+
                 // partner
                 .antMatchers(HttpMethod.POST, "/api/partner/read-by-criteria").permitAll()
                 .anyRequest().authenticated();

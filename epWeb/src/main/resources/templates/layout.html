@@ -73,43 +73,64 @@
                     </div>
                 </li>
 
-
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-expanded="true">
-                        Perfil
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Acessibilidade
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div sec:authorize="!isAuthenticated()">
-                            <a class="dropdown-item" th:href="@{/account/login}">Entrar</a>
-                            <a class="dropdown-item" th:href="@{/account/register}">Cadastrar</a>
-                        </div>
-                        <div sec:authorize="isAuthenticated()">
-                            <a class="dropdown-item" sec:authorize="hasRole('ADMIN')"
-                                th:href="@{/user/administrator-area}">
-                                Área do administrador
-                            </a>
-                            <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
-                            <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a>
-                            <a class="dropdown-item" th:href="@{/log-out}">Sair</a>
-                        </div>
+                        <label for="input-zoom-mode">
+                            <a class="dropdown-item">Aumentar Letra</a>
+                        </label>
+                        <input type="checkbox" id="input-zoom-mode" hidden>
+                        <label for="input-dark-mode">
+                            <a class="dropdown-item">Modo Escuro</a>
+                        </label>
+                        <input type="checkbox" id="input-dark-mode" hidden>
                     </div>
                 </li>
-
             </ul>
         </div>
 
-        <label for="input-zoom-mode">
-            <a class="button btn btn-outline-light">Aumentar Letra</a>
-        </label>
-        <input type="checkbox" id="input-zoom-mode" hidden>
+        <div sec:authorize="!isAuthenticated()">
+            <a class="button btn btn-outline-light mr-4" th:href="@{/account/login}">Entrar</a>
+            <a class="button btn btn-outline-light mr-4" th:href="@{/account/register}">Cadastrar</a>
+        </div>
 
-        <label for="input-dark-mode">
-            <a class="button btn btn-outline-light ml-3">Dark Mode</a>
-        </label>
-        <input type="checkbox" id="input-dark-mode" hidden>
-
+        <!-- Default dropleft button -->
+        <div class="btn-group" sec:authorize="isAuthenticated()">
+            <button type="button" class="button btn btn-primary mr-4 dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-address-book-o"></i>
+                Opções do usuário
+            </button>
+            <div class="dropdown-menu">
+                <h6 class="dropdown-header">Perfil</h6>
+                <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
+                <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a>
+                <a class="dropdown-item" th:href="@{/account/change-my-password}">Alterar senha</a>
+                <a class="dropdown-item" th:href="@{/log-out}">Sair</a>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Administração</h6>
+                    <a class="dropdown-item" th:href="@{/user/read-all}">
+                        Usuários
+                    </a>
+                    <a class="dropdown-item" th:href="@{/partner/admin-list}">
+                        Parceiros
+                    </a>
+                    <a class="dropdown-item" th:href="@{/news/admin-list}">
+                        Notícias
+                    </a>
+                    <a class="dropdown-item" th:href="@{/question/list}">
+                        Questões
+                    </a>
+                    <a class="dropdown-item" th:href="@{/user/administrator-area}">
+                        Área do Admin
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <div class="container col-12"><br>
