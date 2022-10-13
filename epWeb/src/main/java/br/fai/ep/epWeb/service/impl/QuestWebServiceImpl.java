@@ -2,7 +2,9 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.RestService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -23,7 +25,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<br.fai.ep.epEntities.Questao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, br.fai.ep.epEntities.Questao[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
@@ -40,7 +42,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<br.fai.ep.epEntities.Questao> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, br.fai.ep.epEntities.Questao.class);
             response = requestResponse.getBody();
@@ -58,8 +60,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final br.fai.ep.epEntities.Questao news = (br.fai.ep.epEntities.Questao) entity;
-            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>(news);
+            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((Questao) entity);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
@@ -77,7 +78,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((br.fai.ep.epEntities.Questao) entity);
+            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((Questao) entity, RestService.getRequestHeaders());
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
                     httpEntity, Boolean.class);
             response = responseEntity.getBody();
@@ -95,7 +96,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
@@ -113,7 +114,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<br.fai.ep.epEntities.Questao[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, br.fai.ep.epEntities.Questao[].class);
             response = Arrays.asList(responseEntity.getBody());
@@ -136,7 +137,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<QuestionDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, QuestionDto[].class);
             response = Arrays.asList(responseEntity.getBody());

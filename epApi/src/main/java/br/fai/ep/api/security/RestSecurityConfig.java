@@ -19,11 +19,12 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 // user
+                .antMatchers(HttpMethod.GET, "/api/user/read-by-id-for-update-password/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/user/update-forgotten-user-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/authentication").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/create").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/forgot-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/send-mail").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/read-by-id/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/update").permitAll()
 
                 // news
@@ -33,7 +34,6 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // partner
                 .antMatchers(HttpMethod.POST, "/api/partner/read-by-criteria").permitAll()
-
                 .anyRequest().authenticated();
     }
 }

@@ -5,6 +5,7 @@ import br.fai.ep.epEntities.DTO.NewsDto;
 import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.RestService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -26,7 +27,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Noticia[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, Noticia[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
@@ -43,7 +44,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Noticia> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, Noticia.class);
             response = requestResponse.getBody();
@@ -61,8 +62,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final Noticia news = (Noticia) entity;
-            final HttpEntity<Noticia> httpEntity = new HttpEntity<>(news);
+            final HttpEntity<Noticia> httpEntity = new HttpEntity<>((Noticia) entity, RestService.getRequestHeaders());
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
@@ -80,7 +80,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<Noticia> httpEntity = new HttpEntity<>((Noticia) entity);
+            final HttpEntity<Noticia> httpEntity = new HttpEntity<>((Noticia) entity, RestService.getRequestHeaders());
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
                     httpEntity, Boolean.class);
             response = responseEntity.getBody();
@@ -98,7 +98,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
@@ -116,7 +116,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<Noticia[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Noticia[].class);
             response = Arrays.asList(responseEntity.getBody());
@@ -140,7 +140,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<NewsDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, NewsDto[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
@@ -160,7 +160,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<NewsDto> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, NewsDto.class);
             response = requestResponse.getBody();
@@ -181,7 +181,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<NewsDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, NewsDto[].class);
             response = Arrays.asList(responseEntity.getBody());
@@ -203,7 +203,7 @@ public class NewsWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<NewsDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, NewsDto[].class);
             response = Arrays.asList(responseEntity.getBody());

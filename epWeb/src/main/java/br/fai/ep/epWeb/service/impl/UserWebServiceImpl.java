@@ -27,7 +27,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Usuario[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, Usuario[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
@@ -49,7 +49,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Usuario> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, Usuario.class);
             response = requestResponse.getBody();
@@ -72,7 +72,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
         try {
             final RestTemplate restTemplace = new RestTemplate();
             final Usuario user = (Usuario) entity;
-            final HttpEntity<Usuario> httpEntity = new HttpEntity<>(user);
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
             newIdUser = responseEntity.getBody();
@@ -90,7 +90,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity);
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity, RestService.getRequestHeaders());
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
                     httpEntity, Boolean.class);
             response = responseEntity.getBody();
@@ -108,7 +108,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.DELETE,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
@@ -126,7 +126,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
+            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
             final ResponseEntity<Usuario[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Usuario[].class);
             response = Arrays.asList(responseEntity.getBody());
@@ -194,7 +194,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
@@ -211,7 +211,7 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<String> httpEntity = new HttpEntity<>("");
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<Boolean> requestResponse = restTemplace.exchange(endpoint, HttpMethod.GET,
                     httpEntity, Boolean.class);
             response = requestResponse.getBody();
@@ -234,6 +234,44 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
             response = requestResponse.getBody();
         } catch (final Exception e) {
             System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    public Usuario readByIdForUpdatePassword(final long id) {
+        final String endpoint = BASE_ENDPOINT + "/read-by-id-for-update-password/" + id;
+        Usuario response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<Usuario> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Usuario.class);
+            response = requestResponse.getBody();
+
+            if (response != null && response.isAnonimo()) {
+                response = null;
+            }
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public boolean updateForgottenUserPassword(final Object entity) {
+        final String endpoint = BASE_ENDPOINT + "/update-forgotten-user-password";
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity);
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
+                    httpEntity, Boolean.class);
+            response = responseEntity.getBody();
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
         return response;

@@ -82,4 +82,14 @@ public class UsuarioController {
     public ResponseEntity<Boolean> authenticate(@RequestBody final MailDto mail) {
         return ResponseEntity.ok(service.sendemail(mail));
     }
+
+    @GetMapping("/read-by-id-for-update-password/{id}")
+    public ResponseEntity authenticate(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.readById(id));
+    }
+
+    @PutMapping("/update-forgotten-user-password")
+    public ResponseEntity<Boolean> updateForgottenUserPassword(@RequestBody final Usuario entity) {
+        return ResponseEntity.ok(service.update(entity));
+    }
 }

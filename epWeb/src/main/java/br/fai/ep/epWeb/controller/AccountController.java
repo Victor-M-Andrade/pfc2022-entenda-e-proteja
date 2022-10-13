@@ -5,10 +5,12 @@ import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.AnonymizeData;
 import br.fai.ep.epWeb.helper.FoldersName;
-import br.fai.ep.epWeb.service.WebServiceInterface;
+import br.fai.ep.epWeb.security.CustomUserDetail;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ import java.util.Map;
 
 @Controller
 public class AccountController {
-    private final WebServiceInterface service = new UserWebServiceImpl();
+    private final UserWebServiceImpl service = new UserWebServiceImpl();
     private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
     private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
 
@@ -177,15 +179,17 @@ public class AccountController {
         return "redirect:/user/profile/" + user.getId();
     }
 
+    @GetMapping("/account/check-exists-user/{id}")
+    public String checkExistsUser(@PathVariable final long id) {
+        if (service.readByIdForUpdatePassword(id) != null) {
+            System.out.println("Lemos um usuário: ");
+            return "redirect:/account/change-user-password/" + id;
+        }
+        return "redirect:/not-found";
+    }
+
     @GetMapping("/account/change-user-password/{id}")
     public String getChangeUserPasswordPage(@PathVariable final long id, final Model model, final Usuario user) {
-        if (service.readById(id) == null && !triedPasswordChange) {
-            changePasswordError = false;
-            triedPasswordChange = false;
-            return "redirect:/not-found";
-        }
-        triedPasswordChange = false;
-
         model.addAttribute(USER_ID, id);
         model.addAttribute(CHANGE_PASSWORD_ERROR, changePasswordError);
         if (changePasswordError) {
@@ -197,21 +201,19 @@ public class AccountController {
 
     @PostMapping("/account/update-user-password")
     public String updateUserPassword(final Model model, final Usuario user) {
-        triedPasswordChange = true;
-        final Usuario myUser = (Usuario) service.readById(user.getId());
+        final Usuario myUser = service.readByIdForUpdatePassword(user.getId());
         if (myUser == null) {
             changePasswordError = true;
             return "redirect:/account/change-user-password/" + user.getId();
         }
 
         myUser.setSenha(user.getSenha());
-        changePasswordError = !service.update(myUser);
+        changePasswordError = !service.updateForgottenUserPassword(myUser);
         if (changePasswordError) {
             return "redirect:/account/change-user-password/" + user.getId();
         }
 
-        triedPasswordChange = false;
-        return "redirect:/user/profile/" + user.getId();
+        return "redirect:/account/login";
     }
 
     @GetMapping("/account/confirm-delete-account/{id}")
@@ -294,5 +296,28 @@ public class AccountController {
     @GetMapping("/account/log-out")
     public String singOut() {
         return "redirect:/";
+    }
+
+    @GetMapping("/account/get-id-authenticated-user")
+    public String getIdAuthenticatedUser() {
+        String redirectPage = "/";
+        try {
+            final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) {
+                return "redirect:/";
+            }
+
+            final CustomUserDetail userDatails = (CustomUserDetail) authentication.getPrincipal();
+            if (userDatails == null) {
+                return "redirect:/";
+            }
+
+            final Usuario authenticatedUser = userDatails.getUsuario();
+            redirectPage = (authenticatedUser != null) ? "/user/profile/" + authenticatedUser.getId() : redirectPage;
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            return "redirect:" + redirectPage;
+        }
     }
 }
