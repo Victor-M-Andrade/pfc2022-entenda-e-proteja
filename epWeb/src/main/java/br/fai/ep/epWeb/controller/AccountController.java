@@ -208,18 +208,24 @@ public class AccountController {
         return "redirect:/account/login";
     }
 
-    @GetMapping("/account/confirm-delete-account/{id}")
-    public String confirmDeleteAccount(@PathVariable final long id) {
-        final Usuario user = (Usuario) service.readById(id);
-        if (user.isAdministrador() || user.isAutor() || user.isParceiro()) {
-            return "redirect:/account/request-use-data/" + id;
+    @GetMapping("/account/confirm-delete-account")
+    public String confirmDeleteAccount() {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            UserController.deleteUserError = false;
+            return "redirect:/user/profile";
         }
 
-        UserController.deleteUserError = !service.delete(id);
+        final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
+        if (user.isAdministrador() || user.isAutor() || user.isParceiro()) {
+            return "redirect:/account/request-use-data/" + authenticatedUser.getId();
+        }
+
+        UserController.deleteUserError = !service.delete(authenticatedUser.getId());
         if (UserController.deleteUserError) {
             return "redirect:/user/profile";
         }
-        return "redirect:/account/login";
+        return "redirect:/";
     }
 
     @GetMapping("/account/request-use-data/{id}")
