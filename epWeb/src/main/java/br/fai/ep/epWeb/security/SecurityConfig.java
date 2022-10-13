@@ -43,35 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/account/check-exists-user/**").permitAll()
                 .antMatchers("/account/change-user-password/**").permitAll()
                 .antMatchers("/account/update-user-password").permitAll()
-                .antMatchers("/account/confirm-delete-account/**").hasRole(ROLE_NAME.USER)
-                .antMatchers("/account/request-use-data/**").hasRole(ROLE_NAME.USER)
-                .antMatchers("/account/confirm-delete-my-account/**").hasRole(ROLE_NAME.USER)
-                .antMatchers("/account/anonymize-my-account/**").hasRole(ROLE_NAME.USER)
 
                 // Partner
                 .antMatchers("/partner/list").permitAll()
                 .antMatchers("/partner/detail/**").permitAll()
-                .antMatchers("/partner/register/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/request-register").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/my-data-as-partner/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/edit-my-data-as-partner/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/update-my-data-as-partner").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/delete-my-data-as-partner/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
-                .antMatchers("/partner/new-registration-requestl/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.PARTNER)
 
                 // news
                 .antMatchers("/news/categories").permitAll()
                 .antMatchers("/news/news-by-category/**").permitAll()
                 .antMatchers("/news/news-list").permitAll()
                 .antMatchers("/news/new/**").permitAll()
-                .antMatchers("/news/create-new-news/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/request-news-publication").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/user-news-list/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/user-news-detail/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/delete-user-news/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/new-publication-request/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/user-news-edit/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
-                .antMatchers("/news/update-user-news/**").hasAnyRole(ROLE_NAME.USER, ROLE_NAME.AUTHOR)
 
                 // question
                 .antMatchers("/question/list").hasRole(ROLE_NAME.ADMINISTRATOR)
