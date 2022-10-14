@@ -29,6 +29,13 @@
                     Selecionar outro nível
                 </a>
             </div>
+            <div class="row d-flex justify-content-center col-xl-12 col-12">
+                <div class="alert alert-danger col-12 col-md-12 text-center py-2" th:if="${saveTestError}">
+                    <span class="font-weight-bold align-middle">
+                        Desculpe, não foi possível salvar o teste. Por gentileza, tente novamente
+                    </span>
+                </div>
+            </div>
         </div>
 
         <div class="accordion py-2" id="accordion-parent">

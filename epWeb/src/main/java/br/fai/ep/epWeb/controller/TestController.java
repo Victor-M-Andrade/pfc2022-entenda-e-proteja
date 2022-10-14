@@ -29,7 +29,7 @@ public class TestController {
 
     private boolean saveTestError;
 
-    private Questionnaire temporaryQuestionary = null;
+    private final Questionnaire temporaryQuestionary = null;
 
     @GetMapping("/knowledge-test/select-level")
     public String getQuestionnairePage() {
@@ -56,13 +56,9 @@ public class TestController {
     }
 
     @PostMapping("/knowledge-test/result-test")
-    public String getResultKnowledgeTestPage(Questionnaire questionnaire, final Model model) {
+    public String getResultKnowledgeTestPage(final Questionnaire questionnaire, final Model model) {
         model.addAttribute(SAVE_TEST_ERROR, saveTestError);
-        if (questionnaire != null && saveTestError) {
-            questionnaire = temporaryQuestionary;
-            temporaryQuestionary = null;
-            saveTestError = false;
-        }
+        saveTestError = false;
 
         model.addAttribute(QUESTIONS_LIST, questionnaire);
         return FoldersName.KNOWLEDGE_TEST + "/result_test";
@@ -73,14 +69,15 @@ public class TestController {
         final Usuario user = epAuthenticationProvider.getAuthenticatedUser();
         if (user == null) {
             saveTestError = true;
-            temporaryQuestionary = questionnaire;
+            return getResultKnowledgeTestPage(questionnaire, model);
         }
+
         questionnaire.getQuestions().stream().forEach(question -> question.setUserId(user.getId()));
         final long newTestId = testWebService.create(questionnaire.getQuestions());
         System.out.println(newTestId);
         if (newTestId == -1) {
-            model.addAttribute(QUESTIONS_LIST, questionnaire);
-            return FoldersName.KNOWLEDGE_TEST + "/result_test";
+            saveTestError = true;
+            return getResultKnowledgeTestPage(questionnaire, model);
         }
         return "redirect:/knowledge-test/select-level";
     }
