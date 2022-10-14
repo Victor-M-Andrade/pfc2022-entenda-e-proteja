@@ -2,9 +2,9 @@ package br.fai.ep.db.dao.impl;
 
 import br.fai.ep.db.connection.ConnectionFactory;
 import br.fai.ep.db.dao.BaseDao;
-import br.fai.ep.db.dao.BaseDaoInterface;
+import br.fai.ep.db.dao.QuestTestDaoInterface;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
-import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epEntities.QuestaoTeste;
 import br.fai.ep.epEntities.QuestaoTeste.QUESTION_TEST_TABLE;
 
@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
+public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterface {
 
     @Override
-    public List<? extends BasePojo> readAll() {
+    public List<QuestaoTeste> readAll() {
         List<QuestaoTeste> questionTestList;
         resetValuesForNewQuery();
 
@@ -50,7 +50,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
     }
 
     @Override
-    public Object readById(final long id) {
+    public QuestaoTeste readById(final long id) {
         QuestaoTeste questionTest = null;
         resetValuesForNewQuery();
 
@@ -86,28 +86,27 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
     }
 
     @Override
-    public long create(final Object entity) {
+    public long create(final List<QuestionDto> questTestList) {
+        if (questTestList == null || questTestList.isEmpty()) {
+            return -1;
+        }
+
         resetValuesForNewQuery();
         long newId = Long.valueOf(-1);
-
+        final String valuesFormat = "('%s', %d, %d),";
         try {
             String sql = SQL_COMMAND.INSERT;
             sql += QUESTION_TEST_TABLE.TABLE_NAME + SQL_COMMAND.OPEN_PARENTHESIS;
             sql += QUESTION_TEST_TABLE.CHOICE_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += QUESTION_TEST_TABLE.ID_QUEST_COLUMN + SQL_COMMAND.SEPARATOR;
             sql += QUESTION_TEST_TABLE.ID_TEST_COLUMN + SQL_COMMAND.CLOSE_PARENTHESIS;
-            sql += SQL_COMMAND.VALUES;
-            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; // demanda
-            sql += SQL_COMMAND.PARAM_INSERT_TO_COMPLETE; //tipo_servico
-            sql += SQL_COMMAND.LAST_PARAM_INSERT_TO_COMPLETE; // id_questionTeste
-            preparForReadingOrCreating(sql, true, true);
+            sql += "VALUES ";
+            for (final QuestionDto question : questTestList) {
+                sql += String.format(valuesFormat, question.getUserAswer(), question.getId(), question.getTestId());
+            }
+            sql = sql.substring(0, sql.length() - 1) + ";";
 
-            final QuestaoTeste questionTest = (QuestaoTeste) entity;
-            int i = 1;
-            preparedStatement.setString(i++, questionTest.getEscolha());
-            preparedStatement.setLong(i++, questionTest.getIdQuestao());
-            preparedStatement.setLong(i++, questionTest.getIdTeste());
-
+            preparForReadingOrCreating(sql, true, false);
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
 
@@ -124,6 +123,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:create | classe: " + QuestaoTesteDaoImpl.class);
             System.out.println(e.getMessage());
+            newId = -1;
         } finally {
             ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
@@ -132,7 +132,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
     }
 
     @Override
-    public boolean update(final Object entity) {
+    public boolean update(final QuestaoTeste entity) {
         resetValuesForNewQuery();
         boolean isUpdateCompleted;
 
@@ -145,7 +145,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
             sql += QUESTION_TEST_TABLE.ID_COLUMN + SQL_COMMAND.lAST_PARAM_UPDATE_TO_COMPLETE + ";";
             preparForUpdateOrDelete(sql);
 
-            final QuestaoTeste questionTest = (QuestaoTeste) entity;
+            final QuestaoTeste questionTest = entity;
             int i = 1;
             preparedStatement.setString(i++, questionTest.getEscolha());
             preparedStatement.setLong(i++, questionTest.getIdQuestao());
@@ -205,7 +205,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements BaseDaoInterface {
     }
 
     @Override
-    public List<? extends BasePojo> readByCriteria(final String criteria) {
+    public List<QuestaoTeste> readByCriteria(final String criteria) {
         List<QuestaoTeste> questionTestList;
         resetValuesForNewQuery();
 

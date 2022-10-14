@@ -1,8 +1,9 @@
 package br.fai.ep.api.controller;
 
-import br.fai.ep.epEntities.BasePojo;
-import br.fai.ep.epEntities.Teste;
 import br.fai.ep.api.service.impl.TesteServiceImpl;
+import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.Teste;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,15 @@ public class TesteController {
         return ResponseEntity.ok(service.readById(id));
     }
 
+//    @PostMapping("/create")
+//    public ResponseEntity<Long> create(@RequestBody final Teste entity) {
+//        System.out.println(entity);
+//        return ResponseEntity.ok(service.create(entity));
+//    }
+
     @PostMapping("/create")
-    public ResponseEntity<Long> create(@RequestBody final Teste entity) {
-        System.out.println(entity);
-        return ResponseEntity.ok(service.create(entity));
+    public ResponseEntity<Long> create(@RequestBody final List<QuestionDto> questionsList) {
+        return ResponseEntity.ok(service.create(questionsList));
     }
 
     @PutMapping("/update")

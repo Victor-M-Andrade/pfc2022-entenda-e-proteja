@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // knowledge-test
                 .antMatchers("/knowledge-test/select-level").permitAll()
                 .antMatchers("/knowledge-test/test/**").permitAll()
+                .antMatchers("/knowledge-test/result-test").permitAll()
 
                 // administrator-user-area
                 .antMatchers("/user/administrator-area").hasRole(ROLE_NAME.ADMINISTRATOR)
