@@ -68,9 +68,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputUser">Nome de usuário</label>
-                                    <span data-tooltip="Dado Público">
                                     <input class="form-control py-4" id="inputUser" type="text"
-                                           placeholder="Insira seu nome" th:field="${myUser.nome}" required/>
+                                           placeholder="Insira seu nome" data-toggle="tooltip" data-placement="top" title="Dado Publico!" th:field="${myUser.nome}" required/>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -78,7 +77,7 @@
                                     <label class="small mb-1" for="inputEmail">Email</label>
                                     <span data-tooltip="Dado Privado">
                                     <input class="form-control py-4" id="inputEmail" type="email"
-                                           placeholder="Insira o seu email" th:field="${myUser.email}"
+                                           placeholder="Insira o seu email" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.email}"
                                            required/>
                                 </div>
                             </div>
@@ -90,7 +89,7 @@
                                     <label class="small mb-1" for="inputPassword">Senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputPassword" type="password"
-                                           placeholder="Insira a senha" th:field="${myUser.senha}" required/>
+                                           placeholder="Insira a senha" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.senha}" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -99,12 +98,12 @@
                                         senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputConfirmPassword" type="password"
-                                           placeholder="Confirme a senha" required/>
+                                           placeholder="Confirme a senha" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-control custom-checkbox mt-4">
                                 <input class="form-check-input" type="checkbox" id="acceptTermsCheck">
                                 <label class="form-check-label" for="acceptTermsCheck">
                                     Aceitar os

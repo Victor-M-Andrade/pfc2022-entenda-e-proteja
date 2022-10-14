@@ -35,13 +35,13 @@
                                 <label class="small mb-1" for="username">Email</label>
                                 <span data-tooltip="Dado Privado">
                                 <input class="form-control py-4" id="username" name="username" type="email"
-                                    placeholder="Insira o endereço de email" required />
+                                    placeholder="Insira o endereço de email" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required />
                             </div>
                             <div class="form-group">
                                 <label class="small mb-1" for="password">Senha</label>
                                 <span data-tooltip="Dado Anônimo">
                                 <input class="form-control py-4" id="password" name="password" type="password"
-                                    placeholder="Insira a senha" required />
+                                    placeholder="Insira a senha" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required />
                             </div>
                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                 <a class="small" th:href="@{/account/forgot-my-password}">Esqueceu a senha?</a>
