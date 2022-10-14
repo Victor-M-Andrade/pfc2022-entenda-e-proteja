@@ -22,7 +22,7 @@ VALUES
     ('Quais são os tipos de dados existentes, segundo a classificação da LGPD?',         'Dados Pessoais, Dados Delicados, Dados Públicos, Dados Compartilháveis',         'Dados Pessoais, Dados Sensíveis, Dados Públicos, Dados Anonimizados',         'Dados Pessoais, Dados Secretos, Dados Públicos, Dados Particulares', 'Dados Pessoais, Dados Secretos, Dados Públicos, Dados Delicados', 'B', 1),
     ('Qual é o órgão responsável por esse tipo de fiscalização?', 'Autoridade Brasileira de Proteção de Dados', 'Autoridade Nacional de Proteção de Dados', 'Autoridade de Proteção de Dados do Brasil', 'Autoridade de Proteção de Dados no Brasil', 'B', 1),
     ('Em que ano foi sancionada a LGPD?', '2012', '2018', '2010', '2017', 'B', 1),
-    ('O que é a ANPD', 'Um banco de dados', 'Órgão responsável por acompanha e aplicar sanções na LGPD', 'Uma organização internacional de apoio ao governo', 'Entidade sem fins lucrativos', 'B', 1);
+    ('O que é a ANPD?', 'Um banco de dados', 'Órgão responsável por acompanha e aplicar sanções na LGPD', 'Uma organização internacional de apoio ao governo', 'Entidade sem fins lucrativos', 'B', 1);
 
 -- Dados iniciais da tabela questao com nivel 2
 INSERT INTO
