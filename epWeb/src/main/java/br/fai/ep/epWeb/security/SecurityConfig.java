@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/send-email").permitAll()
                 .antMatchers("/privacy-policy").permitAll()
                 .antMatchers("/terms-conditions").permitAll()
+                .antMatchers("/know_lgpd").permitAll()
 
                 // account
                 .antMatchers("/account/register").permitAll()

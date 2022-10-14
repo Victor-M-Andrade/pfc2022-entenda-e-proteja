@@ -97,4 +97,10 @@ public class HomeController {
     public String getTermsConditionsPage() {
         return FoldersName.CONTRACTS_FOLDER + "/termos_uso";
     }
+
+
+    @GetMapping("/know_lgpd")
+    public String getKnowLGPD() {
+        return FoldersName.KNOW_LGPD + "/know_lgpd";
+    }
 }
