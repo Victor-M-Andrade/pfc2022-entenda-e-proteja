@@ -1,6 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.Teste;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.helper.Questionnaire;
@@ -80,5 +81,37 @@ public class TestController {
             return getResultKnowledgeTestPage(questionnaire, model);
         }
         return "redirect:/knowledge-test/select-level";
+    }
+
+    @GetMapping("/knowledge-test/user-tests")
+    public String getUserTestsPage(final Model model) {
+        final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
+        if (authenticatedUser == null) {
+            return "redirect:/not-found";
+        }
+
+        final Map<String, Long> criteria = new HashMap<>();
+        criteria.put(Teste.TEST_TABLE.ID_USER_COLUMN, authenticatedUser.getId());
+        final List<Teste> testList = (List<Teste>) testWebService.readByCriteria(criteria);
+
+        final boolean exitsTests = (testList != null && !testList.isEmpty()) ? true : false;
+
+        model.addAttribute("existsTests", exitsTests);
+        model.addAttribute("testList", testList);
+        return FoldersName.KNOWLEDGE_TEST + "/user_test_list";
+    }
+
+    @GetMapping("/knowledge-test/test-detail/{id}")
+    public String getTestDetilPage(@PathVariable("id") final long id, final Model model) {
+        final Questionnaire questionnaire = new Questionnaire();
+
+        final List<QuestionDto> questionDtoList = testWebService.readAllQuestionsByTest(id);
+        if (questionDtoList != null && !questionDtoList.isEmpty()) {
+            questionDtoList.stream().forEach(questionnaire::addQuestion);
+        }
+        final boolean existsQuestions = (questionDtoList != null && !questionDtoList.isEmpty()) ? true : false;
+        model.addAttribute(EXISTS_QUESTIONS, existsQuestions);
+        model.addAttribute(QUESTIONS_LIST, questionnaire);
+        return FoldersName.KNOWLEDGE_TEST + "/user_test_detail";
     }
 }

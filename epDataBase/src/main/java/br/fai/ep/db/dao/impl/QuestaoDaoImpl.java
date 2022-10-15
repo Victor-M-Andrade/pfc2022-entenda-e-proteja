@@ -8,7 +8,7 @@ import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epEntities.Questao.QUESTION_TABLE;
-import br.fai.ep.epEntities.Teste;
+import br.fai.ep.epEntities.QuestaoTeste;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -289,7 +289,6 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             while (resultSet.next()) {
                 final QuestionDto question = new QuestionDto();
                 question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
-                question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
                 question.setPergunta(resultSet.getString(QUESTION_TABLE.QUESTION_COLUMN));
                 question.setAlternativaA(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_A_COLUMN));
                 question.setAlternativaB(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_B_COLUMN));
@@ -297,6 +296,8 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
                 question.setAlternativaD(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_D_COLUMN));
                 question.setResposta(resultSet.getString(QUESTION_TABLE.ANSWER_COLUMN));
                 question.setNivel(resultSet.getInt(QUESTION_TABLE.LEVEL_COLUMN));
+                question.setUserAswer(resultSet.getString(QuestaoTeste.QUESTION_TEST_TABLE.CHOICE_COLUMN));
+                question.setTestId(resultSet.getLong(QuestaoTeste.QUESTION_TEST_TABLE.ID_TEST_COLUMN));
                 questionList.add(question);
             }
 
@@ -309,40 +310,5 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
         }
 
         return questionList;
-    }
-
-    public List<Teste> readAllTheQuestionTest(final long questionId) {
-        List<Teste> testList = null;
-        resetValuesForNewQuery();
-
-        try {
-            final String sql = "select T.* from teste as T inner join teste_questao as TQ ON TQ.id_teste = T.id where TQ.id_questao = ?;";
-
-            preparForReadingOrCreating(sql, false, false);
-            preparedStatement.setLong(1, questionId);
-            resultSet = preparedStatement.executeQuery();
-
-            testList = new ArrayList<>();
-            while (resultSet.next()) {
-                final Teste test = new Teste();
-                test.setId(resultSet.getLong(Teste.TEST_TABLE.ID_COLUMN));
-                test.setDataHora(resultSet.getTimestamp(Teste.TEST_TABLE.DATE_TIME_COLUMN));
-                test.setAcertos(resultSet.getInt(Teste.TEST_TABLE.HIT_COLUMN));
-                test.setIdUsuario(resultSet.getLong(Teste.TEST_TABLE.ID_USER_COLUMN));
-
-                testList.add(test);
-            }
-        } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readAll | classe: " + TesteDaoImpl.class);
-            if (e instanceof SQLException) {
-                System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
-            }
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
-        }
-
-        return testList;
     }
 }

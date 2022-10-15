@@ -2,6 +2,7 @@ package br.fai.ep.api.service.impl;
 
 import br.fai.ep.api.service.BaseService;
 import br.fai.ep.db.dao.impl.QuestaoDaoImpl;
+import br.fai.ep.db.dao.impl.QuestaoTesteDaoImpl;
 import br.fai.ep.db.dao.impl.TesteDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
@@ -21,6 +22,7 @@ public class QuestaoServiceImpl implements BaseService {
     private QuestaoDaoImpl dao;
 
     private final TesteDaoImpl testeDao = new TesteDaoImpl();
+    private final QuestaoTesteDaoImpl questTestDao = new QuestaoTesteDaoImpl();
 
     @Override
     public List<? extends BasePojo> readAll() {
@@ -44,7 +46,7 @@ public class QuestaoServiceImpl implements BaseService {
 
     @Override
     public boolean delete(final long id) {
-        final List<Teste> testList = dao.readAllTheQuestionTest(id);
+        final List<Teste> testList = questTestDao.readAllTestsByQuestion(id);
         final List<Teste> updatedTestList = new ArrayList<>();
         boolean updated = false;
         for (final Teste test : testList) {

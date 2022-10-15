@@ -83,4 +83,12 @@ public class TesteServiceImpl implements KnowledgeTestService {
 
         return param;
     }
+
+    public List<Teste> readAllTestsByQuestion(final long questionId) {
+        return questTestDao.readAllTestsByQuestion(questionId);
+    }
+
+    public List<QuestionDto> readAllQuestionsByTest(final long testId) {
+        return questTestDao.readAllQuestionsByTest(testId);
+    }
 }

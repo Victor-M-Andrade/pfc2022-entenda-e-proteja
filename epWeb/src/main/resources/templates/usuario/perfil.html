@@ -66,11 +66,15 @@
                                 </div>
 
                                 <div class="mb-2" th:if="${myUser.autor}">
-                                    <a th:href="@{/news/user-news-list}"
-                                        class="btn btn-primary col-12 btn-enviar-livro">
+                                    <a th:href="@{/news/user-news-list}" class="btn btn-primary col-12">
                                         Área do autor
                                     </a>
                                 </div>
+                            </div>
+                            <div class="mb-2">
+                                <a th:href="@{/knowledge-test/user-tests}" class="btn btn-primary col-12">
+                                    Testes salvos
+                                </a>
                             </div>
                         </div>
 

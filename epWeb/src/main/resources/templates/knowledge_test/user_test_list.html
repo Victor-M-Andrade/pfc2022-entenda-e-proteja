@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de testes salvos E&P</title>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/profile}">Meu perfil</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Testes Salvos
+            </li>
+        </ol>
+        <h1 class="text-center">Testes Salvos</h1>
+        <a th:href="@{/user/profile}" class="btn btn-secondary col-12 py-2">
+            Voltar ao seu perfil
+        </a>
+        <hr>
+        <div class="container-fluid text-center navbar-expand-md">
+            <div class="row align-items-start">
+                <div class="table-responsive">
+                    <div class="alert alert-danger col-12 text-center" th:unless="${existsTests}">
+                        <span class="font-weight-bold align-middle">
+                            Não foram encontrados testes associados ao seu usuário.
+                        </span>
+                    </div>
+                    <table class="table table-bordered text-center table-hover table-hover" id="tabela" width="100%"
+                        cellspacing="0" th:if="${existsTests}">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Acertos</th>
+                                <th>Data</th>
+                                <th>Ação</th>
+                            </tr>
+                            <tr class="col-12">
+                                <th><input class="col-10" type="text" id="txtColuna1" /></th>
+                                <th><input class="col-10" type="text" id="txtColuna2" /></th>
+                                <th><input class="col-10" type="text" id="txtColuna3" /></th>
+                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Acertos</th>
+                                <th>Data</th>
+                                <th>Ação</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr th:each="test : ${testList}">
+                                <td th:text="${test.id}" class="align-middle">00</td>
+                                <td th:text="${test.acertos}" class="align-middle">0</td>
+                                <td th:text="${#dates.format(new java.util.Date(test.dataHora), 'dd/MM/yyyy')}"
+                                    class="align-middle">
+                                    01/01/2022
+                                </td>
+                                <td>
+                                    <div class="col-12">
+                                        <a th:href="@{/knowledge-test/test-detail/{id} (id = ${test.id})}"
+                                            class="btn col-12 btn-info">
+                                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                            Resultado
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

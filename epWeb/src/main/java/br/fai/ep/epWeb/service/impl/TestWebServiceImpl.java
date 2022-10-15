@@ -131,17 +131,33 @@ public class TestWebServiceImpl extends BaseWebService implements WebServiceInte
         return "";
     }
 
-    public List<QuestionDto> readByDtoCriteria(final Map criteria) {
-        final String endpoint = BASE_ENDPOINT + "/read-by-dto-criteria";
+    public List<Teste> readAllTestsByQuestion(final long testId) {
+        final String endpoint = BASE_ENDPOINT + "/read-test-by-question/" + testId;
+        List<Teste> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<Teste[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Teste[].class);
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public List<QuestionDto> readAllQuestionsByTest(final long testId) {
+        final String endpoint = BASE_ENDPOINT + "/read-question-by-test/" + testId;
         List<QuestionDto> response = null;
 
         try {
-            final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
-            final ResponseEntity<QuestionDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<QuestionDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, QuestionDto[].class);
-            response = Arrays.asList(responseEntity.getBody());
-
+            response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
         }

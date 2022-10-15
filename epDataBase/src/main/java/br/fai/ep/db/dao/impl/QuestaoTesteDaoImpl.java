@@ -5,8 +5,10 @@ import br.fai.ep.db.dao.BaseDao;
 import br.fai.ep.db.dao.QuestTestDaoInterface;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epEntities.QuestaoTeste;
 import br.fai.ep.epEntities.QuestaoTeste.QUESTION_TEST_TABLE;
+import br.fai.ep.epEntities.Teste;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -236,5 +238,81 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
         }
 
         return questionTestList;
+    }
+
+    public List<Teste> readAllTestsByQuestion(final long questionId) {
+        List<Teste> testList = null;
+        resetValuesForNewQuery();
+
+        try {
+            final String sql = "select T.* from teste as T inner join teste_questao as TQ ON TQ.id_teste = T.id where TQ.id_questao = ?;";
+
+            preparForReadingOrCreating(sql, false, true);
+            preparedStatement.setLong(1, questionId);
+            resultSet = preparedStatement.executeQuery();
+
+            testList = new ArrayList<>();
+            while (resultSet.next()) {
+                final Teste test = new Teste();
+                test.setId(resultSet.getLong(Teste.TEST_TABLE.ID_COLUMN));
+                test.setDataHora(resultSet.getTimestamp(Teste.TEST_TABLE.DATE_TIME_COLUMN));
+                test.setAcertos(resultSet.getInt(Teste.TEST_TABLE.HIT_COLUMN));
+                test.setIdUsuario(resultSet.getLong(Teste.TEST_TABLE.ID_USER_COLUMN));
+
+                testList.add(test);
+            }
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readAll | classe: " + TesteDaoImpl.class);
+            if (e instanceof SQLException) {
+                System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
+            }
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return testList;
+    }
+
+    public List<QuestionDto> readAllQuestionsByTest(final long testId) {
+        List<QuestionDto> testList = null;
+        resetValuesForNewQuery();
+
+        try {
+            final String sql = "select Q.*, TQ.id_teste, TQ.escolha from questao as Q inner join teste_questao TQ ON TQ.id_questao = Q.id where TQ.id_teste = ?;";
+
+            preparForReadingOrCreating(sql, false, true);
+            preparedStatement.setLong(1, testId);
+            resultSet = preparedStatement.executeQuery();
+
+            testList = new ArrayList<>();
+            while (resultSet.next()) {
+                final QuestionDto question = new QuestionDto();
+                question.setId(resultSet.getLong(Questao.QUESTION_TABLE.ID_COLUMN));
+                question.setPergunta(resultSet.getString(Questao.QUESTION_TABLE.QUESTION_COLUMN));
+                question.setAlternativaA(resultSet.getString(Questao.QUESTION_TABLE.ALTERNATIVE_A_COLUMN));
+                question.setAlternativaB(resultSet.getString(Questao.QUESTION_TABLE.ALTERNATIVE_B_COLUMN));
+                question.setAlternativaC(resultSet.getString(Questao.QUESTION_TABLE.ALTERNATIVE_C_COLUMN));
+                question.setAlternativaD(resultSet.getString(Questao.QUESTION_TABLE.ALTERNATIVE_D_COLUMN));
+                question.setResposta(resultSet.getString(Questao.QUESTION_TABLE.ANSWER_COLUMN));
+                question.setNivel(resultSet.getInt(Questao.QUESTION_TABLE.LEVEL_COLUMN));
+                question.setUserAswer(resultSet.getString(QUESTION_TEST_TABLE.CHOICE_COLUMN));
+                question.setTestId(resultSet.getLong(QUESTION_TEST_TABLE.ID_TEST_COLUMN));
+
+                testList.add(question);
+            }
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readAll | classe: " + TesteDaoImpl.class);
+            if (e instanceof SQLException) {
+                System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
+            }
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return testList;
     }
 }

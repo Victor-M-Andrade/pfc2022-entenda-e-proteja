@@ -29,12 +29,6 @@ public class TesteController {
         return ResponseEntity.ok(service.readById(id));
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<Long> create(@RequestBody final Teste entity) {
-//        System.out.println(entity);
-//        return ResponseEntity.ok(service.create(entity));
-//    }
-
     @PostMapping("/create")
     public ResponseEntity<Long> create(@RequestBody final List<QuestionDto> questionsList) {
         return ResponseEntity.ok(service.create(questionsList));
@@ -53,5 +47,15 @@ public class TesteController {
     @PostMapping("/read-by-criteria")
     public ResponseEntity<List<? extends BasePojo>> readByCriteria(@RequestBody final Map criteria) {
         return ResponseEntity.ok(service.readByCriteria(criteria));
+    }
+
+    @GetMapping("/read-test-by-question/{id}")
+    public ResponseEntity<List<Teste>> readAllTestsByQuestion(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.readAllTestsByQuestion(id));
+    }
+
+    @GetMapping("/read-question-by-test/{id}")
+    public ResponseEntity<List<QuestionDto>> readAllQuestionsByTest(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.readAllQuestionsByTest(id));
     }
 }
