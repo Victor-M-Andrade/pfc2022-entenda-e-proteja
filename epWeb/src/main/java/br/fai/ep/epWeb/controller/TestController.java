@@ -1,7 +1,7 @@
 package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epEntities.DTO.QuestionDto;
-import br.fai.ep.epEntities.Teste;
+import br.fai.ep.epEntities.DTO.TestDto;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.helper.Questionnaire;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,15 +96,20 @@ public class TestController {
         if (authenticatedUser == null) {
             return "redirect:/not-found";
         }
-
-        final Map<String, Long> criteria = new HashMap<>();
-        criteria.put(Teste.TEST_TABLE.ID_USER_COLUMN, authenticatedUser.getId());
-        final List<Teste> testList = (List<Teste>) testWebService.readByCriteria(criteria);
-
-        final boolean exitsTests = (testList != null && !testList.isEmpty()) ? true : false;
+        final List<TestDto> testList = testWebService.readAllUserTest(authenticatedUser.getId());
+        final List<TestDto> userTest = new ArrayList<>();
+        boolean exitsTests = false;
+        if (testList != null && !testList.isEmpty()) {
+            exitsTests = true;
+            for (final TestDto test : testList) {
+                if (checkIfTestHasBeenAdded(test, userTest)) {
+                    userTest.add(test);
+                }
+            }
+        }
 
         model.addAttribute("existsTests", exitsTests);
-        model.addAttribute("testList", testList);
+        model.addAttribute("testList", userTest);
         return FoldersName.KNOWLEDGE_TEST + "/user_test_list";
     }
 
@@ -131,5 +137,15 @@ public class TestController {
                 filter(question -> question.getUserAswer().equalsIgnoreCase(question.getResposta()))
                 .collect(Collectors.toList()).size();
         return (correctAnswers / questionDtoList.size()) * 100;
+    }
+
+    private boolean checkIfTestHasBeenAdded(final TestDto test, final List<TestDto> textList) {
+        boolean thisTestNotExist = true;
+        for (int i = 0; thisTestNotExist && i < textList.size(); i++) {
+            if (textList.get(i).getId() == test.getId()) {
+                thisTestNotExist = false;
+            }
+        }
+        return thisTestNotExist;
     }
 }

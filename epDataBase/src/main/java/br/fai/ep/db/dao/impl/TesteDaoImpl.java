@@ -5,6 +5,8 @@ import br.fai.ep.db.dao.BaseDao;
 import br.fai.ep.db.dao.BaseDaoInterface;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
+import br.fai.ep.epEntities.DTO.TestDto;
+import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epEntities.Teste;
 import br.fai.ep.epEntities.Teste.TEST_TABLE;
 import org.springframework.stereotype.Repository;
@@ -228,6 +230,45 @@ public class TesteDaoImpl extends BaseDao implements BaseDaoInterface {
 
         } catch (final Exception e) {
             System.out.println("Excecao -> metodo:readByCriteria | classe: " + TesteDaoImpl.class);
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return testList;
+    }
+
+    public List<TestDto> readAllUserTest(final long userId) {
+        List<TestDto> testList = null;
+        resetValuesForNewQuery();
+
+        try {
+            final String questionIdColumnName = "question_id";
+            final String sql = "select userTest.*, Q.nivel, Q.id as " + questionIdColumnName + " from questao as Q " +
+                    "inner join teste_questao TQ on Q.id = TQ.id_questao " +
+                    "inner join (select * from teste as T where T.id_usuario = ?) as userTest " +
+                    "on TQ.id_teste = userTest.id;";
+
+            preparForReadingOrCreating(sql, false, true);
+            preparedStatement.setLong(1, userId);
+            resultSet = preparedStatement.executeQuery();
+
+            testList = new ArrayList<>();
+            while (resultSet.next()) {
+                final TestDto test = new TestDto();
+                test.setId(resultSet.getLong(TEST_TABLE.ID_COLUMN));
+                test.setDataHora(resultSet.getTimestamp(TEST_TABLE.DATE_TIME_COLUMN));
+                test.setAcertos(resultSet.getInt(TEST_TABLE.HIT_COLUMN));
+                test.setIdUsuario(resultSet.getLong(TEST_TABLE.ID_USER_COLUMN));
+                test.setLevelTest(resultSet.getInt(Questao.QUESTION_TABLE.LEVEL_COLUMN));
+                test.setQuestionId(resultSet.getInt(questionIdColumnName));
+
+                testList.add(test);
+            }
+
+        } catch (final Exception e) {
+            System.out.println("Excecao -> metodo:readByDtoCriteria | classe: " + TesteDaoImpl.class);
             System.out.println(e.getMessage());
             return null;
         } finally {

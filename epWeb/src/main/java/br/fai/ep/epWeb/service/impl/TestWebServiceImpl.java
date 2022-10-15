@@ -2,6 +2,7 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.DTO.TestDto;
 import br.fai.ep.epEntities.Teste;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.RestService;
@@ -157,6 +158,23 @@ public class TestWebServiceImpl extends BaseWebService implements WebServiceInte
             final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
             final ResponseEntity<QuestionDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, QuestionDto[].class);
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public List<TestDto> readAllUserTest(final long userId) {
+        final String endpoint = BASE_ENDPOINT + "/read-all-user-test/" + userId;
+        List<TestDto> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<TestDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, TestDto[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());

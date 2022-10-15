@@ -37,11 +37,13 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Nivel</th>
                                 <th>Acertos</th>
                                 <th>Data</th>
                                 <th>Ação</th>
                             </tr>
                             <tr class="col-12">
+                                <th><input class="col-10" type="text" id="txtColuna1" /></th>
                                 <th><input class="col-10" type="text" id="txtColuna1" /></th>
                                 <th><input class="col-10" type="text" id="txtColuna2" /></th>
                                 <th><input class="col-10" type="text" id="txtColuna3" /></th>
@@ -51,6 +53,7 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
+                                <th>Nivel</th>
                                 <th>Acertos</th>
                                 <th>Data</th>
                                 <th>Ação</th>
@@ -59,6 +62,9 @@
                         <tbody>
                             <tr th:each="test : ${testList}">
                                 <td th:text="${test.id}" class="align-middle">00</td>
+                                <td th:text="Fácil" th:if="${test.levelTest == 1}" class="align-middle"></td>
+                                <td th:text="Médio" th:if="${test.levelTest == 2}" class="align-middle"></td>
+                                <td th:text="Difícil" th:if="${test.levelTest == 3}" class="align-middle"></td>
                                 <td th:text="${test.acertos}" class="align-middle">0</td>
                                 <td th:text="${#dates.format(new java.util.Date(test.dataHora), 'dd/MM/yyyy')}"
                                     class="align-middle">

@@ -6,6 +6,7 @@ import br.fai.ep.db.dao.impl.TesteDaoImpl;
 import br.fai.ep.db.helper.DataBaseHelper.SQL_COMMAND;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.DTO.TestDto;
 import br.fai.ep.epEntities.Teste;
 import br.fai.ep.epEntities.Teste.TEST_TABLE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +91,9 @@ public class TesteServiceImpl implements KnowledgeTestService {
 
     public List<QuestionDto> readAllQuestionsByTest(final long testId) {
         return questTestDao.readAllQuestionsByTest(testId);
+    }
+
+    public List<TestDto> readAllUserTest(final long userId) {
+        return dao.readAllUserTest(userId);
     }
 }

@@ -3,6 +3,7 @@ package br.fai.ep.api.controller;
 import br.fai.ep.api.service.impl.TesteServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.DTO.TestDto;
 import br.fai.ep.epEntities.Teste;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +58,10 @@ public class TesteController {
     @GetMapping("/read-question-by-test/{id}")
     public ResponseEntity<List<QuestionDto>> readAllQuestionsByTest(@PathVariable("id") final long id) {
         return ResponseEntity.ok(service.readAllQuestionsByTest(id));
+    }
+
+    @GetMapping("/read-all-user-test/{id}")
+    public ResponseEntity<List<TestDto>> readAllUserTest(@PathVariable("id") final long userId) {
+        return ResponseEntity.ok(service.readAllUserTest(userId));
     }
 }
