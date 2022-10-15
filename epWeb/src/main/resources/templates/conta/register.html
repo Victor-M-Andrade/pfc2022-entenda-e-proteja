@@ -40,7 +40,7 @@
 <div layout:fragment="body">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a th:href="@{/}">Home</a>
+            <a th:href="@{/}">Início</a>
         </li>
         <li class="breadcrumb-item active">
             Cadastro de usuário
@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputUser">Nome de usuário</label>
                                     <input class="form-control py-4" id="inputUser" type="text"
-                                           placeholder="Insira seu nome" data-toggle="tooltip" data-placement="top" title="Dado Publico!" th:field="${myUser.nome}" required/>
+                                           placeholder="Insira seu nome" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.nome}" required/>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -89,7 +89,7 @@
                                     <label class="small mb-1" for="inputPassword">Senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputPassword" type="password"
-                                           placeholder="Insira a senha" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.senha}" required/>
+                                           placeholder="Insira a senha" data-toggle="tooltip" data-placement="top" title="Dado Privado!" th:field="${myUser.senha}" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -98,7 +98,7 @@
                                         senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputConfirmPassword" type="password"
-                                           placeholder="Confirme a senha" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required/>
+                                           placeholder="Confirme a senha" data-toggle="tooltip" data-placement="top" title="Dado Privado!" required/>
                                 </div>
                             </div>
                         </div>

@@ -54,7 +54,7 @@
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item">
                 <a th:href="@{/user/profile}">Meu perfil</a>
@@ -87,7 +87,7 @@
                                 <div class="mb-2 card">
                                     <div class="card-body">
                                         <div class="custom-file">
-                                            <label for="newsCoverId">Imagem da logo ou do consultor</label>
+                                            <label for="newsCoverId">Imagem da capa da notícia</label>
                                             <input class="form-control" type="file" name="newsCover" accept="image/*"
                                                 id="newsCoverId" onchange="PreviewImage();">
 
@@ -99,7 +99,7 @@
                                             <div class="col-sm-3">Título</div>
                                             <div class="col-sm-9">
                                                 <input th:field="${myNews.titulo}" type="text" class="form-control"
-                                                    required>
+                                                       data-toggle="tooltip" data-placement="top" title="Dado Público!" required>
                                             </div>
                                         </div>
                                         <hr>
@@ -109,10 +109,10 @@
                                                 <input th:field="${myNews.artigo}" type="number" min="0"
                                                     class="form-control" oninput="articleNumber(this)" required>
                                             </div>
-                                            <div class="col-sm-3">Palavras Chaves</div>
+                                            <div class="col-sm-3">Palavras chaves</div>
                                             <div class="col-sm-5">
                                                 <input th:field="${myNews.palavraChave}" type="text"
-                                                    class="form-control" required>
+                                                    class="form-control"  required>
                                             </div>
                                         </div>
                                         <hr>
@@ -136,7 +136,7 @@
                                             <div class="col-sm-3">Notícia</div>
                                             <div class="col-sm-9">
                                                 <textarea th:field="${myNews.contexto}" class="form-control" rows="10"
-                                                    required></textarea>
+                                                          data-toggle="tooltip" data-placement="top" title="Dado Público!" required></textarea>
                                             </div>
                                         </div>
                                         <hr>

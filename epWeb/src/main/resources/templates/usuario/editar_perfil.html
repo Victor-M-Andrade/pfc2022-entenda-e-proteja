@@ -20,7 +20,7 @@
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item">
                 <a th:href="@{/user/profile}">Meu perfil</a>
@@ -61,14 +61,14 @@
                                         <div class="row">
                                             <div class="col-sm-3">Usuário</div>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" th:field="*{nome}" required>
+                                                <input type="text" class="form-control" th:field="*{nome}" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">Email</div>
                                             <div class="col-sm-9">
-                                                <input type="email" class="form-control" th:field="*{email}" required>
+                                                <input type="email" class="form-control" th:field="*{email}" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" required>
                                             </div>
                                         </div>
                                         <hr>
@@ -79,7 +79,7 @@
                                             <div class="col-sm-9">
                                                 <div class="mb-3">
                                                     <input class="form-control" type="file" id="uploadImage"
-                                                        name="fromMyFile" accept="image/*" onchange="PreviewImage();">
+                                                           data-toggle="tooltip" data-placement="top" title="Dado Público!" name="fromMyFile" accept="image/*" onchange="PreviewImage();">
                                                 </div>
                                             </div>
                                         </div>

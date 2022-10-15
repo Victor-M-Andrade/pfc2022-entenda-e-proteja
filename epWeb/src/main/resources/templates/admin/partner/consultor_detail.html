@@ -10,7 +10,7 @@
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item">
                 <a th:href="@{/user/administrator-area}">Área do Administrador</a>
@@ -64,7 +64,7 @@
                             <div class="mb-2">
                                 <a th:href="@{/user/admin-profile/{id} (id = ${myPartner.idUsuario})}"
                                     class="btn btn-primary col-12">
-                                    Perfil de usuario do consultor
+                                    Perfil de usuário do consultor
                                 </a>
                             </div>
                             <div th:if="${!myPartner.anonimo}">

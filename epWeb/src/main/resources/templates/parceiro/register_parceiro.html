@@ -62,7 +62,7 @@
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item">
                 <a th:href="@{/user/profile}">Meu perfil</a>
@@ -102,12 +102,12 @@
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label class="mb-1" for="inputCompany">
-                                            Nome da Empresa
+                                            Nome da empresa
                                         </label>
                                         <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputCompany" type="text"
                                             placeholder="Insira o nome da sua empresa" required
-                                            th:field="${myPartner.nomeEmpresa}" />
+                                               data-toggle="tooltip" data-placement="top" title="Dado Público!" th:field="${myPartner.nomeEmpresa}" />
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -117,7 +117,7 @@
                                         <span data-tooltip="Dado Privado">
                                         <input class="form-control py-4" id="inputAssunto" type="text"
                                             placeholder="Insira o CNPJ da empresa" required
-                                            th:field="${myPartner.cnpj}" />
+                                               data-toggle="tooltip" data-placement="top" title="Dado Privado!" th:field="${myPartner.cnpj}" />
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                         <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputSite" type="url"
                                             placeholder="Insira o site da empresa" required
-                                            th:field="${myPartner.website}" />
+                                               data-toggle="tooltip" data-placement="top" title="Dado Público!" th:field="${myPartner.website}" />
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -141,7 +141,7 @@
                                         <span data-tooltip="Dado Público">
                                         <input class="form-control py-4" id="inputTelefone" type="tel"
                                             placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
-                                            th:field="${myPartner.telefone}">
+                                               data-toggle="tooltip" data-placement="top" title="Dado Público!" th:field="${myPartner.telefone}">
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +175,11 @@
                             </div>
                             <div class="form-group">
 
-                                <label for="">Descrição dos serviços oferecidos</label>
+                                <label for="">Descrição da empresa</label>
 
                                 <textarea type="text" class="form-control" rows="10"
                                     placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
-                                    required th:field="${myPartner.descricao}"></textarea>
+                                          data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="${myPartner.descricao}"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -193,7 +193,7 @@
                             <div class="form-group mt-4 mb-0">
                                 <button class="btn btn-info btn-block" id="requestRegister" type="submit"
                                     onclick="validate()">
-                                    Enviar para Análise
+                                    Enviar para análise
                                 </button>
                             </div>
                         </form>

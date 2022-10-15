@@ -10,13 +10,13 @@
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item active">
                 Lista de notícias
             </li>
         </ol>
-        <h1 class="text-center">Notícias desta categorias</h1>
+        <h1 class="text-center">Notícias desta categoria</h1>
         <hr>
         <div class="col-12 text-center">
             <a th:href="@{/news/categories}" class="btn btn-primary col-sm-5 py-2">
@@ -42,8 +42,8 @@
                         th:if="${existsNews}">
                         <thead>
                             <tr>
-                                <th class="col-4">Titulo</th>
-                                <th class="col-2">Category</th>
+                                <th class="col-4">Título</th>
+                                <th class="col-2">Categoria</th>
                                 <th class="col-2">ID Autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
@@ -57,7 +57,7 @@
                         <tfoot>
                             <tr>
                                 <th class="col-4">Titulo</th>
-                                <th class="col-2">Category</th>
+                                <th class="col-2">Categoria</th>
                                 <th class="col-2">ID Autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
@@ -80,7 +80,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title text-center" id="exampleModalLabel">
-                                                        Dados do Autor
+                                                        Dados do autor
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -94,7 +94,7 @@
                                                                 <div class="col-sm-3"><strong>Nome</strong></div>
                                                                 <div class="col-sm-9">
                                                                     <label th:text="${news.authorName}">
-                                                                        Nome do Autor
+                                                                        Nome do autor
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -104,7 +104,7 @@
                                                 <div class="modal-footer text-center">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">
-                                                        Fechar dialog
+                                                        Fechar
                                                     </button>
                                                 </div>
                                             </div>

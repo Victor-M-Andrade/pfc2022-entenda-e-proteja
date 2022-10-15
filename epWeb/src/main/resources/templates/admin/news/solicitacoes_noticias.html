@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Solicitacao de registro de consultor E&P</title>
+    <title>Solicitação de registro de consultor E&P</title>
 </head>
 
 <body>
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a th:href="@{/}">Home</a>
+                <a th:href="@{/}">Início</a>
             </li>
             <li class="breadcrumb-item">
                 <a th:href="@{/user/administrator-area}">Área do Administrador</a>
@@ -36,9 +36,9 @@
                         th:if="${existsNews}">
                         <thead>
                             <tr>
-                                <th class="col-6">Titulo</th>
-                                <th class="col-2">Category</th>
-                                <th class="col-2">ID Autor</th>
+                                <th class="col-6">Título</th>
+                                <th class="col-2">Categoria</th>
+                                <th class="col-2">ID autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
                             <tr class="col-12">
@@ -50,15 +50,15 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th class="col-6">Titulo</th>
-                                <th class="col-2">Category</th>
-                                <th class="col-2">ID Autor</th>
+                                <th class="col-6">Título</th>
+                                <th class="col-2">Categoria</th>
+                                <th class="col-2">ID autor</th>
                                 <th class="col-2">Ação</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <tr th:each="news : ${publicationNews}">
-                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                                <td th:text="${news.titulo}" class="align-middle">título</td>
                                 <td th:text="${news.categoria}" class="align-middle">categoria</td>
                                 <td class="align-middle">
                                     <!-- Button trigger modal -->
@@ -74,7 +74,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title text-center" id="exampleModalLabel">
-                                                        Dados do Autor
+                                                        Dados do autor
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -88,7 +88,7 @@
                                                                 <div class="col-sm-3"><strong>Nome</strong></div>
                                                                 <div class="col-sm-9">
                                                                     <label th:text="${news.authorName}">
-                                                                        Nome do Autor
+                                                                        Nome do autor
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -105,7 +105,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">
-                                                        Fechar dialog
+                                                        Fechar
                                                     </button>
                                                     <a th:href="@{/user/admin-profile/{id} (id = ${news.idAutor})}"
                                                         class="btn btn-info">
