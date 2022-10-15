@@ -262,7 +262,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
                 testList.add(test);
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readAll | classe: " + TesteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readAll | readAllTestsByQuestion: " + QuestaoTesteDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }
@@ -303,7 +303,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
                 testList.add(question);
             }
         } catch (final Exception e) {
-            System.out.println("Excecao -> metodo:readAll | classe: " + TesteDaoImpl.class);
+            System.out.println("Excecao -> metodo:readAllQuestionsByTest | classe: " + QuestaoTesteDaoImpl.class);
             if (e instanceof SQLException) {
                 System.out.println("SQLException: olhar metodo newReadOrCreateInstances");
             }

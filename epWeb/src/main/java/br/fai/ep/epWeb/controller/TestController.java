@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class TestController {
@@ -27,10 +28,12 @@ public class TestController {
     private final String EXISTS_QUESTIONS = "existsQuestions";
     private final String QUESTIONS_LIST = "myQuestionnaire";
     private final String SAVE_TEST_ERROR = "saveTestError";
+    private final String TEST_RESULT_MESSAGE_FORMAT = "Você acertou %.0f%% das questoes do teste";
 
     private boolean saveTestError;
 
     private final Questionnaire temporaryQuestionary = null;
+    public String RESULT_MESSAGE = "resultadoMessage";
 
     @GetMapping("/knowledge-test/select-level")
     public String getQuestionnairePage() {
@@ -61,6 +64,9 @@ public class TestController {
         model.addAttribute(SAVE_TEST_ERROR, saveTestError);
         saveTestError = false;
 
+        final String message = String.format(TEST_RESULT_MESSAGE_FORMAT, calculePercentage(questionnaire.getQuestions()));
+
+        model.addAttribute(RESULT_MESSAGE, message);
         model.addAttribute(QUESTIONS_LIST, questionnaire);
         return FoldersName.KNOWLEDGE_TEST + "/result_test";
     }
@@ -104,14 +110,26 @@ public class TestController {
     @GetMapping("/knowledge-test/test-detail/{id}")
     public String getTestDetilPage(@PathVariable("id") final long id, final Model model) {
         final Questionnaire questionnaire = new Questionnaire();
-
         final List<QuestionDto> questionDtoList = testWebService.readAllQuestionsByTest(id);
+
+        String message = "";
+        boolean existsQuestions = false;
         if (questionDtoList != null && !questionDtoList.isEmpty()) {
+            existsQuestions = true;
             questionDtoList.stream().forEach(questionnaire::addQuestion);
+            message = String.format(TEST_RESULT_MESSAGE_FORMAT, calculePercentage(questionDtoList));
         }
-        final boolean existsQuestions = (questionDtoList != null && !questionDtoList.isEmpty()) ? true : false;
-        model.addAttribute(EXISTS_QUESTIONS, existsQuestions);
+
+        model.addAttribute(RESULT_MESSAGE, message);
         model.addAttribute(QUESTIONS_LIST, questionnaire);
+        model.addAttribute(EXISTS_QUESTIONS, existsQuestions);
         return FoldersName.KNOWLEDGE_TEST + "/user_test_detail";
+    }
+
+    private double calculePercentage(final List<QuestionDto> questionDtoList) {
+        final double correctAnswers = questionDtoList.stream().
+                filter(question -> question.getUserAswer().equalsIgnoreCase(question.getResposta()))
+                .collect(Collectors.toList()).size();
+        return (correctAnswers / questionDtoList.size()) * 100;
     }
 }

@@ -8,7 +8,6 @@ import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
 import br.fai.ep.epEntities.Questao;
 import br.fai.ep.epEntities.Questao.QUESTION_TABLE;
-import br.fai.ep.epEntities.QuestaoTeste;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -296,8 +295,6 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
                 question.setAlternativaD(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_D_COLUMN));
                 question.setResposta(resultSet.getString(QUESTION_TABLE.ANSWER_COLUMN));
                 question.setNivel(resultSet.getInt(QUESTION_TABLE.LEVEL_COLUMN));
-                question.setUserAswer(resultSet.getString(QuestaoTeste.QUESTION_TEST_TABLE.CHOICE_COLUMN));
-                question.setTestId(resultSet.getLong(QuestaoTeste.QUESTION_TEST_TABLE.ID_TEST_COLUMN));
                 questionList.add(question);
             }
 
