@@ -31,7 +31,7 @@ public class TestController {
     private final String SAVE_TEST_ERROR = "saveTestError";
     private final String EXISTS_QUESTIONS = "existsQuestions";
 
-    private final String TEST_RESULT_MESSAGE_FORMAT = "Você acertou %.0f%% das questoes do teste";
+    private final String TEST_RESULT_MESSAGE_FORMAT = "Você acertou %.0f%% das questões do teste";
     private final String BETTER_TEST_MESSAGE_FORMAT = "Teste ID %d, com %d de %d acertos";
 
     private boolean saveTestError;
