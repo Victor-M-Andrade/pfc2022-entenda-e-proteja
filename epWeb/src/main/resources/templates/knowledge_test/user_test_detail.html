@@ -3,57 +3,65 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Teste de conhecimento E&P</title>
+    <title>Resultado do teste salvo E&P</title>
 </head>
 
 <body>
     <div layout:fragment="body">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/}">Início</a>
+                <a th:href="@{/}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/knowledge-test/select-level}">Nível do teste</a>
+                <a th:href="@{/user/profile}">Meu perfil</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/knowledge-test/user-tests}">
+                    Testes Salvos
+                </a>
             </li>
             <li class="breadcrumb-item active">
-                Teste de conhecimento
+                Resultado do teste
             </li>
         </ol>
 
         <div class="row">
             <div class="col-12 col-md-12 text-center">
-                <h1>Teste de conhecimento sobre a LGPD</h1>
+                <h1>Resultado do teste salvo</h1>
+                <h5 th:text="${resultadoMessage}" th:if="${existsQuestions}">Mensagem do resultado</h5>
             </div>
             <div class="col-12 col-md-12 text-center py-2">
-                <a th:href="@{/knowledge-test/select-level}" class="btn btn-secondary col-12">
-                    Selecionar outro nível
+                <a th:href="@{/knowledge-test/user-tests}" class="btn btn-secondary col-12">
+                    Lista de teste salvos
                 </a>
             </div>
-
             <div class="row d-flex justify-content-center col-xl-12 col-12">
                 <div class="alert alert-danger col-12 col-md-12 text-center py-2" th:unless="${existsQuestions}">
                     <span class="font-weight-bold align-middle">
-                        Desculpe, mas não temos questões disponíveis neste nível no momento.
+                        Desculpe, as questões do teste não estão mais disponíveis para visualização.
                     </span>
                 </div>
             </div>
         </div>
 
         <div class="accordion py-2" id="accordion-parent">
-            <form th:action="@{/knowledge-test/result-test}" method="post" th:object="${myQuestionnaire}"
-                th:if="${existsQuestions}" class="py-2">
+            <form action="" method="post" th:object="${myQuestionnaire}" class="py-2" th:if="${existsQuestions}">
 
                 <div class="card" th:each="questionDto, itemStat : *{questions}">
 
-                    <div class="card-header">
-                        <h3 th:text="'Pergunta ' + (${itemStat.index} + 1)">Pergunta N</h3>
+                    <div class="card-header bg-success text-white"
+                        th:if="*{questions[__${itemStat.index}__].userAswer == questions[__${itemStat.index}__].resposta}">
+                        <h3 th:text="'Pergunta ' + (${itemStat.index} + 1)">Pergunta N certa</h3>
+                    </div>
+                    <div class="card-header bg-danger text-white"
+                        th:unless="*{questions[__${itemStat.index}__].userAswer == questions[__${itemStat.index}__].resposta}">
+                        <h3 th:text="'Pergunta ' + (${itemStat.index} + 1)">Pergunta N errado</h3>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" style="white-space: pre;"
                             th:utext="*{questions[__${itemStat.index}__].pergunta}">
                             Pergunta LGPD?
                         </h5>
-                        <p class=" card-text">Escolha uma opção:</p>
                         <div class="form-check">
                             <input class="form-check-input" type="radio"
                                 th:field="*{questions[__${itemStat.index}__].userAswer}" th:value="'A'" required
@@ -98,6 +106,34 @@
                                 Alternativa D
                             </label>
                         </div>
+                        <div
+                            th:unless="*{questions[__${itemStat.index}__].userAswer == questions[__${itemStat.index}__].resposta}">
+                            <br>
+                            <p>A alternativa correta é:</p>
+                            <div class="form-check">
+                                <input class="form-check-input" id="repostaQuestao" type="radio" checked>
+                                <label class="form-check-label" for="repostaQuestao"
+                                    th:if="*{questions[__${itemStat.index}__].resposta == 'A'}"
+                                    th:utext="*{questions[__${itemStat.index}__].alternativaA}">
+                                    Alternativa A
+                                </label>
+                                <label class="form-check-label" for="repostaQuestao"
+                                    th:if="*{questions[__${itemStat.index}__].resposta == 'B'}"
+                                    th:utext="*{questions[__${itemStat.index}__].alternativaB}">
+                                    Alternativa B
+                                </label>
+                                <label class="form-check-label" for="repostaQuestao"
+                                    th:if="*{questions[__${itemStat.index}__].resposta == 'C'}"
+                                    th:utext="*{questions[__${itemStat.index}__].alternativaC}">
+                                    Alternativa C
+                                </label>
+                                <label class="form-check-label" for="repostaQuestao"
+                                    th:if="*{questions[__${itemStat.index}__].resposta == 'D'}"
+                                    th:utext="*{questions[__${itemStat.index}__].alternativaD}">
+                                    Alternativa D
+                                </label>
+                            </div>
+                        </div>
                         <input th:field="*{questions[__${itemStat.index}__].id}" hidden>
                         <input th:field="*{questions[__${itemStat.index}__].pergunta}" hidden>
                         <input th:field="*{questions[__${itemStat.index}__].alternativaA}" hidden>
@@ -105,28 +141,6 @@
                         <input th:field="*{questions[__${itemStat.index}__].alternativaC}" hidden>
                         <input th:field="*{questions[__${itemStat.index}__].alternativaD}" hidden>
                         <input th:field="*{questions[__${itemStat.index}__].resposta}" hidden>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="alert alert-warning text-center py-2" th:if="${existsQuestions}"
-                            sec:authorize="!isAuthenticated()">
-                            <h3 class="alert-heading font-weight-bold align-middle">Lembrete</h3>
-                            <span class="font-weight-bold align-middle">
-                                Como você ainda não está autenticado no site, você poderá ver o resultado do teste, mas
-                                não será
-                                possível salvar o resultado.
-                            </span><br>
-                            <span class="font-weight-bold align-middle">
-                                Caso ainda não tenha uma conta, realize o cadastro e a autenticação no site
-                                <a th:href="@{/account/register}">
-                                    clicando aqui
-                                </a>
-                            </span>
-                        </div>
-                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
-                            Finalizar teste
-                        </button>
                     </div>
                 </div>
             </form>

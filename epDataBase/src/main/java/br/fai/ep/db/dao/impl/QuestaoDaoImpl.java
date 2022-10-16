@@ -288,7 +288,6 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             while (resultSet.next()) {
                 final QuestionDto question = new QuestionDto();
                 question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
-                question.setId(resultSet.getLong(QUESTION_TABLE.ID_COLUMN));
                 question.setPergunta(resultSet.getString(QUESTION_TABLE.QUESTION_COLUMN));
                 question.setAlternativaA(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_A_COLUMN));
                 question.setAlternativaB(resultSet.getString(QUESTION_TABLE.ALTERNATIVE_B_COLUMN));

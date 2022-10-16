@@ -65,8 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/question/delete-question/**").hasRole(ROLE_NAME.ADMINISTRATOR)
 
                 // knowledge-test
-                .antMatchers("/knowledge-test/select-level").anonymous()
-                .antMatchers("/knowledge-test/test/**").anonymous()
+                .antMatchers("/knowledge-test/select-level").permitAll()
+                .antMatchers("/knowledge-test/test/**").permitAll()
+                .antMatchers("/knowledge-test/result-test").permitAll()
 
                 // administrator-user-area
                 .antMatchers("/user/administrator-area").hasRole(ROLE_NAME.ADMINISTRATOR)

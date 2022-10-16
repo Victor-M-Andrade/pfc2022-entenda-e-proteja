@@ -2,7 +2,8 @@ package br.fai.ep.epWeb.service.impl;
 
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
-import br.fai.ep.epEntities.Questao;
+import br.fai.ep.epEntities.DTO.TestDto;
+import br.fai.ep.epEntities.Teste;
 import br.fai.ep.epWeb.service.BaseWebService;
 import br.fai.ep.epWeb.service.RestService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
@@ -15,18 +16,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class QuestWebServiceImpl extends BaseWebService implements WebServiceInterface {
-    private final String BASE_ENDPOINT = API_HOST + "/question";
+public class TestWebServiceImpl extends BaseWebService implements WebServiceInterface {
+    private final String BASE_ENDPOINT = API_HOST + "/test";
 
     @Override
     public List<? extends BasePojo> readAll() {
         final String endpoint = BASE_ENDPOINT + "/read-all";
-        List<br.fai.ep.epEntities.Questao> response = null;
+        List<Teste> response = null;
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
-            final ResponseEntity<br.fai.ep.epEntities.Questao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, br.fai.ep.epEntities.Questao[].class);
+            final ResponseEntity<Teste[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, Teste[].class);
             response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
@@ -38,13 +39,13 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public Object readById(final long id) {
         final String endpoint = BASE_ENDPOINT + "/read-by-id/" + id;
-        br.fai.ep.epEntities.Questao response = null;
+        Teste response = null;
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
-            final ResponseEntity<br.fai.ep.epEntities.Questao> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
-                    httpEntity, br.fai.ep.epEntities.Questao.class);
+            final ResponseEntity<Teste> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Teste.class);
             response = requestResponse.getBody();
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
@@ -56,19 +57,19 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public long create(final Object entity) {
         final String endpoint = BASE_ENDPOINT + "/create";
-        long newIdUser = Long.valueOf(-1);
+        long newIdTeste = Long.valueOf(-1);
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((Questao) entity, RestService.getRequestHeaders());
+            final HttpEntity<List<QuestionDto>> httpEntity = new HttpEntity<>((List<QuestionDto>) entity, RestService.getRequestHeaders());
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);
-            newIdUser = responseEntity.getBody();
+            newIdTeste = responseEntity.getBody();
         } catch (final Exception e) {
             System.out.println(e.getMessage());
         }
 
-        return newIdUser;
+        return newIdTeste;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<br.fai.ep.epEntities.Questao> httpEntity = new HttpEntity<>((Questao) entity, RestService.getRequestHeaders());
+            final HttpEntity<Teste> httpEntity = new HttpEntity<>((Teste) entity, RestService.getRequestHeaders());
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT,
                     httpEntity, Boolean.class);
             response = responseEntity.getBody();
@@ -110,13 +111,13 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
     @Override
     public List<? extends BasePojo> readByCriteria(final Map criteria) {
         final String endpoint = BASE_ENDPOINT + "/read-by-criteria";
-        List<br.fai.ep.epEntities.Questao> response = null;
+        List<Teste> response = null;
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
             final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria, RestService.getRequestHeaders());
-            final ResponseEntity<br.fai.ep.epEntities.Questao[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
-                    httpEntity, br.fai.ep.epEntities.Questao[].class);
+            final ResponseEntity<Teste[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+                    httpEntity, Teste[].class);
             response = Arrays.asList(responseEntity.getBody());
 
         } catch (final Exception ex) {
@@ -131,17 +132,50 @@ public class QuestWebServiceImpl extends BaseWebService implements WebServiceInt
         return "";
     }
 
-    public List<QuestionDto> readByDtoCriteria(final Map criteria) {
-        final String endpoint = BASE_ENDPOINT + "/read-by-dto-criteria";
+    public List<Teste> readAllTestsByQuestion(final long testId) {
+        final String endpoint = BASE_ENDPOINT + "/read-test-by-question/" + testId;
+        List<Teste> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<Teste[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Teste[].class);
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public List<QuestionDto> readAllQuestionsByTest(final long testId) {
+        final String endpoint = BASE_ENDPOINT + "/read-question-by-test/" + testId;
         List<QuestionDto> response = null;
 
         try {
-            final RestTemplate restTemplace = new RestTemplate();
-            final HttpEntity<Map> httpEntity = new HttpEntity<>(criteria);
-            final ResponseEntity<QuestionDto[]> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<QuestionDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
                     httpEntity, QuestionDto[].class);
-            response = Arrays.asList(responseEntity.getBody());
+            response = Arrays.asList(requestResponse.getBody());
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
+        return response;
+    }
+
+    public List<TestDto> readAllUserTest(final long userId) {
+        final String endpoint = BASE_ENDPOINT + "/read-all-user-test/" + userId;
+        List<TestDto> response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<TestDto[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, TestDto[].class);
+            response = Arrays.asList(requestResponse.getBody());
         } catch (final Exception ex) {
             System.out.println(ex.getMessage());
         }
