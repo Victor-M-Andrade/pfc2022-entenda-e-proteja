@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.fai.ep.web</groupId>
     <artifactId>epWeb</artifactId>
-    <version>6.0.0</version>
+    <version>6.1.0</version>
     <name>epWeb</name>
     <description>Módulo onde estão todas as views e interações com os usuários dos softwares</description>
     <properties>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>br.fai.ep</groupId>
             <artifactId>epEntity</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
