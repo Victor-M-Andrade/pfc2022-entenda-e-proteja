@@ -26,15 +26,15 @@ public class TestController {
     private final QuestWebServiceImpl questWebService = new QuestWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
-    private final String EXISTS_QUESTIONS = "existsQuestions";
+    private final String RESULT_MESSAGE = "resultadoMessage";
     private final String QUESTIONS_LIST = "myQuestionnaire";
     private final String SAVE_TEST_ERROR = "saveTestError";
+    private final String EXISTS_QUESTIONS = "existsQuestions";
+
     private final String TEST_RESULT_MESSAGE_FORMAT = "Você acertou %.0f%% das questoes do teste";
+    private final String BETTER_TEST_MESSAGE_FORMAT = "Teste ID %d, com %d de %d acertos";
 
     private boolean saveTestError;
-
-    private final Questionnaire temporaryQuestionary = null;
-    public String RESULT_MESSAGE = "resultadoMessage";
 
     @GetMapping("/knowledge-test/select-level")
     public String getQuestionnairePage() {
@@ -96,20 +96,28 @@ public class TestController {
         if (authenticatedUser == null) {
             return "redirect:/not-found";
         }
-        final List<TestDto> testList = testWebService.readAllUserTest(authenticatedUser.getId());
-        final List<TestDto> userTest = new ArrayList<>();
+        final List<TestDto> userTestResultList = testWebService.readAllUserTest(authenticatedUser.getId());
+        final List<TestDto> userTestList = new ArrayList<>();
         boolean exitsTests = false;
-        if (testList != null && !testList.isEmpty()) {
+        if (userTestResultList != null && !userTestResultList.isEmpty()) {
             exitsTests = true;
-            for (final TestDto test : testList) {
-                if (checkIfTestHasBeenAdded(test, userTest)) {
-                    userTest.add(test);
+            for (final TestDto test : userTestResultList) {
+                if (checkIfTestHasBeenAdded(test, userTestList)) {
+                    userTestList.add(test);
                 }
             }
         }
 
+        final String betterTestOFLevel1Message = betterTestByLevel(1, userTestList, userTestResultList);
+        final String betterTestOFLevel2Message = betterTestByLevel(2, userTestList, userTestResultList);
+        final String betterTestOFLevel3Message = betterTestByLevel(3, userTestList, userTestResultList);
+
+        model.addAttribute("betterResultLevel1", betterTestOFLevel1Message);
+        model.addAttribute("betterResultLevel2", betterTestOFLevel2Message);
+        model.addAttribute("betterResultLevel3", betterTestOFLevel3Message);
+
         model.addAttribute("existsTests", exitsTests);
-        model.addAttribute("testList", userTest);
+        model.addAttribute("userTestList", userTestList);
         return FoldersName.KNOWLEDGE_TEST + "/user_test_list";
     }
 
@@ -147,5 +155,33 @@ public class TestController {
             }
         }
         return thisTestNotExist;
+    }
+
+    private String betterTestByLevel(final int level, final List<TestDto> userTestList, final List<TestDto> userTestResultList) {
+        if (userTestList == null || userTestList.isEmpty()) {
+            return "Não há testes deste nível";
+        }
+
+        final List<TestDto> testByLevel = userTestList.stream()
+                .filter(testDto -> testDto.getLevelTest() == level)
+                .collect(Collectors.toList());
+
+        if (testByLevel == null || testByLevel.isEmpty()) {
+            return "Não há testes deste nível";
+        }
+
+        int indexBetterTest = 0;
+        for (final TestDto testDto : testByLevel) {
+            if (testDto.getAcertos() > testByLevel.get(indexBetterTest).getAcertos()) {
+                indexBetterTest = testByLevel.indexOf(testDto);
+            }
+        }
+
+        final TestDto betterTest = testByLevel.get(indexBetterTest);
+        final int questionNumber = userTestResultList.stream()
+                .filter(testDto -> testDto.getId() == betterTest.getId())
+                .collect(Collectors.toList()).size();
+
+        return String.format(BETTER_TEST_MESSAGE_FORMAT, betterTest.getId(), betterTest.getAcertos(), questionNumber);
     }
 }

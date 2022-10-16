@@ -19,11 +19,29 @@
                 Testes Salvos
             </li>
         </ol>
-        <h1 class="text-center">Testes Salvos</h1>
-        <a th:href="@{/user/profile}" class="btn btn-secondary col-12 py-2">
-            Voltar ao seu perfil
-        </a>
-        <hr>
+        <h1 class="text-center">Melhores resultados</h1>
+        <div class="row d-flex justify-content-center col-xl-12 col-12 text-center">
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <div class="form-group alert alert-success">
+                    <h4 class="alert-heading">Nível fácil</h4>
+                    <label th:text="${betterResultLevel1}">resultados do fácil</label>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <div class="form-group alert alert-warning">
+                    <h4 class="alert-heading">Nível médio</h4>
+                    <label th:text="${betterResultLevel2}">resultados do médio</label>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12 mt-2 noticia_categ">
+                <div class="form-group alert alert-danger">
+                    <h4 class="alert-heading">Nível difícil</h4>
+                    <label th:text="${betterResultLevel3}">resultados do difícil</label>
+                </div>
+            </div>
+
+        </div>
+        <h1 class="text-center">Lista de testes</h1>
         <div class="container-fluid text-center navbar-expand-md">
             <div class="row align-items-start">
                 <div class="table-responsive">
@@ -60,7 +78,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr th:each="test : ${testList}">
+                            <tr th:each="test : ${userTestList}">
                                 <td th:text="${test.id}" class="align-middle">00</td>
                                 <td th:text="Fácil" th:if="${test.levelTest == 1}" class="align-middle"></td>
                                 <td th:text="Médio" th:if="${test.levelTest == 2}" class="align-middle"></td>
@@ -85,7 +103,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
