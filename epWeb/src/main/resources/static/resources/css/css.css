@@ -153,24 +153,23 @@ body {
     position: relative;
   }
 
-  [data-tooltip]:after {
+[data-tooltip-tecs]:after {
     display: none;
     position: absolute;
-    top: 60px;
+    top: -50px;
     padding: 5px;
     border-radius: 3px;
-    left: calc(100% - 110px);
-    content: attr(data-tooltip);
+    left: calc(45%);
+    content: attr(data-tooltip-tecs);
     white-space: nowrap;
-    background-color: #0095ff;
+    font-weight: bold;
+    background-color: #b15800;
     color: White;
-  }
+}
 
-
-
-  [data-tooltip-tecs]:hover:after {
+[data-tooltip-tecs]:hover:after {
     display: block;
-  }
+}
 
 
 .logo_lgpd{
