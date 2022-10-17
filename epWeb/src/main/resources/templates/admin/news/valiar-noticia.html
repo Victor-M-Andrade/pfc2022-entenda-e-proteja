@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Noticia - XYZ E&P</title>
+    <title th:text="${myNews.titulo}">Noticia - XYZ E&P</title>
 </head>
 
 <body>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col col-xl-12 col-md-12 col-sm-12 col-12 text-left">
                     <hr>
-                    <p style="white-space: pre;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet, consectetur
+                    <p style="white-space: pre-wrap;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit, sed
                         do eiusmod
                         tempor incididunt ut
