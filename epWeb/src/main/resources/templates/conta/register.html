@@ -33,6 +33,7 @@
                 document.getElementById("cadastro").setAttribute("type", tipoButton);
             }
 
+
     </script>
 </head>
 
@@ -69,7 +70,8 @@
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputUser">Nome de usuário</label>
                                     <input class="form-control py-4" id="inputUser" type="text"
-                                           placeholder="Insira seu nome" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.nome}" required/>
+                                           placeholder="Insira seu nome" data-toggle="tooltip" data-placement="top"
+                                           title="Dado Pessoal!" th:field="${myUser.nome}" required/>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -77,7 +79,8 @@
                                     <label class="small mb-1" for="inputEmail">Email</label>
                                     <span data-tooltip="Dado Privado">
                                     <input class="form-control py-4" id="inputEmail" type="email"
-                                           placeholder="Insira o seu email" data-toggle="tooltip" data-placement="top" title="Dado Pessoal!" th:field="${myUser.email}"
+                                           placeholder="Insira o seu email" data-toggle="tooltip" data-placement="top"
+                                           title="Dado Pessoal!" th:field="${myUser.email}"
                                            required/>
                                 </div>
                             </div>
@@ -89,7 +92,8 @@
                                     <label class="small mb-1" for="inputPassword">Senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputPassword" type="password"
-                                           placeholder="Insira a senha" data-toggle="tooltip" data-placement="top" title="Dado Privado!" th:field="${myUser.senha}" required/>
+                                           placeholder="Insira a senha" data-toggle="tooltip" data-placement="top"
+                                           title="Dado Privado!" th:field="${myUser.senha}" required/>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -98,7 +102,8 @@
                                         senha</label>
                                     <span data-tooltip="Dado Anônimo">
                                     <input class="form-control py-4" id="inputConfirmPassword" type="password"
-                                           placeholder="Confirme a senha" data-toggle="tooltip" data-placement="top" title="Dado Privado!" required/>
+                                           placeholder="Confirme a senha" data-toggle="tooltip" data-placement="top"
+                                           title="Dado Privado!" required/>
                                 </div>
                             </div>
                         </div>

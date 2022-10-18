@@ -7,55 +7,55 @@
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item">
-                Nível do teste
-            </li>
-        </ol>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item">
+            Nível do teste
+        </li>
+    </ol>
 
-        <h1 class="text-center">Selecionar nível do teste de conhecimento</h1>
-        <br>
-        <div class="row d-flex justify-content-center col-xl-12 col-12">
-            <div class="alert alert-warning text-center" sec:authorize="!isAuthenticated()">
-                <h3 class="alert-heading font-weight-bold align-middle">Atenção</h3>
-                <span class="font-weight-bold align-middle">
+    <h1 class="text-center">Selecionar nível do teste de conhecimento</h1>
+    <br>
+    <div class="row d-flex justify-content-center col-xl-12 col-12">
+        <div class="alert alert-warning text-center col-12" sec:authorize="!isAuthenticated()">
+            <h3 class="alert-heading font-weight-bold align-middle">Atenção</h3>
+            <span class="font-weight-bold align-middle">
                     Como você ainda não está autenticado no site, você poderá ver o resultado do teste, mas não será
                     possível salvar o resultado.
                 </span><br>
-                <span class="font-weight-bold align-middle">
+            <span class="font-weight-bold align-middle">
                     Para que possa salvar o resultado do teste, faça a autenticação no site antes de realizar
                     o teste.
                 </span><br>
-                <span class="font-weight-bold align-middle">
+            <span class="font-weight-bold align-middle">
                     Caso ainda não tenha uma conta, realize o cadastro e a autenticação no site
                     <a th:href="@{/account/register}">
                         clicando aqui
                     </a>
                 </span>
-            </div>
-
-            <div class="col-xl-4 col-12 mt-2 noticia_categ">
-                <a th:href="@{/knowledge-test/test/1}" class="btn btn-success btn-block">
-                    <h1 class="mt-5 mb-5">FÁCIL</h1>
-                </a>
-            </div>
-            <div class="col-xl-4 col-12 mt-2 noticia_categ">
-                <a th:href="@{/knowledge-test/test/2}" class="btn btn-warning btn-block text-light">
-                    <h1 class="mt-5 mb-5">MÉDIO</h1>
-                </a>
-            </div>
-            <div class="col-xl-4 col-12 mt-2 noticia_categ">
-                <a th:href="@{/knowledge-test/test/3}" class="btn btn-danger btn-block">
-                    <h1 class="mt-5 mb-5">DIFÍCIL</h1>
-                </a>
-            </div>
-
         </div>
+
+        <div class="col-xl-4 col-12 mt-2 noticia_categ">
+            <a th:href="@{/knowledge-test/test/1}" class="btn btn-success btn-block">
+                <h1 class="mt-5 mb-5">FÁCIL</h1>
+            </a>
+        </div>
+        <div class="col-xl-4 col-12 mt-2 noticia_categ">
+            <a th:href="@{/knowledge-test/test/2}" class="btn btn-warning btn-block text-light">
+                <h1 class="mt-5 mb-5">MÉDIO</h1>
+            </a>
+        </div>
+        <div class="col-xl-4 col-12 mt-2 noticia_categ">
+            <a th:href="@{/knowledge-test/test/3}" class="btn btn-danger btn-block">
+                <h1 class="mt-5 mb-5">DIFÍCIL</h1>
+            </a>
+        </div>
+
     </div>
+</div>
 </body>
 
 </html>

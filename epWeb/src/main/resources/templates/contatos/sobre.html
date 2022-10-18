@@ -1,137 +1,196 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Sobre o projeto E&P</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre o projeto E&P</title>
+</head>
 
-    <body>
-        <div layout:fragment="body">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a th:href="@{/}">Início</a>
-                </li>
-                <li class="breadcrumb-item active">
-                    Sobre o projeto
-                </li>
-            </ol>
+<body>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Sobre o projeto
+        </li>
+    </ol>
 
-            <div class="container-fluid text-center navbar-expand-md col-12">
+    <div class="container-fluid text-center navbar-expand-md">
 
-                <div class="row align-items-start">
+        <div class="row align-items-start">
 
-                    <div class="container card border-0 rounded-lg col-xl-10 col-12">
-                        <div class="">
-                            <br>
-                            <h1>Sobre o Projeto</h1>
-                            <hr>
-                            <img src="/resources/img/logo_completa.png" alt="logo_completa" width="250px">
-                            <hr>
-                            <div class="col-10 container text-center">
-                                <p>O fluxo de informações ocorre de forma acelerada em comparação aos séculos passados,
-                                    tendo em vista
-                                    que os dispositivos tecnológicos facilitam a comunicação entre pessoas, essas
-                                    tecnologias da informação e
-                                    comunicação estão cada vez mais presentes nas atividades tanto profissionais como
-                                    rotineiras das
-                                    pessoas.</p>
-                                <p>A dependência na tecnologia gera uma superexposição de dados de usuários, numa
-                                    quantidade por vezes
-                                    incalculável de informações na rede que precisam de organização, tratamento e guarda
-                                    segura, para haver recuperação
-                                    quando assim for necessário. Porém quando essas ações não são efetuadas, abrem a
-                                    probabilidade de vazamento
-                                    de conteúdos importantes, gerando prejuízos aos envolvidos. Como, por exemplo, no
-                                    uso
-                                    indevido de
-                                    imagens, clonagem de cartões, redes sociais hackeadas, fake news, entre outras.</p>
-                                <p>Com essa nova era de tecnologia as leis foram atualizadas, para abranger o mundo
-                                    digital. Sendo assim o presente trabalho, vem para
-                                    descomplicar a lei e mostrar suas atualizações.</p>
-
-
-                                <hr>
-
-                                <p>Desenvolvedores:</p>
+            <div class="container card border-0 rounded-lg col-xl-10 col-12">
+                <div class="">
+                    <br>
+                    <h1>Sobre o Projeto</h1>
+                    <hr>
+                    <img src="resources/img/logo_completa.png" alt="logo_completa" width="250px">
+                    <hr>
+                    <div class="col-10 container text-center">
+                        <p>O fluxo de informações ocorre de forma acelerada em comparação aos séculos passados,
+                            tendo em vista
+                            que os dispositivos tecnológicos facilitam a comunicação entre pessoas, essas
+                            tecnologias da informação e
+                            comunicação estão cada vez mais presentes nas atividades tanto profissionais como
+                            rotineiras das
+                            pessoas.</p>
+                        <p>A dependência na tecnologia gera uma superexposição de dados de usuários, numa
+                            quantidade por vezes
+                            incalculável de informações na rede que precisam de organização, tratamento e guarda
+                            segura, para haver recuperação
+                            quando assim for necessário. Porém quando essas ações não são efetuadas, abrem a
+                            probabilidade de vazamento
+                            de conteúdos importantes, gerando prejuízos aos envolvidos. Como, por exemplo, no uso
+                            indevido de
+                            imagens, clonagem de cartões, redes sociais hackeadas, fake news, entre outras.</p>
+                        <p>Com essa nova era de tecnologia as leis foram atualizadas, para abranger o mundo
+                            digital. Sendo assim o presente trabalho, vem para
+                            descomplicar a Lei Geral de Proteção de Dados Pessoais (LGPD) e mostrar suas atualizações,
+                            além de ser uma plataforma
+                            para quem busca serviços de auditorias com um local de compartilhamento de serviços.</p>
 
 
+                        <hr>
 
-                                <div class="row">
+                        <h3 class="mb-4">Desenvolvedores</h3>
 
-                                    <div class="col-xl-3">
-                                        <img src="/resources/img/logo_invertido.png" class="img-fluid" alt="lucas"
-                                            width="150px">
-                                        <p>Alysson</p>
-                                        <p>(Documentação)</p>
-                                        <a href="https://github.com/Alysson212" target="_blank">
-                                            <button class="btn btn-dark btn-block mb-4">GitHub</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <img src="/resources/img/logo_invertido.png" class="img-fluid" alt="lucas"
-                                            width="150px">
-                                        <p>Lucas Lima</p>
-                                        <p>(Back-end)</p>
-                                        <a href="https://github.com/LucasLima147" target="_blank">
-                                            <button class="btn btn-dark btn-block mb-4">GitHub</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <img src="/resources/img/logo_invertido.png" class="img-fluid" alt="victor"
-                                            width="150px">
-                                        <p>Victor</p>
-                                        <p>(Front-end)</p>
-                                        <a href="https://github.com/Victor-M-Andrade" target="_blank">
-                                            <button class="btn btn-dark btn-block mb-4">GitHub</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <img src="/resources/img/logo_invertido.png" class="img-fluid" alt="william"
-                                            width="150px">
-                                        <p>William de Paula</p>
-                                        <p>(Documentação)</p>
-                                        <a href="https://github.com/wprs18" target="_blank">
-                                            <button class="btn btn-dark btn-block mb-4">GitHub</button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-xl-3">
-                                        <img src="/resources/img/logo_invertido.png" class="img-fluid" alt="william"
-                                            width="150px">
-                                        <p>Repositório do Projeto</p>
-                                        <p>Entenda & Proteja</p>
-                                        <a href="https://github.com/Victor-M-Andrade/pfc2022-entenda-e-proteja/"
-                                            target="_blank">
-                                            <button class="btn btn-dark btn-block mb-4">GitHub</button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row d-flex justify-content-center">
-                                    <h2 class="col-12 mb-4">Tecnologias Utilizadas</h2>
 
-                                    <div class="col-xl-12 mt-5">
-                                        <span data-tooltip-tecs="HTML 5"><img src="../resources/img/logo-ferramentas/html.png" alt="html logo" width="90px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="CSS 3"><img src="../resources/img/logo-ferramentas/css.png" alt="css logo" width="100px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="JavaScript"><img src="../resources/img/logo-ferramentas/js.png" alt="js logo" width="95px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="Bootstrap"><img src="../resources/img/logo-ferramentas/bootstrap.png" alt="bootstrap logo" width="110px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="Java"><img src="../resources/img/logo-ferramentas/java.png" alt="java logo" width="93px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="Spring"><img src="../resources/img/logo-ferramentas/spring.png" alt="spring logo" width="80px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="PostgreSQL"><img src="../resources/img/logo-ferramentas/postgresql.png" alt="postgresql logo" width="90px" class="mb-2"></span>
-                                        <span data-tooltip-tecs="GIT / GitHub"><img src="../resources/img/logo-ferramentas/git.png" alt="git logo" width="80px" class="mb-2"></span>
-                                    </div>
-                                </div>
-                                <hr>
-                                <br>
+                        <div class="row">
+
+                            <div class="col-xl-3">
+                                <img src="../resources/img/devs/alysson.jpg" class="img-fluid rounded-circle"
+                                     alt="alysson" width="150px">
+                                <p>Alysson Vasconcelos</p>
+                                <p>(Documentação)</p>
+                                <a href="https://github.com/Alysson212" target="_blank">
+                                    <button class="btn btn-dark btn-block mb-4"><i class="fa fa-github mr-2"
+                                                                                   aria-hidden="true"></i>GitHub
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-xl-3">
+                                <img src="../resources/img/devs/lucas_lima.jpg" class="img-fluid rounded-circle"
+                                     alt="lucas" width="150px">
+                                <p>Lucas Lima</p>
+                                <p>(Back-end)</p>
+                                <a href="https://github.com/LucasLima147" target="_blank">
+                                    <button class="btn btn-dark btn-block mb-4"><i class="fa fa-github mr-2"
+                                                                                   aria-hidden="true"></i>GitHub
+                                    </button>
+
+                                </a>
+                            </div>
+                            <div class="col-xl-3">
+                                <img src="../resources/img/devs/victor.jpg" class="img-fluid rounded-circle"
+                                     alt="victor" width="150px">
+                                <p>Victor Andrade</p>
+                                <p>(Front-end)</p>
+                                <a href="https://github.com/Victor-M-Andrade" target="_blank">
+                                    <button class="btn btn-dark btn-block mb-4"><i class="fa fa-github mr-2"
+                                                                                   aria-hidden="true"></i>GitHub
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-xl-3">
+                                <img src="../resources/img/devs/will.jpg" class="img-fluid rounded-circle" alt="william"
+                                     width="150px">
+                                <p>William de Paula</p>
+                                <p>(Documentação)</p>
+                                <a href="https://github.com/wprs18" target="_blank">
+                                    <button class="btn btn-dark btn-block mb-4"><i class="fa fa-github mr-2"
+                                                                                   aria-hidden="true"></i>GitHub
+                                    </button>
+                                </a>
                             </div>
                         </div>
+
+                        <hr>
+
+
+                        <h3 class="mb-4">Extensões para a comunidade</h3>
+
+
+                        <div class="row d-flex justify-content-center">
+
+                            <div class="col-xl-3">
+                                <h4>Repositório</h4>
+                                <p>Entenda & Proteja</p>
+                                <a href="https://github.com/Victor-M-Andrade/pfc2022-entenda-e-proteja/"
+                                   target="_blank">
+                                    <button class="btn btn-dark btn-block mb-4"><i class="fa fa-github mr-2"
+                                                                                   aria-hidden="true"></i>GitHub
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div class="col-xl-3">
+                                <h4>Podcast</h4>
+                                <p>Paticipação no TALKSFAI-MG</p>
+                                <a href="https://open.spotify.com/episode/6fezsd8OqOKfILdONojJ4L?si=NabXNmmPRmCmDxbVLrxfBQ"
+                                   target="_blank">
+                                    <button class="btn btn-success btn-block mb-4"><i class="fa fa-spotify mr-2"
+                                                                                      aria-hidden="true"></i>Spotify
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div class="col-xl-3">
+                                <h4>Mídias socias</h4>
+                                <p>@entenda_e_proteja</p>
+                                <a href="https://instagram.com/entenda_e_proteja?igshid=YmMyMTA2M2Y=" target="_blank">
+                                    <button class="btn btn-primary btn-block mb-4"><i class="fa fa-instagram mr-2"
+                                                                                      aria-hidden="true"></i>Instagram
+                                    </button>
+                                </a>
+                            </div>
+
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <div class="row d-flex justify-content-center">
+
+
+                            <h3 class="col-12 mb-2">Tecnologias Utilizadas</h3>
+
+                            <div class="col-xl-12 mt-5">
+                                <img src="../resources/img/logo-ferramentas/html.png" alt="html logo" width="90px"
+                                     class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/css.png" alt="css logo" width="100px"
+                                     class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/js.png" alt="js logo" width="95px"
+                                     class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/bootstrap.png" alt="bootstrap logo"
+                                     width="110px" class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/java.png" alt="java logo" width="93px"
+                                     class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/spring.png" alt="spring logo" width="80px"
+                                     class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/postgresql.png" alt="postgresql logo"
+                                     width="90px" class="mb-2"></span>
+                                <img src="../resources/img/logo-ferramentas/git.png" alt="git logo" width="80px"
+                                     class="mb-2"></span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <br>
                     </div>
                 </div>
             </div>
+
         </div>
-    </body>
+
+    </div>
+
+</div>
+</body>
 
 </html>

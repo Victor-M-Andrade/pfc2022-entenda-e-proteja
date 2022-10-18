@@ -1,30 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const body = document.querySelector('body');
-    const inputDarkMode = document.getElementById('input-dark-mode');
-     
-    if(localStorage.getItem('dark-mode')){
-        body.setAttribute("dark", "true");
+    const darkModeStorage = localStorage.getItem('dark-mode')
+    const body = document.querySelector('body')
+    const inputDarkMode = document.getElementById('input-dark-mode')
+
+    if(darkModeStorage){
+        body.setAttribute("dark", "true")
+        inputDarkMode.checked = "true"
     }
 
     inputDarkMode.addEventListener('change', () => {
-        var darkModeStorage = localStorage.getItem('dark-mode');
-        darkModeStorage ? body.removeAttribute("dark") : body.setAttribute("dark", "true"); 
-        darkModeStorage ? localStorage.removeItem('dark-mode'): localStorage.setItem('dark-mode', true);
-   });
-});
+        if(inputDarkMode.checked){
+            body.setAttribute("dark", "true")
+            localStorage.setItem('dark-mode', true)
+            localStorage
+        }else{
+            body.removeAttribute("dark")
+            localStorage.removeItem('dark-mode')
+        }
+   })
+})
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const card = document.querySelector('.card');
-    const inputDarkMode = document.getElementById('input-dark-mode');
+    const darkModeStorage = localStorage.getItem('dark-mode')
+    const card = document.querySelector('.card')
+    const inputDarkMode = document.getElementById('input-dark-mode')
 
-    if(localStorage.getItem('dark-mode')){
-        card.setAttribute("dark", "true");
+    if(darkModeStorage){
+        card.setAttribute("dark", "true")
+        inputDarkMode.checked = "true"
     }
 
     inputDarkMode.addEventListener('change', () => {
-        var darkModeStorage = localStorage.getItem('dark-mode');
-        darkModeStorage ? card.removeAttribute("dark") : card.setAttribute("dark", "true"); 
-        darkModeStorage ? localStorage.removeItem('dark-mode'): localStorage.setItem('dark-mode', true);
-   });
-});
+        if(inputDarkMode.checked){
+            card.setAttribute("dark", "true")
+            localStorage.setItem('dark-mode', true)
+        }else{
+            card.removeAttribute("dark")
+            localStorage.removeItem('dark-mode')
+        }
+   })
+})

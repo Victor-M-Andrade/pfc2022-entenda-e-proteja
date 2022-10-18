@@ -54,144 +54,151 @@
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
             }
         }
+
     </script>
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a th:href="@{/user/profile}">Meu perfil</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a th:href="@{/partner/my-data-as-partner}">Dados de consultor</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Editar meus dados de consultor
-            </li>
-        </ol>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/profile}">Meu perfil</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/partner/my-data-as-partner}">Dados de consultor</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Editar meus dados de consultor
+        </li>
+    </ol>
 
-        <div class="container-fluid text-center navbar-expand-md col-12">
-            <div class="row align-items-start">
-                <div class="container card border-0 rounded-lg login col-12 col-xl-8">
-                    <div class="card-header">
-                        <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
-                        <img class="logo" th:src="@{${myPartner.pathImagePartner}}" id="uploadPreview" alt="logo">
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-danger" th:if="${updatePartnerError}">
+    <div class="container-fluid text-center navbar-expand-md col-12">
+        <div class="row align-items-start">
+            <div class="container card border-0 rounded-lg login col-12 col-xl-8">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
+                    <img class="logo" th:src="@{${myPartner.pathImagePartner}}" id="uploadPreview" alt="logo">
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" th:if="${updatePartnerError}">
                             <span class="font-weight-bold align-middle">
                                 Desculpe, não foi possível concluir a atualização dos dados. Por gentileza,
                                 tente novamente.
                             </span>
+                    </div>
+                </div>
+                <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
+                      th:object="${myPartner}">
+                    <div class="form-row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="mb-1" for="inputCompany">
+                                    Nome da empresa
+                                </label>
+                                <input class="form-control py-4" id="inputCompany" type="text"
+                                       placeholder="Insira o nome da sua empresa" data-toggle="tooltip"
+                                       data-placement="top" title="Dado Público!" required th:field="*{nomeEmpresa}"/>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="mb-1" for="inputCnpj">CNPJ</label>
+                                <input class="form-control py-4" id="inputCnpj" type="text"
+                                       placeholder="Insira o CNPJ da empresa" data-toggle="tooltip" data-placement="top"
+                                       title="Dado Privado!" required th:field="*{cnpj}"/>
+                            </div>
                         </div>
                     </div>
-                    <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
-                        th:object="${myPartner}">
-                        <div class="form-row">
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label class="mb-1" for="inputCompany">
-                                        Nome da empresa
-                                    </label>
-                                    <input class="form-control py-4" id="inputCompany" type="text"
-                                        placeholder="Insira o nome da sua empresa" data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="*{nomeEmpresa}" />
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="mb-1" for="inputCnpj">CNPJ</label>
-                                    <input class="form-control py-4" id="inputCnpj" type="text"
-                                        placeholder="Insira o CNPJ da empresa" data-toggle="tooltip" data-placement="top" title="Dado Privado!" required th:field="*{cnpj}" />
-                                </div>
+                    <div class="form-row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="mb-1" for="inputSite">
+                                    Site da empresa
+                                </label>
+                                <input class="form-control py-4" id="inputSite" type="url"
+                                       placeholder="Insira o site da empresa" data-toggle="tooltip" data-placement="top"
+                                       title="Dado Público!" required th:field="*{website}"/>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label class="mb-1" for="inputSite">
-                                        Site da empresa
-                                    </label>
-                                    <input class="form-control py-4" id="inputSite" type="url"
-                                        placeholder="Insira o site da empresa" data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="*{website}" />
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="mb-1" for="inputTelefone">
-                                        Telefone para contato
-                                    </label>
-                                    <input class="form-control py-4" id="inputTelefone" type="tel"
-                                        placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
-                                           data-toggle="tooltip" data-placement="top" title="Dado Público!" th:field="*{telefone}">
-                                </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="mb-1" for="inputTelefone">
+                                    Telefone para contato
+                                </label>
+                                <input class="form-control py-4" id="inputTelefone" type="tel"
+                                       placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
+                                       data-toggle="tooltip" data-placement="top" title="Dado Público!"
+                                       th:field="*{telefone}">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
-                            <input class="form-control" type="file" name="partnerProfile" accept="image/*"
-                                   data-toggle="tooltip" data-placement="top" title="Dado Público!" id="uploadImage" onchange="PreviewImage();">
-                        </div>
-                        <hr>
-                        <div class="form-row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="mb-1">
-                                        Tipo de serviço de consultoria:
-                                    </label>
+                    </div>
+                    <div class="form-group">
+                        <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
+                        <input class="form-control" type="file" name="partnerProfile" accept="image/*"
+                               data-toggle="tooltip" data-placement="top" title="Dado Público!" id="uploadImage"
+                               onchange="PreviewImage();">
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="mb-1">
+                                    Tipo de serviço de consultoria:
+                                </label>
 
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="checkLegislativo"
-                                        th:field="${myPartner.legislativo}" th:checked="${myPartner.legislativo}">
-                                    <label class="form-check-label" for="checkLegislativo">
-                                        Legislativo
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="checkTecnico"
-                                        th:field="${myPartner.tecnico}" th:checked="${myPartner.tecnico}">
-                                    <label class="form-check-label" for="checkTecnico">
-                                        Técnico
-                                    </label>
-                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="txtDescricao">Descrição do serviços oferecidos</label>
-                            <textarea type="text" class="form-control" rows="10"
-                                placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
-                                      data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="${myPartner.descricao}" id="txtDescricao"></textarea>
+                        <div class="col-md-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="checkLegislativo"
+                                       th:field="${myPartner.legislativo}" th:checked="${myPartner.legislativo}">
+                                <label class="form-check-label" for="checkLegislativo">
+                                    Legislativo
+                                </label>
+                            </div>
                         </div>
-                        <input th:field="${myPartner.id}" hidden />
-                        <input th:field="${myPartner.situacao}" hidden />
-                        <input th:field="${myPartner.idUsuario}" hidden />
-                        <input th:field="${myPartner.pathImagePartner}" hidden>
-                        <input th:field="${myPartner.dataHora}" hidden>
-                        <div class="form-group mt-4 mb-0">
-                            <button class="btn btn-success btn-block" id="updateData" type="submit"
+                        <div class="col-md-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="checkTecnico"
+                                       th:field="${myPartner.tecnico}" th:checked="${myPartner.tecnico}">
+                                <label class="form-check-label" for="checkTecnico">
+                                    Técnico
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDescricao">Descrição do serviços oferecidos</label>
+                        <textarea type="text" class="form-control" rows="10"
+                                  placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
+                                  data-toggle="tooltip" data-placement="top" title="Dado Público!" required
+                                  th:field="${myPartner.descricao}" id="txtDescricao"></textarea>
+                    </div>
+                    <input th:field="${myPartner.id}" hidden/>
+                    <input th:field="${myPartner.situacao}" hidden/>
+                    <input th:field="${myPartner.idUsuario}" hidden/>
+                    <input th:field="${myPartner.pathImagePartner}" hidden>
+                    <input th:field="${myPartner.dataHora}" hidden>
+                    <div class="form-group mt-4 mb-0">
+                        <button class="btn btn-success btn-block" id="updateData" type="submit"
                                 onclick="validate()">
-                                Atualizar dados
-                            </button>
-                        </div>
-                        <div class="form-group mt-2 mb-0">
-                            <a class="btn btn-secondary btn-block" th:href="@{/partner/my-data-as-partner}">
-                                Cancelar operação
-                            </a>
-                        </div>
-                    </form>
-                </div>
+                            Atualizar dados
+                        </button>
+                    </div>
+                    <div class="form-group mt-2 mb-0">
+                        <a class="btn btn-secondary btn-block" th:href="@{/partner/my-data-as-partner}">
+                            Cancelar operação
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    </div>
+</div>
+</div>
 </body>
 
 </html>

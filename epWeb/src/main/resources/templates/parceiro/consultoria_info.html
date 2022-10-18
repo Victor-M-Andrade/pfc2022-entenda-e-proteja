@@ -7,82 +7,82 @@
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item active">
-                <a th:href="@{/partner/list}">Consultores</a>
-            </li>
-            <li class="breadcrumb-item">
-                Info. do consultor
-            </li>
-        </ol>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item active">
+            <a th:href="@{/partner/list}">Consultores</a>
+        </li>
+        <li class="breadcrumb-item">
+            Info. do consultor
+        </li>
+    </ol>
 
-        <h1 class="text-center">Informações do consultor</h1>
-        <br>
-        <div class="container-fluid text-center navbar-expand-md col-12">
-            <div class="row align-items-start">
-                <div class="h-100 card col-12">
-                    <h3 class="card-header text-center text-dark mt-1" th:text="${myPartner.nomeEmpresa}">Empresa 1
-                    </h3>
-                    <div class="container py-4">
-                        <div class="row">
-                            <img class="consultoria_logo_empresa col-xl-3 col-12"
-                                th:src="@{${myPartner.pathImagePartner}}" alt="logo">
-                            <div class="col-xl-9 col-12 text-left">
-                                <p style="white-space: pre;" th:utext="${myPartner.descricao}"></p>
-                            </div>
+    <h1 class="text-center">Informações do consultor</h1>
+    <br>
+    <div class="container-fluid text-center navbar-expand-md col-12">
+        <div class="row align-items-start">
+            <div class="h-100 card col-12">
+                <h3 class="card-header text-center text-dark mt-1" th:text="${myPartner.nomeEmpresa}">Empresa 1
+                </h3>
+                <div class="container py-4">
+                    <div class="row">
+                        <img class="consultoria_logo_empresa col-xl-3 col-12"
+                             th:src="@{${myPartner.pathImagePartner}}" alt="logo">
+                        <div class="col-xl-9 col-12 text-left">
+                            <p style="white-space: pre;" th:utext="${myPartner.descricao}"></p>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-xl-4 col-12">
-                                <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
-                                <h5>Telefones para contato</h5>
-                                <p th:unless="${myPartner.anonimo}">
-                                    <a th:href="'tel:' + ${myPartner.telefone}" th:text="${myPartner.telefone}">
-                                        (35) 99999-9999
-                                    </a>
-                                </p>
-                                <p th:if="${myPartner.anonimo}" th:text="${myPartner.telefone}">
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-4 col-12">
+                            <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                            <h5>Telefones para contato</h5>
+                            <p th:unless="${myPartner.anonimo}">
+                                <a th:href="'tel:' + ${myPartner.telefone}" th:text="${myPartner.telefone}">
                                     (35) 99999-9999
-                                </p>
-                            </div>
-                            <div class="col-xl-4 col-12">
-                                <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
-                                <h5>Email</h5>
-                                <p th:unless="${myPartner.anonimo}">
-                                    <a th:href="'mailto:' + ${myPartner.email}" th:text="${myPartner.email}">
-                                        teste@teste.com
-                                    </a>
-                                </p>
-                                <p th:if="${myPartner.anonimo}" th:text="${myPartner.email}">
+                                </a>
+                            </p>
+                            <p th:if="${myPartner.anonimo}" th:text="${myPartner.telefone}">
+                                (35) 99999-9999
+                            </p>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>
+                            <h5>Email</h5>
+                            <p th:unless="${myPartner.anonimo}">
+                                <a th:href="'mailto:' + ${myPartner.email}" th:text="${myPartner.email}">
                                     teste@teste.com
-                                </p>
-                            </div>
-                            <div class="col-xl-4 col-12">
-                                <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
-                                <h5>Website</h5>
-                                <p th:unless="${myPartner.anonimo}">
-                                    <a th:href="@{${myPartner.website}}" th:text=" ${myPartner.website}">
-                                        teste.com.br
-                                    </a>
-                                </p>
-                                <p th:if="${myPartner.anonimo}" th:text=" ${myPartner.website}">
+                                </a>
+                            </p>
+                            <p th:if="${myPartner.anonimo}" th:text="${myPartner.email}">
+                                teste@teste.com
+                            </p>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <i class="fa fa-newspaper-o fa-3x" aria-hidden="true"></i>
+                            <h5>Website</h5>
+                            <p th:unless="${myPartner.anonimo}">
+                                <a th:href="@{${myPartner.website}}" th:text=" ${myPartner.website}">
                                     teste.com.br
-                                </p>
-                            </div>
+                                </a>
+                            </p>
+                            <p th:if="${myPartner.anonimo}" th:text=" ${myPartner.website}">
+                                teste.com.br
+                            </p>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <a href="#" class="btn btn-info btn-block btn-lg">Solicitar Serviço</a>
-                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <a href="#" class="btn btn-info btn-block btn-lg">Solicitar Serviço</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>

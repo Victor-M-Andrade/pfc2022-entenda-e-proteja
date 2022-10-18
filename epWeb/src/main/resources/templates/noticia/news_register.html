@@ -46,105 +46,110 @@
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
             }
         }
+
     </script>
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a th:href="@{/user/profile}">Meu perfil</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Proposta de notícia
-            </li>
-        </ol>
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/profile}">Meu perfil</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Proposta de notícia
+        </li>
+    </ol>
 
-        <div class="container-fluid text-center navbar-expand-md col-12">
-            <div class="row align-items-start">
-                <div class="container col-12">
-                    <div class="row perfil">
-                        <h1 class="col-12 py-3">Proposta de notícia</h1>
-                        <div class="mb-2 col-12">
-                            <div class="alert alert-danger" th:if="${registrationRequestProblems}">
+    <div class="container-fluid text-center navbar-expand-md col-12">
+        <div class="row align-items-start">
+            <div class="container col-12">
+                <div class="row perfil">
+                    <h1 class="col-12 py-3">Proposta de notícia</h1>
+                    <div class="mb-2 col-12">
+                        <div class="alert alert-danger" th:if="${registrationRequestProblems}">
                                 <span class="font-weight-bold align-middle">
                                     Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente
                                     novamente.
                                 </span>
-                            </div>
-                            <form th:action="@{/news/request-news-publication}" enctype="multipart/form-data"
-                                method="post" th:object="${myNews}">
-                                <div class="mb-2 card">
-                                    <div class="card-body">
-                                        <div class="custom-file">
-                                            <label for="newsCoverId">Imagem da capa da notícia</label>
-                                            <input class="form-control" type="file" name="newsCover" accept="image/*"
-                                                id="newsCoverId" onchange="PreviewImage();">
-
-                                        </div>
-                                        <img class="d-block w-100 banner_noticia" id="uploadPreview"
-                                            src="/resources/img/noticias/capa/fundo_anonimo.png" alt="banner_exemplo">
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-3">Título</div>
-                                            <div class="col-sm-9">
-                                                <input th:field="${myNews.titulo}" type="text" class="form-control"
-                                                       data-toggle="tooltip" data-placement="top" title="Dado Público!" required>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-2">Artigo da LGPD</div>
-                                            <div class="col-sm-2">
-                                                <input th:field="${myNews.artigo}" type="number" min="0"
-                                                    class="form-control" oninput="articleNumber(this)" required>
-                                            </div>
-                                            <div class="col-sm-3">Palavras chaves</div>
-                                            <div class="col-sm-5">
-                                                <input th:field="${myNews.palavraChave}" type="text"
-                                                    class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-3">Categoria</div>
-                                            <div class="col-sm-9 text-left">
-                                                <div class="form-check" th:each="category : ${categoryList}">
-
-                                                    <input class="form-check-input" th:field="${myNews.categoria}"
-                                                        type="radio" th:id="${category}" th:value="${category}"
-                                                        th:checked="${myNews.categoria eq category}">
-
-                                                    <label class="form-check-label" th:text="${category}"
-                                                        th:for="${category}">categoria</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-3">Notícia</div>
-                                            <div class="col-sm-9">
-                                                <textarea th:field="${myNews.contexto}" class="form-control" style="white-space: pre-wrap;" rows="10"
-                                                          data-toggle="tooltip" data-placement="top" title="Dado Público!" required></textarea>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <input type="text" th:field="${myNews.idAutor}" th:value="${userId}" hidden>
-                                        <input type="text" th:field="${myNews.pathImageNews}" hidden>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <button type="submit" id="newsRegisterButton" onclick="validate()"
-                                        class="btn btn-info col-12">Enviar para análise</a>
-                                </div>
-                            </form>
                         </div>
+                        <form th:action="@{/news/request-news-publication}" enctype="multipart/form-data"
+                              method="post" th:object="${myNews}">
+                            <div class="mb-2 card">
+                                <div class="card-body">
+                                    <div class="custom-file">
+                                        <label for="newsCoverId">Imagem da capa da notícia</label>
+                                        <input class="form-control" type="file" name="newsCover" accept="image/*"
+                                               id="newsCoverId" onchange="PreviewImage();">
+
+                                    </div>
+                                    <img class="d-block w-100 banner_noticia" id="uploadPreview"
+                                         src="/resources/img/noticias/capa/fundo_anonimo.png" alt="banner_exemplo">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Título</div>
+                                        <div class="col-sm-9">
+                                            <input th:field="${myNews.titulo}" type="text" class="form-control"
+                                                   data-toggle="tooltip" data-placement="top" title="Dado Público!"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">Artigo da LGPD</div>
+                                        <div class="col-sm-2">
+                                            <input th:field="${myNews.artigo}" type="number" min="0"
+                                                   class="form-control" oninput="articleNumber(this)" required>
+                                        </div>
+                                        <div class="col-sm-3">Palavras chaves</div>
+                                        <div class="col-sm-5">
+                                            <input th:field="${myNews.palavraChave}" data-toggle="tooltip"
+                                                   data-placement="top" title="Dado Público!" type="text"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Categoria</div>
+                                        <div class="col-sm-9 text-left">
+                                            <div class="form-check" th:each="category : ${categoryList}">
+
+                                                <input class="form-check-input" th:field="${myNews.categoria}"
+                                                       type="radio" th:id="${category}" th:value="${category}"
+                                                       th:checked="${myNews.categoria eq category}">
+
+                                                <label class="form-check-label" th:text="${category}"
+                                                       th:for="${category}">categoria</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">Notícia</div>
+                                        <div class="col-sm-9">
+                                                <textarea th:field="${myNews.contexto}" class="form-control"
+                                                          style="white-space: pre-wrap;" rows="10"
+                                                          data-toggle="tooltip" data-placement="top"
+                                                          title="Dado Público!" required></textarea>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <input type="text" th:field="${myNews.idAutor}" th:value="${userId}" hidden>
+                                    <input type="text" th:field="${myNews.pathImageNews}" hidden>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button type="submit" id="newsRegisterButton" onclick="validate()"
+                                        class="btn btn-info col-12">Enviar para análise</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

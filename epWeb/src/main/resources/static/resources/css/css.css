@@ -4,6 +4,7 @@ html {
     font-size: 100%;
 }
 
+
 .unselectable {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -13,7 +14,7 @@ html {
 }
 
 html[zoom]{
-    font-size: 160%;
+    font-size: 1.3rem;
 }
 
 body[dark]{
