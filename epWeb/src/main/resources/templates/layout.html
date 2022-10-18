@@ -49,13 +49,13 @@
 
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a th:href="@{/}" class="nav-link">Início</a>
+                <a th:href="@{/}" class="nav-link"><i class="fa fa-home mr-1" aria-hidden="true"></i>Início</a>
             </li>
 
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    LGPD
+                    <i class="fa fa-leanpub mr-1" aria-hidden="true"></i>LGPD
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" th:href="@{/know_lgpd}"><i class="fa fa-graduation-cap mr-1"
@@ -73,7 +73,7 @@
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Contatos
+                    <i class="fa fa-shield mr-1" aria-hidden="true"></i>Contatos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" th:href="@{/partner/list}"><i class="fa fa-handshake-o mr-1"
@@ -113,9 +113,9 @@
     </div>
 
     <div sec:authorize="!isAuthenticated()">
-        <a class="button btn btn-outline-light mr-4 small" th:href="@{/account/login}"><i class="fa fa-sign-in mr-1"
+        <a class="button btn btn-outline-light mr-4 btn-sm" th:href="@{/account/login}"><i class="fa fa-sign-in mr-1"
                                                                                           aria-hidden="true"></i>Entrar</a>
-        <a class="button btn btn-outline-light mr-4 small" th:href="@{/account/register}"><i
+        <a class="button btn btn-outline-light mr-4 btn-sm" th:href="@{/account/register}"><i
                 class="fa fa-user-plus mr-1"
                 aria-hidden="true"></i></i>
             Cadastrar</a>
@@ -130,27 +130,27 @@
         </button>
         <div class="dropdown-menu">
             <h6 class="dropdown-header">Perfil</h6>
-            <a class="dropdown-item" th:href="@{/user/profile}">Ver Perfil</a>
-            <a class="dropdown-item" th:href="@{/user/edit}">Editar Perfil</a>
-            <a class="dropdown-item" th:href="@{/account/change-my-password}">Alterar senha</a>
-            <a class="dropdown-item" th:href="@{/log-out}">Sair</a>
+            <a class="dropdown-item" th:href="@{/user/profile}"><i class="fa fa-user mr-1" aria-hidden="true"></i>Ver Perfil</a>
+            <a class="dropdown-item" th:href="@{/user/edit}"><i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar Perfil</a>
+            <a class="dropdown-item" th:href="@{/account/change-my-password}"><i class="fa fa-key mr-1" aria-hidden="true"></i>Alterar senha</a>
+            <a class="dropdown-item" th:href="@{/log-out}"><i class="fa fa-sign-out mr-1" aria-hidden="true"></i>Sair</a>
             <div sec:authorize="hasRole('ADMIN')">
                 <div class="dropdown-divider"></div>
                 <h6 class="dropdown-header">Administração</h6>
                 <a class="dropdown-item" th:href="@{/user/read-all}">
-                    Usuários
+                    <i class="fa fa-users mr-1" aria-hidden="true"></i>Usuários
                 </a>
                 <a class="dropdown-item" th:href="@{/partner/admin-list}">
-                    Parceiros
+                    <i class="fa fa-handshake-o mr-1" aria-hidden="true"></i>Parceiros
                 </a>
                 <a class="dropdown-item" th:href="@{/news/admin-list}">
-                    Notícias
+                    <i class="fa fa-newspaper-o mr-1" aria-hidden="true"></i>Notícias
                 </a>
                 <a class="dropdown-item" th:href="@{/question/list}">
-                    Questões
+                    <i class="fa fa-book mr-1" aria-hidden="true"></i>Questões
                 </a>
                 <a class="dropdown-item" th:href="@{/user/administrator-area}">
-                    Área do Admin
+                    <i class="fa fa-user-secret mr-1" aria-hidden="true"></i>Área do Admin
                 </a>
             </div>
         </div>

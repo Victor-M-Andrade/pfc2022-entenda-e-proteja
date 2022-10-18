@@ -43,7 +43,7 @@
         <form th:action="@{/knowledge-test/result-test}" method="post" th:object="${myQuestionnaire}"
               th:if="${existsQuestions}" class="py-2">
 
-            <div class="" th:each="questionDto, itemStat : *{questions}">
+            <div class="card" th:each="questionDto, itemStat : *{questions}">
 
                 <div class="card-header">
                     <h3 th:text="'Pergunta ' + (${itemStat.index} + 1)">Pergunta N</h3>
