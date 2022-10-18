@@ -36,7 +36,7 @@ public class JwtServiceImpl implements JwtService {
                     .claim(JwtHelper.CLAIMS_AUTHORITIES_KEY, grantedAuthorityList.stream().map(GrantedAuthority::getAuthority)
                             .collect(Collectors.toList()))
                     .setIssuedAt(new Date(System.currentTimeMillis()))
-                    .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                    .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                     .signWith(JwtHelper.KEY_GENERATE_TOKEN).compact();
 
             return token;
