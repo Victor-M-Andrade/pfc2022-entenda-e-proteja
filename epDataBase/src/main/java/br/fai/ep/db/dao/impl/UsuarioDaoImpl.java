@@ -137,7 +137,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setString(i++, user.getNome());
             preparedStatement.setString(i++, user.getEmail());
             preparedStatement.setString(i++, user.getSenha());
-            preparedStatement.setString(i++, DEFAULT_IMAGE_PATH);
+            preparedStatement.setString(i++, Usuario.DEFAULT_IMAGE_PATH);
             preparedStatement.setBoolean(i++, user.isAdministrador());
             preparedStatement.setBoolean(i++, true);
 

@@ -34,6 +34,12 @@
                                 tente novamente.
                             </span>
                         </div>
+                        <div class="alert alert-danger col-12 text-center" th:if="${loadImageError}">
+                            <span class="font-weight-bold align-middle">
+                                Desculpe, não foi possível carregar sua imagem de perfil de consultor.
+                                Pedimos que edite seus dados de consultor e selecione uma nova imagem.
+                            </span>
+                        </div>
                         <div class="alert alert-danger col-12 text-center" th:if="${updatePartnerError}">
                             <span class="font-weight-bold align-middle">
                                 Não foi possível completar a nova solicitação. Por gentileza, tente novamente.

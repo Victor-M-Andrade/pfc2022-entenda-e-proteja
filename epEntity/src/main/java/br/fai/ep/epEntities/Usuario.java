@@ -20,6 +20,8 @@ public class Usuario extends BasePojo {
     private Timestamp dataHora;
     private String token;
 
+    public static final String DEFAULT_IMAGE_PATH = "/resources/img/logo_invertido.png";
+
     public static class USER_TABLE extends TABLE {
         public static final String TABLE_NAME = "usuario as U";
         public static final String SHORT_TABLE_NAME = "U.";

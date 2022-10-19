@@ -180,7 +180,7 @@ public class ParceiroDaoImpl extends BaseDao implements BaseDaoInterface {
             preparedStatement.setBoolean(i++, partner.isLegislativo());
             preparedStatement.setBoolean(i++, partner.isTecnico());
             preparedStatement.setString(i++, partner.getNomeEmpresa());
-            preparedStatement.setString(i++, DEFAULT_IMAGE_PATH);
+            preparedStatement.setString(i++, Usuario.DEFAULT_IMAGE_PATH);
             preparedStatement.setLong(i++, partner.getIdUsuario());
 
             preparedStatement.execute();

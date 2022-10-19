@@ -30,10 +30,12 @@ public class NewsController {
     private final String NEWS_LIST = "newsList";
     private final String EXISTS_NEWS = "existsNews";
     private final String AUTHOR_NAME = "authorName";
+    private final String LOAD_IMAGE_ERROR = "loadImageError";
     private final String MY_NEWS_REFERENCE = "myNews";
     private final String DELETE_NEWS_ERROR = "deleteNewsError";
     private final String UPDATE_NEWS_ERROR = "updateNewsError";
     private final String SEARCH_BY_CATEGORY = "isSearchByCategory";
+    private final String DEFAULT_NEWS_IMAGE_PATH = "/resources/img/noticias/capa/fundo_anonimo.png";
     private final String CATEFORY_LIST_REFERENCE = "categoryList";
     private final String REGISTRATION_REQUEST_PROBLEMS = "registrationRequestProblems";
 
@@ -98,6 +100,14 @@ public class NewsController {
         if (newsDto == null) {
             return "redirect:/not-found";
         }
+
+        if (!newsDto.getPathImageNews().equalsIgnoreCase(DEFAULT_NEWS_IMAGE_PATH)) {
+            final byte[] imageBytes = ImageRequestController.canLoadImage(newsDto.getPathImageNews());
+            if (imageBytes == null || imageBytes.length == 0) {
+                model.addAttribute(LOAD_IMAGE_ERROR, true);
+            }
+        }
+
         model.addAttribute(MY_NEWS_REFERENCE, newsDto);
         return FoldersName.NEWS_FOLDER + "/noticias_modelo";
     }
@@ -126,7 +136,7 @@ public class NewsController {
 
     @PostMapping("/news/request-news-publication")
     public String requestnewsRegistration(@RequestParam("newsCover") final MultipartFile file, final Noticia news) {
-        news.setPathImageNews("/resources/img/noticias/capa/fundo_anonimo.png");
+        news.setPathImageNews(DEFAULT_NEWS_IMAGE_PATH);
         news.setDataCriacao(Timestamp.from(Instant.now()));
 
         temporaryNews = news;
@@ -200,6 +210,13 @@ public class NewsController {
         final Usuario user = (Usuario) userWebService.readById(news.getIdAutor());
         if (user == null) {
             return "redirect:/not-found";
+        }
+
+        if (!news.getPathImageNews().equalsIgnoreCase(DEFAULT_NEWS_IMAGE_PATH)) {
+            final byte[] imageBytes = ImageRequestController.canLoadImage(news.getPathImageNews());
+            if (imageBytes == null || imageBytes.length == 0) {
+                model.addAttribute(LOAD_IMAGE_ERROR, true);
+            }
         }
 
         model.addAttribute(MY_NEWS_REFERENCE, news);

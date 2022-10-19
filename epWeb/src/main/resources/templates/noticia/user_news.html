@@ -23,6 +23,13 @@
             </li>
         </ol>
         <h1 class="text-center">Detalhes da notícia</h1>
+        <div class="alert alert-danger col-12 text-center" th:if="${loadImageError}">
+            <span class="font-weight-bold align-middle">
+                Desculpe, não foi possível carregar a imagem da notícia.
+                Por gentileza, clique em <a th:href="@{/news/user-news-edit/{id} (id = ${myNews.id})}">Editar
+                    notícia</a> e selecione uma nova imagem.
+            </span>
+        </div>
         <div class="container-fluid text-center navbar-expand-md">
             <hr>
             <div class="row align-items-start">

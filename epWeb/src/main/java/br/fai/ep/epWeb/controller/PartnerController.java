@@ -26,6 +26,7 @@ public class PartnerController {
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
     private final String EXISTS_PARTNER = "existsPartner";
+    private final String LOAD_IMAGE_ERROR = "loadImageError";
     private final String REGISTERED_PARTNER = "registeredPartner";
     private final String MY_PARTNER_REFERENCE = "myPartner";
     private final String UPDATE_PARTNER_ERROR = "updatePartnerError";
@@ -147,6 +148,14 @@ public class PartnerController {
             return "redirect:/not-found";
         }
 
+        final Parceiro partner = partnerList.get(0);
+        if (!partner.getPathImagePartner().equalsIgnoreCase(Usuario.DEFAULT_IMAGE_PATH)) {
+            final byte[] imageBytes = ImageRequestController.canLoadImage(partner.getPathImagePartner());
+            if (imageBytes == null || imageBytes.length == 0) {
+                model.addAttribute(LOAD_IMAGE_ERROR, true);
+            }
+        }
+
         model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
         if (deletePartnerError) {
             deletePartnerError = false;
@@ -157,7 +166,7 @@ public class PartnerController {
             updatePartnerError = false;
         }
 
-        model.addAttribute(MY_PARTNER_REFERENCE, partnerList.get(0));
+        model.addAttribute(MY_PARTNER_REFERENCE, partner);
         return FoldersName.PARTNER_FOLDER + "/perfil_consultor";
     }
 

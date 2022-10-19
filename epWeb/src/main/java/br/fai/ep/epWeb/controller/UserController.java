@@ -25,6 +25,7 @@ public class UserController {
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
     private final String USER_ID = "userId";
+    private final String LOAD_IMAGE_ERROR = "loadImageError";
     private final String MY_USER_REFERENCE = "myUser";
     private final String DATA_UPDATE_ERROR = "updateDataError";
     private final String USER_CREATION_DATE = "dateCreate";
@@ -45,6 +46,13 @@ public class UserController {
         final Usuario user = (Usuario) service.readById(authenticatedUser.getId());
         if (user == null) {
             return "redirect:/not-found";
+        }
+
+        if (!user.getPathImageProfile().equalsIgnoreCase(Usuario.DEFAULT_IMAGE_PATH)) {
+            final byte[] imageBytes = ImageRequestController.canLoadImage(user.getPathImageProfile());
+            if (imageBytes == null || imageBytes.length == 0) {
+                model.addAttribute(LOAD_IMAGE_ERROR, true);
+            }
         }
 
         model.addAttribute(MY_USER_REFERENCE, user);

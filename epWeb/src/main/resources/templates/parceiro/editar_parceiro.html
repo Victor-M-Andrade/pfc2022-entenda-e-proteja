@@ -91,6 +91,12 @@
                     </div>
                     <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
                         th:object="${myPartner}">
+                        <div class="form-group">
+                            <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
+                            <input class="form-control" type="file" name="partnerProfile" accept="image/*"
+                                data-toggle="tooltip" data-placement="top" title="Dado Público!" id="uploadImage"
+                                onchange="PreviewImage();">
+                        </div>
                         <div class="form-row">
                             <div class="col-md-7">
                                 <div class="form-group">
@@ -98,14 +104,16 @@
                                         Nome da empresa
                                     </label>
                                     <input class="form-control py-4" id="inputCompany" type="text"
-                                        placeholder="Insira o nome da sua empresa" data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="*{nomeEmpresa}" />
+                                        placeholder="Insira o nome da sua empresa" data-toggle="tooltip"
+                                        data-placement="top" title="Dado Público!" required th:field="*{nomeEmpresa}" />
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="mb-1" for="inputCnpj">CNPJ</label>
                                     <input class="form-control py-4" id="inputCnpj" type="text"
-                                        placeholder="Insira o CNPJ da empresa" data-toggle="tooltip" data-placement="top" title="Dado Privado!" required th:field="*{cnpj}" />
+                                        placeholder="Insira o CNPJ da empresa" data-toggle="tooltip"
+                                        data-placement="top" title="Dado Privado!" required th:field="*{cnpj}" />
                                 </div>
                             </div>
                         </div>
@@ -116,7 +124,8 @@
                                         Site da empresa
                                     </label>
                                     <input class="form-control py-4" id="inputSite" type="url"
-                                        placeholder="Insira o site da empresa" data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="*{website}" />
+                                        placeholder="Insira o site da empresa" data-toggle="tooltip"
+                                        data-placement="top" title="Dado Público!" required th:field="*{website}" />
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -126,14 +135,10 @@
                                     </label>
                                     <input class="form-control py-4" id="inputTelefone" type="tel"
                                         placeholder="Ex.: (00) 0000-0000" oninput="phoneFormat(this)"
-                                           data-toggle="tooltip" data-placement="top" title="Dado Público!" th:field="*{telefone}">
+                                        data-toggle="tooltip" data-placement="top" title="Dado Público!"
+                                        th:field="*{telefone}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for=" txtImagemPerfil">Imagem da logo ou do consultor</label>
-                            <input class="form-control" type="file" name="partnerProfile" accept="image/*"
-                                   data-toggle="tooltip" data-placement="top" title="Dado Público!" id="uploadImage" onchange="PreviewImage();">
                         </div>
                         <hr>
                         <div class="form-row">
@@ -168,7 +173,8 @@
                             <label for="txtDescricao">Descrição do serviços oferecidos</label>
                             <textarea type="text" class="form-control" rows="10"
                                 placeholder="Descreva os serviços oferecidos aos clientes ou informações relevante sobre sua empresa"
-                                      data-toggle="tooltip" data-placement="top" title="Dado Público!" required th:field="${myPartner.descricao}" id="txtDescricao"></textarea>
+                                data-toggle="tooltip" data-placement="top" title="Dado Público!" required
+                                th:field="${myPartner.descricao}" id="txtDescricao"></textarea>
                         </div>
                         <input th:field="${myPartner.id}" hidden />
                         <input th:field="${myPartner.situacao}" hidden />
