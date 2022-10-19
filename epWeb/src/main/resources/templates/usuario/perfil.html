@@ -30,6 +30,12 @@
                                 Não foi possível realizar a exclusão da sua conta. Por gentileza, tente novamente.
                             </span>
                         </div>
+                        <div class="alert alert-danger col-12 text-center" th:if="${loadImageError}">
+                            <span class="font-weight-bold align-middle">
+                                Desculpe, não foi possível carregar sua imagem de perfil.
+                                Pedimos que edite seus dados e selecione uma nova imagem de perfil.
+                            </span>
+                        </div>
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">
