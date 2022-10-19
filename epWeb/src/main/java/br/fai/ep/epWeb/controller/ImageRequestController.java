@@ -1,5 +1,6 @@
 package br.fai.ep.epWeb.controller;
 
+import br.fai.ep.epWeb.helper.ReadDefaultImages;
 import br.fai.ep.epWeb.service.BaseWebService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,14 @@ public class ImageRequestController {
     public byte[] requesUserImage(@PathVariable("urlImagemLocal") final String nomeImagem) {
         final File imagemArquivo = new File(targetDirectory + BaseWebService.PATH_IMAGENS_USERS + "/" + nomeImagem);
         try {
-            return Files.readAllBytes(imagemArquivo.toPath());
+            final byte[] byteImage = Files.readAllBytes(imagemArquivo.toPath());
+            System.out.println(byteImage);
+            return (byteImage == null || byteImage.length == 0) ?
+                    ReadDefaultImages.getDefaultProfileImage() : byteImage;
         } catch (final IOException e) {
-            return null;
+            System.out.println("primeira exception");
+            System.out.println(e.getMessage());
+            return ReadDefaultImages.getDefaultProfileImage();
         }
     }
 
@@ -31,9 +37,13 @@ public class ImageRequestController {
     public byte[] requesNewsImage(@PathVariable("urlImagemLocal") final String nomeImagem) {
         final File imagemArquivo = new File(targetDirectory + BaseWebService.PATH_IMAGENS_NEWS + "/" + nomeImagem);
         try {
-            return Files.readAllBytes(imagemArquivo.toPath());
+            final byte[] byteImage = Files.readAllBytes(imagemArquivo.toPath());
+            System.out.println(byteImage);
+            return (byteImage == null || byteImage.length == 0) ?
+                    ReadDefaultImages.getDefaultProfileImage() : byteImage;
         } catch (final IOException e) {
-            return null;
+            System.out.println(e.getMessage());
+            return ReadDefaultImages.getDefaultNewsImage();
         }
     }
 
@@ -44,7 +54,8 @@ public class ImageRequestController {
         try {
             return Files.readAllBytes(imagemArquivo.toPath());
         } catch (final IOException e) {
-            return null;
+            System.out.println(e.getMessage());
+            return ReadDefaultImages.getDefaultProfileImage();
         }
     }
 }
