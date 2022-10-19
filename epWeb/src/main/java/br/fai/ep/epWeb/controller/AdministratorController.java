@@ -5,6 +5,7 @@ import br.fai.ep.epEntities.Noticia;
 import br.fai.ep.epEntities.Parceiro;
 import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
+import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
@@ -27,6 +28,7 @@ public class AdministratorController {
     private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
     private final PartnerWebServiceImpl partnerWebService = new PartnerWebServiceImpl();
     private final NewsWebServiceImpl newsWebService = new NewsWebServiceImpl();
+    private final EpAuthenticationProvider authenticationProvider = new EpAuthenticationProvider();
 
     private final String USER_ID = "userId";
     private final String EXISTS_USERS = "existsUsers";
@@ -528,12 +530,19 @@ public class AdministratorController {
 
     @GetMapping("/news/approve-news-publication/{id}")
     public String approveNewsPublication(@PathVariable final long id) {
+        final Usuario user = authenticationProvider.getAuthenticatedUser();
+        if (user == null) {
+            updateNewsError = true;
+            return "redirect:/news/evaluate-news/" + id;
+        }
+
         final Noticia news = (Noticia) newsWebService.readById(id);
         if (news == null) {
             updateNewsError = true;
             return "redirect:/news/evaluate-news/" + id;
         }
 
+        news.setIdPublicador(user.getId());
         news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
         news.setDataPublicacao(Timestamp.from(Instant.now()));
         updateNewsError = !newsWebService.update(news);
@@ -561,12 +570,19 @@ public class AdministratorController {
 
     @GetMapping("/news/new-approve-news-publication/{id}")
     public String newApproveNewsPublication(@PathVariable final long id) {
+        final Usuario user = authenticationProvider.getAuthenticatedUser();
+        if (user == null) {
+            updateNewsError = true;
+            return "redirect:/news/evaluate-news/" + id;
+        }
+
         final Noticia news = (Noticia) newsWebService.readById(id);
         if (news == null) {
             updateNewsError = true;
-            return "redirect:/news/new-evaluate-news/" + id;
+            return "redirect:/news/evaluate-news/" + id;
         }
 
+        news.setIdPublicador(user.getId());
         news.setSituacao(Noticia.SITUATIONS.PUBLISHED);
         news.setDataPublicacao(Timestamp.from(Instant.now()));
         updateNewsError = !newsWebService.update(news);
