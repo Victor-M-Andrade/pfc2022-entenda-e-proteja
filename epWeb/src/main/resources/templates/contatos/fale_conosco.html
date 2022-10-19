@@ -45,31 +45,34 @@
                         <div class="form-group">
                             <label class="mb-1" for="inputinputUsernameName">
                                 <strong>
-                                    Nome para contato
+                                    Nome
                                 </strong>
                             </label>
                             <input class="form-control py-4" id="inputUsername" type="text"
                                    placeholder="Insira o nome que gostaria de ser chamado"
-                                   th:field="${mailDto.username}" required/>
+                                   th:field="${mailDto.username}" data-toggle="tooltip" data-placement="top"
+                                   title="Dado Pessoal!" required/>
                         </div>
                         <div class="form-group">
                             <label class="mb-1" for="inputEmailAddress">
-                                <strong>Email para resposta</strong>
+                                <strong>Email</strong>
                             </label>
                             <input class="form-control py-4" id="inputEmailAddress" type="email"
                                    placeholder="Insira um endereço de email para retornarmos o contato"
+                                   data-toggle="tooltip" data-placement="top" title="Dado Pessoal!"
                                    th:field="${mailDto.mailContact}" required/>
                         </div>
                         <div class="form-group">
-                            <label class="mb-1" for="inputAssunto"><strong>Motivo do contato</strong></label>
+                            <label class="mb-1" for="inputAssunto"><strong>Motivo</strong></label>
                             <input class="form-control py-4" id="inputAssunto" type="text"
                                    placeholder="Insira o motivo do seu contato" th:field="${mailDto.reason}"
-                                   required/>
+                                   data-toggle="tooltip" data-placement="top" title="Dado Público!" required/>
                         </div>
                         <div class="form-group">
                             <label for=""><strong>Mensagem</strong></label>
                             <textarea type="text" class="form-control" rows="10"
-                                      placeholder="Escreva aqui sua mensagem" th:field="${mailDto.message}" required>
+                                      placeholder="Escreva aqui sua mensagem" th:field="${mailDto.message}"
+                                      data-toggle="tooltip" data-placement="top" title="Dado Público!" required>
                                     </textarea>
                         </div>
 

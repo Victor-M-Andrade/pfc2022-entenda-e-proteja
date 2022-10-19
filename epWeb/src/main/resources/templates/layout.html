@@ -93,28 +93,28 @@
                     Acessibilidade
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-                    <!-- Removendo zoom
-                    <label for="input-zoom-mode">
-                        <a class="dropdown-item"><i class="fa fa-expand mr-1" aria-hidden="true"></i>Aumentar/Diminuir
-                            letra</a>
-                    </label>
-                    <input type="checkbox" id="input-zoom-mode" hidden>
-                    -->
+            <!-- Removendo zoom
+            <label for="input-zoom-mode">
+                <a class="dropdown-item"><i class="fa fa-expand mr-1" aria-hidden="true"></i>Aumentar/Diminuir
+                    letra</a>
+            </label>
+            <input type="checkbox" id="input-zoom-mode" hidden>
+            -->
 
-                    <!--
-                    <label for="input-dark-mode">
-                        <a class="dropdown-item">Modo escuro/claro</a>
-                        </labe>
-                        <input type="checkbox" id="input-dark-mode" hidden>
-                    -->
-                </div>
-            </li>
-        </ul>
+            <!--
+            <label for="input-dark-mode">
+                <a class="dropdown-item">Modo escuro/claro</a>
+                </labe>
+                <input type="checkbox" id="input-dark-mode" hidden>
+            -->
+    </div>
+    </li>
+    </ul>
     </div>
 
     <div sec:authorize="!isAuthenticated()">
         <a class="button btn btn-outline-light mr-4 btn-sm" th:href="@{/account/login}"><i class="fa fa-sign-in mr-1"
-                                                                                          aria-hidden="true"></i>Entrar</a>
+                                                                                           aria-hidden="true"></i>Entrar</a>
         <a class="button btn btn-outline-light mr-4 btn-sm" th:href="@{/account/register}"><i
                 class="fa fa-user-plus mr-1"
                 aria-hidden="true"></i></i>
@@ -130,10 +130,17 @@
         </button>
         <div class="dropdown-menu">
             <h6 class="dropdown-header">Perfil</h6>
-            <a class="dropdown-item" th:href="@{/user/profile}"><i class="fa fa-user mr-1" aria-hidden="true"></i>Ver Perfil</a>
-            <a class="dropdown-item" th:href="@{/user/edit}"><i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar Perfil</a>
-            <a class="dropdown-item" th:href="@{/account/change-my-password}"><i class="fa fa-key mr-1" aria-hidden="true"></i>Alterar senha</a>
-            <a class="dropdown-item" th:href="@{/log-out}"><i class="fa fa-sign-out mr-1" aria-hidden="true"></i>Sair</a>
+            <a class="dropdown-item" th:href="@{/user/profile}"><i class="fa fa-user mr-1" aria-hidden="true"></i>Ver
+                Perfil</a>
+            <a class="dropdown-item" th:href="@{/user/edit}"><i class="fa fa-pencil-square-o mr-1"
+                                                                aria-hidden="true"></i>Editar Perfil</a>
+            <a class="dropdown-item" th:href="@{/account/change-my-password}"><i class="fa fa-key mr-1"
+                                                                                 aria-hidden="true"></i>Alterar
+                Senha</a>
+            <a class="dropdown-item" th:href="@{/news/user-news-list}"><i class="fa fa-file-text-o mr-1"
+                                                                          aria-hidden="true"></i>Área do Autor</a>
+            <a class="dropdown-item" th:href="@{/log-out}"><i class="fa fa-sign-out mr-1"
+                                                              aria-hidden="true"></i>Sair</a>
             <div sec:authorize="hasRole('ADMIN')">
                 <div class="dropdown-divider"></div>
                 <h6 class="dropdown-header">Administração</h6>

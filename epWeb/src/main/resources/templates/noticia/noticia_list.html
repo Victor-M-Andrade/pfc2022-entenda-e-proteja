@@ -7,126 +7,126 @@
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Lista de notícias
-            </li>
-        </ol>
-        <h1 class="text-center">Notícias desta categoria</h1>
-        <hr>
-        <div class="col-12 text-center">
-            <a th:href="@{/news/categories}" class="btn btn-primary col-sm-5 py-2">
-                Lista de categorias
-            </a>
-            <a th:href="@{/news/news-list}" class="btn btn-primary col-sm-5 py-2">
-                Todas as noticias
-            </a>
-        </div>
-        <hr>
-        <div class="container-fluid text-center navbar-expand-md py-2">
-            <div class="row align-items-start">
-                <div class="table-responsive">
-                    <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Lista de notícias
+        </li>
+    </ol>
+    <h1 class="text-center mb-3">Notícias desta categoria</h1>
+    <hr>
+    <div class="col-12 text-center">
+        <a th:href="@{/news/categories}" class="btn btn-primary col-sm-5 py-2 mb-2">
+            Lista de categorias
+        </a>
+        <a th:href="@{/news/news-list}" class="btn btn-primary col-sm-5 py-2 mb-2">
+            Todas as noticias
+        </a>
+    </div>
+    <hr>
+    <div class="container-fluid text-center navbar-expand-md py-2">
+        <div class="row align-items-start">
+            <div class="table-responsive">
+                <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
                         <span class="font-weight-bold align-middle" th:if="${isSearchByCategory}">
                             Desculpe, não há notícias publicadas desta categoria no momento.
                         </span>
-                        <span class="font-weight-bold align-middle" th:unless="${isSearchByCategory}">
+                    <span class="font-weight-bold align-middle" th:unless="${isSearchByCategory}">
                             Desculpe, não há notícias publicadas no momento.
                         </span>
-                    </div>
-                    <table class="table table-bordered text-center table-hover" id="tabela" width="100%" cellspacing="0"
-                        th:if="${existsNews}">
-                        <thead>
-                            <tr>
-                                <th class="col-4">Título</th>
-                                <th class="col-2">Categoria</th>
-                                <th class="col-2">ID Autor</th>
-                                <th class="col-2">Ação</th>
-                            </tr>
-                            <tr class="col-12">
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna1" /></th>
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
-                                <th><input class="col-10 col-md-10" type="text" id="txtColuna2" /></th>
-                                <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th class="col-4">Titulo</th>
-                                <th class="col-2">Categoria</th>
-                                <th class="col-2">ID Autor</th>
-                                <th class="col-2">Ação</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr th:each="news : ${newsList}">
-                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
-                                <td th:text="${news.categoria}" class="align-middle">categoria</td>
-                                <td class="align-middle">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="py-2" data-toggle="modal"
-                                        th:attr="data-target='#newsId'+${news.id}">
-                                        <i class="fa fa-address-card"></i>
-                                    </button>
+                </div>
+                <table class="table table-bordered text-center table-hover" id="tabela" width="100%" cellspacing="0"
+                       th:if="${existsNews}">
+                    <thead>
+                    <tr>
+                        <th class="col-4">Título</th>
+                        <th class="col-2">Categoria</th>
+                        <th class="col-2">ID Autor</th>
+                        <th class="col-2">Ação</th>
+                    </tr>
+                    <tr class="col-12">
+                        <th><input class="col-10 col-md-10" type="text" id="txtColuna1"/></th>
+                        <th><input class="col-10 col-md-10" type="text" id="txtColuna2"/></th>
+                        <th><input class="col-10 col-md-10" type="text" id="txtColuna2"/></th>
+                        <th><i class="fa fa-search col-md-1" aria-hidden="true"></i></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th class="col-4">Titulo</th>
+                        <th class="col-2">Categoria</th>
+                        <th class="col-2">ID Autor</th>
+                        <th class="col-2">Ação</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="news : ${newsList}">
+                        <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                        <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                        <td class="align-middle">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="py-2" data-toggle="modal"
+                                    th:attr="data-target='#newsId'+${news.id}">
+                                <i class="fa fa-address-card"></i>
+                            </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" th:id="'newsId' + ${news.id}" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title text-center" id="exampleModalLabel">
-                                                        Dados do autor
-                                                    </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-2 card">
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-3"><strong>Nome</strong></div>
-                                                                <div class="col-sm-9">
-                                                                    <label th:text="${news.authorName}">
-                                                                        Nome do autor
-                                                                    </label>
-                                                                </div>
-                                                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="'newsId' + ${news.id}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-center" id="exampleModalLabel">
+                                                Dados do autor
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-2 card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-3"><strong>Nome</strong></div>
+                                                        <div class="col-sm-9">
+                                                            <label th:text="${news.authorName}">
+                                                                Nome do autor
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer text-center">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">
-                                                        Fechar
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
+                                        <div class="modal-footer text-center">
+                                            <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">
+                                                Fechar
+                                            </button>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
 
-                                </td>
-                                <td>
-                                    <div class="col-12">
-                                        <a th:href="@{/news/new/{id} (id = ${news.id})}" class="btn col-12 btn-info">
-                                            <i class="fas fa-eye"></i>
-                                            Ler
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </td>
+                        <td>
+                            <div class="col-12">
+                                <a th:href="@{/news/new/{id} (id = ${news.id})}" class="btn col-12 btn-info">
+                                    <i class="fas fa-eye"></i>
+                                    Ler
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>

@@ -7,83 +7,90 @@
 </head>
 
 <body>
-    <div layout:fragment="body">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a th:href="@{/}">Início</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a th:href="@{/user/profile}">Meu perfil</a>
-            </li>
-            <li class="breadcrumb-item active">
-                Suas notícias
-            </li>
-        </ol>
-        <h1 class="text-center">Suas notícias</h1>
-        <a th:href="@{/user/profile}" class="btn btn-secondary col-12 py-2">
+<div layout:fragment="body">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/user/profile}">Meu perfil</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Suas notícias
+        </li>
+    </ol>
+    <h1 class="text-center mb-2">Suas notícias</h1>
+    <div class="col-12 text-center">
+
+        <a th:href="@{/news/create-new-news}" class="btn btn-primary col-xl-3 col-12 mb-2">
+            Criar nova proposta de notícia
+        </a>
+
+        <a th:href="@{/user/profile}" class="btn btn-secondary col-xl-3 col-12 mb-2">
             Voltar ao seu perfil
         </a>
-        <hr>
-        <div class="container-fluid text-center navbar-expand-md col-12">
-            <div class="row align-items-start">
-                <div class="table-responsive">
-                    <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
+    </div>
+    <hr>
+    <div class="container-fluid text-center navbar-expand-md col-12">
+        <div class="row align-items-start">
+            <div class="table-responsive">
+                <div class="alert alert-danger col-12 text-center" th:unless="${existsNews}">
                         <span class="font-weight-bold align-middle">
                             Você não possuí notícias cadastradas.
                         </span>
-                    </div>
-                    <table class="table table-bordered text-center table-hover table-hover" id="tabela" width="100%"
-                        cellspacing="0" th:if="${existsNews}">
-                        <thead>
-                            <tr>
-                                <th>Situação</th>
-                                <th>Titulo</th>
-                                <th>Categoria</th>
-                                <th>Data Criação</th>
-                                <th>Ação</th>
-                            </tr>
-                            <tr class="col-12">
-                                <th><input class="col-10" type="text" id="txtColuna1" /></th>
-                                <th><input class="col-10" type="text" id="txtColuna2" /></th>
-                                <th><input class="col-10" type="text" id="txtColuna3" /></th>
-                                <th><input class="col-10" type="text" id="txtColuna4" /></th>
-                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Situação</th>
-                                <th>Titulo</th>
-                                <th>Categoria</th>
-                                <th>Data Criação</th>
-                                <th>Ação</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr th:each="news : ${newsList}">
-                                <td th:text="${news.situacao}" class="align-middle">situacao</td>
-                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
-                                <td th:text="${news.categoria}" class="align-middle">categoria</td>
-                                <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
-                                    class="align-middle">
-                                    01/01/2022
-                                </td>
-                                <td>
-                                    <div class="col-12">
-                                        <a th:href="@{/news/user-news-detail/{id} (id = ${news.id})}"
-                                            class="btn col-12 btn-info">
-                                            <i class="fas fa-eye"></i>
-                                            Ler
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
+                <table class="table table-bordered text-center table-hover table-hover" id="tabela" width="100%"
+                       cellspacing="0" th:if="${existsNews}">
+                    <thead>
+                    <tr>
+                        <th>Situação</th>
+                        <th>Titulo</th>
+                        <th>Categoria</th>
+                        <th>Data Criação</th>
+                        <th>Ação</th>
+                    </tr>
+                    <tr class="col-12">
+                        <th><input class="col-10" type="text" id="txtColuna1"/></th>
+                        <th><input class="col-10" type="text" id="txtColuna2"/></th>
+                        <th><input class="col-10" type="text" id="txtColuna3"/></th>
+                        <th><input class="col-10" type="text" id="txtColuna4"/></th>
+                        <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Situação</th>
+                        <th>Titulo</th>
+                        <th>Categoria</th>
+                        <th>Data Criação</th>
+                        <th>Ação</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="news : ${newsList}">
+                        <td th:text="${news.situacao}" class="align-middle">situacao</td>
+                        <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                        <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                        <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
+                            class="align-middle">
+                            01/01/2022
+                        </td>
+                        <td>
+                            <div class="col-12">
+                                <a th:href="@{/news/user-news-detail/{id} (id = ${news.id})}"
+                                   class="btn col-12 btn-info">
+                                    <i class="fas fa-eye"></i>
+                                    Ler
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>
