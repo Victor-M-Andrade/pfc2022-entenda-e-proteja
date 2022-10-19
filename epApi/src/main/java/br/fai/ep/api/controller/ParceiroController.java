@@ -1,8 +1,8 @@
 package br.fai.ep.api.controller;
 
+import br.fai.ep.api.service.impl.ParceiroServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.Parceiro;
-import br.fai.ep.api.service.impl.ParceiroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +28,12 @@ public class ParceiroController {
     public ResponseEntity readById(@PathVariable("id") final long id) {
         return ResponseEntity.ok(service.readById(id));
     }
+
+    @GetMapping("/read-partner-detail/{id}")
+    public ResponseEntity readPartnerDetail(@PathVariable("id") final long id) {
+        return ResponseEntity.ok(service.readById(id));
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<Long> create(@RequestBody final Parceiro entity) {

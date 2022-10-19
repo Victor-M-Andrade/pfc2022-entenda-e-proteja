@@ -37,6 +37,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // partner
                 .antMatchers(HttpMethod.POST, "/api/partner/read-by-criteria").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/partner/read-partner-detail/**").permitAll()
                 .anyRequest().authenticated();
     }
 }

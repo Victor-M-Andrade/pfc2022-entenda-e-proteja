@@ -144,4 +144,25 @@ public class PartnerWebServiceImpl extends BaseWebService implements WebServiceI
         final Parceiro partner = (Parceiro) entity;
         return String.format(NAME_FILE_FORMAT, partner.getId(), dateFormateForSaveFiles(partner.getDataHora()));
     }
+
+    public Object readPartnerDetail(final long id) {
+        final String endpoint = BASE_ENDPOINT + "/read-partner-detail/" + id;
+        Parceiro response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<>(RestService.getRequestHeaders());
+            final ResponseEntity<Parceiro> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET,
+                    httpEntity, Parceiro.class);
+            response = requestResponse.getBody();
+        } catch (final Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        if (response != null) {
+            response = response.isAnonimo() ? AnonymizeData.anonymizeAllData(response) : response;
+        }
+
+        return response;
+    }
 }

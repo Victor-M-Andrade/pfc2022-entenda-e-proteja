@@ -6,7 +6,6 @@ import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
-import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 @Controller
 public class PartnerController {
-    private final WebServiceInterface service = new PartnerWebServiceImpl();
+    private final PartnerWebServiceImpl service = new PartnerWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
     private final String EXISTS_PARTNER = "existsPartner";
@@ -75,7 +74,7 @@ public class PartnerController {
 
     @GetMapping("/partner/detail/{id}")
     public String getPartnerDetailPage(@PathVariable final long id, final Model model) {
-        final Parceiro partner = (Parceiro) service.readById(id);
+        final Parceiro partner = (Parceiro) service.readPartnerDetail(id);
         if (partner == null) {
             return "redirect:/not-found";
         }
