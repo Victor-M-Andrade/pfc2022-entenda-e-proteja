@@ -15,11 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
-    public static final String DELETE_USER_ERROR = "deleteUserError";
-    public static final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
 
-    public static boolean deleteUserError = false;
-    public static boolean anonymizeUserError = false;
 
     private final WebServiceInterface service = new UserWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
@@ -28,9 +24,11 @@ public class UserController {
     private final String LOAD_IMAGE_ERROR = "loadImageError";
     private final String MY_USER_REFERENCE = "myUser";
     private final String DATA_UPDATE_ERROR = "updateDataError";
+    private final String DELETE_USER_ERROR = "deleteUserError";
     private final String USER_CREATION_DATE = "dateCreate";
     private final String IS_ADMINISTRATOR_USER = "isAdministrator";
 
+    private boolean deleteUserError = false;
     private boolean triedPasswordChange = false;
     private boolean updateUserDataError = false;
 

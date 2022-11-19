@@ -30,7 +30,9 @@ public class AccountController {
     private final String SENDED_EMAIL = "sendedEmail";
     private final String MY_USER_OBJECT = "myUser";
     private final String EMAIL_NOT_FOUND = "emailNotFound";
+    private final String DELETE_USER_ERROR = "deleteUserError";
     private final String OLD_USER_PASSWORD = "oldUserPassword";
+    private final String ANONYMIZE_USER_ERROR = "anonymizeUserError";
     private final String AUTHENTICATION_ERROR = "authenticationError";
     private final String CHANGE_PASSWORD_ERROR = "changePasswordError";
     private final String ALREADY_REGISTERED_EMAIL = "alreadyRegisteredEmail";
@@ -38,6 +40,8 @@ public class AccountController {
 
     private boolean sendedEmail = false;
     private boolean emailNotFound = false;
+    private boolean deleteUserError = false;
+    private boolean anonymizeUserError = false;
     private boolean changePasswordError = false;
     private boolean authenticationError = false;
     private boolean triedPasswordChange = false;
@@ -212,7 +216,7 @@ public class AccountController {
     public String confirmDeleteAccount() {
         final Usuario authenticatedUser = epAuthenticationProvider.getAuthenticatedUser();
         if (authenticatedUser == null) {
-            UserController.deleteUserError = false;
+            deleteUserError = false;
             return "redirect:/user/profile";
         }
 
@@ -221,8 +225,8 @@ public class AccountController {
             return "redirect:/account/request-use-data";
         }
 
-        UserController.deleteUserError = !service.delete(authenticatedUser.getId());
-        if (UserController.deleteUserError) {
+        deleteUserError = !service.delete(authenticatedUser.getId());
+        if (deleteUserError) {
             return "redirect:/user/profile";
         }
         return "redirect:/log-out";
@@ -267,14 +271,12 @@ public class AccountController {
         }
         model.addAttribute("userIsAuthor", userIsAuthor);
 
-        model.addAttribute(UserController.DELETE_USER_ERROR, UserController.deleteUserError);
-        if (UserController.deleteUserError) {
-            UserController.deleteUserError = false;
-        }
-        model.addAttribute(UserController.ANONYMIZE_USER_ERROR, UserController.anonymizeUserError);
-        if (UserController.anonymizeUserError) {
-            UserController.anonymizeUserError = false;
-        }
+        model.addAttribute(DELETE_USER_ERROR, deleteUserError);
+        deleteUserError = false;
+
+        model.addAttribute(ANONYMIZE_USER_ERROR, anonymizeUserError);
+        anonymizeUserError = false;
+
         return FoldersName.ACCOUNT_FOLDER + "/confirmar-exclusao";
     }
 
@@ -285,8 +287,8 @@ public class AccountController {
             return "redirect:/not-found";
         }
 
-        UserController.deleteUserError = !service.delete(authenticatedUser.getId());
-        if (UserController.deleteUserError) {
+        deleteUserError = !service.delete(authenticatedUser.getId());
+        if (deleteUserError) {
             return "redirect:/account/request-use-data";
         }
         return "redirect:/log-out";
@@ -299,8 +301,8 @@ public class AccountController {
             return "redirect:/not-found";
         }
 
-        UserController.deleteUserError = !new UserWebServiceImpl().anonymizeUser(authenticatedUser.getId());
-        if (UserController.anonymizeUserError) {
+        anonymizeUserError = !service.anonymizeUser(authenticatedUser.getId());
+        if (anonymizeUserError) {
             return "redirect:/account/request-use-data";
         }
         return "redirect:/log-out";
