@@ -32,8 +32,9 @@
         function validate() {
             let tipoButton = "submit";
             let existError = false;
-            let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
 
+            let titleMessageError = "Erro durante atualização";
+            let messageError = "";
             if (!checkTypeService()) {
                 tipoButton = "button";
                 messageError += "Selecione pelo menos um dos tipos de serviços.\n"
@@ -41,7 +42,7 @@
             }
 
             if (existError) {
-                alert(messageError);
+                showModelError(messageError, titleMessageError);
             }
             document.getElementById("updateData").setAttribute("type", tipoButton);
         }

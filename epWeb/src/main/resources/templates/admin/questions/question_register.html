@@ -25,7 +25,9 @@
         function validade() {
             let tipoButton = "submit";
             let existError = false;
-            let messageError = "Preenchimento inválido.\n\nProblemas encontrado:\n";
+
+            let titleMessageError = "Erro ao criar questão";
+            let messageError = "";
 
             if (!selectQuestLevel()) {
                 tipoButton = "button";
@@ -40,7 +42,7 @@
             }
 
             if (existError) {
-                alert(messageError);
+                showModelError(messageError, titleMessageError);
             }
             document.getElementById("createQuestButton").setAttribute("type", tipoButton);
         }

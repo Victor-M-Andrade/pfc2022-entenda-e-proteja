@@ -25,7 +25,9 @@
         function validade() {
             let tipoButton = "submit";
             let existError = false;
-            let messageError = "Preenchimento inválido.\n\nProblemas encontrado:\n";
+
+            let titleMessageError = "Erro(s) durante atualização";
+            let messageError = "";
 
             if (!selectQuestLevel()) {
                 tipoButton = "button";
@@ -40,7 +42,7 @@
             }
 
             if (existError) {
-                alert(messageError);
+                showModelError(messageError, titleMessageError);
             }
             document.getElementById("createQuestButton").setAttribute("type", tipoButton);
         }
@@ -69,7 +71,7 @@
 
         <div class="row">
             <div class="col-12 col-md-12 text-center">
-                <h1>Criar questão</h1>
+                <h1>Editar questão</h1>
 
                 <div class="alert alert-danger py-2" th:if="${updateQuestionError}">
                     <span class="font-weight-bold align-middle">
