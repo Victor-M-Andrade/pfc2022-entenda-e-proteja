@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Cadastro de usuário E&P</title>
     <script>
+        const titleMessageError = "Não foi possível realizar o cadastro";
+
         function validaSenhas() {
             let pass = document.getElementById("inputPassword");
             let confirPass = document.getElementById("inputConfirmPassword");
@@ -13,7 +15,7 @@
             let tipoButton = "submit";
             let existError = false;
 
-            let titleMessageError = "Erro ao realizar cadastro!";
+
             let messageError = "";
 
             if (pass.value != confirPass.value) {
@@ -33,6 +35,28 @@
             }
 
             document.getElementById("cadastro").setAttribute("type", tipoButton);
+        }
+
+        window.onload = function () {
+            var account = $("#createAccount").is(":checked");
+            var email = $("#alreadyEmail").is(":checked");
+
+            let messageError = "";
+            let existError = false;
+
+            if (account) {
+                messageError += "O email informado já esta registrado. Por gentileza, informe outro email.\n";
+                existError = true;
+            }
+
+            if (email) {
+                messageError += "Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.\n";
+                existError = true;
+            }
+
+            if (existError) {
+                showModelError(messageError, titleMessageError);
+            }
         }
     </script>
 </head>
@@ -56,15 +80,10 @@
                         <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-danger" th:if="${alreadyRegisteredEmail}">
-                            <span class="font-weight-bold align-middle">O email informado já esta registrado. Por
-                                gentileza, informe outro email.</span>
-                        </div>
-                        <div class="alert alert-danger" th:if="${accountCreationProblems}">
-                            <span class="font-weight-bold align-middle">
-                                Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.
-                            </span>
-                        </div>
+
+                        <input type="checkbox" id="createAccount" th:checked="${accountCreationProblems}" hidden>
+                        <input type="checkbox" id="alreadyEmail" th:checked="${alreadyRegisteredEmail}" hidden>
+
                         <form th:action="@{/account/create}" method="post" th:object="${myUser}">
                             <div class="form-row">
                                 <div class="col-md-12">
