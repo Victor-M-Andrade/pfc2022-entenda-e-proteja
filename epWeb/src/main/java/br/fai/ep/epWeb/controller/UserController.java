@@ -83,7 +83,7 @@ public class UserController {
                 model.addAttribute(USER_ID, user.getId());
                 model.addAttribute(DATA_UPDATE_ERROR, updateUserDataError);
                 updateUserDataError = false;
-                return "/usuario/editar_perfil";
+                return FoldersName.USER_FOLDER + "/editar_perfil";
             }
 
             if (triedPasswordChange && temporaryUser != null) {
