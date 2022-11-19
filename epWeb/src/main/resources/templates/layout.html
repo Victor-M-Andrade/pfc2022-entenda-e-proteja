@@ -13,18 +13,42 @@
     <script src="/resources/javascript/tooltip.js"></script>
     <link rel="stylesheet" href="/resources/bootstrap-4.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/6d6eee6583.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/css/css.css">
+    <link rel="stylesheet" href="/resources/css/base-css.css">
+    <link rel="stylesheet" href="/resources/css/my-model.css">
     <script src="/resources/js/font-awesome/all.min.js"></script>
     <script src="/resources/jquery/jquery-3.4.1.min.js"></script>
     <script src="/resources/popper/popper.min.js"></script>
     <script src="/resources/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/javascript/tabelas.js"></script>
+    <script type="text/javascript" src="/resources/javascript/showModelError.js"></script>
     <!-- <script src="/resources/javascript/darkMode.js"></script>
     <script src="/resources/javascript/aumentarLetra.js"></script> -->
 </head>
 
 <body>
+    <!-- Modal HTML -->
+    <div id="modelError" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4 id="errorModelLabel">Ooops!</h4>
+                    <h6>Problema(s) encontrado(s):</h6>
+                    <p id="errorMessage">Something went wrong. File was not uploaded.</p>
+                    <button class="btn btn-secondary" data-dismiss="modal">
+                        Ok, entendi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div vw class="enabled">
         <div vw-access-button class="active"></div>

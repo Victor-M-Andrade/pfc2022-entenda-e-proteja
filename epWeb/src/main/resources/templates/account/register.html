@@ -12,11 +12,13 @@
 
             let tipoButton = "submit";
             let existError = false;
-            let messageError = "Não foi possível cadastrar seus dados.\n\nProblemas encontrado:\n";
+
+            let titleMessageError = "Erro ao realizar cadastro!";
+            let messageError = "";
 
             if (pass.value != confirPass.value) {
                 tipoButton = "button";
-                messageError += "Foram informadas senhas diferentes no compo \"Senha\" e \"Confirme sua senha\".\n";
+                messageError += "Foram informadas senhas diferentes nos compos \"Senha\" e \"Confirme sua senha\".\n";
                 existError = true;
             }
 
@@ -27,7 +29,7 @@
             }
 
             if (existError) {
-                alert(messageError);
+                showModelError(messageError, titleMessageError);
             }
 
             document.getElementById("cadastro").setAttribute("type", tipoButton);
