@@ -19,7 +19,7 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     private final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
-    public String URL_WEBSITE_EP = "http://192.168.0.102:8100";
+    public String URL_WEBSITE_EP = "http://localhost:8100";
 
     public String buildMessage(final String username, final long userId) {
         final String message = "<html lang=\"pt-br\">" +

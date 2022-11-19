@@ -4,174 +4,185 @@
 <head>
     <meta charset="UTF-8">
     <title>Solicitação do uso de dados</title>
+    <script>
+        window.onload = function () {
+            var deleteError = $("#deleteUserError").is(":checked");
+            var anonymizeError = $("#anonymizeUserError").is(":checked");
+
+            let titleMessageError = "";
+            let messageError = "";
+            let existError = false;
+
+            if (deleteError) {
+                titleMessageError = "Erro durante exclusão da conta";
+                messageError = "Não foi possível realizar a exclusão da sua conta.Por gentileza, tente novamente.";
+                existError = true;
+            }
+
+            if (anonymizeError) {
+                titleMessageError = "Erro durante anonimização da conta";
+                messageError = "Não foi possível realizar a anonimização da sua conta. Por gentileza, tente novamente.";
+                existError = true;
+            }
+
+            if (existError) {
+                showModelError(messageError, titleMessageError);
+            }
+        }
+    </script>
 </head>
 
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/}">Início</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a th:href="@{/user/profile}">Meu perfil</a>
-        </li>
-        <li class="breadcrumb-item active">
-            Confirmar exclusão
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Início</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/user/profile}">Meu perfil</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Confirmar exclusão
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md col-12">
-        <div class="row align-items-start">
-            <div class="container card border-0 rounded-lg col-12 col-xl-12 login">
-                <div class="card-header">
-                    <h3 class="text-center font-weight-light">Solicitação do uso de dados</h3>
-                    <img src="/resources/img/logo_invertido.png" alt="logo">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <p>Verificamos que a sua conta está associada a alguns dados que podem ser usados para
-                            estatísticas.</p>
-                        <p>Pedimos a sua autorização para que estes dados sejam mantidos no sistema, mas os seus
-                            dados
-                            pessoais anonimizados, ou seja, não serão mais visíveis</p>
-                        <label th:text="${anonymous}">Exemplo: lu***********************</label>
-                        <p>O que deseja fazer?</p>
-                        <p></p>
-                        <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
-                            <div class="col-12">
-                                <a class="btn btn-secondary col-sm-3 py-2" th:href="@{/user/profile}">
-                                    Cancelar esta operação
-                                </a>
-                                <a class="btn btn-danger col-sm-3 py-2"
-                                   th:href="@{/account/confirm-delete-my-account}">
-                                    Excluir meus dados
-                                </a>
-                                <a class="btn btn-success col-sm-3 py-2" th:href="@{/account/anonymize-my-account}">
-                                    Anonimizar dados
-                                </a>
-                            </div>
-                        </div>
-                        <div th:if="${deleteUserError}">
-                            <br>
-                            <div class="alert alert-danger col-12 text-center">
-                                    <span class="font-weight-bold align-middle">
-                                        Não foi possível realizar a exclusão da sua conta. Por gentileza, tente
-                                        novamente.
-                                    </span>
-                            </div>
-                        </div>
-                        <div th:if="${anonymizeUserEror}">
-                            <br>
-                            <div class="alert alert-danger col-12 text-center">
-                                    <span class="font-weight-bold align-middle">
-                                        Não foi possível realizar a anonimização da sua conta. Por gentileza, tente
-                                        novamente.
-                                    </span>
+        <div class="container-fluid text-center navbar-expand-md col-12">
+            <div class="row align-items-start">
+                <div class="container card border-0 rounded-lg col-12 col-xl-12 login">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light">Solicitação do uso de dados</h3>
+                        <img src="/resources/img/logo_invertido.png" alt="logo">
+                    </div>
+
+                    <input type="checkbox" id="deleteUserError" th:checked="${deleteUserError}" hidden>
+                    <input type="checkbox" id="anonymizeUserError" th:checked="${anonymizeUserError}" hidden>
+
+                    <div class="card-body">
+                        <div>
+                            <p>Verificamos que a sua conta está associada a alguns dados que podem ser usados para
+                                estatísticas.</p>
+                            <p>Pedimos a sua autorização para que estes dados sejam mantidos no sistema, mas os seus
+                                dados
+                                pessoais anonimizados, ou seja, não serão mais visíveis</p>
+                            <label th:text="${anonymous}">Exemplo: lu***********************</label>
+                            <p>O que deseja fazer?</p>
+                            <p></p>
+                            <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
+                                <div class="col-12">
+                                    <a class="btn btn-secondary col-sm-3 py-2" th:href="@{/user/profile}">
+                                        Cancelar esta operação
+                                    </a>
+                                    <a class="btn btn-danger col-sm-3 py-2"
+                                        th:href="@{/account/confirm-delete-my-account}">
+                                        Excluir meus dados
+                                    </a>
+                                    <a class="btn btn-success col-sm-3 py-2" th:href="@{/account/anonymize-my-account}">
+                                        Anonimizar dados
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="align-items-start" th:if="${userIsParner}">
-                    <hr>
-                    <h3>Dados cadastrados como prestador de consultoria</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-center table-hover table-hover" id="tabela"
-                               width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>CNPJ</th>
-                                <th>Empresa</th>
-                                <th>Técnico</th>
-                                <th>Jurídico</th>
-                                <th>Ação</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td th:text="${dataPartner.cnpj}" class="align-middle">cnpj</td>
-                                <td th:text="${dataPartner.nomeEmpresa}" class="align-middle">Empresa X</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" class="form-control"
-                                           th:checked="${dataPartner.legislativo}" disabled>
-                                </td>
-                                <td class="align-middle">
-                                    <input type="checkbox" class="form-control"
-                                           th:checked="${dataPartner.tecnico}" disabled>
-                                </td>
-                                <td>
-                                    <div class="col-12">
-                                        <a th:href="@{/partner/my-data-as-partner}"
-                                           class="btn col-12 btn-info">
-                                            <i class="fas fa-info-circle"></i>
-                                            Detalhes
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="col-12">
+                    <div class="align-items-start" th:if="${userIsParner}">
+                        <hr>
+                        <h3>Dados cadastrados como prestador de consultoria</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center table-hover table-hover" id="tabela"
+                                width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>CNPJ</th>
+                                        <th>Empresa</th>
+                                        <th>Técnico</th>
+                                        <th>Jurídico</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td th:text="${dataPartner.cnpj}" class="align-middle">cnpj</td>
+                                        <td th:text="${dataPartner.nomeEmpresa}" class="align-middle">Empresa X</td>
+                                        <td class="align-middle">
+                                            <input type="checkbox" class="form-control"
+                                                th:checked="${dataPartner.legislativo}" disabled>
+                                        </td>
+                                        <td class="align-middle">
+                                            <input type="checkbox" class="form-control"
+                                                th:checked="${dataPartner.tecnico}" disabled>
+                                        </td>
+                                        <td>
+                                            <div class="col-12">
+                                                <a th:href="@{/partner/my-data-as-partner}" class="btn col-12 btn-info">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    Detalhes
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="align-items-start" th:if="${userIsAuthor}">
-                    <hr>
-                    <h3>Notícias escritas</h3>
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-center table-hover table-hover" id="tabela"
-                               width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Situação</th>
-                                <th>Titulo</th>
-                                <th>Categoria</th>
-                                <th>Data Criação</th>
-                                <th>Ação</th>
-                            </tr>
-                            <tr class="col-12">
-                                <th><input class="col-10" type="text" id="txtColuna1"/></th>
-                                <th><input class="col-10" type="text" id="txtColuna2"/></th>
-                                <th><input class="col-10" type="text" id="txtColuna3"/></th>
-                                <th><input class="col-10" type="text" id="txtColuna4"/></th>
-                                <th><i class="fa fa-search" aria-hidden="true"></i></th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Situação</th>
-                                <th>Titulo</th>
-                                <th>Categoria</th>
-                                <th>Data Criação</th>
-                                <th>Ação</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            <tr th:each="news : ${newsList}">
-                                <td th:text="${news.situacao}" class="align-middle">situacao</td>
-                                <td th:text="${news.titulo}" class="align-middle">titulo</td>
-                                <td th:text="${news.categoria}" class="align-middle">categoria</td>
-                                <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
-                                    class="align-middle">
-                                    01/01/2022
-                                </td>
-                                <td>
-                                    <div class="col-12">
-                                        <a th:href="@{/news/user-news-detail/{id} (id = ${news.id})}"
-                                           class="btn col-12 btn-info">
-                                            <i class="fas fa-eye"></i>
-                                            Ler
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="align-items-start" th:if="${userIsAuthor}">
+                        <hr>
+                        <h3>Notícias escritas</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center table-hover table-hover" id="tabela"
+                                width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Situação</th>
+                                        <th>Titulo</th>
+                                        <th>Categoria</th>
+                                        <th>Data Criação</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    <tr class="col-12">
+                                        <th><input class="col-10" type="text" id="txtColuna1" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna2" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna3" /></th>
+                                        <th><input class="col-10" type="text" id="txtColuna4" /></th>
+                                        <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Situação</th>
+                                        <th>Titulo</th>
+                                        <th>Categoria</th>
+                                        <th>Data Criação</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr th:each="news : ${newsList}">
+                                        <td th:text="${news.situacao}" class="align-middle">situacao</td>
+                                        <td th:text="${news.titulo}" class="align-middle">titulo</td>
+                                        <td th:text="${news.categoria}" class="align-middle">categoria</td>
+                                        <td th:text="${#dates.format(new java.util.Date(news.dataCriacao), 'dd/MM/yyyy')}"
+                                            class="align-middle">
+                                            01/01/2022
+                                        </td>
+                                        <td>
+                                            <div class="col-12">
+                                                <a th:href="@{/news/user-news-detail/{id} (id = ${news.id})}"
+                                                    class="btn col-12 btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                    Ler
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>
