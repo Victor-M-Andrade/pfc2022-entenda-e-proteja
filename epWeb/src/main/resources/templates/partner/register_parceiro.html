@@ -53,9 +53,31 @@
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                showModelError(messageError, titleMessageError, true);
             }
             document.getElementById("requestRegister").setAttribute("type", tipoButton);
+        }
+
+        window.onload = function () {
+            var alreadError = $("#alreadError").is(":checked");
+            var cnpjError = $("#cnpjError").is(":checked");
+            var registerError = $("#registerError").is(":checked");
+            if (!alreadError && !cnpjError && !registerError) {
+                return;
+            }
+
+            let title = "Problema(s) ao realizar a solicitação";
+            let message = "";
+
+            if (alreadError) {
+                message = "Você já possuí um cadastro como consultor. Verifique seu perfil ou entre em contato com o suporte.";
+            } else if (cnpjError) {
+                message = "O CNPJ informado já esta registrado. Por gentileza, informe outro CNPJ.";
+            } else if (registerError) {
+                message = "Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente novamente.";
+            }
+
+            showModelError(message, title, false);
         }
     </script>
 </head>
@@ -88,17 +110,11 @@
                                 Verifique seu perfil ou entre em contato com o suporte.
                             </span>
                         </div>
-                        <div class="alert alert-danger" th:if="${alreadyRegisteredCnpj}">
-                            <span class="font-weight-bold align-middle">
-                                O CNPJ informado já esta registrado. Por gentileza, informe outro CNPJ.
-                            </span>
-                        </div>
-                        <div class="alert alert-danger" th:if="${registrationRequestProblems}">
-                            <span class="font-weight-bold align-middle">
-                                Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente
-                                novamente.
-                            </span>
-                        </div>
+
+                        <input type="checkbox" id="alreadError" th:checked="${alreadyRegisteredPartner}" hidden>
+                        <input type="checkbox" id="cnpjError" th:checked="${alreadyRegisteredCnpj}" hidden>
+                        <input type="checkbox" id="registerError" th:checked="${registrationRequestProblems}" hidden>
+
                         <form th:action="@{/partner/request-register}" method="post" th:object="${myPartner}">
                             <div class="form-row">
                                 <div class="col-md-7">

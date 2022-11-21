@@ -37,12 +37,12 @@
             let messageError = "";
             if (!checkTypeService()) {
                 tipoButton = "button";
-                messageError += "Selecione pelo menos um dos tipos de serviços.\n"
+                messageError += "Selecione pelo menos um dos tipos de serviços.\n";
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                showModelError(messageError, titleMessageError, false);
             }
             document.getElementById("updateData").setAttribute("type", tipoButton);
         }
@@ -54,6 +54,17 @@
             oFReader.onload = function (oFREvent) {
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
             }
+        }
+
+        window.onload = function () {
+            var error = $("#updateError").is(":checked");
+            if (!error) {
+                return;
+            }
+
+            let title = "Erro durante atualização";
+            let message = "Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.";
+            showModelError(message, title, false);
         }
     </script>
 </head>
@@ -90,6 +101,7 @@
                             </span>
                         </div>
                     </div>
+                    <input type="checkbox" id="updateError" th:checked="${updatePartnerError}" hidden />
                     <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
                         th:object="${myPartner}">
                         <div class="form-group">

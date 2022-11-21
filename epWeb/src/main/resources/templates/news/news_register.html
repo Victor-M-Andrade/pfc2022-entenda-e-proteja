@@ -35,7 +35,7 @@
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                showModelError(messageError, titleMessageError, false);
             }
             document.getElementById("newsRegisterButton").setAttribute("type", tipoButton);
         }
@@ -49,8 +49,16 @@
             }
         }
 
+        window.onload = function () {
+            var error = $("#registrationError").is(":checked");
+            if (error) {
+                return;
+            }
 
-
+            let title = "Não foi possível criar a proposta";
+            let message = "Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente novamente.";
+            showModelError(message, title, false);
+        }
     </script>
 </head>
 
@@ -74,12 +82,8 @@
                     <div class="row perfil">
                         <h1 class="col-12 py-3">Proposta de notícia</h1>
                         <div class="mb-2 col-12">
-                            <div class="alert alert-danger" th:if="${registrationRequestProblems}">
-                                <span class="font-weight-bold align-middle">
-                                    Desculpe, não foi possível concluir a sua solicitação. Por gentileza, tente
-                                    novamente.
-                                </span>
-                            </div>
+                            <input type="checkbox" id="registrationError" th:checked="${registrationRequestProblems}"
+                                hidden />
                             <form th:action="@{/news/request-news-publication}" enctype="multipart/form-data"
                                 method="post" th:object="${myNews}">
                                 <div class="mb-2 card">
