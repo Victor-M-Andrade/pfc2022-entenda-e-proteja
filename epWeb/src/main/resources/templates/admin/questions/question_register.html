@@ -30,21 +30,31 @@
             let messageError = "";
 
             if (!selectQuestLevel()) {
-                tipoButton = "button";
-                messageError += "Selecione o nível da questão.\n"
+                messageError += "Selecione o nível da questão.\n";
                 existError = true;
             }
 
             if (!selectAnswer()) {
-                tipoButton = "button";
-                messageError += "Selecione a resposta correta.\n"
+                messageError += "Selecione a resposta correta.\n";
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                tipoButton = "button";
+                showModelError(messageError, titleMessageError, true);
             }
             document.getElementById("createQuestButton").setAttribute("type", tipoButton);
+        }
+
+        window.onload = function () {
+            var createError = $("#questRegisterError").is(":checked");
+            if (!createError) {
+                return;
+            }
+
+            let titleMessageError = "Erro ao criar questão";
+            let messageError = "Desculpe, não foi possível realizar o cadastro da questão. Por gentileza, tente novamente.";
+            showModelError(messageError, titleMessageError, false);
         }
     </script>
 </head>
@@ -69,12 +79,8 @@
         <div class="row">
             <div class="col-12 col-md-12 text-center">
                 <h1>Criar questão</h1>
+                <input type="checkbox" id="questRegisterError" th:checked="${questRegisterError}" hidden>
 
-                <div class="alert alert-danger py-2" th:if="${questRegisterError}">
-                    <span class="font-weight-bold align-middle">
-                        Desculpe, não foi possível realizar o cadastro da questão. Por gentileza, tente novamente.
-                    </span>
-                </div>
             </div>
         </div>
         <!--Questionario-->

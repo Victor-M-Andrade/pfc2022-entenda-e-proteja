@@ -30,24 +30,39 @@
         }
 
         function validate() {
+            var phone = document.getElementById("inputTelefone");
+
             let tipoButton = "submit";
             let existError = false;
 
             let titleMessageError = "Erro(s) durante atualização";
             let messageError = "";
 
+            if (phone.length < 14) {
+                messageError += "Preencha o número de telefone com pelo menos 10 números.\n"
+            }
+
             if (!checkTypeService()) {
-                tipoButton = "button";
                 messageError += "Selecione pelo menos um dos tipos de serviços.\n"
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                tipoButton = "button";
+                showModelError(messageError, titleMessageError, true);
             }
             document.getElementById("updateData").setAttribute("type", tipoButton);
         }
 
+        window.onload = function () {
+            var updateError = $("#updatePartnerError").is(":checked");
+            if (!updateError) {
+                return;
+            }
+
+            let titleMessageError = "Erro(s) durante atualização";
+            let messageError = "Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente."
+        }
     </script>
 </head>
 
@@ -75,17 +90,11 @@
             <div class="row align-items-start">
                 <div class="container card border-0 rounded-lg login col-12 col-xl-8">
                     <div class="card-header">
-                        <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
+                        <h3 class="text-center font-weight-light">Editar dados do consultor</h3>
                         <img class="logo" th:src="@{${myPartner.pathImagePartner}}" alt="logo">
                     </div>
-                    <div class="card-body">
-                        <div class="alert alert-danger" th:if="${updatePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Desculpe, não foi possível concluir a atualização dos dados. Por gentileza,
-                                tente novamente.
-                            </span>
-                        </div>
-                    </div>
+
+                    <input type="checkbox" id="updatePartnerError" th:checked="${updatePartnerError}" hidden>
                     <form th:action="@{/partner/update-partner-data}" method="post" th:object="${myPartner}">
                         <div class="form-row">
                             <div class="col-md-7">

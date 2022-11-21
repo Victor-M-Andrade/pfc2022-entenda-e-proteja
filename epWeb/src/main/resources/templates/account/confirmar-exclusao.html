@@ -8,26 +8,21 @@
         window.onload = function () {
             var deleteError = $("#deleteUserError").is(":checked");
             var anonymizeError = $("#anonymizeUserError").is(":checked");
+            if (!deleteError && !anonymizeError) {
+                return;
+            }
 
             let titleMessageError = "";
             let messageError = "";
-            let existError = false;
-
             if (deleteError) {
                 titleMessageError = "Erro durante exclusão da conta";
                 messageError = "Não foi possível realizar a exclusão da sua conta.Por gentileza, tente novamente.";
-                existError = true;
-            }
-
-            if (anonymizeError) {
+            } else if (anonymizeError) {
                 titleMessageError = "Erro durante anonimização da conta";
                 messageError = "Não foi possível realizar a anonimização da sua conta. Por gentileza, tente novamente.";
-                existError = true;
             }
 
-            if (existError) {
-                showModelError(messageError, titleMessageError);
-            }
+            showModelError(messageError, titleMessageError, false);
         }
     </script>
 </head>

@@ -30,12 +30,12 @@
 
             if (!selectOneRadio()) {
                 tipoButton = "button";
-                messageError += "Selecione pelo menos uma das categorias.\n"
+                messageError += "Selecione pelo menos uma das categorias.\n";
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                showModelError(messageError, titleMessageError, false);
             }
             document.getElementById("updateNewsButton").setAttribute("type", tipoButton);
         }
@@ -49,9 +49,16 @@
             }
         }
 
+        window.onload = function () {
+            var updateError = $("#updateNewsError").is(":checked");
+            if (!updateError) {
+                return;
+            }
 
-
-
+            let titleMessageError = "Erro(s) durante atualizaçao";
+            let messageError = "Selecione pelo menos uma das categorias.\n";
+            showModelError(messageError, titleMessageError, false);
+        }
     </script>
 </head>
 

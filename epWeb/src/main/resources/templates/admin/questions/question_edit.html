@@ -30,21 +30,31 @@
             let messageError = "";
 
             if (!selectQuestLevel()) {
-                tipoButton = "button";
-                messageError += "Selecione o nível da questão.\n"
+                messageError += "Selecione o nível da questão.\n";
                 existError = true;
             }
 
             if (!selectAnswer()) {
-                tipoButton = "button";
-                messageError += "Selecione a resposta correta.\n"
+                messageError += "Selecione a resposta correta.\n";
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                tipoButton = "button";
+                showModelError(messageError, titleMessageError, true);
             }
             document.getElementById("createQuestButton").setAttribute("type", tipoButton);
+        }
+
+        window.onload = function () {
+            var updateError = $("#updateQuestionError").is(":checked");
+            if (!updateError) {
+                return;
+            }
+
+            let messageError = " Desculpe, não foi possível atualizar questão. Por gentileza, tente novamente.";
+            let titleMessageError = "Erro(s) durante atualização";
+            showModelError(messageError, titleMessageError, false);
         }
     </script>
 </head>
@@ -72,12 +82,7 @@
         <div class="row">
             <div class="col-12 col-md-12 text-center">
                 <h1>Editar questão</h1>
-
-                <div class="alert alert-danger py-2" th:if="${updateQuestionError}">
-                    <span class="font-weight-bold align-middle">
-                        Desculpe, não foi possível atualizar questão. Por gentileza, tente novamente.
-                    </span>
-                </div>
+                <input type="checkbox" id="updateQuestionError" th:checked="${updateQuestionError}" hidden>
             </div>
         </div>
         <!--Questionario-->

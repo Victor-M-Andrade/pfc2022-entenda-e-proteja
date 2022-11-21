@@ -19,19 +19,18 @@
             let messageError = "";
 
             if (pass.value != confirPass.value) {
-                tipoButton = "button";
                 messageError += "Foram informadas senhas diferentes nos compos \"Senha\" e \"Confirme sua senha\".\n";
                 existError = true;
             }
 
             if (!accept.checked) {
-                tipoButton = "button";
-                messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n"
+                messageError += "Só será possível cadastar seus dados se os termos de uso não foram aceitados.\n";
                 existError = true;
             }
 
             if (existError) {
-                showModelError(messageError, titleMessageError);
+                tipoButton = "button";
+                showModelError(messageError, titleMessageError, true);
             }
 
             document.getElementById("cadastro").setAttribute("type", tipoButton);
@@ -40,23 +39,18 @@
         window.onload = function () {
             var account = $("#createAccount").is(":checked");
             var email = $("#alreadyEmail").is(":checked");
+            if (!account && !email) {
+                return;
+            }
 
             let messageError = "";
-            let existError = false;
-
             if (account) {
-                messageError += "O email informado já esta registrado. Por gentileza, informe outro email.\n";
-                existError = true;
+                messageError = "O email informado já esta registrado. Por gentileza, informe outro email.";
+            } else if (email) {
+                messageError = "Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.";
             }
 
-            if (email) {
-                messageError += "Desculpe, não foi possível concluir a cricação da conta. Por gentileza, tente novamente.\n";
-                existError = true;
-            }
-
-            if (existError) {
-                showModelError(messageError, titleMessageError);
-            }
+            showModelError(messageError, titleMessageError, false);
         }
     </script>
 </head>
