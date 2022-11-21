@@ -19,11 +19,11 @@ public class EpErrorController implements ErrorController {
             final Integer statusCode = Integer.valueOf(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                System.out.println("ERRO DE NOT-FOUND >>>>>>> 404");
+                System.out.println("ERRO DE NOT_FOUND >>>>>>> 404");
                 return "redirect:/not-found";
 
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                System.out.println("ERRO DE NOT-FOUND >>>>>>> 500");
+                System.out.println("ERRO DE SERVER_ERROR >>>>>>> 500");
                 return "redirect:/not-found";
             }
         }
