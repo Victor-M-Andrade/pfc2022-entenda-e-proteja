@@ -6,14 +6,10 @@
     <title>Login E&P</title>
     <script>
         window.onload = function () {
-            var authenticationError = $("#authenticationError").is(":checked");
-            if (!authenticationError) {
-                return;
+            var loginError = $("#loginError").is(":checked");
+            if (loginError) {
+                showModelError("Email ou senha inválidos", "Erro durante autenticação", false);
             }
-
-            let titleMessageError = "Erro durante autenticação";
-            let messageError = "Email ou senha inválidos";
-            showModelError(messageError, titleMessageError, false);
         }
     </script>
 </head>
@@ -39,7 +35,7 @@
                         <img src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
                     <div class="card-body">
-                        <input type="checkbox" id="authenticationError" th:checked="${authenticationError}" hidden>
+                        <input type="checkbox" id="loginError" th:checked="${authenticationError}" hidden>
                         <form th:action="@{/account/authenticate}" method="post">
                             <div class="form-group">
                                 <label class="small mb-1" for="username">Email</label>
