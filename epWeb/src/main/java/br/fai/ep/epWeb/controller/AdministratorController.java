@@ -506,7 +506,7 @@ public class AdministratorController {
             updateNewsError = false;
         }
 
-        return FoldersName.ADMIN_NEWS_FOLDER + "/valiar-noticia";
+        return FoldersName.ADMIN_NEWS_FOLDER + "/avaliar-noticia";
     }
 
     @GetMapping("/news/new-evaluate-news/{id}")
@@ -525,7 +525,7 @@ public class AdministratorController {
             updateNewsError = false;
         }
 
-        return FoldersName.ADMIN_NEWS_FOLDER + "/valiar-noticia";
+        return FoldersName.ADMIN_NEWS_FOLDER + "/avaliar-noticia";
     }
 
     @GetMapping("/news/approve-news-publication/{id}")
