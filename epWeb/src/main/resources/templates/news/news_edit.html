@@ -50,13 +50,13 @@
         }
 
         window.onload = function () {
-            var updateError = $("#updateNewsError").is(":checked");
+            var updateError = $("#updateError").is(":checked");
             if (!updateError) {
                 return;
             }
 
-            let titleMessageError = "Erro(s) durante atualizaçao";
-            let messageError = "Selecione pelo menos uma das categorias.\n";
+            let titleMessageError = "Erro durante atualizaçao";
+            let messageError = "Desculpe, não foi possível atualizar os dados da notícia. Por gentileza, tente novamente.";
             showModelError(messageError, titleMessageError, false);
         }
     </script>
@@ -88,12 +88,7 @@
                     <div class="row perfil">
                         <h1 class="col-12 py-3">Proposta de notícia</h1>
                         <div class="mb-2 col-12">
-                            <div class="alert alert-danger" th:if="${updateNewsError}">
-                                <span class="font-weight-bold align-middle">
-                                    Desculpe, não foi possível atualizar os dados da notícia. Por gentileza, tente
-                                    novamente.
-                                </span>
-                            </div>
+                            <input type="checkbox" id="updateError" th:checked="${updateNewsError}" hidden />
                             <form th:action="@{/news/update-user-news}" enctype="multipart/form-data" method="post"
                                 th:object="${myNews}">
                                 <div class="mb-2 card">

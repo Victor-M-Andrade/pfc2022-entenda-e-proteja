@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Meu perfil de consultor E&P</title>
+    <script>
+        window.onload = function () {
+            var deleteError = $("#deleteError").is(":checked");
+            var updateError = $("#updateError").is(":checked");
+            if (!deleteError && !updateError) {
+                return;
+            }
+
+            let title = "";
+            let messsage = "";
+            if (deleteError) {
+                title = "Erro durante exclusão";
+                messsage = "Não foi possível realizar a exclusão do seu registro como consultor. Por gentileza, tente novamente.";
+            } else if (updateError) {
+                title = "Erro durante nova solicitação";
+                messsage = "Não foi possível completar a nova solicitação. Por gentileza, tente novamente.";
+            }
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -28,23 +48,15 @@
                     <div class="row perfil">
 
                         <h1 class="col-12 py-3">Meus dados de consultor</h1>
-                        <div class="alert alert-danger col-12 text-center" th:if="${deletePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão do seu registro como consultor. Por gentileza,
-                                tente novamente.
-                            </span>
-                        </div>
                         <div class="alert alert-danger col-12 text-center" th:if="${loadImageError}">
                             <span class="font-weight-bold align-middle">
                                 Desculpe, não foi possível carregar sua imagem de perfil de consultor.
                                 Pedimos que edite seus dados de consultor e selecione uma nova imagem.
                             </span>
                         </div>
-                        <div class="alert alert-danger col-12 text-center" th:if="${updatePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível completar a nova solicitação. Por gentileza, tente novamente.
-                            </span>
-                        </div>
+                        <input type="checkbox" id="deleteError" th:checked="${deletePartnerError}" hidden />
+                        <input type="checkbox" id="updateError" th:checked="${updatePartnerError}" hidden />
+
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">

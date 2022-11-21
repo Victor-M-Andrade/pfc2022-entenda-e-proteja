@@ -4,6 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Meu perfil E&P</title>
+    <script>
+        window.onload = function () {
+            var deleteError = $("#deleteError").is(":checked");
+            if (!deleteError) {
+                return;
+            }
+
+            let title = "Erro durante exclusão da conta";
+            let messsage = "Não foi possível realizar a exclusão da sua conta. Por gentileza, tente novamente.";
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -25,17 +37,13 @@
                     <div class="row perfil">
 
                         <h1 class="col-12 py-3">Seja bem-vindo(a) ao seu perfil</h1>
-                        <div class="alert alert-danger col-12 text-center" th:if="${deleteUserError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão da sua conta. Por gentileza, tente novamente.
-                            </span>
-                        </div>
                         <div class="alert alert-danger col-12 text-center" th:if="${loadImageError}">
                             <span class="font-weight-bold align-middle">
                                 Desculpe, não foi possível carregar sua imagem de perfil.
                                 Pedimos que edite seus dados e selecione uma nova imagem de perfil.
                             </span>
                         </div>
+                        <input type="checkbox" id="deleteError" th:checked="${deleteUserError}" hidden />
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">

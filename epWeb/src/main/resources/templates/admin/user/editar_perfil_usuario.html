@@ -4,22 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar perfil E&P</title>
-
     <script>
-        function password_show_hide() {
-            var x = document.getElementById("password");
-            var show_eye = document.getElementById("show_eye");
-            var hide_eye = document.getElementById("hide_eye");
-            hide_eye.classList.remove("d-none");
-            if (x.type === "password") {
-                x.type = "text";
-                show_eye.style.display = "none";
-                hide_eye.style.display = "block";
-            } else {
-                x.type = "password";
-                show_eye.style.display = "block";
-                hide_eye.style.display = "none";
+        window.onload = function () {
+            var updateError = $("#updateError").is(":checked");
+            if (!updateError) {
+                return;
             }
+
+            let title = "Erro durante a atualização";
+            let messsage = "Desculpe, não foi possível concluir a atualização dos dados. Por gentileza, tente novamente.";
+            showModelError(messsage, title, false);
         }
     </script>
 </head>
@@ -64,10 +58,7 @@
                             </div>
                         </div>
                         <div class="mb-2 col-12 col-sm-7">
-                            <div class="alert alert-danger" th:if="${updateDataError}">
-                                <span class="font-weight-bold align-middle">Desculpe, não foi possível concluir a
-                                    atualização dos dados. Por gentileza, tente novamente.</span>
-                            </div>
+                            <input type="checkbox" id="updateError" th:checked="${updateDataError}" hidden />
                             <form th:action="@{/user/admin-update-user-data}" method="POST" th:object="${usuario}">
                                 <div class="mb-2 card">
                                     <div class="card-body">

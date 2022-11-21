@@ -4,6 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de notícias E&P</title>
+    <script>
+        window.onload = function () {
+            var deleteError = $("#deleteError").is(":checked");
+            if (!deleteError) {
+                return;
+            }
+
+            let title = "Erro durante a exclusão";
+            let messsage = "Não foi possível realizar a exclusão da questão. Por gentileza, tente novamente.";
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -73,11 +85,7 @@
                     Voltar a lista de questões
                 </a>
             </div>
-            <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteQuestionError}">
-                <span class="font-weight-bold align-middle">
-                    Não foi possível realizar a exclusão da questão. Por gentileza, tente novamente.
-                </span>
-            </div>
+            <input type="checkbox" id="deleteError" th:checked="${deleteQuestionError}" hidden />
             <hr>
         </div>
         <!--Questionario-->

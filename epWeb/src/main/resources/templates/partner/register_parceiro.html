@@ -104,17 +104,9 @@
                         <img class="logo" src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-danger" th:if="${alreadyRegisteredPartner}">
-                            <span class="font-weight-bold align-middle">
-                                Você já possuí um cadastro como consultor.
-                                Verifique seu perfil ou entre em contato com o suporte.
-                            </span>
-                        </div>
-
                         <input type="checkbox" id="alreadError" th:checked="${alreadyRegisteredPartner}" hidden>
                         <input type="checkbox" id="cnpjError" th:checked="${alreadyRegisteredCnpj}" hidden>
                         <input type="checkbox" id="registerError" th:checked="${registrationRequestProblems}" hidden>
-
                         <form th:action="@{/partner/request-register}" method="post" th:object="${myPartner}">
                             <div class="form-row">
                                 <div class="col-md-7">

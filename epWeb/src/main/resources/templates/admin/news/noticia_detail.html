@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${myNews.titulo}">Noticia - XYZ E&P</title>
+    <script>
+        window.onload = function () {
+            var updateError = $("#updateError").is(":checked");
+            var deleteError = $("#deleteError").is(":checked");
+            if (!updateError && !deleteError) {
+                return;
+            }
+
+            let title = "";
+            let messsage = "";
+            if (updateError) {
+                title = "Erro durante a atualização"
+                messsage = "Não foi possível realizar a atualização da notícia. Por gentileza, tente novamente.";
+            } else if (deleteError) {
+                title = "Erro durante a exclusão"
+                messsage = "Não foi possível realizar a exclusão da notícia. Por gentileza, tente novamente.";
+            }
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -80,16 +100,8 @@
                             Voltar a lista de notícias
                         </a>
                     </div>
-                    <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
-                        <span class="font-weight-bold align-middle">
-                            Não foi possível realizar a atualização da notícia. Por gentileza, tente novamente.
-                        </span>
-                    </div>
-                    <div class="alert alert-danger col-12 text-center py-2" th:if="${deleteNewsError}">
-                        <span class="font-weight-bold align-middle">
-                            Não foi possível realizar a exclusão da notícia. Por gentileza, tente novamente.
-                        </span>
-                    </div>
+                    <input type="checkbox" id="updateError" th:checked="${updateNewsError}" hidden />
+                    <input type="checkbox" id="deleteError" th:checked="${deleteNewsError}" hidden />
                     <hr>
                 </div>
                 <img class="d-block w-100 banner_noticia py-2" th:src="@{${myNews.pathImageNews}}" alt="banner_exemplo">
@@ -106,7 +118,8 @@
                 </div>
                 <div class="col col-xl-12 col-md-12 col-sm-12 col-12 text-left">
                     <hr>
-                    <p style="white-space: pre-wrap;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet, consectetur
+                    <p style="white-space: pre-wrap;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet,
+                        consectetur
                         adipiscing elit, sed
                         do eiusmod
                         tempor incididunt ut

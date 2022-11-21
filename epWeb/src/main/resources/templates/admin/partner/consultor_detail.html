@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Meu perfil de consultor E&P</title>
+    <script>
+        window.onload = function () {
+            var updateError = $("#updateError").is(":checked");
+            var deleteError = $("#deleteError").is(":checked");
+            if (!updateError && !deleteError) {
+                return;
+            }
+
+            let title = "";
+            let messsage = "";
+            if (updateError) {
+                title = "Erro durante a atualização"
+                messsage = "Não foi possível atualizar a situação do consultor. Por gentileza, tente novamente.";
+            } else if (deleteError) {
+                title = "Erro durante a exclusão"
+                messsage = " Não foi possível realizar a exclusão do consultor. Por gentileza, tente novamente.";
+            }
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -29,19 +49,8 @@
 
                 <div class="container col-12">
                     <div class="row perfil">
-
-                        <h1 class="col-12 py-3">Meus dados de consultor</h1>
-                        <div class="alert alert-danger col-12 text-center" th:if="${deletePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão do consultor. Por gentileza,
-                                tente novamente.
-                            </span>
-                        </div>
-                        <div class="alert alert-danger col-12 text-center" th:if="${updatePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível completar a nova solicitação. Por gentileza, tente novamente.
-                            </span>
-                        </div>
+                        <input type="checkbox" id="updateError" th:checked="${updatePartnerError}" hidden />
+                        <input type="checkbox" id="deleteError" th:checked="${deletePartnerError}" hidden />
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">

@@ -4,6 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil do usuário E&P</title>
+    <script>
+        window.onload = function () {
+            var deleteError = $("#deleteError").is(":checked");
+            var updateError = $("#updateError").is(":checked");
+            var anonymizeError = $("#anonymizeError").is(":checked");
+            if (!deleteError && !updateError && !anonymizeError) {
+                return;
+            }
+
+            let title = "";
+            let messsage = "";
+            if (deleteError) {
+                title = "Erro durante a exclusão";
+                messsage = "Não foi possível realizar a exclusão desta conta. Por gentileza, tente novamente.";
+            } else if (updateError) {
+                title = "Erro durante a atualização";
+                messsage = "Não foi possível realizar a atualização da conta. Por gentileza, tente novamente.";
+            } else if (anonymizeError) {
+                title = "Erro durante a anonimização";
+                messsage = "Não foi possível realizar a anonimização da conta. Por gentileza, tente novamente.";
+            }
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -31,21 +55,9 @@
                     <div class="row perfil">
 
                         <h1 class="col-12 py-3">Perfil do Usuário</h1>
-                        <div class="alert alert-danger col-12 text-center" th:if="${deleteUserError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a exclusão desta conta. Por gentileza, tente novamente.
-                            </span>
-                        </div>
-                        <div class="alert alert-danger col-12 text-center" th:if="${anonymizeUserError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a anonimização da conta. Por gentileza, tente novamente.
-                            </span>
-                        </div>
-                        <div class="alert alert-danger col-12 text-center" th:if="${updateDataError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a atualização da conta. Por gentileza, tente novamente.
-                            </span>
-                        </div>
+                        <input type="checkbox" id="deleteError" th:checked="${deleteUserError}" hidden />
+                        <input type="checkbox" id="anonymizeError" th:checked="${anonymizeUserError}" hidden />
+                        <input type="checkbox" id="updateError" th:checked="${updateDataError}" hidden />
                         <div class="col-12 col-sm-5">
                             <div class="card">
                                 <div class="card-body">

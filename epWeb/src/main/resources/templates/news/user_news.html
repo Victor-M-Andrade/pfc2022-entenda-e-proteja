@@ -4,6 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${myNews.titulo}">Noticia - XYZ E&P</title>
+    <script>
+        window.onload = function () {
+            var updateError = $("#updateError").is(":checked");
+            if (!updateError) {
+                return;
+            }
+
+            let title = "Erro ao nova solicitação";
+            let messsage = "Não foi possível realizar a nova solicitação. Por gentileza, tente novamente.";
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
@@ -30,6 +42,8 @@
                     notícia</a> e selecione uma nova imagem.
             </span>
         </div>
+
+        <input type="checkbox" id="updateError" th:checked="${updateNewsError}" hidden />
         <div class="container-fluid text-center navbar-expand-md col-12">
             <hr>
             <div class="row align-items-start">
@@ -87,11 +101,6 @@
                             class="btn btn-success col-sm-10 py-2">
                             Enviar notícia para avaliação.
                         </a>
-                        <div class="alert alert-danger col-12 text-center py-2" th:if="${updateNewsError}">
-                            <span class="font-weight-bold align-middle">
-                                Não foi possível realizar a nova solicitação. Por gentileza, tente novamente.
-                            </span>
-                        </div>
                     </div>
                     <hr>
                 </div>
@@ -116,7 +125,8 @@
                 </div>
                 <div class="col col-xl-12 col-md-12 col-sm-12 col-12 text-left">
                     <hr>
-                    <p style="white-space: pre-wrap;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet, consectetur
+                    <p style="white-space: pre-wrap;" th:utext="${myNews.contexto}">Lorem ipsum dolor sit amet,
+                        consectetur
                         adipiscing elit, sed
                         do eiusmod
                         tempor incididunt ut

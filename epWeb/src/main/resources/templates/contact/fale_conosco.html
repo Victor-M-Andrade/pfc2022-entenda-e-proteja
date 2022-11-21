@@ -4,87 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Fale Conosco E&P</title>
+    <script>
+        window.onload = function () {
+            var emailError = $("#emailError").is(":checked");
+            if (!emailError) {
+                return;
+            }
+
+            let title = "Error durante envio de e-mail";
+            let messsage = "Não foi possível enviar o e-mail. verifique o email informado e tente novamente.";
+            showModelError(messsage, title, false);
+        }
+    </script>
 </head>
 
 <body>
-<div layout:fragment="body">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active">
-            <a th:href="@{/}">Início</a>
-        </li>
-        <li class="breadcrumb-item">
-            Fale Conosco
-        </li>
-    </ol>
+    <div layout:fragment="body">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a th:href="@{/}">Início</a>
+            </li>
+            <li class="breadcrumb-item">
+                Fale Conosco
+            </li>
+        </ol>
 
-    <div class="container-fluid text-center navbar-expand-md col-12">
-        <div class="row align-items-start">
-            <div class="container card border-0 rounded-lg col-12 col-xl-8 login">
-                <div class="card-header">
-                    <h3 class="text-center font-weight-light">Fale Conosco</h3>
-                    <img src="/resources/img/logo_invertido.png" alt="logo">
-                </div>
-                <div class="card-body">
-                    <p>
-                        Caso possua alguma ideia ou crítica construtiva nos mande um e-mail e o mais rápido
-                        possível entraremos em contato
-                    </p>
-                    <hr>
-                    <div class="alert alert-danger" th:if="${sendedEmailError}">
-                                <span class="font-weight-bold align-middle">
-                                    Não foi possível enviar o email. verifique o email informado e tente novamente.
-                                </span>
+        <div class="container-fluid text-center navbar-expand-md col-12">
+            <div class="row align-items-start">
+                <div class="container card border-0 rounded-lg col-12 col-xl-8 login">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light">Fale Conosco</h3>
+                        <img src="/resources/img/logo_invertido.png" alt="logo">
                     </div>
-                    <div class="alert alert-success" role="alert" th:if="${sendedEmail}">
-                                <span class="font-weight-bold align-middle">
-                                    Sua mensagem foi enviada com sucesso!<br>
-                                    Nossa equipe irá retornar o contato assim que possível
-                                </span>
-                    </div>
-                    <form th:action="@{/send-email}" method="post" th:object="${mailDto}">
-                        <div class="form-group">
-                            <label class="mb-1" for="inputinputUsernameName">
-                                <strong>
-                                    Nome
-                                </strong>
-                            </label>
-                            <input class="form-control py-4" id="inputUsername" type="text"
-                                   placeholder="Insira o nome que gostaria de ser chamado"
-                                   th:field="${mailDto.username}" data-toggle="tooltip" data-placement="top"
-                                   title="Dado Pessoal!" required/>
+                    <div class="card-body">
+                        <p>
+                            Caso possua alguma ideia ou crítica construtiva nos mande um e-mail e o mais rápido
+                            possível entraremos em contato
+                        </p>
+                        <hr>
+                        <!-- 878787 -->
+                        <div class="alert alert-success" role="alert" th:if="${sendedEmail}">
+                            <span class="font-weight-bold align-middle">
+                                Sua mensagem foi enviada com sucesso!<br>
+                                Nossa equipe irá retornar o contato assim que possível
+                            </span>
                         </div>
-                        <div class="form-group">
-                            <label class="mb-1" for="inputEmailAddress">
-                                <strong>Email</strong>
-                            </label>
-                            <input class="form-control py-4" id="inputEmailAddress" type="email"
-                                   placeholder="Insira um endereço de email para retornarmos o contato"
-                                   data-toggle="tooltip" data-placement="top" title="Dado Pessoal!"
-                                   th:field="${mailDto.mailContact}" required/>
-                        </div>
-                        <div class="form-group">
-                            <label class="mb-1" for="inputAssunto"><strong>Motivo</strong></label>
-                            <input class="form-control py-4" id="inputAssunto" type="text"
-                                   placeholder="Insira o motivo do seu contato" th:field="${mailDto.reason}"
-                                   data-toggle="tooltip" data-placement="top" title="Dado Público!" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for=""><strong>Mensagem</strong></label>
-                            <textarea type="text" class="form-control" rows="10"
-                                      placeholder="Escreva aqui sua mensagem" th:field="${mailDto.message}"
-                                      data-toggle="tooltip" data-placement="top" title="Dado Público!" required>
+                        <input type="checkbox" id="emailError" th:checked="${sendedEmailError}" hidden />
+                        <form th:action="@{/send-email}" method="post" th:object="${mailDto}">
+                            <div class="form-group">
+                                <label class="mb-1" for="inputinputUsernameName">
+                                    <strong>
+                                        Nome
+                                    </strong>
+                                </label>
+                                <input class="form-control py-4" id="inputUsername" type="text"
+                                    placeholder="Insira o nome que gostaria de ser chamado"
+                                    th:field="${mailDto.username}" data-toggle="tooltip" data-placement="top"
+                                    title="Dado Pessoal!" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1" for="inputEmailAddress">
+                                    <strong>Email</strong>
+                                </label>
+                                <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                    placeholder="Insira um endereço de email para retornarmos o contato"
+                                    data-toggle="tooltip" data-placement="top" title="Dado Pessoal!"
+                                    th:field="${mailDto.mailContact}" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1" for="inputAssunto"><strong>Motivo</strong></label>
+                                <input class="form-control py-4" id="inputAssunto" type="text"
+                                    placeholder="Insira o motivo do seu contato" th:field="${mailDto.reason}"
+                                    data-toggle="tooltip" data-placement="top" title="Dado Público!" required />
+                            </div>
+                            <div class="form-group">
+                                <label for=""><strong>Mensagem</strong></label>
+                                <textarea type="text" class="form-control" rows="10"
+                                    placeholder="Escreva aqui sua mensagem" th:field="${mailDto.message}"
+                                    data-toggle="tooltip" data-placement="top" title="Dado Público!" required>
                                     </textarea>
-                        </div>
+                            </div>
 
-                        <div class="form-group align-items-center mt-4 mb-0">
-                            <button class="btn btn-info" type="submit">Enviar mensagem</button>
-                        </div>
-                    </form>
+                            <div class="form-group align-items-center mt-4 mb-0">
+                                <button class="btn btn-info" type="submit">Enviar mensagem</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

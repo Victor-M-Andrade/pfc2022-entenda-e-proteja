@@ -93,14 +93,6 @@
                         <h3 class="text-center font-weight-light">Cadastro de Parceria</h3>
                         <img class="logo" th:src="@{${myPartner.pathImagePartner}}" id="uploadPreview" alt="logo">
                     </div>
-                    <div class="card-body">
-                        <div class="alert alert-danger" th:if="${updatePartnerError}">
-                            <span class="font-weight-bold align-middle">
-                                Desculpe, não foi possível concluir a atualização dos dados. Por gentileza,
-                                tente novamente.
-                            </span>
-                        </div>
-                    </div>
                     <input type="checkbox" id="updateError" th:checked="${updatePartnerError}" hidden />
                     <form th:action="@{/partner/update-my-data-as-partner}" enctype="multipart/form-data" method="post"
                         th:object="${myPartner}">
