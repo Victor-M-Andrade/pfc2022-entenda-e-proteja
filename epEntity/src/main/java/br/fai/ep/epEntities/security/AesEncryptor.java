@@ -14,8 +14,8 @@ import java.security.NoSuchProviderException;
 
 public abstract class AesEncryptor {
 
-    private static final String IV = "AAAAAAAAAAAAAAAA";
-    private static final String ENCRYPTION_KEY = "0123456789abcdef";
+    private static final String IV = "EpProject-FAI-22";
+    private static final String ENCRYPTION_KEY = "EpSkeyIsSotark22";
 
     public static byte[] encrypt(final String text) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException, UnsupportedEncodingException, InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         final Cipher encripta = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
