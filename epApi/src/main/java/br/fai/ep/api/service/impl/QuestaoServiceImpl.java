@@ -21,7 +21,7 @@ public class QuestaoServiceImpl implements BaseService {
     @Autowired
     private QuestaoDaoImpl dao;
 
-    private final TesteDaoImpl testeDao = new TesteDaoImpl();
+    private final TesteDaoImpl testDao = new TesteDaoImpl();
     private final QuestaoTesteDaoImpl questTestDao = new QuestaoTesteDaoImpl();
 
     @Override
@@ -53,7 +53,7 @@ public class QuestaoServiceImpl implements BaseService {
             if (test.getAcertos() > 0) {
                 test.setAcertos(test.getAcertos() - 1);
             }
-            updated = !testeDao.update(test);
+            updated = !testDao.update(test);
             if (updated) {
                 break;
             }
@@ -63,7 +63,7 @@ public class QuestaoServiceImpl implements BaseService {
         if (updated) {
             for (final Teste test : updatedTestList) {
                 test.setAcertos(test.getAcertos() + 1);
-                testeDao.update(test);
+                testDao.update(test);
             }
             return false;
         }
@@ -71,7 +71,7 @@ public class QuestaoServiceImpl implements BaseService {
         if (!dao.delete(id)) {
             for (final Teste test : updatedTestList) {
                 test.setAcertos(test.getAcertos());
-                testeDao.update(test);
+                testDao.update(test);
             }
             return false;
         }
