@@ -9,9 +9,7 @@ public abstract class BaseDao {
     protected PreparedStatement preparedStatement;
     protected ResultSet resultSet;
 
-    protected final String DEFAULT_IMAGE_PATH = "/resources/img/logo_invertido.png";
-
-    public void preparForReadingOrCreating(final String sql, final boolean isGenerateKeys, final boolean isAutoCommit) throws SQLException {
+    protected void preparForReadingOrCreating(final String sql, final boolean isGenerateKeys, final boolean isAutoCommit) throws SQLException {
         try {
             connection = ConnectionFactory.getConnection();
             connection.setAutoCommit(isAutoCommit);
@@ -26,7 +24,7 @@ public abstract class BaseDao {
         }
     }
 
-    public void preparForUpdateOrDelete(final String sql) throws SQLException {
+    protected void preparForUpdateOrDelete(final String sql) throws SQLException {
         try {
             connection = ConnectionFactory.getConnection();
             connection.setAutoCommit(false);
@@ -36,7 +34,7 @@ public abstract class BaseDao {
         }
     }
 
-    public void resetValuesForNewQuery() {
+    protected void resetValuesForNewQuery() {
         connection = null;
         preparedStatement = null;
         resultSet = null;
