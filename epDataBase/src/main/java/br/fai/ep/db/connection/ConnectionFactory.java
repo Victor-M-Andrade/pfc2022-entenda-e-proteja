@@ -44,14 +44,13 @@ public class ConnectionFactory {
     }
 
 
-    public static void close(final ResultSet resultSet, final PreparedStatement preparedStatement,
-                             final Connection connection) {
+    public static void close(final ResultSet resultSet, final PreparedStatement preparedStatement) {
         closeConnection();
         closePreparedStatement(preparedStatement);
         closeResultSet(resultSet);
     }
 
-    public static void close(final PreparedStatement preparedStatement, final Connection connection) {
+    public static void close(final PreparedStatement preparedStatement) {
         closeConnection();
         closePreparedStatement(preparedStatement);
     }

@@ -52,7 +52,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return userList;
@@ -94,7 +94,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return user;
@@ -158,7 +158,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + UsuarioDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -209,7 +209,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -241,7 +241,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -282,7 +282,7 @@ public class UsuarioDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return userList;

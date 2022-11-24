@@ -45,7 +45,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionTestList;
@@ -81,7 +81,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionTest;
@@ -127,7 +127,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             newId = -1;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -168,7 +168,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -200,7 +200,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -234,7 +234,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionTestList;
@@ -269,7 +269,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return testList;
@@ -310,7 +310,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return testList;

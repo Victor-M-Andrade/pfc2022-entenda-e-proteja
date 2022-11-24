@@ -44,7 +44,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return clientList;
@@ -80,7 +80,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return client;
@@ -129,7 +129,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + ClienteDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -168,7 +168,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -200,7 +200,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -234,7 +234,7 @@ public class ClienteDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return clientList;

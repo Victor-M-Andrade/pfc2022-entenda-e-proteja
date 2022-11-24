@@ -45,7 +45,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return requestList;
@@ -80,7 +80,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return request;
@@ -126,7 +126,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + SolicitacaoDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -167,7 +167,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -199,7 +199,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -233,7 +233,7 @@ public class SolicitacaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return requestList;

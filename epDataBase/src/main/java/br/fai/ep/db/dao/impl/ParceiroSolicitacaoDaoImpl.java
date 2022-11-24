@@ -42,7 +42,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return partinerRequestList;
@@ -77,7 +77,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return partinerRequest;
@@ -120,7 +120,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             System.out.println("Excecao -> metodo:create | classe: " + ParceiroSolicitacaoDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -159,7 +159,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -191,7 +191,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -224,7 +224,7 @@ public class ParceiroSolicitacaoDaoImpl extends BaseDao implements BaseDaoInterf
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return partinerRequestList;

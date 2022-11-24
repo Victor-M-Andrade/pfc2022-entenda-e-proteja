@@ -50,7 +50,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionList;
@@ -89,7 +89,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return question;
@@ -148,7 +148,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + QuestaoDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -197,7 +197,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -229,7 +229,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -267,7 +267,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionList;
@@ -303,7 +303,7 @@ public class QuestaoDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return questionList;

@@ -55,7 +55,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsList;
@@ -98,7 +98,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return news;
@@ -161,7 +161,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println("Excecao -> metodo:create | classe: " + NoticiaDaoImpl.class);
             System.out.println(e.getMessage());
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newId;
@@ -222,7 +222,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             isUpdateCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isUpdateCompleted;
@@ -254,7 +254,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             }
             isDeleteCompleted = false;
         } finally {
-            ConnectionFactory.close(preparedStatement, connection);
+            ConnectionFactory.close(preparedStatement);
         }
 
         return isDeleteCompleted;
@@ -296,7 +296,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsList;
@@ -347,7 +347,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsDtoList;
@@ -399,7 +399,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsDto;
@@ -449,7 +449,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsDtoList;
@@ -492,7 +492,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsList;
@@ -545,7 +545,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsDtoList;
@@ -597,7 +597,7 @@ public class NoticiaDaoImpl extends BaseDao implements BaseDaoInterface {
             System.out.println(e.getMessage());
             return null;
         } finally {
-            ConnectionFactory.close(resultSet, preparedStatement, connection);
+            ConnectionFactory.close(resultSet, preparedStatement);
         }
 
         return newsDtoList;
