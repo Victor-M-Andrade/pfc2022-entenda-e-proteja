@@ -240,6 +240,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
         return questionTestList;
     }
 
+    @Override
     public List<Teste> readAllTestsByQuestion(final long questionId) {
         List<Teste> testList = null;
         resetValuesForNewQuery();
@@ -275,6 +276,7 @@ public class QuestaoTesteDaoImpl extends BaseDao implements QuestTestDaoInterfac
         return testList;
     }
 
+    @Override
     public List<QuestionDto> readAllQuestionsByTest(final long testId) {
         List<QuestionDto> testList = null;
         resetValuesForNewQuery();
