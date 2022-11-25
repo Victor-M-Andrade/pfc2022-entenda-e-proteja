@@ -205,6 +205,9 @@
                                 </div>
                             </div>
                             <input th:field="${myPartner.idUsuario}" hidden />
+                            <div class="mb-2">
+                                <a class="btn btn-secondary col-12" th:href="@{/user/profile}">Cancelar</a>
+                            </div>
                             <div class="form-group mt-4 mb-0">
                                 <button class="btn btn-info btn-block" id="requestRegister" type="submit"
                                     onclick="validate()">
