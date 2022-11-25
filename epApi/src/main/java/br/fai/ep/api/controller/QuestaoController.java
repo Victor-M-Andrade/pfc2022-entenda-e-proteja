@@ -3,6 +3,7 @@ package br.fai.ep.api.controller;
 import br.fai.ep.api.service.impl.QuestaoServiceImpl;
 import br.fai.ep.epEntities.BasePojo;
 import br.fai.ep.epEntities.DTO.QuestionDto;
+import br.fai.ep.epEntities.Questao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,13 @@ public class QuestaoController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Long> create(@RequestBody final br.fai.ep.epEntities.Questao entity) {
+    public ResponseEntity<Long> create(@RequestBody final Questao entity) {
         System.out.println(entity);
         return ResponseEntity.ok(service.create(entity));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Boolean> update(@RequestBody final br.fai.ep.epEntities.Questao entity) {
+    public ResponseEntity<Boolean> update(@RequestBody final Questao entity) {
         return ResponseEntity.ok(service.update(entity));
     }
 

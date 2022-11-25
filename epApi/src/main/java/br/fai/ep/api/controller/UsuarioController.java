@@ -79,12 +79,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/send-mail")
-    public ResponseEntity<Boolean> authenticate(@RequestBody final MailDto mail) {
+    public ResponseEntity<Boolean> sendEmail(@RequestBody final MailDto mail) {
         return ResponseEntity.ok(service.sendemail(mail));
     }
 
     @GetMapping("/read-by-id-for-update-password/{id}")
-    public ResponseEntity authenticate(@PathVariable("id") final long id) {
+    public ResponseEntity readByIdForUpdatePassword(@PathVariable("id") final long id) {
         return ResponseEntity.ok(service.readById(id));
     }
 
