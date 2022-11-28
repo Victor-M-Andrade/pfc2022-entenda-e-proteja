@@ -71,7 +71,6 @@ public class UserWebServiceImpl extends BaseWebService implements WebServiceInte
 
         try {
             final RestTemplate restTemplace = new RestTemplate();
-            final Usuario user = (Usuario) entity;
             final HttpEntity<Usuario> httpEntity = new HttpEntity<>((Usuario) entity);
             final ResponseEntity<Integer> responseEntity = restTemplace.exchange(endpoint, HttpMethod.POST,
                     httpEntity, Integer.class);

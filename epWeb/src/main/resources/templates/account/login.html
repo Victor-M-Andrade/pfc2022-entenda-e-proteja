@@ -8,7 +8,7 @@
         window.onload = function () {
             var loginError = $("#loginError").is(":checked");
             if (loginError) {
-                showModelError("Email ou senha inválidos", "Erro durante autenticação", false);
+                showModelError("E-mail ou senha inválidos", "Erro durante autenticação", false);
             }
         }
     </script>
@@ -38,7 +38,7 @@
                         <input type="checkbox" id="loginError" th:checked="${authenticationError}" hidden>
                         <form th:action="@{/account/authenticate}" method="post">
                             <div class="form-group">
-                                <label class="small mb-1" for="username">Email</label>
+                                <label class="small mb-1" for="username">E-mail</label>
                                 <span data-tooltip="Dado Privado">
                                     <input class="form-control py-4" id="username" name="username" type="email"
                                         placeholder="Insira o endereço de email" data-toggle="tooltip"

@@ -35,7 +35,8 @@ public class ImageRequestController {
     @GetMapping("/images/news/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesNewsImage(@PathVariable("urlImagemLocal") final String nomeImagem, final Model model) {
-        final File imagemArquivo = new File(TARGET_DIRECTORY + BaseWebService.PATH_IMAGENS_NEWS + File.separator + nomeImagem);
+        final File imagemArquivo = new File(TARGET_DIRECTORY +
+                BaseWebService.PATH_IMAGENS_NEWS + File.separator + nomeImagem);
         try {
             final byte[] byteImage = Files.readAllBytes(imagemArquivo.toPath());
             System.out.println(byteImage);
