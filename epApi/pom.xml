@@ -6,7 +6,7 @@
     <parent>
         <groupId>br.fai.ep</groupId>
         <artifactId>entenda-e-proteja-parent</artifactId>
-        <version>${entenda-e-proteja.version}</version>
+        <version>8.0.0</version>
     </parent>
 
     <artifactId>epApi</artifactId>
@@ -101,4 +101,45 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.0</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>br.fai.ep.epWeb.EpWebApplication</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>beanstalk</id>
+            <build>
+                <finalName>${project.name}-ep</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/cloud/config/*.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

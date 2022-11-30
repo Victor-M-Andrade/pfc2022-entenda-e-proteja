@@ -7,7 +7,7 @@
     <parent>
         <groupId>br.fai.ep</groupId>
         <artifactId>entenda-e-proteja-parent</artifactId>
-        <version>${entenda-e-proteja.version}</version>
+        <version>8.0.0</version>
     </parent>
 
     <artifactId>epDataBase</artifactId>
