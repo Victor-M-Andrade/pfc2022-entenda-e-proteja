@@ -26,7 +26,7 @@
         <entenda-e-proteja.version>8.0.0</entenda-e-proteja.version>
         <epEntity.version>2.0.0</epEntity.version>
         <epDataBase.version>1.9.0</epDataBase.version>
-        <epApi.version>2.2.0</epApi.version>
+        <epApi.version>2.3.0</epApi.version>
         <!--        <epWeb.version>1.1.0</epWeb.version>-->
 
         <!-- build-->

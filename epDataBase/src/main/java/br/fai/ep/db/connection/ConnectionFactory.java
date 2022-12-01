@@ -3,7 +3,8 @@ package br.fai.ep.db.connection;
 import java.sql.*;
 
 public abstract class ConnectionFactory {
-    private static final String DB_ENDPOINT = "jdbc:postgresql://localhost:5433/Entenda_E_Proteja";
+    //    private static final String DB_ENDPOINT = "jdbc:postgresql://localhost:5433/Entenda_E_Proteja";
+    private static final String DB_ENDPOINT = "jdbc:postgresql://awseb-e-spzkjtkywb-stack-awsebrdsdatabase-to0k4pwkcntd.ccbfva6uqgav.us-east-1.rds.amazonaws.com:5432/Entenda_E_Proteja";
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "postgres";
 
