@@ -123,7 +123,7 @@ public class AccountController {
 
     @PostMapping("/account/request-password-change")
     public String requestPasswordChange(final Model model, final Usuario user) {
-        sendedEmail = new UserWebServiceImpl().forgotPassword(user.getEmail());
+        sendedEmail = service.forgotPassword(user.getEmail());
         if (!sendedEmail) {
             emailNotFound = true;
             temporaryUser = user;

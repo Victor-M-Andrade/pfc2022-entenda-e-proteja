@@ -64,6 +64,30 @@
             <version>2.0.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- AWS -->
+        <!-- https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-context -->
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-context</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-autoconfigure -->
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-autoconfigure</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.347</version>
+        </dependency>
+
+
     </dependencies>
 
 

@@ -2,70 +2,44 @@ package br.fai.ep.epWeb.controller;
 
 import br.fai.ep.epWeb.helper.ReadDefaultImages;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
 @Controller
 public class ImageRequestController {
 
     private static final String TARGET_DIRECTORY = System.getProperty("user.dir");
 
+    @Autowired
+    private FileService awsFileService;
+
     @GetMapping("/images/users/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesUserImage(@PathVariable("urlImagemLocal") final String nomeImagem, final Model model) {
-        final File imagemArquivo = new File(TARGET_DIRECTORY + BaseWebService.PATH_IMAGENS_USERS + File.separator + nomeImagem);
-        try {
-            final byte[] byteImage = Files.readAllBytes(imagemArquivo.toPath());
-            System.out.println(byteImage);
-            return (byteImage == null || byteImage.length == 0) ?
-                    ReadDefaultImages.getDefaultProfileImage() : byteImage;
-        } catch (final IOException e) {
-            System.out.println(e.getMessage());
-            return ReadDefaultImages.getDefaultProfileImage();
-        }
+
+        final byte[] byteImage = awsFileService.downloadFile(BaseWebService.PATH_IMAGENS_USERS + nomeImagem);
+        System.out.println(byteImage);
+        return (byteImage == null || byteImage.length == 0) ? ReadDefaultImages.getDefaultProfileImage() : byteImage;
     }
 
     @GetMapping("/images/news/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesNewsImage(@PathVariable("urlImagemLocal") final String nomeImagem, final Model model) {
-        final File imagemArquivo = new File(TARGET_DIRECTORY +
-                BaseWebService.PATH_IMAGENS_NEWS + File.separator + nomeImagem);
-        try {
-            final byte[] byteImage = Files.readAllBytes(imagemArquivo.toPath());
-            System.out.println(byteImage);
-            return (byteImage == null || byteImage.length == 0) ?
-                    ReadDefaultImages.getDefaultProfileImage() : byteImage;
-        } catch (final IOException e) {
-            System.out.println(e.getMessage());
-            return ReadDefaultImages.getDefaultNewsImage();
-        }
+        final byte[] byteImage = awsFileService.downloadFile(BaseWebService.PATH_IMAGENS_NEWS + nomeImagem);
+        System.out.println(byteImage);
+        return (byteImage == null || byteImage.length == 0) ? ReadDefaultImages.getDefaultNewsImage() : byteImage;
     }
 
     @GetMapping("/images/partners/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesPartnerImage(@PathVariable("urlImagemLocal") final String nomeImagem, final Model model) {
-        final File imagemArquivo = new File(TARGET_DIRECTORY + BaseWebService.PATH_IMAGENS_PARTNER + File.separator + nomeImagem);
-        try {
-            return Files.readAllBytes(imagemArquivo.toPath());
-        } catch (final IOException e) {
-            System.out.println(e.getMessage());
-            return ReadDefaultImages.getDefaultProfileImage();
-        }
-    }
-
-    public static byte[] canLoadImage(final String imagePath) {
-        final File imagemArquivo = new File(TARGET_DIRECTORY + imagePath);
-        try {
-            return Files.readAllBytes(imagemArquivo.toPath());
-        } catch (final IOException e) {
-            return null;
-        }
+        final byte[] byteImage = awsFileService.downloadFile(BaseWebService.PATH_IMAGENS_USERS + nomeImagem);
+        System.out.println(byteImage);
+        return (byteImage == null || byteImage.length == 0) ? ReadDefaultImages.getDefaultProfileImage() : byteImage;
     }
 }

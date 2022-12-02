@@ -7,8 +7,10 @@ import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.FileService;
 import br.fai.ep.epWeb.service.impl.NewsWebServiceImpl;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,10 @@ import java.util.*;
 
 @Controller
 public class NewsController {
+
+    @Autowired
+    private FileService awsFieService;
+
     private final NewsWebServiceImpl service = new NewsWebServiceImpl();
     private final UserWebServiceImpl userWebService = new UserWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
@@ -102,10 +108,8 @@ public class NewsController {
         }
 
         if (!newsDto.getPathImageNews().equalsIgnoreCase(DEFAULT_NEWS_IMAGE_PATH)) {
-            final byte[] imageBytes = ImageRequestController.canLoadImage(newsDto.getPathImageNews());
-            if (imageBytes == null || imageBytes.length == 0) {
-                model.addAttribute(LOAD_IMAGE_ERROR, true);
-            }
+            final byte[] byteImage = awsFieService.downloadFile(newsDto.getPathImageNews().substring(1));
+            model.addAttribute(LOAD_IMAGE_ERROR, (byteImage == null || byteImage.length == 0));
         }
 
         model.addAttribute(MY_NEWS_REFERENCE, newsDto);
@@ -164,7 +168,8 @@ public class NewsController {
             return "redirect:/news/user-news-detail/" + newNewsId;
         }
 
-        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_NEWS, nameFileWithExtension, newNameFile);
+        final String newKeyFile = BaseWebService.PATH_IMAGENS_NEWS + nameFileWithExtension;
+        final String pathImage = awsFieService.uploadFile(file, newKeyFile, news.getPathImageNews().substring(1));
         if (pathImage != null) {
             news.setPathImageNews(pathImage);
         }
@@ -213,10 +218,8 @@ public class NewsController {
         }
 
         if (!news.getPathImageNews().equalsIgnoreCase(DEFAULT_NEWS_IMAGE_PATH)) {
-            final byte[] imageBytes = ImageRequestController.canLoadImage(news.getPathImageNews());
-            if (imageBytes == null || imageBytes.length == 0) {
-                model.addAttribute(LOAD_IMAGE_ERROR, true);
-            }
+            final byte[] byteImage = awsFieService.downloadFile(news.getPathImageNews().substring(1));
+            model.addAttribute(LOAD_IMAGE_ERROR, (byteImage == null || byteImage.length == 0));
         }
 
         model.addAttribute(MY_NEWS_REFERENCE, news);
@@ -325,8 +328,8 @@ public class NewsController {
             temporaryNews = null;
             return "redirect:/news/user-news-detail/" + news.getId();
         }
-
-        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_NEWS, nameFileWithExtension, newNameFile);
+        final String newKeyFile = BaseWebService.PATH_IMAGENS_NEWS + nameFileWithExtension;
+        final String pathImage = awsFieService.uploadFile(file, newKeyFile, news.getPathImageNews().substring(1));
         if (pathImage != null) {
             news.setPathImageNews(pathImage);
         }

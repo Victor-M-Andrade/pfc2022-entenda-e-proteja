@@ -6,7 +6,9 @@ import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.FileService;
 import br.fai.ep.epWeb.service.impl.PartnerWebServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,10 @@ import java.util.Map;
 
 @Controller
 public class PartnerController {
+
+    @Autowired
+    private FileService awsFileService;
+
     private final PartnerWebServiceImpl service = new PartnerWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
 
@@ -148,11 +154,9 @@ public class PartnerController {
         }
 
         final Parceiro partner = partnerList.get(0);
-        if (!partner.getPathImagePartner().equalsIgnoreCase(Usuario.DEFAULT_IMAGE_PATH)) {
-            final byte[] imageBytes = ImageRequestController.canLoadImage(partner.getPathImagePartner());
-            if (imageBytes == null || imageBytes.length == 0) {
-                model.addAttribute(LOAD_IMAGE_ERROR, true);
-            }
+        if (!partner.getPathImageProfile().equalsIgnoreCase(Usuario.DEFAULT_IMAGE_PATH)) {
+            final byte[] byteImage = awsFileService.downloadFile(partner.getPathImageProfile().substring(1));
+            model.addAttribute(LOAD_IMAGE_ERROR, (byteImage == null || byteImage.length == 0));
         }
 
         model.addAttribute(DELETE_PARTNER_ERROR, deletePartnerError);
@@ -213,7 +217,8 @@ public class PartnerController {
             return "redirect:/partner/my-data-as-partner";
         }
 
-        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_PARTNER, nameFileWithExtension, newNameFile);
+        final String newKeyFile = BaseWebService.PATH_IMAGENS_PARTNER + nameFileWithExtension;
+        final String pathImage = awsFileService.uploadFile(file, newKeyFile, partner.getPathImageProfile().substring(1));
         if (pathImage != null) {
             partner.setPathImagePartner(pathImage);
         }

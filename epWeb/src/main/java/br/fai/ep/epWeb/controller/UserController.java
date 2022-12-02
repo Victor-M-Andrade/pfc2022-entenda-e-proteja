@@ -4,8 +4,10 @@ import br.fai.ep.epEntities.Usuario;
 import br.fai.ep.epWeb.helper.FoldersName;
 import br.fai.ep.epWeb.security.provider.EpAuthenticationProvider;
 import br.fai.ep.epWeb.service.BaseWebService;
+import br.fai.ep.epWeb.service.FileService;
 import br.fai.ep.epWeb.service.WebServiceInterface;
 import br.fai.ep.epWeb.service.impl.UserWebServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UserController {
 
+    @Autowired
+    private FileService awsFieService;
 
     private final WebServiceInterface service = new UserWebServiceImpl();
     private final EpAuthenticationProvider epAuthenticationProvider = new EpAuthenticationProvider();
@@ -47,10 +51,8 @@ public class UserController {
         }
 
         if (!user.getPathImageProfile().equalsIgnoreCase(Usuario.DEFAULT_IMAGE_PATH)) {
-            final byte[] imageBytes = ImageRequestController.canLoadImage(user.getPathImageProfile());
-            if (imageBytes == null || imageBytes.length == 0) {
-                model.addAttribute(LOAD_IMAGE_ERROR, true);
-            }
+            final byte[] byteImage = awsFieService.downloadFile(user.getPathImageProfile().substring(1));
+            model.addAttribute(LOAD_IMAGE_ERROR, (byteImage == null || byteImage.length == 0));
         }
 
         model.addAttribute(MY_USER_REFERENCE, user);
@@ -131,7 +133,8 @@ public class UserController {
             return "redirect:/user/profile";
         }
 
-        final String pathImage = service.saveFileInProfile(file, BaseWebService.PATH_IMAGENS_USERS, nameFileWithExtension, newNameFile);
+        final String newKeyFile = BaseWebService.PATH_IMAGENS_USERS + nameFileWithExtension;
+        final String pathImage = awsFieService.uploadFile(file, newKeyFile, user.getPathImageProfile().substring(1));
         if (pathImage != null) {
             user.setPathImageProfile(pathImage);
         }
