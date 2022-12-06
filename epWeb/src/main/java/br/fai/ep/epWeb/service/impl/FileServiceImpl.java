@@ -39,11 +39,17 @@ public class FileServiceImpl implements FileService {
             awsCS3Client.putObject(BUKET_NAME, newKeyFile, file.getInputStream(), metadata);
             awsCS3Client.setObjectAcl(BUKET_NAME, newKeyFile, CannedAccessControlList.PublicRead);
             return "/" + newKeyFile;
-        } catch (final IOException ex) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "create or update image error");
-            System.out.println("create or update image error in upload");
-            return null;
+        } catch (final AmazonServiceException serviceException) {
+            System.out.println("Erro ao solicitar a imagem pra AWS");
+            System.out.println(serviceException.getMessage());
+        } catch (final SdkClientException clientException) {
+            System.out.println("Erro de conexão com a AWS");
+            System.out.println(clientException.getMessage());
+        } catch (final IOException ioException) {
+            System.out.println("Erro ao ler os bytes da imagem");
+            System.out.println(ioException.getMessage());
         }
+        return null;
     }
 
     @Override
