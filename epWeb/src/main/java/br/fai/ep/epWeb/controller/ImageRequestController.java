@@ -38,7 +38,7 @@ public class ImageRequestController {
     @GetMapping("/images/partners/{urlImagemLocal}")
     @ResponseBody
     public byte[] requesPartnerImage(@PathVariable("urlImagemLocal") final String nomeImagem, final Model model) {
-        final byte[] byteImage = awsFileService.downloadFile(BaseWebService.PATH_IMAGENS_USERS + nomeImagem);
+        final byte[] byteImage = awsFileService.downloadFile(BaseWebService.PATH_IMAGENS_PARTNER + nomeImagem);
         System.out.println(byteImage);
         return (byteImage == null || byteImage.length == 0) ? ReadDefaultImages.getDefaultProfileImage() : byteImage;
     }

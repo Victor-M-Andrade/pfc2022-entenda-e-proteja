@@ -218,7 +218,7 @@ public class PartnerController {
         }
 
         final String newKeyFile = BaseWebService.PATH_IMAGENS_PARTNER + nameFileWithExtension;
-        final String pathImage = awsFileService.uploadFile(file, newKeyFile, partner.getPathImageProfile().substring(1));
+        final String pathImage = awsFileService.uploadFile(file, newKeyFile, partner.getPathImagePartner().substring(1));
         if (pathImage != null) {
             partner.setPathImagePartner(pathImage);
         }
