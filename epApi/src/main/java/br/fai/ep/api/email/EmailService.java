@@ -18,8 +18,8 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    private final String SENDER = "Suporte_Projeto_EP <suporte_entenda_e_proteja@outlook.com>";
-    private final String URL_WEBSITE_EP = "http://localhost:8100";
+    private final String SENDER = "Entenda e Proteja Projeto <supote_projeto_ep@outlook.com>";
+    private final String URL_WEBSITE_EP = "http://entenda-e-proteja.us-east-1.elasticbeanstalk.com";
 
     public String buildMessage(final String username, final long userId) {
         final String message = "<html lang=\"pt-br\">" +

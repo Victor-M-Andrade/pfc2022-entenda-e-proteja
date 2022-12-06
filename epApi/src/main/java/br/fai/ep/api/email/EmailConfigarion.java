@@ -30,7 +30,7 @@ public class EmailConfigarion {
         properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", true);
-        properties.put("mail.smtp.connectiontimeout", 10000);
+        properties.put("mail.smtp.connectiontimeout", 100000);
         properties.setProperty("mail.mime.charset", "utf-8");
 
         mailSender.setJavaMailProperties(properties);

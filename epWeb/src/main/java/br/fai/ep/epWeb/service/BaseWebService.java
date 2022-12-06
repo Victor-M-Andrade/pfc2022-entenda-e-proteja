@@ -9,8 +9,8 @@ public abstract class BaseWebService {
     private static final String DATE_FORMAT_COMPLETE = "dd/MM/yyyy HH:mm:ss";
     private static final String DATE_FORMAT_SAVE_FILES = "dd-MM-yyyy_HH-mm-ss";
 
-    protected final String API_HOST = "http://api-entenda-e-proteja.us-east-1.elasticbeanstalk.com/api";
-//    protected final String API_HOST = "http://localhost:5001/api";
+    //    protected final String API_HOST = "http://api-entenda-e-proteja.us-east-1.elasticbeanstalk.com/api";
+    protected final String API_HOST = "http://localhost:5001/api";
 
     public static final String PATH_IMAGENS_USERS = "images/users/";
     public static final String PATH_IMAGENS_NEWS = "images/news/";
